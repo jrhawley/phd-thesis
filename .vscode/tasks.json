@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "args": [
+                "-f",
+                "markdown+fancy_lists+startnum+fenced_code_blocks+backtick_code_blocks",
+                "-t",
+                "latex",
+                "-o",
+                "Hawley_James_R_202111_PhD_thesis.pdf",
+                "--pdf-engine",
+                "xelatex",
+                "Hawley_James_R_202111_PhD_thesis.md"
+            ],
+            "command": "pandoc",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": true,
+            "options": {
+                "cwd": "markdown"
+            }
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "classoption",
+        "documentclass",
+        "gradyear"
+    ],
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.autoIndent": "none",
+        "editor.useTabStops": false,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "latex-workshop.message.warning.show": false,
+    "latex-workshop.message.error.show": false,
+    "latex-workshop.message.badbox.show": false,
+    "latex-workshop.message.information.show": false
+}
