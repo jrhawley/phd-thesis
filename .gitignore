@@ -274,3 +274,8 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+# Other files to ignore
+word/
+__latexindent_temp.tex
+*.apc
