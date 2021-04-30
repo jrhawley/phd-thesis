@@ -1,0 +1,62 @@
+% ==============================================================================
+% Environment
+% ==============================================================================
+\documentclass[oneside]{ut-thesis}
+% \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
+\usepackage{subfiles}
+\usepackage{quotes}
+\usepackage{tocloft}
+
+\newcommand{\listappendicesname}{List of Appendices}
+\newlistof{appendices}{apc}{\listappendicesname}
+\newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
+
+
+\author{James Hawley}
+\title{Genomic and epigenomic aberrations of gene regulation in prostate cancer and leukemia}
+\degree{Doctor of Philosophy}
+\department{Medical Biophysics}
+\gradyear{2021}
+
+% ==============================================================================
+% Document
+% ==============================================================================
+\begin{document}
+
+% Front Matter
+% ------------------------------------------------
+\frontmatter
+\subfile{frontmatter/title}
+\subfile{frontmatter/abstract}
+\subfile{frontmatter/acknowledgments}
+\subfile{frontmatter/toc}
+\subfile{frontmatter/tables_list}
+\subfile{frontmatter/figures_list}
+\subfile{frontmatter/appendices_list}
+
+% Main Matter
+% ------------------------------------------------
+\mainmatter
+% intro
+\subfile{mainmatter/chapter1}
+
+% FOXA1 CREs
+\subfile{mainmatter/chapter2}
+
+% prostate cancer 3D genome
+\subfile{mainmatter/chapter3}
+
+% n=1 RNA-seq method
+\subfile{mainmatter/chapter4}
+
+% B-ALL DNA methylation
+\subfile{mainmatter/chapter5}
+
+% discussion and future directions
+\subfile{mainmatter/chapter6}
+
+% Back Matter
+% ------------------------------------------------
+\backmatter
+\subfile{backmatter/appendices}
+\end{document}
