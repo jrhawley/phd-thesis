@@ -1,0 +1,21 @@
+# Replacement checklist
+
+- [ ] Reference numbers
+- [ ] Characters
+  - [ ] % -> \%
+  - [ ] # -> \#
+  - [ ] ± -> \pm
+  - [ ] > and < -> $>$ and $<$
+  - [ ] non-standard " and '
+  - [ ] x -> \cdot
+  - [ ] ° -> \textdegree
+  - [ ] ™ -> \texttrademark
+- [ ] Italicize
+  - [ ] gene names
+  - [ ] _cis_- and _trans_-
+- [ ] newlines after periods
+- [ ] replace certain words
+  - [ ] overexpression -> over-expression
+  - [ ] underexpression -> under-expression
+- [ ] Glossary of abbreviations?
+  - [ ] How do I make abbreviations in the text?
