@@ -9,6 +9,7 @@
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{glossaries}
+\usepackage{chngcntr}
 \usepackage[backend=biber, style=nature, sorting=none]{biblatex}
 \usepackage{hyperref}
 \usepackage[capitalize, noabbrev]{cleveref}
@@ -33,10 +34,11 @@
 
 % Figure placement
 % ------------------------------------------------
-\newcommand{\newfigure}[3]{
+\newcommand{\newfigure}[4]{
   \begin{figure}
-    \includegraphics[width=\textwidth]{#1}
-    \caption{\textbf{#2}. #3}
+    \includegraphics[width=0.9\textwidth]{#1}
+    \caption[#2]{\textbf{#2.} #3}
+    \label{#4}
   \end{figure}
 }
 

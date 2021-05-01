@@ -1,6 +1,13 @@
 \appendix
+\chapter{Appendices}
+% ensure that figures in appendices are labelled Figure X.Y
+% to keep consistent with the chapter labelling
+\counterwithin{figure}{section}
+% \setcounter{section}{0}
+% \setcounter{figure}{0}
+% \renewcommand{\thefigure}{S\Roman{\thesection}.\arabic{figure}}
 
 \subfile{appendices/appendix1}
-\subfile{appendices/appendix2}
-\subfile{appendices/appendix3}
-\subfile{appendices/appendix4}
+% \subfile{appendices/appendix2}
+% \subfile{appendices/appendix3}
+% \subfile{appendices/appendix4}
