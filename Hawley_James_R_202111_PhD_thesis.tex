@@ -48,6 +48,24 @@
   \end{figure}
 }
 
+% Figure layout and placement for a figure with a long caption
+\newcommand{\newlongfigure}[4]{
+  % Start figure environment
+  \begin{figure}
+    % Start add the figure
+    \includegraphics[width=0.9\textwidth]{#1}
+    % Include the figure title, state the caption is on the next page
+    \caption[#2]{\textbf{#2.} (Continued on the following page)}
+    % Add the label for internal referencing
+    % \label{#4}
+  \end{figure}
+  % Create the next figure that will just hold the caption
+  \begin{figure}
+    % Print the long caption
+    \contcaption{#3}
+  \end{figure}
+}
+
 % ==============================================================================
 % Document
 % ==============================================================================
