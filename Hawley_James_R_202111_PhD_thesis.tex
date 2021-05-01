@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{glossaries}
 \usepackage{chngcntr}
+\usepackage{ccaption}
 \usepackage[backend=biber, style=nature, sorting=none]{biblatex}
 \usepackage{hyperref}
 \usepackage[capitalize, noabbrev]{cleveref}
@@ -34,11 +35,16 @@
 
 % Figure placement
 % ------------------------------------------------
+% Typical figure layout and placement
 \newcommand{\newfigure}[4]{
-  \begin{figure}
+  % Start figure environment
+  \begin{figure}[ht]
+    % Include the figure
     \includegraphics[width=0.9\textwidth]{#1}
+    % Add the figure caption
     \caption[#2]{\textbf{#2.} #3}
-    \label{#4}
+    % Add the label for internal referencing
+    % \label{#4}
   \end{figure}
 }
 
