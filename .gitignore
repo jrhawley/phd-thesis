@@ -278,4 +278,5 @@ TSWLatexianTemp*
 # Other files to ignore
 word/
 __latexindent_temp.tex
+__latexindent_temp.pdf
 *.apc
