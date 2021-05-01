@@ -1,22 +1,44 @@
 % ==============================================================================
 % Environment
 % ==============================================================================
-\documentclass[oneside]{ut-thesis}
+\documentclass[oneside,doublespacing]{ut-thesis}
 % \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
 \usepackage{subfiles}
 \usepackage{quotes}
 \usepackage{tocloft}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{glossaries}
+\usepackage[backend=biber, style=nature, sorting=none]{biblatex}
+\usepackage{hyperref}
+\usepackage[capitalize, noabbrev]{cleveref}
 
-\newcommand{\listappendicesname}{List of Appendices}
-\newlistof{appendices}{apc}{\listappendicesname}
-\newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
-
+\addbibresource{thesis.bib}
 
 \author{James Hawley}
 \title{Genomic and epigenomic aberrations of gene regulation in prostate cancer and leukemia}
 \degree{Doctor of Philosophy}
 \department{Medical Biophysics}
 \gradyear{2021}
+
+% ==============================================================================
+% Functions and commands
+% ==============================================================================
+
+% Appendix naming
+% ------------------------------------------------
+\newcommand{\listappendicesname}{List of Appendices}
+\newlistof{appendices}{apc}{\listappendicesname}
+\newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
+
+% Figure placement
+% ------------------------------------------------
+\newcommand{\newfigure}[3]{
+  \begin{figure}
+    \includegraphics[width=\textwidth]{#1}
+    \caption{\textbf{#2}. #3}
+  \end{figure}
+}
 
 % ==============================================================================
 % Document
@@ -58,5 +80,6 @@
 % Back Matter
 % ------------------------------------------------
 \backmatter
+\subfile{backmatter/references}
 \subfile{backmatter/appendices}
 \end{document}
