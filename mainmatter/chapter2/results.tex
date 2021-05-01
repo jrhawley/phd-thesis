@@ -19,20 +19,20 @@ In accordance with previous reports, our results using essentiality datasets fol
 
 \subsection{Identifying putative \emph{FOXA1} CREs}
 
-The interweaving of distal CREs with target gene promoters establishes regulatory plexuses with some to be ascribed to specific genes 125,165.
-Regulatory plexuses stem from chromatin interactions orchestrated by various factors including ZNF143, YY1, CTCF and the cohesin complex 141–143.
+The interweaving of distal CREs with target gene promoters establishes regulatory plexuses with some to be ascribed to specific genes \cite{sallariConvergenceDispersedRegulatory2016,baileyNoncodingSomaticInherited2016}.
+Regulatory plexuses stem from chromatin interactions orchestrated by various factors including ZNF143, YY1, CTCF and the cohesin complex \cite{phillipsCTCFMasterWeaver2009,weintraubYY1StructuralRegulator2017,baileyZNF143ProvidesSequence2015}.
 Motivated by the oncogenic role of FOXA1 in prostate cancer, we investigated its regulatory plexus controlling its expression.
 According to chromatin contact frequency maps generated from Hi-C assays performed in LNCaP prostate cancer cells, FOXA1 lies in a 440 kbp TAD (chr14: 37720002-38160000 $\pm$ 40 kbp adjusting for resolution) (Figure 3.2a).
 By overlaying DNase-seq data from LNCaP prostate cancer cells, there are a total of 123 putative CREs reported as DNase I Hypersensitive Sites (DHS) that populate this TAD (Figure 3.2a).
-We next inferred the regulatory plexus of FOXA1 using the Cross Cell-Type Correlation based on DNA accessibility (C3D) method 311.
-C3D aggregates and draws correlation of DHS signal intensities between the cell line of choice and the DHS signal across all systems in the database 311.
+We next inferred the regulatory plexus of FOXA1 using the Cross Cell-Type Correlation based on DNA accessibility (C3D) method \cite{mehdiC3DToolPredict2019}.
+C3D aggregates and draws correlation of DHS signal intensities between the cell line of choice and the DHS signal across all systems in the database \cite{mehdiC3DToolPredict2019}.
 Anchoring our analysis to the FOXA1 promoter and using accessible chromatin regions defined in LNCaP prostate cancer cells identified 55 putative CREs to the FOXA1 regulatory plexus ($r > 0.7$) (Figure 3.2b).
 
 \subsection{Putative \emph{FOXA1} CREs harbour TF binding sites and SNVs}
 
-To delineate the CREs that could be actively involved in the transcriptional regulation of FOXA1, we annotated the DHS with available ChIP-seq data for histone modifications and TFs conducted in LNCaP, 22Rv1, VCaP prostate cancer cell lines and primary prostate tumours (Figure 3.2b) 186,232.
-Close to 60\% (33/55) of the putative FOXA1 plexus CREs are positively marked by H3K27ac profiled in primary prostate tumours 232, indicative of active CREs in tumours (Figure 3.2b) 140.
-Next, considering that noncoding SNVs can target a set of CREs that converge on the same target gene in cancer 125, we overlapped the somatic SNVs called from the whole-genome sequencing across 200 primary prostate tumours to the 33 H3K27ac-marked DHS predicted to regulate FOXA1 214,234.
+To delineate the CREs that could be actively involved in the transcriptional regulation of FOXA1, we annotated the DHS with available ChIP-seq data for histone modifications and TFs conducted in LNCaP, 22Rv1, VCaP prostate cancer cell lines and primary prostate tumours (Figure 3.2b) \cite{pomerantzAndrogenReceptorCistrome2015,kronTMPRSS2ERGFusion2017}.
+Close to 60\% (33/55) of the putative FOXA1 plexus CREs are positively marked by H3K27ac profiled in primary prostate tumours \cite{kronTMPRSS2ERGFusion2017}, indicative of active CREs in tumours (Figure 3.2b) \cite{creyghtonHistoneH3K27acSeparates2010}.
+Next, considering that noncoding SNVs can target a set of CREs that converge on the same target gene in cancer \cite{baileyNoncodingSomaticInherited2016}, we overlapped the somatic SNVs called from the whole-genome sequencing across 200 primary prostate tumours to the 33 H3K27ac-marked DHS predicted to regulate FOXA1 \cite{fraserGenomicHallmarksLocalized2017,espirituEvolutionaryLandscapeLocalized2018}.
 This analysis identified 6 out of the 33 DHS marked with H3K27ac (18.2\%) harboring one or more SNV(s) (10 total SNVs called from 9 tumours) (Figure 3.2b).
 We observe that these 6 CREs can be bound by multiple TFs in prostate cancer cells, including FOXA1, AR and HOXB13 (Figure 3.2b, Appendix II Supplemental Figure 3.4a-f).
 The Hi-C data from the LNCaP prostate cancer cells corroborates the C3D predictions as demonstrated by the elevated contact frequency between the region harboring the FOXA1 promoter and where the 6 CREs are located, compared to other loci in the same TAD (Figure 3.3a).
@@ -43,7 +43,7 @@ The Hi-C and C3D predictions suggest that they regulate FOXA1 expression.
 \subsection{Disruption of CREs reduces \emph{FOXA1} mRNA expression}
 
 We next assessed the role of CREs toward FOXA1 expression using LNCaP and 22Rv1 clones stably expressing the wild-type Cas9 protein (Figure 3.4a-b).
-Guide RNAs (gRNAs) designed against the FOXA1 gene (exon 1 and intron 1) served as positive controls while an outside-TAD region (i.e termed Chr14 (-)), a region on a different chromosome (the human AAVS1 safe-harbor site at the PPP1R12C locus 232,312), and three regions within the TAD predicted to be excluded from the FOXA1 plexus served as negative controls.
+Guide RNAs (gRNAs) designed against the FOXA1 gene (exon 1 and intron 1) served as positive controls while an outside-TAD region (i.e termed Chr14 (-)), a region on a different chromosome (the human AAVS1 safe-harbor site at the PPP1R12C locus \cite{kronTMPRSS2ERGFusion2017,dekelverFunctionalGenomicsProteomics2010}), and three regions within the TAD predicted to be excluded from the FOXA1 plexus served as negative controls.
 Individual deletion of the FOXA1 plexus CREs through transient transfection of gRNAs into the LNCaP cells (See Methods) led to significantly decreased FOXA1 mRNA expression ($\Delta$ CRE1 ~29.3 $\pm$ 8.3\%, $\Delta$ CRE2 ~40.1 $\pm$ 11.8\%, $\Delta$ CRE 3 ~30.6 $\pm$ 9.1\%, $\Delta$ CRE4 ~23.6 $\pm$ 8.2\%, $\Delta$ CRE5 ~25.3 $\pm$ 6.6\%, $\Delta$ CRE6 ~24.5 $\pm$ 10.2\% and $\Delta$ FOXA1 (exon 1 and intron 1) ~87.4 $\pm$ 8.8\% reduction relative to basal levels) (Figure 3.4c, Appendix II Supplemental Figure 3.5a-f).
 In contrast, deletion of several negative control regions within the same TAD did not significantly reduce FOXA1 mRNA level (Figure 3.4c, Appendix II Supplemental Figure 3.5g-i).
 Similar results were observed in 22Rv1 prostate cancer cells (Figure 3.4d).
@@ -66,7 +66,7 @@ Collectively, our results support the restriction of most FOXA1 plexus CREs towa
 
 \subsection{\emph{FOXA1} CREs collaborate to regulate its expression}
 
-Expanding on the idea that multiple CREs can converge to regulate the expression of a single target gene 125,165,313, we asked whether the CREs we identified collaboratively regulate FOXA1 mRNA expression.
+Expanding on the idea that multiple CREs can converge to regulate the expression of a single target gene \cite{sallariConvergenceDispersedRegulatory2016,baileyNoncodingSomaticInherited2016,pennacchioEnhancersFiveEssential2013}, we asked whether the CREs we identified collaboratively regulate FOXA1 mRNA expression.
 Here, we applied a transient approach that delivers Cas9 protein:gRNA as a ribonucleoprotein (RNP) complex formed prior to transfection that would avoid the heterogeneity of Cas9 protein expression across the prostate cancer cell clones (See Methods).
 We first validated this system through single CRE deletions, where we transiently transfected a set of gRNA targeting the CRE of interest.
 In accordance with data from our prostate cancer cell clones stably expressing wild-type Cas9 and dCas9-KRAB, individual CRE deletion resulted in a significant reduction in FOXA1 mRNA expression: ($\Delta$ CRE1 ~29.3 $\pm$ 7.3\%, $\Delta$ CRE2 ~36 $\pm$ 11.8\%, $\Delta$ CRE3 ~30.6 $\pm$ 12.7\%, $\Delta$ CRE4 ~24.5 $\pm$ 6.1\%, $\Delta$ CRE5 ~23.7 $\pm$ 13.2\%, $\Delta$ CRE6 ~26.8 $\pm$ 14.2\% and $\Delta$ FOXA1 ~96.2 $\pm$ 1.4\% reduction (Student’s t-test, $p<0.05$, Figure 3.5a, Appendix II Supplemental Figure 3.8a-f).
@@ -86,7 +86,7 @@ These results suggest that the six FOXA1 plexus contribute to prostate cancer et
 
 \subsection{SNVs mapping to \emph{FOXA1} CREs can alter their activity}
 
-SNVs can alter the transactivation potential of CREs 125,127,145,147,155,314–318.
+SNVs can alter the transactivation potential of CREs \cite{baileyNoncodingSomaticInherited2016,rheinbayRecurrentFunctionalRegulatory2017,zhangIntegrativeFunctionalGenomics2012,huangHighlyRecurrentTERT2013,hornTERTPromoterMutations2013,fuxmanbassHumanGeneCenteredTranscription2015,zhouEmergenceNoncodingCancer2016,feiginRecurrentNoncodingRegulatory2017,khuranaRoleNoncodingSequence2016,cowper-sal*lariBreastCancerRisk2012}.
 In total, we found 10 SNVs called from 9 out of the 200 tumours that map to the six FOXA1 plexus CREs (Figure 3.6a).
 To assess the impact of these noncoding SNVs, we conducted luciferase assays comparing differential reporter activity between the variant and the wild-type allele of each CRE (Figure 3.6b-k).
 We found that the variant alleles of 6 of the 10 SNVs displayed significantly greater luciferase reporter activity when compared to the wild-type alleles (Mann-Whitney U test, $p<0.05$).
@@ -95,7 +95,7 @@ These results indicate that these SNVs can alter the transactivation potential o
 
 \subsection{SNVs mapping to \emph{FOXA1} CREs can modulate the binding of TFs}
 
-We next assessed if the changes in transactivation potential induced by noncoding SNVs related to changes in TF binding to CREs by allele-specific ChIP-qPCR 125,155,315 in LNCaP prostate cancer cells.
+We next assessed if the changes in transactivation potential induced by noncoding SNVs related to changes in TF binding to CREs by allele-specific ChIP-qPCR \cite{baileyNoncodingSomaticInherited2016,zhangIntegrativeFunctionalGenomics2012,cowper-sal*lariBreastCancerRisk2012} in LNCaP prostate cancer cells.
 We observed differential binding of FOXA1, AR, HOXB13, GATA2 and FOXP1 for the chr14:37887005 (A $>$ G) SNV found in CRE1; the chr14:37904343 (A $>$ T), chr14:37905854 (A $>$ G) and chr14:37906009 (T $>$ C) SNVs found in CRE2; and the chr14:38055269 (C $>$ G) SNV found in CRE4 (Student’s t-test, $p<0.05$, Figure 3.6l-p).
 In contrast, SOX9 and NKX3.1 binding was unaffected by these SNVs (Figure  3.6l-q).
 Compared to the wild-type sequence, chr14:37,887,005 A $>$ G significantly increased AR binding (1.31-fold increase), GATA2 binding (1.25-fold increase) and FOXP1 binding (1.23-fold increase); chr14:37,904,343 A $>$ T significant increased AR binding (1.30-fold increase), GATA2 (1.25-fold increase) and FOXP1 (1.33-fold increase); chr14:37,905,854 A $>$ G significantly increased FOXA1 binding (1.41-fold increase) and AR binding (1.33-fold increase); chr14:37,906,009 T $>$ C significantly increased the binding of FOXA1 (1.29-fold increase), AR (1.31-fold increase), HOXB13 (1.13-fold increase) and FOXP1 (1.25-fold increase); and chr14:38,055,269 C $>$ G significantly increased FOXA1 binding (1.20-fold increase).
