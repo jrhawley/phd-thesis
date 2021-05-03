@@ -4,7 +4,7 @@
 
 Chromatin conformation capture technologies enable the measurement of three-dimensional chromatin organization.
 These assays, however, are often limited to cell lines, animal models and liquid tumours due to the amount of input required \cite{lieberman-aidenComprehensiveMappingLongRange2009}.
-Here, we optimized and conducted low-input Hi-C \cite{diazChromatinConformationAnalysis2018} on 10 $\mu$m thick cryosections from 12 primary prostate tumours and 5 primary benign prostate sections (see Methods, Figure 1a, Supplementary Figure 1a).
+Here, we optimized and conducted low-input Hi-C \cite{diazChromatinConformationAnalysis2018} on 10 $\mu$m thick cryosections from 12 primary prostate tumours and 5 primary benign prostate sections (see Methods, \Cref{fig:3D_fig1}a, Supplementary Figure 1a).
 The 12 tumours were selected from the Canadian Prostate Cancer Genome Network (CPC-GENE) cohort previously assessed for whole-genome sequencing \cite{fraserGenomicHallmarksLocalized2017}, RNA-seq \cite{chenWidespreadFunctionalRNA2019}, and H3K27ac ChIP-seq \cite{kronTMPRSS2ERGFusion2017,mazrooeiCistromePartitioningReveals2019} (Supplementary Table 1).
 All 12 of these PCa patients previously underwent radical prostatectomies and 6 of our 12 samples (50\%) harbour the TMPRSS2-ERG genetic fusion (T2E) found in approximately half of the primary PCa patients \cite{fraserGenomicHallmarksLocalized2017}.
 The total percent of genome altered ranges from 0.99\%-18.78\% (Supplementary Table 1) \cite{fraserGenomicHallmarksLocalized2017}.
@@ -13,12 +13,14 @@ Upon Hi-C sequencing, we reached an average of $9.90 \cdot 10^8$  read pairs per
 Pre-processing resulted in an average of $6.23 \cdot 10^8$ (96.13\%) valid read pairs per sample (range $3.95 \cdot 10^8 - 9.01 \cdot 10^8$, or 82.42\% - 99.22\%; Supplementary Table 2).
 Hence, we produced a high depth, high quality Hi-C library on 17 primary prostate tissue slices.
 
+\newfigure{chapter3/Figure1.png}{Topologically associated domains are stable over prostate oncogenesis}{\textbf{a.} The sample collection and data usage of primary prostate samples in this study. 10 $\mu$m sections from 6 tumours previously identified as T2E+ and 6  T2E- were used for Hi-C sequencing. 5 additional 10 $\mu$m sections were collected from benign prostate specimens in the UHN BioBank. \textbf{b-c.} A comparison of the number of TADs detected at multiple window sizes (\textbf{b}) and boundary persistence (\textbf{c}) in each patient sample, with inset schematics. \textbf{d.} Contact matrices around the \emph{AR} gene in primary samples and cell lines. Hi-C data for 22Rv1 and RWPE1 cell lines obtained from Rhie \emph{et al.}, 2019.}{fig:3D_fig1}
+
 To characterize the higher-order organization of the primary prostate genome, we first identified TADs.
 Across the 17 primary tissue samples, we observed an average of 2,305 TADs with a median size of 560 kbp (Supplementary Tables 3-4).
-However, when considering all hierarchical levels of TAD organization, we did not observe significant differences in the number of TADs identified across length scales (Figure 1b), nor in the persistence of their boundaries (Figure 1c).
+However, when considering all hierarchical levels of TAD organization, we did not observe significant differences in the number of TADs identified across length scales (\Cref{fig:3D_fig1}b), nor in the persistence of their boundaries (\Cref{fig:3D_fig1}c).
 This suggests few, if any, differences in three-dimensional chromatin organization at the TAD level between benign and tumour tissue.
 Notably, we observed differences in organization around essential genes for PCa between primary tissue and previously profiled cell lines.
-For example, chromatin around the AR gene that was previously found enriched in the 22Rv1 compared to RWPE1 prostate cell lines 44 were not recapitulated in either benign or tumour primary samples (Figure 1d, Supplementary Figure 1d).
+For example, chromatin around the AR gene that was previously found enriched in the 22Rv1 compared to RWPE1 prostate cell lines \cite{rhieHighresolution3DEpigenomic2019} were not recapitulated in either benign or tumour primary samples (\Cref{fig:3D_fig1}d, Supplementary Figure 1d).
 Moreover, when compared to other Hi-C datasets, the primary prostate samples clustered separately from cell lines (Supplementary Figure 1b), despite similar enrichment of CTCF binding sites near TAD boundaries (Supplementary Figure 1c).
 These results suggest that TADs are constrained over oncogenesis and that cell line models may not harbour disease-relevant three-dimensional chromatin organization.
 
@@ -31,30 +33,34 @@ Collectively, these results suggest that phenotypic differences between benign a
 
 \subsection{Focal chromatin interactions shift over oncogenesis}
 
-Changes to focal chromatin interactions have been observed in the absence of higher-order chromatin changes \cite{taktakayamaTransitionQuiescentActivated2021,johnstoneLargeScaleTopologicalChanges2020}, and we hypothesized that this may be the case in PCa.
+Changes to focal chromatin interactions have been observed in the absence of higher-order chromatin changes \cite{takayamaTransitionQuiescentActivated2021,johnstoneLargeScaleTopologicalChanges2020}, and we hypothesized that this may be the case in PCa.
 We detected chromatin interactions, identifying a median of 4,395 interactions per sample (range 1,286 - 6,993; Supplementary Figure 3a, Supplementary Table 5).
 Among these detected interactions, we identified known contacts in PCa such as those between two distal CREs on chromosome 14 and the FOXA1 promoter \cite{zhouNoncodingMutationsTarget2020} (Supplementary Figure 3b), and CREs upstream of MYC on chromosome 8 that are frequently duplicated in metastatic disease \cite{quigleyGenomicHallmarksStructural2018} (Supplementary Table 5).
-16,474 unique chromatin interactions were identified in at least one sample (Figure 2a), reaching an estimated ~80\% saturation of detection (Supplementary Figure 3c).
+16,474 unique chromatin interactions were identified in at least one sample (\Cref{fig:3D_fig2}a), reaching an estimated ~80\% saturation of detection (Supplementary Figure 3c).
 Restricting our analysis to the 8,486 interactions present in at least two samples (51.5\% of all interactions) yielded 1,405 tumour- and 273 benign-specific interactions, suggesting focal changes in three-dimensional chromatin organization occur over oncogenesis.
-Aggregate peak analysis revealed Hi-C contact enrichment at all detected interactions in all samples (Figure 2b-c), demonstrating that tumors- and benign-specific interactions are not binary.
-Rather, the contacts at "tumour-specific" loci are more enriched than those at "benign-specific" loci in tumour samples (Figure 2b).
-Similarly, the contacts at "benign-specific" loci are more enriched than those at "tumour-specific" loci in benign samples (Figure 2c).
+Aggregate peak analysis revealed Hi-C contact enrichment at all detected interactions in all samples (\Cref{fig:3D_fig2}b-c), demonstrating that tumors- and benign-specific interactions are not binary.
+Rather, the contacts at "tumour-specific" loci are more enriched than those at "benign-specific" loci in tumour samples (\Cref{fig:3D_fig2}b).
+Similarly, the contacts at "benign-specific" loci are more enriched than those at "tumour-specific" loci in benign samples (\Cref{fig:3D_fig2}c).
 Together, these results suggest that more focal changes to chromatin interactions are present in prostate oncogenesis despite the stable higher-order organization.
+
+\newfigure{chapter3/Figure2.png}{Focal chromatin interactions display subtle differences between benign and tumour tissue}{\textbf{a.} Stacked bar plots of the number of samples that chromatin interactions were identified in. \textbf{b-c.} Aggregate peak analysis of tumour (\textbf{b}) or benign (\textbf{c}) contacts in tumour-specific, benign-specific, and shared interactions identified in two or more samples. Regions plotted are $\pm$ 300 kbp around the centre of each identified interaction. Inset numbers are the mean $\log_2$(obs/exp) contact frequencies within the 100 kbp $\times$ 100 kbp black boxes.}{fig:3D_fig2}
 
 \subsection{Cataloguing structural variants from Hi-C data}
 
 In prostate tumours, SVs populate the genome to aid disease onset and progression \cite{fraserGenomicHallmarksLocalized2017,quigleyGenomicHallmarksStructural2018}.
 Advances in computational methods now enable the identification of SVs from Hi-C datasets \cite{dixonIntegrativeDetectionAnalysis2018,hoStructuralVariationSequencing2019}.
-Applying an SV caller to our primary prostate tumour Hi-C dataset \cite{dixonIntegrativeDetectionAnalysis2018}, we detected a total of 317 unique breakpoints with a median of 15 unique breakpoints per tumour (range 3-95; Figure 3a; Supplementary Table 6).
-As an example, we found evidence of the TMPRSS2-ERG (T2E) genetic fusion spanning the 21q22.2-3 locus in 6/12 (50\%) patients (CPCG0258, CPCG0324, CPCG0331, CPCG0336, CPCG0342, and CPCG0366) (Figure 3b), in accordance with previous whole-genome sequencing (WGS) findings \cite{fraserGenomicHallmarksLocalized2017}.
+Applying an SV caller to our primary prostate tumour Hi-C dataset \cite{dixonIntegrativeDetectionAnalysis2018}, we detected a total of 317 unique breakpoints with a median of 15 unique breakpoints per tumour (range 3-95; \Cref{fig:3D_fig3}a; Supplementary Table 6).
+As an example, we found evidence of the TMPRSS2-ERG (T2E) genetic fusion spanning the 21q22.2-3 locus in 6/12 (50\%) patients (CPCG0258, CPCG0324, CPCG0331, CPCG0336, CPCG0342, and CPCG0366) (\Cref{fig:3D_fig3}b), in accordance with previous whole-genome sequencing (WGS) findings \cite{fraserGenomicHallmarksLocalized2017}.
 Combining unique breakpoint pairs into rearrangement events yielded 7.5 total events on average per patient (range 1 - 36, Supplementary Figure 4a-b).
-We also identified more inter-chromosomal breakpoint pairs with the Hi-C data in 11 of 12 tumours (Figure 3b), including a novel translocation event that encompasses the deleted region between TMPRSS2 and ERG into chromosome 14.
+We also identified more inter-chromosomal breakpoint pairs with the Hi-C data in 11 of 12 tumours (\Cref{fig:3D_fig3}b), including a novel translocation event that encompasses the deleted region between TMPRSS2 and ERG into chromosome 14.
 Few loci contained SV breakpoints recurrent between patients (Supplementary Figure 4c).
-These numbers are smaller than previously reported from matched WGS data \cite{fraserGenomicHallmarksLocalized2017}; however, the median distance between breakpoints on the same chromosome was much larger at 31.6 Mbp for Hi-C-identified breakpoints, compared to 1.47 Mbp from WGS-identified breakpoints (Figure 3c).
+These numbers are smaller than previously reported from matched WGS data \cite{fraserGenomicHallmarksLocalized2017}; however, the median distance between breakpoints on the same chromosome was much larger at 31.6 Mbp for Hi-C-identified breakpoints, compared to 1.47 Mbp from WGS-identified breakpoints (\Cref{fig:3D_fig3}c).
 This is consistent with the inherent nature and resolution of the Hi-C method to detect larger, inter-chromosomal events \cite{dixonIntegrativeDetectionAnalysis2018}.
 No SVs were detected in the 5 primary benign prostate tissue samples from Hi-C data.
 While this does not rule out the presence of small rearrangements undetectable by Hi-C limited by its resolution, the absence of large and inter-chromosomal SVs further supports a difference in genome stability between benign and tumour tissues \cite{fraserGenomicHallmarksLocalized2017,bergerGenomicComplexityPrimary2011,bacaPunctuatedEvolutionProstate2013,mazrooeiCistromePartitioningReveals2019}.
 Collectively, Hi-C defines a valid method to interrogate for the presence of SV in tumour samples, compatible with the detection of intra- and inter-chromosomal interactions otherwise missed in WGS analyses.
+
+\newfigure{chapter3/Figure3.png}{SVs are identified in primary tissue through chromatin conformation capture}{\textbf{a.} Bar plot of SV breakpoint pairs identified by Hi-C and WGS on matched samples. BND = inter-chromosomal translocation, DEL = deletion, DUP = duplication, INV = inversion, UNKNOWN = breakpoint pair of unknown type. \textbf{b.} Hi-C contact matrices of the chr21:37-42 Mbp locus harbouring the \emph{TMPRSS2} and \emph{ERG} genes. Circles indicate increased contact between \emph{TMPRSS2} and \emph{ERG} in the T2E+ tumours. \textbf{c.} Histogram showing the distance between breakpoints on the same chromosome detected by Hi-C (left) versus WGS (right). \textbf{d.} An example of a complex set of rearrangements spanning both arms of chromosome 3 in a single patient.}{fig:3D_fig3}
 
 Among SVs detected in primary prostate tumours, we identified both simple and complex chains of breakpoints.
 While simple SVs correspond to fusion between two distal DNA sequences, complex chains are evidence of chromothripsis and chromoplexy \cite{bacaPunctuatedEvolutionProstate2013}.
@@ -63,7 +69,7 @@ The chains can be pictured as paths connecting breakpoints in the contact matrix
 8 of the 12 (66.7\%) tumour samples contained these chains, including one patient (CPCG0331) harbouring 11 complex events and three patients (CPCG0246, CPCG0345, and CPCG0365) each harbouring a single complex event.
 We observed a median of 1 complex event per patient (range 0-11) consisting of a median of 3 breakpoints (range 3-7) spanning a median of 2 chromosomes per event (range 1-4, Supplementary Table 7, Supplementary Figure 4b).
 Patient CPCG0331 had 11 complex events, including a 6-breakpoint event spanning 3 chromosomes (Supplementary Figure 4b).
-A highly rearranged chromosome 3 was also found in the same patient (Figure 3d).
+A highly rearranged chromosome 3 was also found in the same patient (\Cref{fig:3D_fig3}d).
 The most common type of complex event involved 3 breakpoints and spanned 2 chromosomes, occurring 9 times across 5 of the 8 patients with complex events.
 In summary, using Hi-C, we detected both simple and complex SVs in primary prostate tumours not previously identified using WGS-based methods.
 We were able to identify known observations, such as a highly mutated region on chromosome 3 and subtype-specific differences in abundance, as well as find novel inter-chromosomal events not previously reported.
@@ -72,22 +78,24 @@ We were able to identify known observations, such as a highly mutated region on 
 
 Using combined WGS called SVs with those from Hi-C data, we next systematically examined the impact of SVs on TAD structure.
 This led us to look at the intra-TAD and inter-TAD interactions around each breakpoint.
-We observed that only 18 of the 260 (6.9\%) TADs containing SV breakpoints were associated with decreased intra-TAD or increased inter-TAD interactions (Figure 4a).
+We observed that only 18 of the 260 (6.9\%) TADs containing SV breakpoints were associated with decreased intra-TAD or increased inter-TAD interactions (\Cref{fig:3D_fig4}a).
 12 of 18 (66.7\%) occurrences were within T2E+ tumours.
 We found no evidence that simple versus complex SVs were a factor in determining whether a TAD was altered (Pearson's $\chi^2$ test, $\chi^2 = 0.0166$, $p = 0.8974$, $df = 1$).
 Similarly, the type of SV (deletion, inversion, duplication, or translocation) was not predictive of whether the TAD would be altered (Pearson's $\chi^2$ test, $\chi^2 = 4.7756$, $p = 0.3111$, $df = 4$).
 Overall, we find that SVs are associated with higher-order topological changes in a small percentage of cases and that the presence of an SV breakpoint is not predictive alone of an altered TAD.
 
+\newlongfigure{chapter3/Figure4.png}{SVs can alter TADs or gene expression around breakpoints, but rarely alters both}{\textbf{a.} A count of the number of SV breakpoints associated with altered TAD boundaries. \textbf{b.} Bar plot showing the number of genes differentially expressed around SV breakpoints. \textbf{c-f.} An example of an SV that alters intra-TAD contacts without significantly affecting gene expression of the nearby genes. \textbf{c.} The contact matrix showing a translocation of the \emph{TMPRSS2}-\emph{ERG} locus into chromosome 14 in the \emph{RALGAPA1} gene. \textbf{d.} The differential contact matrix between the tumour containing this translocation and another tumour without it. \textbf{e.} Gene expression scatterplot and boxplot of genes within the affected TAD for each sample. \textbf{f.} A schematic representation of the translocation. \textbf{g-j.} An example of an SV that does not alter intra-TAD contacts but does alter the expression of the nearby genes. \textbf{g.} The contact matrix showing a complex rearrangement around the \emph{RIMBP2} gene. \textbf{h.} The differential contact matrix between the tumour containing this rearrangement and another tumour without it. \textbf{e.} Gene expression scatterplot and boxplot of genes within the affected TAD for each sample. \textbf{j.} A schematic representation of the rearrangement. Boxplots highlight the first, second, and third quartiles of expression in the tumours without the example SV. Red dots represent the tumour with the example SV, grey dots represent the tumours without.}{fig:3D_fig4}
+
 Despite the evidence that SVs rarely impact higher-order chromatin topology, we evaluated whether SVs affected the expression of genes within the TADs surrounding the breakpoint using patient-matched RNA-seq data \cite{chenWidespreadFunctionalRNA2019}.
-We found that 23 of 260 breakpoints (8.8\%) are associated with significant changes to local gene expression (Figure 4b).
+We found that 23 of 260 breakpoints (8.8\%) are associated with significant changes to local gene expression (\Cref{fig:3D_fig4}b).
 Complex events can have opposite effects at each breakpoint.
-For example, while the T2E fusion across all tumours leads to over-expression of ERG and under-expression of TMPRSS2 \cite{fraserGenomicHallmarksLocalized2017,kronTMPRSS2ERGFusion2017}, the deleted locus between these two genes was inserted into chromosome 14 as part of a complex translocation event in one patient (Figure 4c-f).
-This inserted fragment positions ERG towards the 5' end of the RALGAPA1 gene and TMPRSS2 towards the 3' end (Figure 4c) resulting in a significant drop in intra-TAD contacts at the RALGAPA1 locus on chromosome 14 (two-sample unpaired $t$-test, $t = 6.38$, $p =1.04 \cdot 10^-9$; Figure 4d).
-Despite the significant topological change on chromosome 14, no significant changes to expression was detectable across genes within the same TAD on chromosome 14 (Figure 4e).
+For example, while the T2E fusion across all tumours leads to over-expression of ERG and under-expression of TMPRSS2 \cite{fraserGenomicHallmarksLocalized2017,kronTMPRSS2ERGFusion2017}, the deleted locus between these two genes was inserted into chromosome 14 as part of a complex translocation event in one patient (\Cref{fig:3D_fig4}c-f).
+This inserted fragment positions ERG towards the 5' end of the RALGAPA1 gene and TMPRSS2 towards the 3' end (\Cref{fig:3D_fig4}c) resulting in a significant drop in intra-TAD contacts at the RALGAPA1 locus on chromosome 14 (two-sample unpaired $t$-test, $t = 6.38$, $p =1.04 \cdot 10^-9$; \Cref{fig:3D_fig4}d).
+Despite the significant topological change on chromosome 14, no significant changes to expression was detectable across genes within the same TAD on chromosome 14 (\Cref{fig:3D_fig4}e).
 Conversely, TAD alterations are not required changes to gene expression.
-As part of a complex SV involving the RIMBP2 gene (Figure 4g-j), both ends of the gene contain breakpoints (Figure 4g).
-This rearrangement is not associated with changes to intra-TAD contacts (two-sample unpaired $t$-test, $t = 0.8101$, $p = 0.4183$; Figure 4h).
-However, RIMBP2 is over-expressed in this patient (Figure 4i).
+As part of a complex SV involving the RIMBP2 gene (\Cref{fig:3D_fig4}g-j), both ends of the gene contain breakpoints (\Cref{fig:3D_fig4}g).
+This rearrangement is not associated with changes to intra-TAD contacts (two-sample unpaired $t$-test, $t = 0.8101$, $p = 0.4183$; \Cref{fig:3D_fig4}h).
+However, RIMBP2 is over-expressed in this patient (\Cref{fig:3D_fig4}i).
 More generally, only a single breakpoint was observed with both TAD contact and gene expression changes, although we did not find evidence to suggest these are dependent events (Pearson's $\chi^2$ test, $\chi^2 = 6.31 \cdot 10^3$, $p = 0.9367$, $df = 1$).
 For TADs where at least one gene was differentially expressed, 19 (83\%) of them had at least one gene with doubled or halved expression.
 Notably, we found that inter-chromosomal translocations are associated with altering the expression of genes nearby their breakpoints compared to intra-chromosomal breakpoints (Pearson's $\chi^2$ test, $\chi^2 = 7.0088$, $p = 0.00811$, $df = 1$; Supplementary Figure 5).
