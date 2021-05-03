@@ -11,6 +11,7 @@
 \usepackage{glossaries}
 \usepackage{chngcntr}
 \usepackage{ccaption}
+\usepackage{ltablex}
 \usepackage[backend=biber, style=nature, sorting=none]{biblatex}
 \usepackage{hyperref}
 \usepackage[capitalize, noabbrev]{cleveref}
@@ -36,6 +37,10 @@
 % Figure placement
 % ------------------------------------------------
 % Typical figure layout and placement
+% #1 = image file
+% #2 = figure title
+% #3 = figure caption
+% #4 = figure reference label
 \newcommand{\newfigure}[4]{
   % Start figure environment
   \begin{figure}
@@ -50,6 +55,10 @@
 }
 
 % Figure layout and placement for a figure with a long caption
+% #1 = image file
+% #2 = figure title
+% #3 = figure caption
+% #4 = figure reference label
 \newcommand{\newlongfigure}[4]{
   % Start figure environment
   \begin{figure}
@@ -68,6 +77,30 @@
   \end{figure}
 }
 
+% Table layout for long tables
+% #1 = table column layout
+% #2 = table title
+% #3 = table header
+% #4 = table reference label
+% #5 = table content
+\newcommand{\newlongtable}[5]{
+  \begin{tabularx}{\linewidth}{#1}
+  \caption{\textbf{#2.}} \\
+  \label{#4}
+  #3 \\
+  \hline
+  \endfirsthead
+  #3 \\
+  \hline
+  \endhead
+  \multicolumn{2}{r}{\footnotesize(Continued)}
+  \endfoot
+  \hline
+  \endlastfoot
+  #5
+\end{tabularx}
+}
+
 % ==============================================================================
 % Document
 % ==============================================================================
@@ -80,7 +113,7 @@
 \subfile{frontmatter/abstract}
 \subfile{frontmatter/acknowledgments}
 \subfile{frontmatter/toc}
-% \subfile{frontmatter/tables_list}
+\subfile{frontmatter/tables_list}
 \subfile{frontmatter/figures_list}
 % \subfile{frontmatter/appendices_list}
 
