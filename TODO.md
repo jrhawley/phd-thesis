@@ -4,10 +4,12 @@
 - [ ] Characters
   - [ ] % -> \%
   - [ ] # -> \#
+  - [ ] $ -> \$
+  - [ ] ~ -> \~
   - [ ] ± -> \pm
   - [ ] > and < -> $>$ and $<$
   - [ ] non-standard " and '
-  - [ ] x -> \cdot
+  - [ ] x -> \cdot or \times
   - [ ] ° -> \textdegree
   - [ ] ™ -> \texttrademark
 - [ ] Italicize
