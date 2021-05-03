@@ -1,23 +1,42 @@
 % ==============================================================================
 % Environment
 % ==============================================================================
+% template for University of Toronto dissertation
 \documentclass[oneside,doublespacing]{ut-thesis}
 % \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
+% separate text into multiple LaTeX files
 \usepackage{subfiles}
+% intelligently handle single and double quotes
 \usepackage{quotes}
+% special functions for handling the table of contents
 \usepackage{tocloft}
+% indent the first line of a paragraph
 \usepackage{indentfirst}
+% commands for inserting images
 \usepackage{graphicx}
+% commands for dealing with initializations, abbreviations, and glossaries
 \usepackage{glossaries}
+% commands for dealing with chapter/section/etc counters
 \usepackage{chngcntr}
+% intelligently handle long captions for figures and tables
 \usepackage{ccaption}
+% intelligently split long tables across pages
 \usepackage{ltablex}
+% slight adjustments to special characters like ~
+\usepackage{textcomp}
+% monotype and teletype fonts for code blocks
+\usepackage{listings}
+% handle citations to external documents
 \usepackage[backend=biber, style=nature, sorting=none]{biblatex}
+% create hyperlinks for jumping around the document
 \usepackage{hyperref}
+% handle internal document references to figures, tables, and more
 \usepackage[capitalize, noabbrev]{cleveref}
 
+% load the Zotero library Bibtex file
 \addbibresource{thesis.bib}
 
+% UofT thesis template items
 \author{James Hawley}
 \title{Genomic and epigenomic aberrations of gene regulation in prostate cancer and leukemia}
 \degree{Doctor of Philosophy}
@@ -98,7 +117,17 @@
   \hline
   \endlastfoot
   #5
-\end{tabularx}
+  \end{tabularx}
+}
+
+% Fix the vertical spacing for the tilde
+\renewcommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}
+
+% Define default formatting for listing code blocks
+\lstset{
+  language=bash,
+  breaklines=true,
+  showstringspaces=false,
 }
 
 % ==============================================================================
