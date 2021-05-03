@@ -103,96 +103,118 @@ Upon confirming library quality and low duplication rates ($<$ 2\%), samples wer
 \subsubsection{Sequence alignment and Hi-C artefact removal}
 
 Paired-end FASTQ files were pre-processed with HiCUP (v0.7.2) \cite{wingettHiCUPPipelineMapping2015}.
-% Reads were truncated at MboI ligation junction sites prior to alignment with `hicup_digester`.
-% Each mate was independently aligned to the hg38 genome and were then paired and assigned to MboI restriction sites by `hicup_map`.
-% `hicup_map` uses Bowtie2 (v2.3.4) 70 as the underlying aligner which has the following parameters: `--very-sensitive --no-unal --reorder`.
-% Reads that reflect technical artefacts were filtered out with `hicup_filter`.
-% Duplicate reads were removed with `hicup_deduplicator`.
+Reads were truncated at MboI ligation junction sites prior to alignment with $\texttt{hicup\_digester}$.
+Each mate was independently aligned to the hg38 genome and were then paired and assigned to MboI restriction sites by $\texttt{hicup\_map}$.
+$\texttt{hicup\_map}$ uses Bowtie2 (v2.3.4) \cite{langmeadFastGappedreadAlignment2012} as the underlying aligner which has the following parameters: $\texttt{--very-sensitive --no-unal --reorder}$.
+Reads that reflect technical artefacts were filtered out with $\texttt{hicup\_filter}$.
+Duplicate reads were removed with $\texttt{hicup\_deduplicator}$.
 
-% Reads that came from different sequencing batches were then aggregated for each tumour sample at this stage using `sambamba merge` (v0.6.9) 71.
-% This resulted in an average of 1.12 $\cdot$ 109 read per tumour sample (Supplementary Table 2).
+Reads that came from different sequencing batches were then aggregated for each tumour sample at this stage using $\texttt{sambamba merge}$ (v0.6.9) \cite{tarasovSambambaFastProcessing2015}.
+This resulted in an average of $1.12 \times 10^9$ read per tumour sample (Supplementary Table 2).
 
 \subsubsection{Contact matrix generation and balancing}
 
-% Aggregated binary alignment map (BAM) files were converted to the pairs format using pairtools (v0.2.2) 72 and then the cooler format using the cooler package (v0.8.5) 73.
-% The pairs files were generated with the following command: `pairtools parse -c {genome} --assembly hg38 -o {output_pairs} {input_bam}`.
-% The cooler files were generated at an initial matrix resolution of 1000 bp with the following command: `cooler cload pairs --assembly hg38 -c1 2 -p1 3 -c2 4 -p2 5 {genome}:1000 {input_pairs} {output_cooler}`.
+Aggregated binary alignment map (BAM) files were converted to the pairs format using pairtools (v0.2.2) \cite{goloborodkoMirnylabPairtoolsV02019} and then the cooler format using the cooler package (v0.8.5) \cite{abdennurMirnylabCoolerV02019}.
+The pairs files were generated with the following command:
 
-% The raw contact matrices stored in the cooler file format were balanced using cooler's implementation of the ICE algorithm 74 using the `cooler balance` command.
-% Contact matrices at different resolutions were created with the `cooler zoomify` command.
+\begin{lstlisting}[basicstyle=\ttfamily]
+pairtools parse -c {genome} --assembly hg38 -o {output_pairs} {input_bam}
+\end{lstlisting}
+
+The cooler files were generated at an initial matrix resolution of 1000 bp with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+cooler cload pairs --assembly hg38 -c1 2 -p1 3 -c2 4 -p2 5 {genome}:1000  {input_pairs} {output_cooler}
+\end{lstlisting}
+
+The raw contact matrices stored in the cooler file format were balanced using cooler's implementation of the ICE algorithm \cite{imakaevIterativeCorrectionHiC2012} using the $\texttt{cooler balance}$ command.
+Contact matrices at different resolutions were created with the $\texttt{cooler zoomify}$ command.
 
 \subsection{Hi-C Data Analysis}
 
 \subsubsection{TAD identification}
 
-% Contact matrices were binned at a resolution of 40 kbp.
-% To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
-% For comparisons including cell lines, this was 120x106 contacts.
-% For comparisons only involving primary samples, this was 300x106 contacts.
-% This was achieved with Cooltools (v0.3.2) with the following command: `cooltools random-sample -c 120000000 {input}::/resolutions/40000 {output}`.
+Contact matrices were binned at a resolution of 40 kbp.
+To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
+For comparisons including cell lines, this was $120 \times 10^6$ contacts.
+For comparisons only involving primary samples, this was $300 \times 10^6$ contacts.
+This was achieved with Cooltools (v0.3.2) \cite{venevMirnylabCooltoolsV02020} with the following command:
 
-% TADs were identified using TopDom 75 on the downsampled, ICE-normalized contact matrices.
-% To identify domains at multiple length scales, similar in concept to Artamus' gamma parameter 76, TopDom was run multiple times per sample, with the window size parameter set at values between 3 and 40, inclusive (corresponding to 120 kbp and 1.6 Mbp).
-% The lower bound for the window size parameter allowed for the identification of domains multiple megabases in size at the upper end and domains $<$ 100 kbp at the lower end without being dominated by false calls due to sparsity of the data.
-% Despite TopDom being more resistant to confounding by sequencing depth than other TAD calling tools 77, biases in boundary persistence were evident between samples of different sequencing depth.
-% Downsampling contact matrices to similar depths resolved these biases.
+\begin{lstlisting}[basicstyle=\ttfamily]
+cooltools random-sample -c 120000000 {input}::/resolutions/40000 {output}
+\end{lstlisting}
 
-% Given the stochasticity of Hi-C sequencing, boundaries called at one window size may not correspond to the exact same location at a different window size.
-% To attempt to resolve these different boundary calls and leverage power from multiple window sizes, boundaries for a given patient were considered at all window sizes.
-% Boundaries within one bin (40 kbp) of each other and called at different window sizes were marked as conflicting calls.
-% If only two boundaries were in conflict and all the window sizes where the first boundary was called are smaller than the window sizes where the second boundary was called, the second boundary was selected since larger smoothing windows are less sensitive to small differences in contact counts.
-% If only two boundaries were in conflict but there is no proper ordering of the window sizes, the boundary that was identified most often between the two was selected.
-% If three boundaries are in conflict, the middle boundary was selected.
-% If four or more boundaries were in conflict, the boundary that was identified most often was selected.
+TADs were identified using TopDom \cite{shinTopDomEfficientDeterministic2016} on the downsampled, ICE-normalized contact matrices.
+To identify domains at multiple length scales, similar in concept to Artamus' gamma parameter \cite{filippovaIdentificationAlternativeTopological2014}, TopDom was run multiple times per sample, with the window size parameter set at values between 3 and 40, inclusive (corresponding to 120 kbp and 1.6 Mbp).
+The lower bound for the window size parameter allowed for the identification of domains multiple megabases in size at the upper end and domains $<$ 100 kbp at the lower end without being dominated by false calls due to sparsity of the data.
+Despite TopDom being more resistant to confounding by sequencing depth than other TAD calling tools \cite{forcatoComparisonComputationalMethods2017}, biases in boundary persistence were evident between samples of different sequencing depth.
+Downsampling contact matrices to similar depths resolved these biases.
 
-% To determine the maximum window size for TAD calls, TAD calls were compared across window sizes for the same patient using the BPscore metric 78.
-% TAD calls are identical when the BPscore is 0, and divergent when 1.
-% The cut-off window size for a single patient was determined when the difference between TAD calls at consecutive window sizes was $<$ 0.005, twice in a row.
-% The maximum window size was determined by the maximum window size cut-off across all samples in a comparison.
-% For comparisons involving only primary samples, the maximum window size was determined to be w = 20 $\times$ 40 kbp.
-% For comparisons involving cell lines, this was w = 32 $\times$ 40 kbp.
+Given the stochasticity of Hi-C sequencing, boundaries called at one window size may not correspond to the exact same location at a different window size.
+To attempt to resolve these different boundary calls and leverage power from multiple window sizes, boundaries for a given patient were considered at all window sizes.
+Boundaries within one bin (40 kbp) of each other and called at different window sizes were marked as conflicting calls.
+If only two boundaries were in conflict and all the window sizes where the first boundary was called are smaller than the window sizes where the second boundary was called, the second boundary was selected since larger smoothing windows are less sensitive to small differences in contact counts.
+If only two boundaries were in conflict but there is no proper ordering of the window sizes, the boundary that was identified most often between the two was selected.
+If three boundaries are in conflict, the middle boundary was selected.
+If four or more boundaries were in conflict, the boundary that was identified most often was selected.
 
-% The persistence of a TAD boundary was calculated as the number of window sizes where this region was identified as a boundary.
+To determine the maximum window size for TAD calls, TAD calls were compared across window sizes for the same patient using the BPscore metric \cite{zaborowskiBPscoreEffectiveMetric2019}.
+TAD calls are identical when the BPscore is 0, and divergent when 1.
+The cut-off window size for a single patient was determined when the difference between TAD calls at consecutive window sizes was $<$ 0.005, twice in a row.
+The maximum window size was determined by the maximum window size cut-off across all samples in a comparison.
+For comparisons involving only primary samples, the maximum window size was determined to be $w = 20 \times 40 \text{ kbp}$.
+For comparisons involving cell lines, this was $w = 32 \times 40 \text{ kbp}$.
+
+The persistence of a TAD boundary was calculated as the number of window sizes where this region was identified as a boundary.
 
 \subsubsection{Sample clustering by TADs}
 
-% Using the TAD calls at the window size w = 32 $\times$ 40 kbp, the similarity between samples was calculated with BPscore.
-% The resulting matrix, containing the similarity between any two samples, was used as the distance matrix for unsupervised hierarchical clustering with Ward.D2 linkage.
+Using the TAD calls at the window size $w = 32 \times 40 \text{ kbp}$, the similarity between samples was calculated with BPscore.
+The resulting matrix, containing the similarity between any two samples, was used as the distance matrix for unsupervised hierarchical clustering with $\texttt{ward.D2}$ linkage.
 
 \subsubsection{Compartment identification}
 
-% Contact matrices were binned at a resolution of 40 kbp, similarly to TAD identification.
-% To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
-% Contact matrix eigenvectors were calculated with Cooltools.
-% To standardize the sign of each eigenvector, the GC content of the reference genome, binned at 40 kbp, was used as a phasing reference track.
-% This reference track was calculated with the `frac_gc` function from the Bioframe Python package (v0.0.12) 79.
-% The first eigenvector was used to identify compartments with the following command: `cooltools call-compartments --bigwig --reference-track gc-content-phase.bedGraph -o {output}{input}`.
+Contact matrices were binned at a resolution of 40 kbp, similarly to TAD identification.
+To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
+Contact matrix eigenvectors were calculated with Cooltools.
+To standardize the sign of each eigenvector, the GC content of the reference genome, binned at 40 kbp, was used as a phasing reference track.
+This reference track was calculated with the $\texttt{frac\_gc}$ function from the Bioframe Python package (v0.0.12) \cite{nezarabdennurMirnylabBioframeV02020}.
+The first eigenvector was used to identify compartments with the following command: 
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+cooltools call-compartments --bigwig --reference-track gc-content-phase.bedGraph -o {output} {input}
+\end{lstlisting}
 
 \subsubsection{Identification of significant chromatin interactions}
 
-% Chromatin interactions were identified in all 17 primary samples with Mustache (v1.0.2) 80.
-% Using the Cooler files from above, Mustache was run on the ICE-normalized 10 kbp contact matrix for each chromosome with the following command: `mustache -f {input} -r 10000 -ch {chromosome} -p 8 -o {output}`.
-% Interaction calls on each chromosome were merged for each sample to create a single table of interaction calls across the entire genome.
+Chromatin interactions were identified in all 17 primary samples with Mustache (v1.0.2) \cite{roayaeiardakanyMustacheMultiscaleDetection2020}.
+Using the Cooler files from above, Mustache was run on the ICE-normalized 10 kbp contact matrix for each chromosome with the following command:
 
-% To account for variances in detection across samples and to identify similarly called interactions across samples, interaction anchors were aggregated across all samples to form a consensus set.
-% Interaction anchors were merged if they overlapped by at least 1 bp.
-% Interaction anchors for each sample were then mapped to the consensus set of anchors, and these new anchors were used in all subsequent analyses.
+\begin{lstlisting}[basicstyle=\ttfamily]
+mustache -f {input} -r 10000 -ch {chromosome} -p 8 -o {output}
+\end{lstlisting}
+
+Interaction calls on each chromosome were merged for each sample to create a single table of interaction calls across the entire genome.
+
+To account for variances in detection across samples and to identify similarly called interactions across samples, interaction anchors were aggregated across all samples to form a consensus set.
+Interaction anchors were merged if they overlapped by at least 1 bp.
+Interaction anchors for each sample were then mapped to the consensus set of anchors, and these new anchors were used in all subsequent analyses.
 
 \subsubsection{Chromatin interaction saturation analysis}
 
-% To estimate the detection of all chromatin interactions across all samples, a nonlinear regression on an asymptotic model was performed.
-% This is similar in method to peak saturation analysis used to assess peaks detected in ChIP-seq experiments from a collection of samples 42.
-% Bootstrapping the number of unique interactions detected in a random selection of n samples was calculated for n ranging from 1 to 17.
-% 100 iterations of the bootstrapping process were performed.
-% An exponential model was fit against the mean number of unique interactions detected in n samples using the `nls` and `SSaymp` functions from the stats R package (v3.6.3).
-% The model was fit to the following equation:
+To estimate the detection of all chromatin interactions across all samples, a nonlinear regression on an asymptotic model was performed.
+This is similar in method to peak saturation analysis used to assess peaks detected in ChIP-seq experiments from a collection of samples \cite{kronTMPRSS2ERGFusion2017}.
+Bootstrapping the number of unique interactions detected in a random selection of n samples was calculated for n ranging from 1 to 17.
+100 iterations of the bootstrapping process were performed.
+An exponential model was fit against the mean number of unique interactions detected in n samples using the $\texttt{nls}$ and $\texttt{SSaymp}$ functions from the stats R package (v3.6.3).
+The model was fit to the following equation:
 
-% \begin{equation}
-%   \mu = \alpha + \left( R_0 - \alpha \right) \exp \left(kn \right)
-% \end{equation}
+\begin{equation}
+  \mu = \alpha + \left( R_0 - \alpha \right) \exp \left(kn \right)
+\end{equation}
 
-% Where $\mu$ is the mean number of chromatin interactions for a given number of samples, $n$, $\alpha$ is the asymptotic limit of the total number of mean detected interactions, $R_0$ is the response for $n = 0$, and $k$ is the rate constant.
-% The estimated fit was used to predict the number of samples required to reach 50\%, 90\%, 95\%, and 99\% saturation of the asymptote (Supplementary Figure 3c).
+where $\mu$ is the mean number of chromatin interactions for a given number of samples, $n$, $\alpha$ is the asymptotic limit of the total number of mean detected interactions, $R_0$ is the response for $n = 0$, and $k$ is the rate constant.
+The estimated fit was used to predict the number of samples required to reach 50\%, 90\%, 95\%, and 99\% saturation of the asymptote (Supplementary Figure 3c).
 
 \subsubsection{Structural variant breakpoint pair detection}
 
