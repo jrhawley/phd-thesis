@@ -7,6 +7,7 @@
   - [ ] $ -> \$
   - [ ] ~ -> \~
   - [ ] ± -> \pm
+  - [ ] _ -> \_
   - [ ] > and < -> $>$ and $<$
   - [ ] non-standard " and '
   - [ ] x -> \cdot or \times

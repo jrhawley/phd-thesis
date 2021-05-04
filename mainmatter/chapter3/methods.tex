@@ -209,90 +209,110 @@ Bootstrapping the number of unique interactions detected in a random selection o
 An exponential model was fit against the mean number of unique interactions detected in n samples using the $\texttt{nls}$ and $\texttt{SSaymp}$ functions from the stats R package (v3.6.3).
 The model was fit to the following equation:
 
-\begin{equation}
+\begin{equation*}
   \mu = \alpha + \left( R_0 - \alpha \right) \exp \left(kn \right)
-\end{equation}
+\end{equation*}
 
 where $\mu$ is the mean number of chromatin interactions for a given number of samples, $n$, $\alpha$ is the asymptotic limit of the total number of mean detected interactions, $R_0$ is the response for $n = 0$, and $k$ is the rate constant.
 The estimated fit was used to predict the number of samples required to reach 50\%, 90\%, 95\%, and 99\% saturation of the asymptote (Supplementary Figure 3c).
 
 \subsubsection{Structural variant breakpoint pair detection}
 
-% Breakpoint pairs for each patient were called on the merged BAM files using `hic_breakfinder` (commit 30a0dcc6d01859797d7c263df7335fd2f52df7b8) 27.
-% Pre-calculated expected observation files for the hg38 genome were downloaded from the `hic_breakfinder` GitHub repository on Jul 24, 2019, as per the instructions.
-% Breakpoints were explicitly called with the following command: `hic_breakfinder --bam-file {BAM} --exp-file-inter inter_expect_1Mb.hg38.txt --exp-file-intra intra_expect_100kb.hg38.txt --name {Sample ID} --min-1kb`.
-% For the T2E fusion, only one patient had the deletion identified by hic_breakfinder with default parameters (CPCG0336).
-% Difficulties identifying SVs with hic_breakfinder have been previously noted 47.
-% After adjusting the detection threshold, we were able to identify the fusion in other samples.
-% To ensure the T2E+ tumours were effectively stratified for future analyses, the fusion was annotated using the same coordinates for the other T2E+ samples.
-% No other additions to breakpoint calls were made.
-% Certain breakpoints that appeared to be artefacts were removed, as described below.
+Breakpoint pairs for each patient were called on the merged BAM files using $\texttt{hic\_breakfinder}$ (commit 30a0dcc6d01859797d7c263df7335fd2f52df7b8) \cite{dixonIntegrativeDetectionAnalysis2018}.
+Pre-calculated expected observation files for the hg38 genome were downloaded from the git repository on July 24, 2019, as per the instructions.
+Breakpoints were explicitly called with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+hic_breakfinder --bam-file {BAM} --exp-file-inter inter_expect_1Mb.hg38.txt --exp-file-intra intra_expect_100kb.hg38.txt --name {Sample_ID} --min-1kb.
+\end{lstlisting}
+
+For the T2E fusion, only one patient had the deletion identified by $\texttt{hic\_breakfinder}$ with default parameters (CPCG0336).
+Difficulties identifying SVs with $\texttt{hic\_breakfinder}$ have been previously noted \cite{hoStructuralVariationSequencing2019}.
+After adjusting the detection threshold, we were able to identify the fusion in other samples.
+To ensure the T2E+ tumours were effectively stratified for future analyses, the fusion was annotated using the same coordinates for the other T2E+ samples.
+No other additions to breakpoint calls were made.
+Certain breakpoints that appeared to be artefacts were removed, as described below.
 
 \subsubsection{Structural variant annotation and graph construction}
 
-% The contact matrix spanning 5 Mbp upstream and downstream around the breakpoint pairs were plotted and annotated according to previously published heuristics (Supplementary Figure 4 for 27).
-% Breakpoint pairs that were nearby other breakpoints or did not match the heuristics in this figure were labelled as "unknown".
-% These annotations were matched against the annotations identified from the previously published whole genome sequencing structural variants 33.
-% Breakpoint pairs matching the following criteria were considered as detection artefacts and were ignored.
+The contact matrix spanning 5 Mbp upstream and downstream around the breakpoint pairs were plotted and annotated according to previously published heuristics (Supplementary Figure 4 for \cite{dixonIntegrativeDetectionAnalysis2018}).
+Breakpoint pairs that were nearby other breakpoints or did not match the heuristics in this figure were labelled as $\texttt{UNKNOWN}$.
+These annotations were matched against the annotations identified from the previously published whole genome sequencing structural variants \cite{fraserGenomicHallmarksLocalized2017}.
+Breakpoint pairs matching the following criteria were considered as detection artefacts and were ignored.
 
-% \begin{enumerate}
-%   \item At least one breakpoint was > 1 Mbp
-%   \item At least one breakpoint was surrounded by empty regions of the contact matrix
-%   \item At least one breakpoint corresponded to a TAD or compartment boundary shared across all samples that lacked a distinct sharp edge that is indicative of a chromosomal rearrangement
-% \end{enumerate}
+\begin{enumerate}
+  \item At least one breakpoint was $>$ 1 Mbp
+  \item At least one breakpoint was surrounded by empty regions of the contact matrix
+  \item At least one breakpoint corresponded to a TAD or compartment boundary shared across all samples that lacked a distinct sharp edge that is indicative of a chromosomal rearrangement
+\end{enumerate}
 
-% To identify unique breakpoints that were identified in multiple breakpoint pairs, breakpoints that were within 50 kbp of each other were considered as possibly redundant calls.
-% This distance was considered as the resolution of the non-artefactual calls is 100 kbp.
-% Plotting the contact matrix 5 Mbp around the breakpoint, breakpoints calls were considered the same breakpoint if the sharp edge of each breakpoint was equal to within 5 kbp.
-% Similar in concept to the ChainFinder algorithm 38, we consider each breakpoint as a node in a graph.
-% Nodes are connected if they are detected as a pair of breakpoints by `hic_breakfinder`.
-% Simple structural variants are connected components in the breakpoint graph containing only two nodes, and complex variants those with greater than two nodes.
-% A visual representation of these graphs can be found in Supplementary Figure 4b.
+To identify unique breakpoints that were identified in multiple breakpoint pairs, breakpoints that were within 50 kbp of each other were considered as possibly redundant calls.
+This distance was considered as the resolution of the non-artefactual calls is 100 kbp.
+Plotting the contact matrix 5 Mbp around the breakpoint, breakpoints calls were considered the same breakpoint if the sharp edge of each breakpoint was equal to within 5 kbp.
+Similar in concept to the ChainFinder algorithm \cite{bacaPunctuatedEvolutionProstate2013}, we consider each breakpoint as a node in a graph.
+Nodes are connected if they are detected as a pair of breakpoints by $\texttt{hic\_breakfinder}$.
+Simple structural variants are connected components in the breakpoint graph containing only two nodes, and complex variants those with greater than two nodes.
+A visual representation of these graphs can be found in Supplementary Figure 4b.
 
-\subsubsection{Determination of structural variant breakpoints altering TAD boundaries}
+\subsubsection{Determination of structural variant breakpoints altering intra-TAD contacts}
 
-% Patients are assigned into one of two groups using hierarchical clustering (complete linkage) with the matrix of pairwise BPscore 78 values as a distance matrix.
-% If the clustering equals the mutated samples from the non-mutated samples (i.e., the clustering matches the mutation status in this locus), then the local topology was classified as "altered" because of the SV.
+Patients are assigned into one of two groups using hierarchical clustering (complete linkage) with the matrix of pairwise BPscore \cite{zaborowskiBPscoreEffectiveMetric2019} values as a distance matrix.
+If the clustering equals the mutated samples from the non-mutated samples (i.e. the clustering matches the mutation status in this locus), then the local topology was classified as $\texttt{altered}$ because of the SV.
 
 \subsubsection{Virtual 4C}
-% Two parts of the BRAF gene were used as anchors for virtual 4C data: the promoter region (1500 bp upstream, 500 bp downstream of the TSS) and the entire gene downstream of the breakpoint.
-% Contact frequencies from the ICE-normalized, 20 kbp contact matrices were extracted, with the rows as the bins containing the anchor and the columns as the target regions (the x-axes in Figure 6e).
-% The row means were calculated to produce a single vector where each element is the average normalized contact frequency between the anchor of interest and the distal 20 kbp bin.
-% These vectors were plotted as lines in Figure 6e.
+
+Two parts of the BRAF gene were used as anchors for virtual 4C data: the promoter region (1500 bp upstream, 500 bp downstream of the TSS) and the entire gene downstream of the breakpoint.
+Contact frequencies from the ICE-normalized, 20 kbp contact matrices were extracted, with the rows as the bins containing the anchor and the columns as the target regions (the x-axes in \Cref{fig:3D_fig6}e).
+The row means were calculated to produce a single vector where each element is the average normalized contact frequency between the anchor of interest and the distal 20 kbp bin.
+These vectors were plotted as lines in \Cref{fig:3D_fig6}e.
 
 \subsection{Patient Tumour Tissue H3K27ac ChIP-seq}
 
-% ChIP-seq against H3K27ac was previously published for these matching samples in 42.
-% Sequencing data was processed similarly to the previous publication of this data 42; however, the hg38 reference genome was used instead of hg19.
+ChIP-seq against H3K27ac was previously published for these matching samples in \cite{kronTMPRSS2ERGFusion2017}.
+Sequencing data was processed similarly to the previous publication of this data \cite{kronTMPRSS2ERGFusion2017}; however, the hg38 reference genome was used instead of hg19.
 
 \subsubsection{Sequence alignment}
 
-% FASTQ files from single-end sequencing were aligned to the hg38 genome using Bowtie2 (v2.3.4) with the following parameters: `-x {genome} -U {input} 2> {output_report} | samtools view -u > {output_bam}`.
-% For FASTQ files from paired-end sequencing, only the first mate was considered and reads were aligned with the following parameters: `-x {genome} -U {input} -3 50 2> {output_report} | samtools view -u > {output_bam}`.
-% This ensured that all H3K27ac ChIP-seq data had the same format (single-end) and length (52 bp) before alignment to mitigate possible differences in downstream analyses due to different sequencing methods.
-% Duplicate reads were removed with sambamba (v0.6.9) via `sambamba markdup -r` and were then sorted by position using `sambamba sort`.
+FASTQ files from single-end sequencing were aligned to the hg38 genome using Bowtie2 (v2.3.4) with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+bowtie2 -x {genome} -U {input} 2> {output_report} | samtools view -u > {output_bam}
+\end{lstlisting}
+
+For FASTQ files from paired-end sequencing, only the first mate was considered and reads were aligned with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+bowtie2 -x {genome} -U {input} -3 50 2> {output_report} | samtools view -u > {output_bam}
+\end{lstlisting}
+
+This ensured that all H3K27ac ChIP-seq data had the same format (single-end) and length (52 bp) before alignment to mitigate possible differences in downstream analyses due to different sequencing methods.
+Duplicate reads were removed with sambamba (v0.6.9) via $\texttt{sambamba markdup -r}$ and were then sorted by position using $\texttt{sambamba sort}$.
 
 \subsubsection{Peak calling}
 
-% Peak calling was performed using MACS2 (v2.1.2) 81 with the following command: `macs2 callpeak -g hs -f BAM -q 0.005 -B -n {output_prefix} -t {seq_chip} -c {seq_input}`.
-% ENCODE hg38 blacklist regions were then removed from the narrow peaks 82.
-% Peaks calls are in Supplementary Table 8.
+Peak calling was performed using MACS2 (v2.1.2) \cite{zhangModelbasedAnalysisChIPSeq2008} with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+macs2 callpeak -g hs -f BAM -q 0.005 -B -n {output_prefix} -t {seq_chip} -c {seq_input}\end{lstlisting}
+
+ENCODE hg38 blacklist regions were then removed from the narrow peaks \cite{amemiyaENCODEBlacklistIdentification2019}.
+Peaks calls are in Supplementary Table 8.
 
 \subsubsection{Differential acetylation analysis}
 
-% Unique peak calls and de-duplicated pull-down and control BAM files from tumour samples were loaded into R with the DiffBind package (v2.14.0) 83 using the DESeq2 (v1.26.0) 84 as the differential analysis model.
-% 3 of the 12 samples had low quality peak calls compared to the other 9 and were not considered when calculating differential acetylation (CPCG0268, CPCG0255, and CPCG0336).
-% We considered each unique breakpoint one at a time in the remaining 9 samples.
-% Samples were grouped by their mutation status (i.e., a design matrix where the mutation status is the only covariate) and DiffBind's differential binding analysis method was performed to identify all differentially acetylated regions between the two groups.
-% Acetylation peaks outside of the TAD(s) overlapping the breakpoint were filtered out.
-% Multiple test correction with the Benjamini-Hochberg FDR method was performed on all peaks after all breakpoints were considered, due to similar group stratifications depending on the breakpoint under consideration.
+Unique peak calls and de-duplicated pull-down and control BAM files from tumour samples were loaded into R with the DiffBind package (v2.14.0) \cite{starkDiffBindDifferentialBinding} using DESeq2 (v1.26.0) 84 as the differential analysis model.
+3 of the 12 samples had low quality peak calls compared to the other 9 and were not considered when calculating differential acetylation (CPCG0268, CPCG0255, and CPCG0336).
+We considered each unique breakpoint one at a time in the remaining 9 samples.
+Samples were grouped by their mutation status (i.e. a design matrix where the mutation status is the only covariate) and DiffBind's differential binding analysis method was performed to identify all differentially acetylated regions between the two groups.
+Acetylation peaks outside of the TAD(s) overlapping the breakpoint were filtered out.
+Multiple test correction with the Benjamini-Hochberg FDR method \cite{benjaminiControllingFalseDiscovery1995} was performed on all peaks after all breakpoints were considered, due to similar group stratifications depending on the breakpoint under consideration.
 
 \subsubsection{Structural variant breakpoint enrichment}
 
-% Structural variant breakpoint coordinates from WGS data from the CPC-GENE cohort were obtained from the International Cancer Genome Consortium (structural somatic mutations from the PRAD-CA dataset, release 28).
-% Breakpoint coordinates were lifted over to hg38 coordinates using the liftOver function from the rtracklayer R package (v1.46.0) 85.
-% Permutation tests were performed with the regioneR R package (v1.18.0) 86, selecting randomized regions from the hg38 genome, excluding the ENCODE blacklist regions 82 and masked loci.
-% 100 permutations were calculated and a one-sided permutation z-test was used to calculate statistical significance.
+Structural variant breakpoint coordinates from WGS data from the CPC-GENE cohort were obtained from the International Cancer Genome Consortium (structural somatic mutations from the PRAD-CA dataset, release 28).
+Breakpoint coordinates were lifted over to hg38 coordinates using the liftOver function from the rtracklayer R package (v1.46.0) \cite{lawrenceRtracklayerPackageInterfacing2009}.
+Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gelRegioneRBioconductorPackage2015}, selecting randomized regions from the hg38 genome, excluding the ENCODE blacklist regions \cite{amemiyaENCODEBlacklistIdentification2019} and masked loci.
+100 permutations were calculated and a one-sided permutation $z$-test was used to calculate statistical significance.
 
 \subsection{Primary Tissue RNA Data Analysis}
 
