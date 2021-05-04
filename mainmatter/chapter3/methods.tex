@@ -318,22 +318,25 @@ Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gel
 
 \subsubsection{Tumour sample RNA sequencing}
 
-% Total RNA was extracted for the CPC-GENE tumour samples as previously described 41.
-% Briefly, total RNA was extracted with mirVana miRNA Isolation Kit (Life Technologies) according to the manufacturer's instructions.
-% RNA samples were sent to BGI Americas where it underwent QC and DNase treatment.
-% For each sample, 200 ng of total RNA was used to construct a TruSeq strand-specific library with the Ribo Zero protocol (Illumina, Cat.
-% #RS-122-2203).
-% The libraries were sequenced on a HiSeq 2000 to a minimal target of 180 million, 2 $\times$ 100 bp paired-end reads.
+Total RNA was extracted for the CPC-GENE tumour samples as previously described \cite{chenWidespreadFunctionalRNA2019}.
+Briefly, total RNA was extracted with mirVana miRNA Isolation Kit (Life Technologies) according to the manufacturer's instructions.
+RNA samples were sent to BGI Americas where it underwent QC and DNase treatment.
+For each sample, 200 ng of total RNA was used to construct a TruSeq strand-specific library with the Ribo Zero protocol (Illumina, Cat. \#RS-122-2203).
+The libraries were sequenced on a HiSeq 2000 to a minimal target of 180 million, 2 $\times$ 100 bp paired-end reads.
 
 \subsubsection{RNA sequencing data pre-processing}
 
-% RNA sequencing FASTQ files were pseudo-aligned to the hg38 genome using Kallisto (v0.46.1) 87 with the following command: `kallisto quant --bootstrap-samples 100 --pseudobam --threads 8 --index /path/to/GRCh38.idx --output-dir {output_dir} {input_R1.fastq.gz} {input_R2.fastq.gz}`.
+RNA sequencing FASTQ files were pseudo-aligned to the hg38 genome using Kallisto (v0.46.1) \cite{brayNearoptimalProbabilisticRNAseq2016} with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+kallisto quant --bootstrap-samples 100 --pseudobam --threads 8 --index /path/to/GRCh38.idx --output-dir {output_dir} {input_R1.fastq.gz} {input_R2.fastq.gz}
+\end{lstlisting}
 
 \subsubsection{Differential gene expression analysis}
 
-% To assess whether SVs were associated with local gene expression changes, we considered each unique breakpoint one at a time.
-% For each breakpoint, we compared the gene expression between the mutated and non-mutated tumour samples using Sleuth (v0.30.0) 88,89 with a linear model where the mutation status was the only covariate.
-% To reduce the chance of falsely identifying genes as differentially expressed, only genes located within the TADs (window size 20) containing breakpoints were considered.
-% Fold-change estimates of each transcript were assessed for significance using a Wald test.
-% Transcript-level p-values are combined to create gene-level p-values using the Lancaster aggregation method provided by the Sleuth package.
-% Correcting for multiple tests was then performed with the Benjamini-Hochberg FDR correction for all genes that were potentially altered in the mutated sample(s).
+To assess whether SVs were associated with local gene expression changes, we considered each unique breakpoint one at a time.
+For each breakpoint, we compared the gene expression between the mutated and non-mutated tumour samples using Sleuth (v0.30.0) \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} with a linear model where the mutation status was the only covariate.
+To reduce the chance of falsely identifying genes as differentially expressed, only genes located within the TADs (window size  $w = 20$) containing breakpoints were considered.
+Fold-change estimates of each transcript were assessed for significance using a Wald test.
+Transcript-level p-values are combined to create gene-level p-values using the Lancaster aggregation method provided by the Sleuth package \cite{yiGenelevelDifferentialAnalysis2018}.
+Correcting for multiple tests was then performed with the Benjamini-Hochberg FDR correction for all genes that were potentially altered in the mutated sample(s).
