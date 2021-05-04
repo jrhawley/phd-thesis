@@ -14,10 +14,6 @@
 \usepackage{indentfirst}
 % commands for inserting images
 \usepackage{graphicx}
-% commands for dealing with initializations, abbreviations, and glossaries
-\usepackage{glossaries}
-% commands for dealing with chapter/section/etc counters
-\usepackage{chngcntr}
 % intelligently handle long captions for figures and tables
 \usepackage{ccaption}
 % customize how enumerated lists are rendered (re-defines enumerate environment)
@@ -32,11 +28,23 @@
 \usepackage[backend=biber, style=nature, sorting=none]{biblatex}
 % create hyperlinks for jumping around the document
 \usepackage{hyperref}
+% commands for dealing with initializations, abbreviations, and glossaries
+% must be loaded after hyperref
+% `record` uses bib2gls to fetch glossary terms from the sourced file, later
+% `toc` adds the glossary to the ToC
+\usepackage[nopostdot, record, toc]{glossaries-extra}
 % handle internal document references to figures, tables, and more
 \usepackage[capitalize, noabbrev]{cleveref}
 
 % load the Zotero library Bibtex file
 \addbibresource{thesis.bib}
+
+% set glossary acronym style
+% glossary bib file must be loaded first
+% \makeglossaries
+\setabbreviationstyle[acronym]{long-short}
+\newacronym{eu}{EU}{European Union}
+% \GlsXtrLoadResources[src={glossary}]
 
 % UofT thesis template items
 \author{James Hawley}
@@ -141,37 +149,42 @@
 % ------------------------------------------------
 \frontmatter
 \subfile{frontmatter/title}
-\subfile{frontmatter/abstract}
-\subfile{frontmatter/acknowledgments}
+% \subfile{frontmatter/abstract}
+% \subfile{frontmatter/acknowledgments}
 \subfile{frontmatter/toc}
-\subfile{frontmatter/tables_list}
-\subfile{frontmatter/figures_list}
-% \subfile{frontmatter/appendices_list}
+% \subfile{frontmatter/tables_list}
+% \subfile{frontmatter/figures_list}
 
 % Main Matter
 % ------------------------------------------------
 \mainmatter
 % intro
-\subfile{mainmatter/chapter1}
+% \subfile{mainmatter/chapter1}
+What about this general text?
+% This is the first entry for \gls{pca}.
+% This is the second entry for \gls{pca}.
+This is the first entry for \gls{eu}.
+This is the second entry for \gls{eu}.
 
 % FOXA1 CREs
-\subfile{mainmatter/chapter2}
+%\subfile{mainmatter/chapter2}
 
 % prostate cancer 3D genome
-\subfile{mainmatter/chapter3}
+%\subfile{mainmatter/chapter3}
 
 % n=1 RNA-seq method
-\subfile{mainmatter/chapter4}
+% \subfile{mainmatter/chapter4}
 
 % B-ALL DNA methylation
-\subfile{mainmatter/chapter5}
+% \subfile{mainmatter/chapter5}
 
 % discussion and future directions
-\subfile{mainmatter/chapter6}
+% \subfile{mainmatter/chapter6}
 
 % Back Matter
 % ------------------------------------------------
-\subfile{backmatter/appendices}
+% \subfile{backmatter/appendices}
 \backmatter
+\printunsrtglossaries
 \subfile{backmatter/references}
 \end{document}
