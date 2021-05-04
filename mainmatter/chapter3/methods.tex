@@ -252,7 +252,8 @@ Plotting the contact matrix 5 Mbp around the breakpoint, breakpoints calls were 
 Similar in concept to the ChainFinder algorithm \cite{bacaPunctuatedEvolutionProstate2013}, we consider each breakpoint as a node in a graph.
 Nodes are connected if they are detected as a pair of breakpoints by $\texttt{hic\_breakfinder}$.
 Simple structural variants are connected components in the breakpoint graph containing only two nodes, and complex variants those with greater than two nodes.
-A visual representation of these graphs can be found in Supplementary Figure 4b.
+A visual representation of these graphs can be found in \Cref{fig:3D_figs4}b.
+Graphs are displayed with a spring-force layout, adjusted using the Kamada Kawai optimization \cite{kamadaAlgorithmDrawingGeneral1989} from the NetworkX Python package (v2.4) \cite{hagbergExploringNetworkStructure2008}.
 
 \subsubsection{Determination of structural variant breakpoints altering intra-TAD contacts}
 
