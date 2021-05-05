@@ -132,7 +132,7 @@ Contact matrices at different resolutions were created with the $\texttt{cooler 
 
 \subsection{Hi-C Data Analysis}
 
-\subsubsection{TAD identification}
+\subsubsection{\Glsentryshort{tad} identification}
 
 Contact matrices were binned at a resolution of 40 kbp.
 To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
@@ -144,7 +144,7 @@ This was achieved with Cooltools (v0.3.2) \cite{venevMirnylabCooltoolsV02020} wi
 cooltools random-sample -c 120000000 {input}::/resolutions/40000 {output}
 \end{lstlisting}
 
-TADs were identified using TopDom \cite{shinTopDomEfficientDeterministic2016} on the downsampled, ICE-normalized contact matrices.
+\glspl{tad} were identified using TopDom \cite{shinTopDomEfficientDeterministic2016} on the downsampled, ICE-normalized contact matrices.
 To identify domains at multiple length scales, similar in concept to Artamus' gamma parameter \cite{filippovaIdentificationAlternativeTopological2014}, TopDom was run multiple times per sample, with the window size parameter set at values between 3 and 40, inclusive (corresponding to 120 kbp and 1.6 Mbp).
 The lower bound for the window size parameter allowed for the identification of domains multiple megabases in size at the upper end and domains $<$ 100 kbp at the lower end without being dominated by false calls due to sparsity of the data.
 Despite TopDom being more resistant to confounding by sequencing depth than other \gls{tad} calling tools \cite{forcatoComparisonComputationalMethods2017}, biases in boundary persistence were evident between samples of different sequencing depth.
@@ -159,7 +159,7 @@ If three boundaries are in conflict, the middle boundary was selected.
 If four or more boundaries were in conflict, the boundary that was identified most often was selected.
 
 To determine the maximum window size for \gls{tad} calls, \gls{tad} calls were compared across window sizes for the same patient using the BPscore metric \cite{zaborowskiBPscoreEffectiveMetric2019}.
-TAD calls are identical when the BPscore is 0, and divergent when 1.
+\gls{tad} calls are identical when the BPscore is 0, and divergent when 1.
 The cut-off window size for a single patient was determined when the difference between \gls{tad} calls at consecutive window sizes was $<$ 0.005, twice in a row.
 The maximum window size was determined by the maximum window size cut-off across all samples in a comparison.
 For comparisons involving only primary samples, the maximum window size was determined to be $w = 20 \times 40 \text{ kbp}$.
