@@ -16,7 +16,7 @@ Prostate tumour \gls{mrna} abundance data was collected from \gls{tcga} \glsentr
 
 \subsection{Prostate cancer cell line gene essentiality}
 
-Essentiality scores were collected from the Cancer Dependency Map Project \cite{mcfarlandImprovedEstimationCancer2018}.
+Essentiality scores were collected from the \gls{depmap} Project \cite{mcfarlandImprovedEstimationCancer2018}.
 To compare gene essentiality between \gls{pca} cell lines and others, essentiality scores for FOXA1 were collected from all available cell lines ($n = 707$).
 To perform a permutation test, the median of 8 randomly selected cell lines was calculated one million times to generate a background distribution of essentiality scores across all cell types available.
 The median essentiality score from the 8 \gls{pca} cell lines was calculated and its percentile within the background distribution is reported.
@@ -36,13 +36,13 @@ The blot was then washed and assessed with the Odyssey\textregistered CLX imagin
 
 \subsection{Identifying putative FOXA1 \glsentryshortpl{cre}}
 
-Putative FOXA1 \glspl{cre} were identified through the use of Cross Cell-Type Correlation based on DNase I Hypersensitivity (C3D) (https://github.com/tahmidmehdi/C3D) \cite{mehdiC3DToolPredict2019}.
+Putative FOXA1 \glspl{cre} were identified through the use of C3D method based on DNase I Hypersensitivity \cite{mehdiC3DToolPredict2019}.
 Predicted interacting \gls{dhs} with a Pearson's correlation above 0.7 \cite{thurmanAccessibleChromatinLandscape2012} were kept for downstream analysis.
 
 \subsection{Hi-C and \glsentryshortpl{tad} in LNCaP cells}
 
 Hi-C and \glspl{tad} conducted and called, respectively, in LNCaP cells are publicly available off ENCODE portal (ENCSR346DCU).
-Visualization of the Hi-C dataset is available on the Hi-C Browser (http://promoter.bx.psu.edu/hi-c/) \cite{wang3DGenomeBrowser2018}.
+Visualization of the Hi-C dataset is available on the Hi-C Browser \cite{wang3DGenomeBrowser2018}.
 
 \subsection{Clonal \glsentrylong{wt} Cas9 and dCas9-KRAB mediated validation}
 
@@ -58,20 +58,20 @@ Upon selection, clones were derived by serial dilution with subsequent single ce
 dCas9-KRAB protein expression for each clone was then assessed through Western blotting (1 \textdegree Ms-Cas9 (Cell Signalling Technology, Cat No. \#14697) 1:1000, Ms-GAPDH 1:5000 (Santa Cruz Biotechnology, Cat No. \#sc47724) in 5\% non-fat milk; 2 \textdegree HRP-linked Anti-Mouse IgG (Cell Signalling Technology, Cat No. \#7076S) 1:10 000 in 2.5\% non-fat milk.
 The full unprocessed blot is in the Source Data File.
 
-For gRNA design, five to six unique crRNA molecules (Integrated DNA Technologies) were designed to tile across the region of interest using the CRISPR (http://crispor.tefor.net/) \cite{haeusslerEvaluationOfftargetOntarget2016} and the Zhang lab CRISPR Design tools (http://crispr.mit.edu/) \cite{hsuDNATargetingSpecificity2013}.
-See published manuscript for gRNA.
-Each CRISPR RNA (crRNA) and tracrRNA (Integrated DNA Technologies) were duplexed according to company supplier protocol to a concentration of 50 $\mu$M.
-Upon generation of the clones, six guides (crRNA-tracrRNA duplexes) for each region of interest were pooled into a single tube (1$\mu$L each guide, 6 $\mu$L per reaction) (Integrated DNA Technologies).
+For \gls{grna} design, five to six unique \gls{crrna} molecules (Integrated DNA Technologies) were designed to tile across the region of interest using the CRISPR (http://crispor.tefor.net/) \cite{haeusslerEvaluationOfftargetOntarget2016} and the Zhang lab CRISPR Design tools (http://crispr.mit.edu/) \cite{hsuDNATargetingSpecificity2013}.
+See published manuscript for \gls{grna}.
+Each \gls{crrna} and \gls{tracrrna} (Integrated DNA Technologies) were duplexed according to company supplier protocol to a concentration of 50 $\mu$M.
+Upon generation of the clones, six guides (\gls{crrna}-\gls{tracrrna} duplexes) for each region of interest were pooled into a single tube (1$\mu$L each guide, 6 $\mu$L per reaction) (Integrated DNA Technologies).
 Lastly, 1 $\mu$L (100 $\mu$M) of electroporation enhancer (Integrated DNA Technologies) was added to the mix (7 $\mu$L total) prior to transfection.
 The entire transfection reaction was transfected into 350 000 cells through Nucleofection (SF Solution EN120 - 4D Nucleofector, Lonza).
 Cells were then harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 
 \subsection{Transient Cas9-mediated disruption of \glsentryshortpl{cre}}
 
-Deletion of elements through this method were achieved through the transfection of Cas9 nuclease protein complexed with the crRNA (Integrated DNA Technologies).
-Briefly, five to six unique crRNA molecules (Integrated DNA Technologies) were designed to tile across the region of interest using the CRISPR (http://crispor.tefor.net/) \cite{haeusslerEvaluationOfftargetOntarget2016} and the Zhang lab CRISPR Design tools (http://crispr.mit.edu/) \cite{hsuDNATargetingSpecificity2013}.
-Each crRNA and tracrRNA (Integrated DNA Technologies) were duplexed according to company supplier protocol to a concentration of 50 $\mu$M.
-The six crRNA-tracrRNA duplexes were pooled into a single tube (6 $\mu$L per reaction), prior to adding 1 $\mu$L (5 $\mu$g) of Alt-R \textregistered S.p HiFi Cas9 Nuclease 3NLS (Integrated DNA Technologies).
+Deletion of elements through this method were achieved through the transfection of Cas9 nuclease protein complexed with the \gls{crrna} (Integrated DNA Technologies).
+Briefly, five to six unique \gls{crrna} molecules (Integrated DNA Technologies) were designed to tile across the region of interest using the CRISPR (http://crispor.tefor.net/) \cite{haeusslerEvaluationOfftargetOntarget2016} and the Zhang lab CRISPR Design tools (http://crispr.mit.edu/) \cite{hsuDNATargetingSpecificity2013}.
+Each \gls{crrna} and \gls{tracrrna} (Integrated DNA Technologies) were duplexed according to company supplier protocol to a concentration of 50 $\mu$M.
+The six \gls{crrna}-\gls{tracrrna} duplexes were pooled into a single tube (6 $\mu$L per reaction), prior to adding 1 $\mu$L (5 $\mu$g) of Alt-R \textregistered S.p HiFi Cas9 Nuclease 3NLS (Integrated DNA Technologies).
 The reaction was incubated at room temperature for 10 minutes for ribonucleoprotein (RNP) complex formation.
 Lastly, 1 $\mu$L (100 $\mu$M) of electroporation enhancer (Integrated DNA Technologies) was added to the mix prior to transfection.
 The entire transfection reaction was transfected into 350 000 cells through Nucleofection (SF Solution EN120 - 4D Nucleofector, Lonza).
@@ -98,8 +98,8 @@ The correlation between on-target genome editing efficiency and FOXA1 \gls{mrna}
 
 \subsection{Cell proliferation upon deletion of FOXA1 \glsentryshortpl{cre}}
 
-Pairs of gRNAs flanking the \glspl{cre} of interest, FOXA1 promoter and control regions were designed using CRISPOR (http://crispor.tefor.net/) and Zhang lab CRISPR Design tool (http://crispr.mit.edu/) (due to size, see published manuscript).
-Each pair of gRNAs were cloned into the lentiCRISPRv2 (Addgene; a gift from Feng Zhang \#52961) and the lentiCRISPRv2-Blast (Addgene; a gift from Feng Zhang \#83480) plasmid as previously described \cite{sanjanaImprovedVectorsGenomewide2014}.
+Pairs of \glspl{grna} flanking the \glspl{cre} of interest, FOXA1 promoter and control regions were designed using CRISPOR (http://crispor.tefor.net/) and Zhang lab CRISPR Design tool (http://crispr.mit.edu/) (due to size, see published manuscript).
+Each pair of \glspl{grna} were cloned into the lentiCRISPRv2 (Addgene; a gift from Feng Zhang \#52961) and the lentiCRISPRv2-Blast (Addgene; a gift from Feng Zhang \#83480) plasmid as previously described \cite{sanjanaImprovedVectorsGenomewide2014}.
 Lentiviral particles were generated in 293FT cells (ThermoFisher) using the pMDG.2 and psPAX2 packaging plasmids (Addgene; \#12259 and \#12260, a gift from Didier Trono), and collected 72 hrs post transfection.
 LNCaP cells were transduced for 24-48hrs with equal amounts of virus, followed by selection with media containing puromycin (3.5 $\mu$g/mL, ThermoFisher) and blasticidin (7 $\mu$g/mL, Wisent).
 Cells were harvested upon selection for RNA and DNA for RT-PCR and confirmation of DNA cleavage, respectively.
