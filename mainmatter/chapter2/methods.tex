@@ -11,8 +11,8 @@ The authenticity of these cells was confirmed through Short Tandem Repeat profil
 
 \subsection{Prostate tumours and cancer cell lines expression}
 
-Cancer cell line mRNA abundance data were collected from the Cancer Dependency Map Project (DEPMAP; https://depmap.org/portal/; RNA-seq TPM values from 2018q4 version with all 5 non-cancer cell lines were removed) \cite{thecancercelllineencyclopediaconsortiumPharmacogenomicAgreementTwo2015} projects.
-Prostate tumour mRNA abundance data was collected from \gls{tcga} \glsentrylong{pca} (TCGA-PRAD) project via the Xena Browser (https://xenabrowser.net/; dataset description: TCGA prostate adenocarcinoma (PRAD) gene expression by RNA-seq (polyA+ Illumina HiSeq; RSEM)).
+Cancer cell line \gls{mrna} abundance data were collected from \gls{depmap}; https://depmap.org/portal/; \gls{rnaseq} TPM values from 2018q4 version with all 5 non-cancer cell lines were removed) \cite{thecancercelllineencyclopediaconsortiumPharmacogenomicAgreementTwo2015} projects.
+Prostate tumour \gls{mrna} abundance data was collected from \gls{tcga} \glsentrylong{pca} (\gls{tcga}-PRAD) project via the Xena Browser (https://xenabrowser.net/; dataset description: \gls{tcga} prostate adenocarcinoma gene expression by \gls{rnaseq} (polyA+ Illumina HiSeq; RSEM)).
 
 \subsection{Prostate cancer cell line gene essentiality}
 
@@ -21,11 +21,11 @@ To compare gene essentiality between \gls{pca} cell lines and others, essentiali
 To perform a permutation test, the median of 8 randomly selected cell lines was calculated one million times to generate a background distribution of essentiality scores across all cell types available.
 The median essentiality score from the 8 \gls{pca} cell lines was calculated and its percentile within the background distribution is reported.
 
-\subsection{siRNA knockdown and cell proliferation assay}
+\subsection{\glsentryshort{sirna} knockdown and cell proliferation assay}
 
-300,000 LNCaP cells (Day 0) were reverse transfected with siRNA (siFOXA1 using Lipofectamine\textregistered RNAimax reagent (ThermoFisher Scientific, Cat No. 13778150)).
+300,000 LNCaP cells (Day 0) were reverse transfected with \gls{sirna} (siFOXA1 using Lipofectamine\textregistered \gls{mrna}max reagent (ThermoFisher Scientific, Cat No. 13778150)).
 Cells were counted using Countess\texttrademark automated cell counter (Invitrogen).
-Whole cell lysates LNCaP cells after siRNA-mediated FOXA1 knockdown was collected at 96-hours post-transfection in RIPA buffer.
+Whole cell lysates LNCaP cells after \gls{sirna}-mediated FOXA1 knockdown was collected at 96-hours post-transfection in RIPA buffer.
 Protein concentrations were determined through the bicinchoninic acid method (ThermoFisher Scientific, Cat No. 23225).
 Then 25 $\mu$g of lysate was subjected to SDS-PAGE.
 Upon completion of SDS-PAGE, protein was transferred onto PVDF membrane (Bio-Rad, Cat No. 1704156).
@@ -34,17 +34,17 @@ After blocking, anti-FOXA1 (Abcam Cat No. 23737) in 2.5\% non-fat milk was added
 Next day, the blot was washed and incubated with IRDye\textregistered 800CW Goat Anti-Rabbit IgG secondary antibody (LI-COR, Cat No. 925-32211) at room temperature for 1 hour.
 The blot was then washed and assessed with the Odyssey\textregistered CLX imaging system (LI-COR).
 
-\subsection{Identifying putative FOXA1 CREs}
+\subsection{Identifying putative FOXA1 \glsentryshortpl{cre}}
 
 Putative FOXA1 \glspl{cre} were identified through the use of Cross Cell-Type Correlation based on DNase I Hypersensitivity (C3D) (https://github.com/tahmidmehdi/C3D) \cite{mehdiC3DToolPredict2019}.
-Predicted interacting DNase I Hypersensitivity Sites (DHS) with a Pearson's correlation above 0.7 \cite{thurmanAccessibleChromatinLandscape2012} were kept for downstream analysis.
+Predicted interacting \gls{dhs} with a Pearson's correlation above 0.7 \cite{thurmanAccessibleChromatinLandscape2012} were kept for downstream analysis.
 
 \subsection{Hi-C and \glsentryshortpl{tad} in LNCaP cells}
 
 Hi-C and \glspl{tad} conducted and called, respectively, in LNCaP cells are publicly available off ENCODE portal (ENCSR346DCU).
 Visualization of the Hi-C dataset is available on the Hi-C Browser (http://promoter.bx.psu.edu/hi-c/) \cite{wang3DGenomeBrowser2018}.
 
-\subsection{Clonal wild-type Cas9 and dCas9-KRAB mediated validation}
+\subsection{Clonal \glsentrylong{wt} Cas9 and dCas9-KRAB mediated validation}
 
 Lentiviral particles were generated in 293FT cells (ThermoFisher) using the pMDG.2 and psPAX2 packaging plasmids (Addgene; \#12259 and \#12260, a gift from Didier Trono) alongside the Lenti-Cas9-2A-Blast plasmid (Addgene \#73310, a gift from Jason Moffat) and collected 72 hrs post transfection.
 LNCaP and 22Rv1 cells were then transduced for 24-48 hours with equal amounts of virus followed by selection with media containing blasticidin (7.5 $\mu$g/mL for LNCaP cells, 6 $\mu$g/mL for 22Rv1 cells).
@@ -66,7 +66,7 @@ Lastly, 1 $\mu$L (100 $\mu$M) of electroporation enhancer (Integrated DNA Techno
 The entire transfection reaction was transfected into 350 000 cells through Nucleofection (SF Solution EN120 - 4D Nucleofector, Lonza).
 Cells were then harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 
-\subsection{Transient Cas9-mediated disruption of CREs}
+\subsection{Transient Cas9-mediated disruption of \glsentryshortpl{cre}}
 
 Deletion of elements through this method were achieved through the transfection of Cas9 nuclease protein complexed with the crRNA (Integrated DNA Technologies).
 Briefly, five to six unique crRNA molecules (Integrated DNA Technologies) were designed to tile across the region of interest using the CRISPR (http://crispor.tefor.net/) \cite{haeusslerEvaluationOfftargetOntarget2016} and the Zhang lab CRISPR Design tools (http://crispr.mit.edu/) \cite{hsuDNATargetingSpecificity2013}.
@@ -76,27 +76,27 @@ The reaction was incubated at room temperature for 10 minutes for ribonucleoprot
 Lastly, 1 $\mu$L (100 $\mu$M) of electroporation enhancer (Integrated DNA Technologies) was added to the mix prior to transfection.
 The entire transfection reaction was transfected into 350 000 cells through Nucleofection (SF Solution EN120 - 4D Nucleofector, Lonza).
 Cells were then harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
-For double deletions, two sets of guide RNA-RNP complex (10 $\mu$g of Alt-R \textregistered S.p HiFi Cas9 Nuclease 3NLS) were transfected and harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
+For double deletions, two sets of \gls{grna}-RNP complex (10 $\mu$g of Alt-R \textregistered S.p HiFi Cas9 Nuclease 3NLS) were transfected and harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 To control for double deletions, two negative control regions within the \gls{tad} were also compounded.
 Due to size, see published manuscript for primers.
 
-\subsection{RT-PCR assessment of gene expression upon deletion of CREs}
+\subsection{RT-PCR assessment of gene expression upon deletion of \glsentryshortpl{cre}}
 
 DNA and RNA were harvested with Qiagen AllPrep RNA/DNA Kit (Qiagen, Cat No. 80204).
-Next, cDNA was synthesized from 300 ng of RNA using SensiFast cDNA Synthesis kit (Bioline, Cat No. BIO-65054), and mRNA expression levels for various genes of interest were assessed.
+Next, cDNA was synthesized from 300 ng of RNA using SensiFast cDNA Synthesis kit (Bioline, Cat No. BIO-65054), and \gls{mrna} expression levels for various genes of interest were assessed.
 Due to size, see published manuscript for the primer sequences used for expression evaluation.
 Differential gene expression was calculated upon normalization with TBP (housekeeping gene).
 Statistical significance was calculated using Student's t-test in R.
 
-\subsection{Confirmation of Cas9-mediated deletion of CREs}
+\subsection{Confirmation of Cas9-mediated deletion of \glsentryshortpl{cre}}
 
 Deletion of \glspl{cre} were confirmed through PCR amplification of the intended region for deletion, followed by the T7 Endonuclease Assay (Integrated DNA Technology).
 Due to size, see published manuscript for primer sequences used for PCR amplification.
 PCR products were then loaded onto a 1\% agarose gel for visualization.
 The agarose gel to assess the on-target genome editing efficiency was done through densitometry using ImageJ.
-The correlation between on-target genome editing efficiency and FOXA1 mRNA expression reduction was drawn through Pearson's correlation in R.
+The correlation between on-target genome editing efficiency and FOXA1 \gls{mrna} expression reduction was drawn through Pearson's correlation in R.
 
-\subsection{Cell proliferation upon deletion of FOXA1 CREs}
+\subsection{Cell proliferation upon deletion of FOXA1 \glsentryshortpl{cre}}
 
 Pairs of gRNAs flanking the \glspl{cre} of interest, FOXA1 promoter and control regions were designed using CRISPOR (http://crispor.tefor.net/) and Zhang lab CRISPR Design tool (http://crispr.mit.edu/) (due to size, see published manuscript).
 Each pair of gRNAs were cloned into the lentiCRISPRv2 (Addgene; a gift from Feng Zhang \#52961) and the lentiCRISPRv2-Blast (Addgene; a gift from Feng Zhang \#83480) plasmid as previously described \cite{sanjanaImprovedVectorsGenomewide2014}.
@@ -113,7 +113,7 @@ Statistical significance was calculated using Student's t-test.
 Each region of interest was ordered as gBlocks from Integrated DNA Technologies.
 The regions were cloned into the BamHI restriction enzyme digest site of the pGL3 promoter plasmid (Promega).
 On Day 0, 90 000 LNCaP cells were seeded in 24-well plates.
-Next day (Day 1), pGL3 plasmids harboring the wild-type and variant sequences were co-transfected with the pRL Renilla plasmid (Promega) using Lipofectamine 2000.
+Next day (Day 1), pGL3 plasmids harboring the \gls{wt} and variant sequences were co-transfected with the pRL Renilla plasmid (Promega) using Lipofectamine 2000.
 48-hours later, the cells were harvested, and dual luciferase reporter assays were conducted (Promega).
 Notably, inserts of both forward and reverse directions were tested using this assay as enhancer elements are known to be direction-independent.
 Final luminescence readings are reported as firefly luciferase normalized to renilla luciferase activity.
@@ -123,8 +123,8 @@ See published manuscript for gBlock sequences.
 
 \subsection{Allele-specific ChIP-qPCR}
 
-Briefly, pGL3 plasmids containing the wild-type sequence and the mutant sequence used in the luciferase reporter assay were transfected into 7 million cells (2 $\mu$g per allele, per 1 million cells) using Lipofectamine 2000 (ThermoFisher Scientific), per manufacturer's instructions.
-Next day, each antibody (FOXA1 5 $\mu$g, Abcam, ab23738; AR 5 $\mu$g, Abcam, ab1083241; HOXB13 5 $\mu$g, Abcam, ab201682; SOX9 5 $\mu$g, Abcam, ab3697; GATA2 5 $\mu$g, Abcam, ab22849; FOXP1 5 $\mu$g, Abcam, ab16645; NKX3.1 10 $\mu$l, Cell Signalling Technology, \#83700) was conjugated with 10 uL of each Dynabeads A and G (Thermo Fisher Scientific) for each ChIP for 6 hours with rotation at 4 \textdegree C.
+Briefly, pGL3 plasmids containing the \gls{wt} sequence and the mutant sequence used in the luciferase reporter assay were transfected into 7 million cells (2 $\mu$g per allele, per 1 million cells) using Lipofectamine 2000 (ThermoFisher Scientific), per manufacturer's instructions.
+Next day, each antibody (FOXA1 5 $\mu$g, Abcam, ab23738; \gls{ar} 5 $\mu$g, Abcam, ab1083241; HOXB13 5 $\mu$g, Abcam, ab201682; SOX9 5 $\mu$g, Abcam, ab3697; GATA2 5 $\mu$g, Abcam, ab22849; FOXP1 5 $\mu$g, Abcam, ab16645; NKX3.1 10 $\mu$l, Cell Signalling Technology, \#83700) was conjugated with 10 uL of each Dynabeads A and G (Thermo Fisher Scientific) for each ChIP for 6 hours with rotation at 4 \textdegree C.
 When antibody-beads conjugates were ready for use, cells were lifted using trypsin and fixed by re-suspending with 300 uL of 1\% formaldehyde in PBS for 10 minutes at room temperature.
 2.5M Glycine was added to quench excess formaldehyde (final concentration 0.125 M).
 Cells were then washed with cold PBS and lysed using 300 uL of Modified RIPA buffer (10 mM Tris-HCl, pH 8.0; 1 mM EDTA; 140 mM NaCl; 1\% Triton X-100; 0.1\% SDS; 0.1\% sodium deoxycholate) supplemented with protease inhibitor.

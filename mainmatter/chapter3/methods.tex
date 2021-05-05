@@ -4,7 +4,7 @@
 
 Patients were selected from the \gls{cpcgene} cohort of Canadian men with indolent PCa, Gleason scores of 3+3, 3+4, and 4+3.
 All primary human material was obtained with informed consent with approval of our institutional research ethics board (UHN 11-0024).
-The intersection of previously published data for whole genome sequencing \cite{fraserGenomicHallmarksLocalized2017}, RNA abundance \cite{chenWidespreadFunctionalRNA2019}, and H3K27ac ChIP-seq \cite{kronTMPRSS2ERGFusion2017} led to 25 samples having data for all assays.
+The intersection of previously published data for \gls{wgs} \cite{fraserGenomicHallmarksLocalized2017}, RNA abundance \cite{chenWidespreadFunctionalRNA2019}, and H3K27ac \gls{chipseq} \cite{kronTMPRSS2ERGFusion2017} led to 25 samples having data for all assays.
 11 of these tested positive for ETS gene family fusions (T2E status), and 14 without.
 To accurately represent the presence of this subtype of PCa in the disease generally, and to ensure minimum read depths required to perform accurate analysis on chromatin conformation data, we selected approximately half of these remaining samples (6 T2E+ and 6 T2E-).
 
@@ -21,14 +21,14 @@ Informed consent was obtained from all patients with REB approval (UHN 11-0024).
 These tumour specimens were sectioned into 10 $\mu$m sections.
 Sections before and after the sections used for Hi-C were stained with hematoxylin and eosin (H\&E) and assessed pathologically for $\ge$ 70\% PCa cellularity.
 The percentage of infiltrating lymphocytes was also estimated by pathological assessment to be $\le$ 3\%.
-Stratification into T2E+ or T2E- was determined through either whole-genome sequencing detection of the rearrangement, immunohistochemistry, or mRNA expression microarray data \cite{fraserGenomicHallmarksLocalized2017}.
+Stratification into T2E+ or T2E- was determined through either \gls{wgs} detection of the rearrangement, immunohistochemistry, or \gls{mrna} expression microarray data \cite{fraserGenomicHallmarksLocalized2017}.
 
 \subsubsection{Normal Tissue Preparation}
 
 Five snap-frozen prostate tumour-adjacent normal tissue specimens were obtained.
 Informed consent was obtained from all patients with REB approval (UHN 11-0024).
 Tissue specimens were sectioned into 5, 10, and 20 $\mu$m sections.
-Sections used for Hi-C and RNA-seq were stained with H\&E and assessed pathologically for $\ge$ 60\% prostate glandular cellularity.
+Sections used for Hi-C and \gls{rnaseq} were stained with H\&E and assessed pathologically for $\ge$ 60\% prostate glandular cellularity.
 
 \subsubsection{Fixation and Lysis}
 
@@ -203,7 +203,7 @@ Interaction anchors for each sample were then mapped to the consensus set of anc
 \subsubsection{Chromatin interaction saturation analysis}
 
 To estimate the detection of all chromatin interactions across all samples, a nonlinear regression on an asymptotic model was performed.
-This is similar in method to peak saturation analysis used to assess peaks detected in ChIP-seq experiments from a collection of samples \cite{kronTMPRSS2ERGFusion2017}.
+This is similar in method to peak saturation analysis used to assess peaks detected in \gls{chipseq} experiments from a collection of samples \cite{kronTMPRSS2ERGFusion2017}.
 Bootstrapping the number of unique interactions detected in a random selection of n samples was calculated for n ranging from 1 to 17.
 100 iterations of the bootstrapping process were performed.
 An exponential model was fit against the mean number of unique interactions detected in n samples using the $\texttt{nls}$ and $\texttt{SSaymp}$ functions from the stats R package (v3.6.3).
@@ -237,7 +237,7 @@ Certain breakpoints that appeared to be artefacts were removed, as described bel
 
 The contact matrix spanning 5 Mbp upstream and downstream around the breakpoint pairs were plotted and annotated according to previously published heuristics (Supplementary Figure 4 for \cite{dixonIntegrativeDetectionAnalysis2018}).
 Breakpoint pairs that were nearby other breakpoints or did not match the heuristics in this figure were labelled as $\texttt{UNKNOWN}$.
-These annotations were matched against the annotations identified from the previously published whole genome sequencing structural variants \cite{fraserGenomicHallmarksLocalized2017}.
+These annotations were matched against the annotations identified from the previously published \gls{wgs} \glspl{sv} \cite{fraserGenomicHallmarksLocalized2017}.
 Breakpoint pairs matching the following criteria were considered as detection artefacts and were ignored.
 
 \begin{enumerate}
@@ -251,11 +251,11 @@ This distance was considered as the resolution of the non-artefactual calls is 1
 Plotting the contact matrix 5 Mbp around the breakpoint, breakpoints calls were considered the same breakpoint if the sharp edge of each breakpoint was equal to within 5 kbp.
 Similar in concept to the ChainFinder algorithm \cite{bacaPunctuatedEvolutionProstate2013}, we consider each breakpoint as a node in a graph.
 Nodes are connected if they are detected as a pair of breakpoints by $\texttt{hic\_breakfinder}$.
-Simple structural variants are connected components in the breakpoint graph containing only two nodes, and complex variants those with greater than two nodes.
+Simple \glspl{sv} are connected components in the breakpoint graph containing only two nodes, and complex variants those with greater than two nodes.
 A visual representation of these graphs can be found in \Cref{fig:3D_figs4}b.
 Graphs are displayed with a spring-force layout, adjusted using the Kamada Kawai optimization \cite{kamadaAlgorithmDrawingGeneral1989} from the NetworkX Python package (v2.4) \cite{hagbergExploringNetworkStructure2008}.
 
-\subsubsection{Determination of structural variant breakpoints altering intra-\glsentryshortpl{tad} contacts}
+\subsubsection{Determination of \glsentryshort{sv} breakpoints altering intra-\glsentryshortpl{tad} contacts}
 
 Patients are assigned into one of two groups using hierarchical clustering (complete linkage) with the matrix of pairwise BPscore \cite{zaborowskiBPscoreEffectiveMetric2019} values as a distance matrix.
 If the clustering equals the mutated samples from the non-mutated samples (i.e. the clustering matches the mutation status in this locus), then the local topology was classified as $\texttt{altered}$ because of the \gls{sv}.
@@ -267,9 +267,9 @@ Contact frequencies from the ICE-normalized, 20 kbp contact matrices were extrac
 The row means were calculated to produce a single vector where each element is the average normalized contact frequency between the anchor of interest and the distal 20 kbp bin.
 These vectors were plotted as lines in \Cref{fig:3D_fig6}e.
 
-\subsection{Patient Tumour Tissue H3K27ac ChIP-seq}
+\subsection{Patient Tumour Tissue H3K27ac \glsentryshortpl{chipseq}}
 
-ChIP-seq against H3K27ac was previously published for these matching samples in \cite{kronTMPRSS2ERGFusion2017}.
+\gls{chipseq} against H3K27ac was previously published for these matching samples in \cite{kronTMPRSS2ERGFusion2017}.
 Sequencing data was processed similarly to the previous publication of this data \cite{kronTMPRSS2ERGFusion2017}; however, the hg38 reference genome was used instead of hg19.
 
 \subsubsection{Sequence alignment}
@@ -286,7 +286,7 @@ For FASTQ files from paired-end sequencing, only the first mate was considered a
 bowtie2 -x {genome} -U {input} -3 50 2> {output_report} | samtools view -u > {output_bam}
 \end{lstlisting}
 
-This ensured that all H3K27ac ChIP-seq data had the same format (single-end) and length (52 bp) before alignment to mitigate possible differences in downstream analyses due to different sequencing methods.
+This ensured that all H3K27ac \gls{chipseq} data had the same format (single-end) and length (52 bp) before alignment to mitigate possible differences in downstream analyses due to different sequencing methods.
 Duplicate reads were removed with sambamba (v0.6.9) via $\texttt{sambamba markdup -r}$ and were then sorted by position using $\texttt{sambamba sort}$.
 
 \subsubsection{Peak calling}
@@ -310,14 +310,14 @@ Multiple test correction with the Benjamini-Hochberg FDR method \cite{benjaminiC
 
 \subsubsection{Structural variant breakpoint enrichment}
 
-Structural variant breakpoint coordinates from WGS data from the \gls{cpcgene} cohort were obtained from the International Cancer Genome Consortium (structural somatic mutations from the PRAD-CA dataset, release 28).
+Structural variant breakpoint coordinates from \gls{wgs} data from the \gls{cpcgene} cohort were obtained from the International Cancer Genome Consortium (structural somatic mutations from the PRAD-CA dataset, release 28).
 Breakpoint coordinates were lifted over to hg38 coordinates using the liftOver function from the rtracklayer R package (v1.46.0) \cite{lawrenceRtracklayerPackageInterfacing2009}.
 Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gelRegioneRBioconductorPackage2015}, selecting randomized regions from the hg38 genome, excluding the ENCODE blacklist regions \cite{amemiyaENCODEBlacklistIdentification2019} and masked loci.
 100 permutations were calculated and a one-sided permutation $z$-test was used to calculate statistical significance.
 
 \subsection{Primary Tissue RNA Data Analysis}
 
-\subsubsection{Tumour sample RNA sequencing}
+\subsubsection{Tumour sample \glsentrylong{rnaseq}}
 
 Total RNA was extracted for the \gls{cpcgene} tumour samples as previously described \cite{chenWidespreadFunctionalRNA2019}.
 Briefly, total RNA was extracted with mirVana miRNA Isolation Kit (Life Technologies) according to the manufacturer's instructions.
@@ -325,9 +325,9 @@ RNA samples were sent to BGI Americas where it underwent QC and DNase treatment.
 For each sample, 200 ng of total RNA was used to construct a TruSeq strand-specific library with the Ribo Zero protocol (Illumina, Cat. \#RS-122-2203).
 The libraries were sequenced on a HiSeq 2000 to a minimal target of 180 million, 2 $\times$ 100 bp paired-end reads.
 
-\subsubsection{RNA sequencing data pre-processing}
+\subsubsection{\glsentrylong{rnaseq} data pre-processing}
 
-RNA sequencing FASTQ files were pseudo-aligned to the hg38 genome using Kallisto (v0.46.1) \cite{brayNearoptimalProbabilisticRNAseq2016} with the following command:
+\gls{rnaseq} FASTQ files were pseudo-aligned to the hg38 genome using Kallisto (v0.46.1) \cite{brayNearoptimalProbabilisticRNAseq2016} with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
 kallisto quant --bootstrap-samples 100 --pseudobam --threads 8 --index /path/to/GRCh38.idx --output-dir {output_dir} {input_R1.fastq.gz} {input_R2.fastq.gz}
