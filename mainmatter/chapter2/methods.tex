@@ -4,7 +4,7 @@
 \subsection{Cell Culture}
 
 LNCaP and 22Rv1 cells were cultured in RPMI medium, and VCaP cells were cultured in DMEM medium, both supplemented with 10\% FBS, and 1\% penicillin-streptomycin at 37 \textdegree C in a humidified incubator with 5\% CO2.
-These prostate cancer cells originated from ATCC.
+These \gls{pca} cells originated from ATCC.
 293FT cells were purchased from ThermoFisherScientific (Cat No. R70007) maintained in complete DMEM medium (DMEM with 10\% FBS (080150, Wisent), L-glutamine (25030-081, ThermoFisher) and non-essential amino acids (11140-050, ThermoFisher) supplemented with 50mg/mL Geneticin (4727894001, Sigma-Aldrich).
 The cells are regularly tested for Mycoplasma contamination.
 The authenticity of these cells was confirmed through Short Tandem Repeat profiling.
@@ -12,14 +12,14 @@ The authenticity of these cells was confirmed through Short Tandem Repeat profil
 \subsection{Prostate tumours and cancer cell lines expression}
 
 Cancer cell line mRNA abundance data were collected from the Cancer Dependency Map Project (DEPMAP; https://depmap.org/portal/; RNA-seq TPM values from 2018q4 version with all 5 non-cancer cell lines were removed) \cite{thecancercelllineencyclopediaconsortiumPharmacogenomicAgreementTwo2015} projects.
-Prostate tumour mRNA abundance data was collected from The Cancer Genome Atlas (TCGA) prostate cancer (TCGA-PRAD) project via the Xena Browser (https://xenabrowser.net/; dataset description: TCGA prostate adenocarcinoma (PRAD) gene expression by RNA-seq (polyA+ Illumina HiSeq; RSEM)).
+Prostate tumour mRNA abundance data was collected from \gls{tcga} \glsentrylong{pca} (TCGA-PRAD) project via the Xena Browser (https://xenabrowser.net/; dataset description: TCGA prostate adenocarcinoma (PRAD) gene expression by RNA-seq (polyA+ Illumina HiSeq; RSEM)).
 
 \subsection{Prostate cancer cell line gene essentiality}
 
 Essentiality scores were collected from the Cancer Dependency Map Project \cite{mcfarlandImprovedEstimationCancer2018}.
-To compare gene essentiality between prostate cancer cell lines and others, essentiality scores for FOXA1 were collected from all available cell lines ($n = 707$).
+To compare gene essentiality between \gls{pca} cell lines and others, essentiality scores for FOXA1 were collected from all available cell lines ($n = 707$).
 To perform a permutation test, the median of 8 randomly selected cell lines was calculated one million times to generate a background distribution of essentiality scores across all cell types available.
-The median essentiality score from the 8 prostate cancer cell lines was calculated and its percentile within the background distribution is reported.
+The median essentiality score from the 8 \gls{pca} cell lines was calculated and its percentile within the background distribution is reported.
 
 \subsection{siRNA knockdown and cell proliferation assay}
 
