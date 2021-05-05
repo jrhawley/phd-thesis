@@ -26,13 +26,14 @@
 \usepackage{listings}
 % handle citations to external documents
 \usepackage[backend=biber, style=nature, sorting=none]{biblatex}
-% create hyperlinks for jumping around the document
-\usepackage{hyperref}
 % commands for dealing with initializations, abbreviations, and glossaries
-% must be loaded after hyperref
+% loading before hyperref to avoid links
+% `nopostdot` remove the period after the term in the glossary
 % `record` uses bib2gls to fetch glossary terms from the sourced file, later
 % `toc` adds the glossary to the ToC
 \usepackage[nopostdot, record, toc]{glossaries-extra}
+% create hyperlinks for jumping around the document
+\usepackage{hyperref}
 % handle internal document references to figures, tables, and more
 \usepackage[capitalize, noabbrev]{cleveref}
 
@@ -157,14 +158,9 @@
 \mainmatter
 % intro
 % \subfile{mainmatter/chapter1}
-What about this general text?
-% This is the first entry for \gls{pca}.
-% This is the second entry for \gls{pca}.
-This is the first entry for \gls{eu}.
-This is the second entry for \gls{eu}.
 
 % FOXA1 CREs
-%\subfile{mainmatter/chapter2}
+\subfile{mainmatter/chapter2}
 
 % prostate cancer 3D genome
 %\subfile{mainmatter/chapter3}
