@@ -147,7 +147,7 @@ cooltools random-sample -c 120000000 {input}::/resolutions/40000 {output}
 TADs were identified using TopDom \cite{shinTopDomEfficientDeterministic2016} on the downsampled, ICE-normalized contact matrices.
 To identify domains at multiple length scales, similar in concept to Artamus' gamma parameter \cite{filippovaIdentificationAlternativeTopological2014}, TopDom was run multiple times per sample, with the window size parameter set at values between 3 and 40, inclusive (corresponding to 120 kbp and 1.6 Mbp).
 The lower bound for the window size parameter allowed for the identification of domains multiple megabases in size at the upper end and domains $<$ 100 kbp at the lower end without being dominated by false calls due to sparsity of the data.
-Despite TopDom being more resistant to confounding by sequencing depth than other TAD calling tools \cite{forcatoComparisonComputationalMethods2017}, biases in boundary persistence were evident between samples of different sequencing depth.
+Despite TopDom being more resistant to confounding by sequencing depth than other \gls{tad} calling tools \cite{forcatoComparisonComputationalMethods2017}, biases in boundary persistence were evident between samples of different sequencing depth.
 Downsampling contact matrices to similar depths resolved these biases.
 
 Given the stochasticity of Hi-C sequencing, boundaries called at one window size may not correspond to the exact same location at a different window size.
@@ -158,23 +158,23 @@ If only two boundaries were in conflict but there is no proper ordering of the w
 If three boundaries are in conflict, the middle boundary was selected.
 If four or more boundaries were in conflict, the boundary that was identified most often was selected.
 
-To determine the maximum window size for TAD calls, TAD calls were compared across window sizes for the same patient using the BPscore metric \cite{zaborowskiBPscoreEffectiveMetric2019}.
+To determine the maximum window size for \gls{tad} calls, \gls{tad} calls were compared across window sizes for the same patient using the BPscore metric \cite{zaborowskiBPscoreEffectiveMetric2019}.
 TAD calls are identical when the BPscore is 0, and divergent when 1.
-The cut-off window size for a single patient was determined when the difference between TAD calls at consecutive window sizes was $<$ 0.005, twice in a row.
+The cut-off window size for a single patient was determined when the difference between \gls{tad} calls at consecutive window sizes was $<$ 0.005, twice in a row.
 The maximum window size was determined by the maximum window size cut-off across all samples in a comparison.
 For comparisons involving only primary samples, the maximum window size was determined to be $w = 20 \times 40 \text{ kbp}$.
 For comparisons involving cell lines, this was $w = 32 \times 40 \text{ kbp}$.
 
-The persistence of a TAD boundary was calculated as the number of window sizes where this region was identified as a boundary.
+The persistence of a \gls{tad} boundary was calculated as the number of window sizes where this region was identified as a boundary.
 
-\subsubsection{Sample clustering by TADs}
+\subsubsection{Sample clustering by \glsentryshortpl{tad}}
 
-Using the TAD calls at the window size $w = 32 \times 40 \text{ kbp}$, the similarity between samples was calculated with BPscore.
+Using the \gls{tad} calls at the window size $w = 32 \times 40 \text{ kbp}$, the similarity between samples was calculated with BPscore.
 The resulting matrix, containing the similarity between any two samples, was used as the distance matrix for unsupervised hierarchical clustering with $\texttt{ward.D2}$ linkage.
 
 \subsubsection{Compartment identification}
 
-Contact matrices were binned at a resolution of 40 kbp, similarly to TAD identification.
+Contact matrices were binned at a resolution of 40 kbp, similarly to \gls{tad} identification.
 To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
 Contact matrix eigenvectors were calculated with Cooltools.
 To standardize the sign of each eigenvector, the GC content of the reference genome, binned at 40 kbp, was used as a phasing reference track.
@@ -243,7 +243,7 @@ Breakpoint pairs matching the following criteria were considered as detection ar
 \begin{enumerate}
   \item At least one breakpoint was $>$ 1 Mbp
   \item At least one breakpoint was surrounded by empty regions of the contact matrix
-  \item At least one breakpoint corresponded to a TAD or compartment boundary shared across all samples that lacked a distinct sharp edge that is indicative of a chromosomal rearrangement
+  \item At least one breakpoint corresponded to a \gls{tad} or compartment boundary shared across all samples that lacked a distinct sharp edge that is indicative of a chromosomal rearrangement
 \end{enumerate}
 
 To identify unique breakpoints that were identified in multiple breakpoint pairs, breakpoints that were within 50 kbp of each other were considered as possibly redundant calls.
@@ -255,7 +255,7 @@ Simple structural variants are connected components in the breakpoint graph cont
 A visual representation of these graphs can be found in \Cref{fig:3D_figs4}b.
 Graphs are displayed with a spring-force layout, adjusted using the Kamada Kawai optimization \cite{kamadaAlgorithmDrawingGeneral1989} from the NetworkX Python package (v2.4) \cite{hagbergExploringNetworkStructure2008}.
 
-\subsubsection{Determination of structural variant breakpoints altering intra-TAD contacts}
+\subsubsection{Determination of structural variant breakpoints altering intra-\glsentryshortpl{tad} contacts}
 
 Patients are assigned into one of two groups using hierarchical clustering (complete linkage) with the matrix of pairwise BPscore \cite{zaborowskiBPscoreEffectiveMetric2019} values as a distance matrix.
 If the clustering equals the mutated samples from the non-mutated samples (i.e. the clustering matches the mutation status in this locus), then the local topology was classified as $\texttt{altered}$ because of the SV.
@@ -305,7 +305,7 @@ Unique peak calls and de-duplicated pull-down and control BAM files from tumour 
 3 of the 12 samples had low quality peak calls compared to the other 9 and were not considered when calculating differential acetylation (CPCG0268, CPCG0255, and CPCG0336).
 We considered each unique breakpoint one at a time in the remaining 9 samples.
 Samples were grouped by their mutation status (i.e. a design matrix where the mutation status is the only covariate) and DiffBind's differential binding analysis method was performed to identify all differentially acetylated regions between the two groups.
-Acetylation peaks outside of the TAD(s) overlapping the breakpoint were filtered out.
+Acetylation peaks outside of the \glspl{tad} overlapping the breakpoint were filtered out.
 Multiple test correction with the Benjamini-Hochberg FDR method \cite{benjaminiControllingFalseDiscovery1995} was performed on all peaks after all breakpoints were considered, due to similar group stratifications depending on the breakpoint under consideration.
 
 \subsubsection{Structural variant breakpoint enrichment}
@@ -337,7 +337,7 @@ kallisto quant --bootstrap-samples 100 --pseudobam --threads 8 --index /path/to/
 
 To assess whether SVs were associated with local gene expression changes, we considered each unique breakpoint one at a time.
 For each breakpoint, we compared the gene expression between the mutated and non-mutated tumour samples using Sleuth (v0.30.0) \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} with a linear model where the mutation status was the only covariate.
-To reduce the chance of falsely identifying genes as differentially expressed, only genes located within the TADs (window size  $w = 20$) containing breakpoints were considered.
+To reduce the chance of falsely identifying genes as differentially expressed, only genes located within the \glspl{tad} (window size  $w = 20$) containing breakpoints were considered.
 Fold-change estimates of each transcript were assessed for significance using a Wald test.
 Transcript-level p-values are combined to create gene-level p-values using the Lancaster aggregation method provided by the Sleuth package \cite{yiGenelevelDifferentialAnalysis2018}.
 Correcting for multiple tests was then performed with the Benjamini-Hochberg FDR correction for all genes that were potentially altered in the mutated sample(s).

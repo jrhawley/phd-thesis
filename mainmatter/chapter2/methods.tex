@@ -36,12 +36,12 @@ The blot was then washed and assessed with the Odyssey\textregistered CLX imagin
 
 \subsection{Identifying putative FOXA1 CREs}
 
-Putative FOXA1 CREs were identified through the use of Cross Cell-Type Correlation based on DNase I Hypersensitivity (C3D) (https://github.com/tahmidmehdi/C3D) \cite{mehdiC3DToolPredict2019}.
+Putative FOXA1 \glspl{cre} were identified through the use of Cross Cell-Type Correlation based on DNase I Hypersensitivity (C3D) (https://github.com/tahmidmehdi/C3D) \cite{mehdiC3DToolPredict2019}.
 Predicted interacting DNase I Hypersensitivity Sites (DHS) with a Pearson's correlation above 0.7 \cite{thurmanAccessibleChromatinLandscape2012} were kept for downstream analysis.
 
-\subsection{Hi-C and TADs in LNCaP cells}
+\subsection{Hi-C and \glsentryshortpl{tad} in LNCaP cells}
 
-Hi-C and TADs conducted and called, respectively, in LNCaP cells are publicly available off ENCODE portal (ENCSR346DCU).
+Hi-C and \glspl{tad} conducted and called, respectively, in LNCaP cells are publicly available off ENCODE portal (ENCSR346DCU).
 Visualization of the Hi-C dataset is available on the Hi-C Browser (http://promoter.bx.psu.edu/hi-c/) \cite{wang3DGenomeBrowser2018}.
 
 \subsection{Clonal wild-type Cas9 and dCas9-KRAB mediated validation}
@@ -77,7 +77,7 @@ Lastly, 1 $\mu$L (100 $\mu$M) of electroporation enhancer (Integrated DNA Techno
 The entire transfection reaction was transfected into 350 000 cells through Nucleofection (SF Solution EN120 - 4D Nucleofector, Lonza).
 Cells were then harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 For double deletions, two sets of guide RNA-RNP complex (10 $\mu$g of Alt-R \textregistered S.p HiFi Cas9 Nuclease 3NLS) were transfected and harvested 24 hours post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
-To control for double deletions, two negative control regions within the TAD were also compounded.
+To control for double deletions, two negative control regions within the \gls{tad} were also compounded.
 Due to size, see published manuscript for primers.
 
 \subsection{RT-PCR assessment of gene expression upon deletion of CREs}
@@ -90,7 +90,7 @@ Statistical significance was calculated using Student's t-test in R.
 
 \subsection{Confirmation of Cas9-mediated deletion of CREs}
 
-Deletion of CREs were confirmed through PCR amplification of the intended region for deletion, followed by the T7 Endonuclease Assay (Integrated DNA Technology).
+Deletion of \glspl{cre} were confirmed through PCR amplification of the intended region for deletion, followed by the T7 Endonuclease Assay (Integrated DNA Technology).
 Due to size, see published manuscript for primer sequences used for PCR amplification.
 PCR products were then loaded onto a 1\% agarose gel for visualization.
 The agarose gel to assess the on-target genome editing efficiency was done through densitometry using ImageJ.
@@ -98,7 +98,7 @@ The correlation between on-target genome editing efficiency and FOXA1 mRNA expre
 
 \subsection{Cell proliferation upon deletion of FOXA1 CREs}
 
-Pairs of gRNAs flanking the CREs of interest, FOXA1 promoter and control regions were designed using CRISPOR (http://crispor.tefor.net/) and Zhang lab CRISPR Design tool (http://crispr.mit.edu/) (due to size, see published manuscript).
+Pairs of gRNAs flanking the \glspl{cre} of interest, FOXA1 promoter and control regions were designed using CRISPOR (http://crispor.tefor.net/) and Zhang lab CRISPR Design tool (http://crispr.mit.edu/) (due to size, see published manuscript).
 Each pair of gRNAs were cloned into the lentiCRISPRv2 (Addgene; a gift from Feng Zhang \#52961) and the lentiCRISPRv2-Blast (Addgene; a gift from Feng Zhang \#83480) plasmid as previously described \cite{sanjanaImprovedVectorsGenomewide2014}.
 Lentiviral particles were generated in 293FT cells (ThermoFisher) using the pMDG.2 and psPAX2 packaging plasmids (Addgene; \#12259 and \#12260, a gift from Didier Trono), and collected 72 hrs post transfection.
 LNCaP cells were transduced for 24-48hrs with equal amounts of virus, followed by selection with media containing puromycin (3.5 $\mu$g/mL, ThermoFisher) and blasticidin (7 $\mu$g/mL, Wisent).
