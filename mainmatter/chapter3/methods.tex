@@ -2,7 +2,7 @@
 
 \subsection{Patient selection criteria}
 
-Patients were selected from the CPC-GENE cohort of Canadian men with indolent PCa, Gleason scores of 3+3, 3+4, and 4+3.
+Patients were selected from the \gls{cpcgene} cohort of Canadian men with indolent PCa, Gleason scores of 3+3, 3+4, and 4+3.
 All primary human material was obtained with informed consent with approval of our institutional research ethics board (UHN 11-0024).
 The intersection of previously published data for whole genome sequencing \cite{fraserGenomicHallmarksLocalized2017}, RNA abundance \cite{chenWidespreadFunctionalRNA2019}, and H3K27ac ChIP-seq \cite{kronTMPRSS2ERGFusion2017} led to 25 samples having data for all assays.
 11 of these tested positive for ETS gene family fusions (T2E status), and 14 without.
@@ -16,7 +16,7 @@ The specific modifications of the protocol are described below.
 
 \subsubsection{Tumour Tissue Preparation}
 
-Twelve cryopreserved-frozen PCa tumour tissue specimens were obtained from primary PCa patients as part of the Canadian PCa Genome Network (CPC-GENE) effort \cite{fraserGenomicHallmarksLocalized2017}.
+Twelve cryopreserved-frozen PCa tumour tissue specimens were obtained from primary \gls{pca} patients as part of the \gls{cpcgene} effort \cite{fraserGenomicHallmarksLocalized2017}.
 Informed consent was obtained from all patients with REB approval (UHN 11-0024).
 These tumour specimens were sectioned into 10 $\mu$m sections.
 Sections before and after the sections used for Hi-C were stained with hematoxylin and eosin (H\&E) and assessed pathologically for $\ge$ 70\% PCa cellularity.
@@ -310,7 +310,7 @@ Multiple test correction with the Benjamini-Hochberg FDR method \cite{benjaminiC
 
 \subsubsection{Structural variant breakpoint enrichment}
 
-Structural variant breakpoint coordinates from WGS data from the CPC-GENE cohort were obtained from the International Cancer Genome Consortium (structural somatic mutations from the PRAD-CA dataset, release 28).
+Structural variant breakpoint coordinates from WGS data from the \gls{cpcgene} cohort were obtained from the International Cancer Genome Consortium (structural somatic mutations from the PRAD-CA dataset, release 28).
 Breakpoint coordinates were lifted over to hg38 coordinates using the liftOver function from the rtracklayer R package (v1.46.0) \cite{lawrenceRtracklayerPackageInterfacing2009}.
 Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gelRegioneRBioconductorPackage2015}, selecting randomized regions from the hg38 genome, excluding the ENCODE blacklist regions \cite{amemiyaENCODEBlacklistIdentification2019} and masked loci.
 100 permutations were calculated and a one-sided permutation $z$-test was used to calculate statistical significance.
@@ -319,7 +319,7 @@ Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gel
 
 \subsubsection{Tumour sample RNA sequencing}
 
-Total RNA was extracted for the CPC-GENE tumour samples as previously described \cite{chenWidespreadFunctionalRNA2019}.
+Total RNA was extracted for the \gls{cpcgene} tumour samples as previously described \cite{chenWidespreadFunctionalRNA2019}.
 Briefly, total RNA was extracted with mirVana miRNA Isolation Kit (Life Technologies) according to the manufacturer's instructions.
 RNA samples were sent to BGI Americas where it underwent QC and DNase treatment.
 For each sample, 200 ng of total RNA was used to construct a TruSeq strand-specific library with the Ribo Zero protocol (Illumina, Cat. \#RS-122-2203).
