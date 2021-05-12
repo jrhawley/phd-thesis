@@ -3,7 +3,11 @@
 % ==============================================================================
 % template for University of Toronto dissertation
 \documentclass[oneside,doublespacing]{ut-thesis}
-% \usepackage[left=2cm, right=2cm, bottom=2cm, top=2cm]{geometry}
+% use UTF-8 character encoding
+\usepackage[utf8]{inputenc}
+% load math-specific fonts and symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
 % separate text into multiple LaTeX files
 \usepackage{subfiles}
 % intelligently handle single and double quotes
@@ -138,6 +142,8 @@
   showstringspaces=false,
 }
 
+\newtheorem{theorem}{Theorem}
+
 % ==============================================================================
 % Document
 % ==============================================================================
@@ -160,13 +166,13 @@
 % \subfile{mainmatter/chapter1}
 
 % FOXA1 CREs
-\subfile{mainmatter/chapter2}
+% \subfile{mainmatter/chapter2}
 
 % prostate cancer 3D genome
-\subfile{mainmatter/chapter3}
+% \subfile{mainmatter/chapter3}
 
-% n=1 RNA-seq method
-% \subfile{mainmatter/chapter4}
+% James-Stein RNA-seq method
+\subfile{mainmatter/chapter4}
 
 % B-ALL DNA methylation
 % \subfile{mainmatter/chapter5}
