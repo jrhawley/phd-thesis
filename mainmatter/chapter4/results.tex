@@ -1,26 +1,153 @@
 \section{Results}
 
-- the two main approaches for reducing error in a model are to reduce the model variance or model bias
-  - \Cref{fig:JS_fig1}
-- here we attempt to decrease \gls{mse} by simultaneously increasing the bias and decreasing the variance in fold change coefficient estimators
-- derivation for the \gls{js} estimator can be found in \Cref{sec:JS_derivation}
-  - Equation for the \gls{js} estimator can be seen in \Cref{fig:JS_fig1}b. 
-- in theory, this may increase the error of some transcripts, but will decrease \gls{mse} for a set of transcripts in aggregate
-  - \Cref{sec:JS_moments}
+\begin{itemize}
+  \item the two main approaches for reducing error in a model are to reduce the model variance or model bias \Cref{fig:JS_fig1}
+  \item here we attempt to decrease \gls{mse} by simultaneously increasing the bias and decreasing the variance in fold change coefficient estimators
+  \item derivation for the \gls{js} estimator can be found in \Cref{sec:JS_derivation}
+  \item Equation for the \gls{js} estimator can be seen in \Cref{fig:JS_fig1}b. 
+  \item in theory, this may increase the error of some transcripts, but will decrease \gls{mse} for a set of transcripts in aggregate \Cref{sec:JS_moments}
+\end{itemize}
+
+\subsection{Derivation of the James-Stein estimator}
+\label{sec:JS_derivation}
+
+For a $p$-variate normal distribution $Z \sim \mathcal{N}_p(\mu, \Sigma)$ where $\mu$ is unknown and $\Sigma$ is known, if we observe a single realization of this distribution, $z$, we have the following theorem \cite{steinInadmissibilityUsualEstimator1956}:
+
+\begin{theorem}
+  The estimator $\hat{\mu}^{(0)} = z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu})^2 \right]$ when $p \ge 3$ and $\Sigma = I_p$. Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert z \Vert ^2}\right) z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for sufficiently small $b$ and large $a$.
+\end{theorem}
+
+This result was generalized to non-singular covariance matrices that were not necessarily the identity matrix (Theorem 2 of \cite[REF][]{bockMinimaxEstimatorsMean1975}):
+
+\begin{theorem}
+  Let $Z \sim \mathcal{N}_p \left(\mu, \Sigma \right)$ and $z$ be a single observation of the random variable $Z$.
+  Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{z^T \Sigma^{-1} z}\right) z$.
+If $p \ge 3$, $\text{Tr}(\Sigma) \ge 2 \lambda_L$ (where $\lambda_L$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the estimator for the mean, $\mu$, that minimizes the \gls{mse}.
+\end{theorem}
+
+Consider the differential analysis model used in the Sleuth R package \cite{pimentelDifferentialAnalysisRNAseq2017, yiGenelevelDifferentialAnalysis2018} for a single transcript, $s$, with the simple experimental design of $n_{nonmut}$ \gls{wt} samples and 1 mutant sample:
+
+\begin{equation*}
+  D_s | Y_s \sim \mathcal{N}_N \left( \beta_{s,0} + \mathbb{I}_{mut}\beta_{s,1}, (\sigma_s^2 + \tau_s^2)I_N \right)
+\end{equation*}
+
+For the $n_{nonmut}$ \gls{wt} samples, this is equivalent to
+
+\begin{equation*}
+  D_s | Y_s \sim \mathcal{N}_{n_{nonmut}} \left( \beta_{s,0}, (\sigma_s^2 + \tau_s^2)I_{n_{nonmut}} \right)
+\end{equation*}
+
+which can be fit with the same model process that Sleuth employs.
+For the single mutated sample, this model is
+
+\begin{equation}
+  D_s | Y_s \sim \mathcal{N} \left( \beta_{s, 0} + \beta_{s, 1}, \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right)
+  \label{eqn:single_mut_model}
+\end{equation}
+
+The covariance matrix is the same as the mutated samples, but the mean $\beta_{s, 0} + \beta_{s, 1}$ is unknown.
+By reparameterizing this model to consider every transcript in the single mutated sample, \Cref{eqn:single_mut_model} can be re-written as follows:
+
+\begin{equation}
+  \Delta \sim \mathcal{N}_{|S|}(\Beta_0 + \Beta_1, \Sigma) \\
+\end{equation}
+
+where
+
+\begin{align*}
+  \Beta_{i,s} &= \beta_{s,i} \forall s \in S \\
+  \Sigma &= \begin{bmatrix}
+    \max\{ \hat{\sigma}_1^2, \tilde{\sigma}_1^2 \} + \hat{\tau}_1^2 & & 0 \\
+    & \ddots & \\
+    0 & & \max\{ \hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2 \} + \hat{\tau}_{|S|}^2 \\
+  \end{bmatrix}
+\end{align*}
+
+We switch from using coefficients $\beta_{t,i}$ to $\Beta_{i,s}$ to avoid confusion, since $\beta_{t,i} \in \mathbb{R}^p$ (a $p$-dimensional vector for each covariate in the design) whereas $\Beta_{i,s} \in \mathbb{R}^{|S|}$ (an $|S|$-dimensional vector for only a single coefficient over all transcripts in $S$).
+
+Observations of a single mutated sample from this model meet the criteria for the \gls{js} estimators.
+Let $\delta$ be a single observation of the distribution $\Delta$.
+A \gls{js} estimator for the unknown effect coefficient, $\Beta_1$, can be constructed.
+
+\begin{equation}
+  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{(\delta - \hat{\Beta}_0)^T \Sigma^{-1} (\delta - \hat{\Beta}_0)} \right)(\delta - \hat{\Beta}_0)
+  \label{eqn:js_defn}
+\end{equation}
+
+where $\hat{\Beta}_0$ is the estimate obtained from the non-mutated samples for all transcripts $s \in S$.
+
+It is straightforward to see that $\text{Tr}(\Sigma) = \sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2$ and that $\lambda_L = \max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}$.
+
+\subsection{Comparison between the \glsentryshort{ols} and \glsentrylong{js} estimators}
+
+For a simple experimental design where the mutation status is the only coefficient the \gls{ols} estimator is given by:
+
+\begin{equation*}
+  \begin{bmatrix}
+    \hat{\beta}_{s,0}^{(OLS)} \\
+    \hat{\beta}_{s,1}^{(OLS)}
+  \end{bmatrix}
+  = \hat{\beta}_s^{(OLS)}
+  = (X^TX)^{-1}X^T d_s
+  = \begin{bmatrix}
+    \bar{d}_s^{(nonmut)} \\
+    d_s^{(mut)} - \bar{d}_s^{(nonmut)}
+  \end{bmatrix}
+\end{equation*}
+
+where
+
+\begin{equation*}
+  X = \begin{bmatrix}
+    1 & 1 \\
+    1 & 0 \\
+    \vdots & \vdots \\
+    1 & 0
+  \end{bmatrix}
+  \in \mathbb{R}^{(N + 1) \times 2}
+\end{equation*}
+
+is the design matrix.
+Looking closely at the \gls{ols} estimator for the mutation coefficient, $\beta_{s,1}$, it is clear that it is given by:
+
+\begin{equation}
+  \hat{\beta}_{s,1}^{(OLS)} = d_s^{(mut)} - \hat{\beta}_{s,0}^{(OLS)} = \delta_s - \hat{\beta}_{0,s}
+\end{equation}
+
+which is used directly in the definition of the \gls{js} estimator in \Cref{eqn:js_defn}.
+The \gls{js} estimator for $\Beta_1$ can then be expressed simply as:
+
+\begin{equation}
+  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{\left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \hat{\Beta}_1^{(OLS)}
+  \label{eqn:js_defn_ols}
+\end{equation}
+
+From this definition, it is easy to see that the \gls{js} estimate is colinear with the \gls{ols} estimate but uniformly shrunk towards 0.
+For a more general experimental design, the above can be extended.
+Given an experimental design matrix $X \in \mathbb{R}^{n \times p}$ where $n > p$, $\text{rank}(X) = p$ and $\text{rank}(X^*) = p - 1$ where $X^* \in \mathbb{R}^{(n - 1) \times p}$ is the same design matrix but with one sample removed, a \gls{js} estimator for the linear coefficient uniquely specified by the one sample is given by
+
+\begin{equation*}
+  \hat{\Beta}_i^{(JS)} = \left( 1 - \frac{c}{\left( \hat{\Beta}_i^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_i^{(OLS)}} \right) \hat{\Beta}_i^{(OLS)}
+\end{equation*}
+
+It can be shown that the \gls{js} estimator is biased towards 0 with a smaller variance than the \gls{ols} estimator (see \Cref{sec:JS_moments}).
 
 \newfigure{chapter4/Figure1.png}{Reducing the bias-variance tradeoff by combining information across multiple features}{\textbf{a.} Schematic of the bias-variance tradeoff for assessing model performance. Dartboard on the left shows low bias of the darts (mean is close to the bullseye) but a large variance. Dartboard on the right shows a high bias of the darts (mean is off-centre), but a small variance. \textbf{b.} For a $p$-variate normal distribution from which a single observation is made, the naive estimator has a higher \gls{mse} than the \gls{js} estimator, defined as $\hat{\mu}^{(2)}$. \textbf{c.} An analogy showing how the \gls{js} estimators work in theory. Trying to estimate the mean height, weight, and age for the entire population ($\mu$) from a single person will give an estimate that is likely far from the truth ($\hat{\mu}^{(1)}$). Combining information from the three variables together can produce an estimate that is closer to the truth ($\hat{\mu}^{(2)}$).}{fig:JS_fig1}
 
-- using RNA-seq data from a highly replicated yeast \gls{ko} experiment, we compared the statistical inference from differential gene expression analysis when using the \gls{ols} and \gls{js} estimators
-- found that for small sample sizes ($n = 4$), the \gls{js} estimators predict the largest number of \gls{tp} and \gls{fp} as well as the smallest number of \gls{tn} and \gls{fn} on average
-  - Student's unpaired $t$-test, $n = 30$, $p = $
-- for larger sample sizes ($n \ge 6$), the \gls{js} estimators continue to identify more \gls{tp} and \gls{fp}, as well as fewer \gls{tn} and \gls{fn} than the \gls{ols} estimator, on average
-  - these effects lessen with increasing sample size, as expected
-- both the \gls{ols} and \gls{js} methods with an unbalanced experimental design perform more poorly than the \gls{ols} method with a balanced experimental design, as expected
+\begin{itemize}
+  \item using RNA-seq data from a highly replicated yeast \gls{ko} experiment, we compared the statistical inference from differential gene expression analysis when using the \gls{ols} and \gls{js} estimators
+  \item found that for small sample sizes ($n = 4$), the \gls{js} estimators predict the largest number of \gls{tp} and \gls{fp} as well as the smallest number of \gls{tn} and \gls{fn} on average (Student's unpaired $t$-test, $n = 30$, $p = $)
+  \item for larger sample sizes ($n \ge 6$), the \gls{js} estimators continue to identify more \gls{tp} and \gls{fp}, as well as fewer \gls{tn} and \gls{fn} than the \gls{ols} estimator, on average
+  \item these effects lessen with increasing sample size, as expected
+  \item both the \gls{ols} and \gls{js} methods with an unbalanced experimental design perform more poorly than the \gls{ols} method with a balanced experimental design, as expected
+\end{itemize}
 
 \newfigure{chapter4/Figure2.png}{Differential gene expression analysis of the entire yeast transcriptome with differently sized experimental designs}{Simulations ($n = 30$) using randomly selected samples which were then compared to the full dataset of 48 $\Delta$ Snf2 vs 48 \gls{wt} to calculate \gls{tp} (\textbf{a}), \gls{fp} (\textbf{b}), \gls{tn} (\textbf{c}), and \gls{fn} (\textbf{d}).}{fig:JS_fig2}
 
-- to investigate where these changes in fold change estimates and $p$-values originates from, we investigate representative simulations
-- most genes in the $\Delta$ Snf2 model are under-expressed compared to the \gls{wt} model % \Cref{fig:JS_fig3}
+\begin{itemize}
+  \item to investigate where these changes in fold change estimates and $p$-values originates from, we investigate representative simulations
+  \item most genes in the $\Delta$ Snf2 model are under-expressed compared to the \gls{wt} model \Cref{fig:JS_fig3}
+\end{itemize}
 
 \newfigure{chapter4/Figure3.png}{Differential gene expression analysis of $\Delta$ Snf2 vs \gls{wt} yeast cells using different sample sizes and experimental designs}{\textbf{a.} Volcano plot of differential expression results with \gls{ols} estimates in a highly replicated experiment consisting of 48 biological replicates of each condition. \textbf{b.} The same analysis as (\textbf{a}) using 4 samples in total, 2 $\Delta$ Snf2 and 2 \gls{wt} samples. \textbf{c.} The same analysis as (\textbf{c}) using 1 $\Delta$ Snf2 and 3 \gls{wt}. \textbf{d.} The same analysis as (\textbf{c}) using the \gls{js} method instead of \gls{ols}.}{fig:JS_fig3}
 

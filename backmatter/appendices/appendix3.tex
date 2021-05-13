@@ -118,121 +118,7 @@ When there is only 1 mutated sample, as per the motivation of this work, this re
   \mathbb{V} \left[\beta_{s, mut}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)(1 + n_{nonmut})}{n_{nonmut}}
 \end{equation}
 
-\section{Derivation of the James-Stein estimator}
-\label{sec:JS_derivation}
 
-For a $p$-variate normal distribution $Z \sim \mathcal{N}_p(\mu, \Sigma)$ where $\mu$ is unknown and $\Sigma$ is known, if we observe a single realization of this distribution, $z$, we have the following theorem \cite{steinInadmissibilityUsualEstimator1956}:
-
-\begin{theorem}
-  The estimator $\hat{\mu}^{(0)} = z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu})^2 \right]$ when $p \ge 3$ and $\Sigma = I_p$. Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert z \Vert ^2}\right) z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for sufficiently small $b$ and large $a$.
-\end{theorem}
-
-This result was generalized to non-singular covariance matrices that were not necessarily the identity matrix (Theorem 2 of \cite[REF][]{bockMinimaxEstimatorsMean1975}):
-
-\begin{theorem}
-  Let $Z \sim \mathcal{N}_p \left(\mu, \Sigma \right)$ and $z$ be a single observation of the random variable $Z$.
-  Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{z^T \Sigma^{-1} z}\right) z$.
-If $p \ge 3$, $\text{Tr}(\Sigma) \ge 2 \lambda_L$ (where $\lambda_L$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the minimax estimator for the mean, $\mu$.
-\end{theorem}
-
-Consider the Sleuth model for a single transcript, $s$, with the simple experimental design above:
-
-\begin{equation*}
-  D_s | Y_s \sim \mathcal{N}_N \left( \beta_{s,0} + \mathbb{I}_{mut}\beta_{s,1}, (\sigma_s^2 + \tau_s^2)I_N \right)
-\end{equation*}
-
-For the $n_{nonmut}$ non-mutated samples, this is equivalent to
-
-\begin{equation*}
-  D_s | Y_s \sim \mathcal{N}_{n_{nonmut}} \left( \beta_{s,0}, (\sigma_s^2 + \tau_s^2)I_n \right)
-\end{equation*}
-
-which can be fit with the same model process that Sleuth employs.
-For the single mutated sample, this model is
-
-\begin{equation}
-  D_s | Y_s \sim \mathcal{N} \left( \beta_{s, 0} + \beta_{s, 1}, \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right)
-  \label{eqn:single_mut_model}
-\end{equation}
-
-The covariance matrix is the same as the mutated samples, but the mean $\beta_{s, 0} + \beta_{s, 1}$ is unknown and we have a single observation of this distribution.
-Reparameterizing \Cref{eqn:single_mut_model} to consider every transcript in the single mutated sample can be written as follows:
-
-\begin{equation}
-  \Delta \sim \mathcal{N}_{|S|}(\Beta_0 + \Beta_1, \Sigma) \\
-\end{equation}
-
-where
-
-\begin{align}
-  \Beta_{i,s} &= \beta_{s,i} \forall s \in S \\
-  \Sigma &= \begin{bmatrix}
-    \max\{ \hat{\sigma}_1^2, \tilde{\sigma}_1^2 \} + \hat{\tau}_1^2 & & 0 \\
-    & \ddots & \\
-    0 & & \max\{ \hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2 \} + \hat{\tau}_{|S|}^2 \\
-  \end{bmatrix}
-\end{align}
-
-We switch from using coefficients $\beta_{t,i}$ to $\Beta_{i,s}$ to avoid confusion, since $\beta_{t,i} \in \mathbb{R}^p$ (a $p$-dimensional vector for each covariate in the design) whereas $\Beta_{i,s} \in \mathbb{R}^{|S|}$ (an $|S|$-dimensional vector for only a single coefficient over all transcripts in $S$).
-
-Observations of a single mutated sample from this model meet the criteria for the \gls{js} estimators.
-Let $\delta$ be a single observation of the distribution $\Delta$.
-A \gls{js} estimator for the unknown effect coefficient, $\Beta_1$, can be constructed.
-
-\begin{equation}
-  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{(\delta - \hat{\Beta}_0)^T \Sigma^{-1} (\delta - \hat{\Beta}_0)} \right)(\delta - \hat{\Beta}_0)
-  \label{eqn:js_defn}
-\end{equation}
-
-where $\hat{\Beta}_0$ is the estimate obtained from the non-mutated samples for all transcripts $s \in S$.
-
-It is simple to see that $\text{Tr}(\Sigma) = \sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2$ and that $\lambda_L = \max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}$.
-
-\section{Comparison between the \glsentryshort{ols} and \glsentrylong{js} estimators}
-
-For a simple experimental design where the mutation status is the only coefficient the \gls{ols} estimator is given by:
-
-\begin{equation*}
-  \begin{bmatrix}
-    \hat{\beta}_{s,0}^{(OLS)} \\
-    \hat{\beta}_{s,1}^{(OLS)}
-  \end{bmatrix}
-  = \hat{\beta}_s^{(OLS)}
-  = (X^TX)^{-1}X^T d_s
-  = \begin{bmatrix}
-    \bar{d}_s^{(nonmut)} \\
-    d_s^{(mut)} - \bar{d}_s^{(nonmut)}
-  \end{bmatrix}
-\end{equation*}
-
-Looking closely at the \gls{ols} estimator for the mutation coefficient, $\beta_{s,1}$, it is clear that it is given by:
-
-\begin{equation}
-  \hat{\beta}_{s,1}^{(OLS)} = d_s^{(mut)} - \hat{\beta}_{s,0}^{(OLS)} = \delta_s - \hat{\beta}_{0,s}
-\end{equation}
-
-which is used directly in the definition of the \gls{js} estimator in \Cref{eqn:js_defn}.
-The \gls{js} estimator for $\Beta_1$ can then be expressed simply as:
-
-\begin{equation}
-  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{\left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \hat{\Beta}_1^{(OLS)}
-  \label{eqn:js_defn_ols}
-\end{equation}
-
-From this definition, it is easy to see that the \gls{js} estimate is colinear with the \gls{ols} estimate but uniformly shrunk towards 0.
-
-For a more general experimental design, the above can be extended.
-Given an experimental design matrix
-
-\begin{equation*}
-  X \in \mathbb{R}^{n \times p}
-\end{equation*}
-
-where $n > p$, $\text{rank}(X) = p$ and $\text{rank}(X^*) = p - 1$ where $X^* \in \mathbb{R}^{(n - 1) \times p}$ is the same design matrix but with one sample removed, a \gls{js} estimator for the linear coefficient uniquely specified by the one sample is given by
-
-\begin{equation*}
-  \hat{\Beta}_i^{(JS)} = \left( 1 - \frac{c}{\left( \hat{\Beta}_i^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_i^{(OLS)}} \right) \hat{\Beta}_i^{(OLS)}
-\end{equation*}
 
 \section{Statistical moments of the \glsentrylong{js} estimator}
 \label{sec:JS_moments}
@@ -324,7 +210,13 @@ Under similar conditions of the number of transcripts under consideration, $|S|$
   - \frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^T
 \end{equation}
 
-Again, a shrinkage factor multiplies $\Sigma$, providing the possibility of a smaller estimator variance than the \gls{ols} estimator.
-This smaller variance allows for more powerful statistical inferences when using a Wald test.
-Notably, $\Beta_1$ is unknown, so the variance of the \gls{js} estimator is a function of both the mean and variance of the transcripts under consideration.
+Since the diagonal elements of $\frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^T$ are all $\ge 0$ and $0 \le \left(1 - \frac{2c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \le 1 \forall c > 0$, the variance than of the \gls{js} estimators are smaller than the \gls{ols} estimators.
+This smaller variance allows for more powerful statistical inferences (i.e. when using a Wald test).
+
+Notably, the variance of the \gls{js} estimator is a function of both the mean and variance of the transcripts under consideration.
 This is in contrast to the \gls{ols} estimator, which is solely a function of the variance.
+Additionally, the off-diagonal elements of the matrix $\Beta_1 \Beta_1^T$ imply that the \gls{js} fold change estimates are not independent of each other.
+This, again, contrasts with the \gls{ols} estimator, where the diagonal covariance matrix, $\Sigma$, implies that the fold change estimates are themselves independent of each other.
+The effect of this dependence on statistical inference is a function of the variance and true fold change, as can be seen from the $\frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2}$ coefficient.
+While rarely true in practice, this statistical dependence can affect the results of statistical inference, in theory.
+For most purposes, is not expected to have a large effect on the results of statistical inference.
