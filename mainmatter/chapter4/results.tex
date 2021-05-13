@@ -1,3 +1,27 @@
 \section{Results}
 
-% \newfigure{chapter4/Figure1.png}{Reducing the bias-variance tradeoff by combining information across multiple features}{Schematic of the bias-variance tradeoff for assessing model performance. Dartboard on the left shows low bias of the darts (mean is close to the bullseye) but a large variance. Dartboard on the right shows a high bias of the darts (mean if off-centre), but a small variance. For a p-variate normal distribution from which a single observation is made, the naïve estimator has a higher \gls{mse} than the James-Stein estimator. An analogy showing how the James-Stein estimators work in theory. Trying to estimate the mean height, weight, and age for the entire population ($\mu$) from a single person will give an estimate that is likely wrong ($\mu^{(1)}$). Combining information from the three variables together can produce an estimate that is closer to the truth ($\mu^{(2)}$).}{fig:JS_fig1}
+- the two main approaches for reducing error in a model are to reduce the model variance or model bias
+  - \Cref{fig:JS_fig1}
+- here we attempt to decrease \gls{mse} by simultaneously increasing the bias and decreasing the variance in fold change coefficient estimators
+- derivation for the \gls{js} estimator can be found in \Cref{sec:JS_derivation}
+  - Equation for the \gls{js} estimator can be seen in \Cref{fig:JS_fig1}b. 
+- in theory, this may increase the error of some transcripts, but will decrease \gls{mse} for a set of transcripts in aggregate
+  - \Cref{sec:JS_moments}
+
+\newfigure{chapter4/Figure1.png}{Reducing the bias-variance tradeoff by combining information across multiple features}{\textbf{a.} Schematic of the bias-variance tradeoff for assessing model performance. Dartboard on the left shows low bias of the darts (mean is close to the bullseye) but a large variance. Dartboard on the right shows a high bias of the darts (mean is off-centre), but a small variance. \textbf{b.} For a $p$-variate normal distribution from which a single observation is made, the naive estimator has a higher \gls{mse} than the \gls{js} estimator, defined as $\hat{\mu}^{(2)}$. \textbf{c.} An analogy showing how the \gls{js} estimators work in theory. Trying to estimate the mean height, weight, and age for the entire population ($\mu$) from a single person will give an estimate that is likely wrong ($\hat{\mu}^{(1)}$). Combining information from the three variables together can produce an estimate that is closer to the truth ($\hat{\mu}^{(2)}$).}{fig:JS_fig1}
+
+- using RNA-seq data from a highly replicated yeast \gls{ko} experiment, we compared the statistical inference from differential gene expression analysis when using the \gls{ols} and \gls{js} estimators
+- found that for small sample sizes ($n = 4$), the \gls{js} estimators predict the largest number of \gls{tp} and \gls{fp} as well as the smallest number of \gls{tn} and \gls{fn} on average
+  - Student's unpaired $t$-test, $n = 30$, $p = $
+- for larger sample sizes ($n \ge 6$), the \gls{js} estimators continue to identify more \gls{tp} and \gls{fp}, as well as fewer \gls{tn} and \gls{fn} than the \gls{ols} estimator, on average
+  - these effects lessen with increasing sample size, as expected
+- both the \gls{ols} and \gls{js} methods with an unbalanced experimental design perform more poorly than the \gls{ols} method with a balanced experimental design, as expected
+
+\newfigure{chapter4/Figure2.png}{Differential gene expression analysis of the entire yeast transcriptome with differently sized experimental designs}{Simulations ($n = 30$) using randomly selected samples which were then compared to the full dataset of 48 $\Delta$ Snf2 vs 48 \gls{wt} to calculate \gls{tp} (\textbf{a}), \gls{fp} (\textbf{b}), \gls{tn} (\textbf{c}), and \gls{fn} (\textbf{d}).}{fig:JS_fig2}
+
+- to investigate where these changes in fold change estimates and $p$-values originates from, we investigate representative simulations
+- most genes in the $\Delta$ Snf2 model are under-expressed compared to the \gls{wt} model % \Cref{fig:JS_fig3}
+
+\newfigure{chapter4/Figure3.png}{Differential gene expression analysis of $\Delta$ Snf2 vs \gls{wt} yeast cells using different sample sizes and experimental designs}{\textbf{a.} Volcano plot of differential expression results with \gls{ols} estimates in a highly replicated experiment consisting of 48 biological replicates of each condition. \textbf{b.} The same analysis as (\textbf{a}) using 4 samples in total, 2 $\Delta$ Snf2 and 2 \gls{wt} samples. \textbf{c.} The same analysis as (\textbf{c}) using 1 $\Delta$ Snf2 and 3 \gls{wt}. \textbf{d.} The same analysis as (\textbf{c}) using the \gls{js} method instead of \gls{ols}.}{fig:JS_fig3}
+
+\newfigure{chapter4/Figure4.png}{Differential gene expression analysis focusing on a subset of trancsripts, not the entire transcriptome}{All experiments use 1 $\Delta$ Snf2 vs 5 \gls{wt} samples (or vice versa). \textbf{a.} Comparison of the \gls{mse} of the \gls{js} estimates ($y$-axis) against the \gls{ols} estimates ($x$-axis). The total number of transcripts in each comparison is specified above each facet. \textbf{b.} Percent different in \gls{mse} between the \gls{js} and \gls{ols} estimates. One-sided, two-sample Student's $t$-test, $n = 30$, FDR multiple test corrections.}{fig:JS_fig4}
