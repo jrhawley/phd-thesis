@@ -124,19 +124,21 @@ When there is only 1 mutated sample, as per the motivation of this work, this re
 For a $p$-variate normal distribution $Z \sim \mathcal{N}_p(\mu, \Sigma)$ where $\mu$ is unknown and $\Sigma$ is known, if we observe a single realization of this distribution, $z$, we have the following theorem \cite{steinInadmissibilityUsualEstimator1956}:
 
 \begin{theorem}
-  The estimator $\hat{\mu}^{(0)} = z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu})^2 \right]$ in the case that $m \ge 3$ and $\Sigma = I_N$. Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert z \Vert ^2}\right) z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for sufficiently small $b$ and large $a$.
+  The estimator $\hat{\mu}^{(0)} = z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu})^2 \right]$ when $p \ge 3$ and $\Sigma = I_p$. Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert z \Vert ^2}\right) z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for sufficiently small $b$ and large $a$.
 \end{theorem}
 
 This result was generalized to non-singular covariance matrices that were not necessarily the identity matrix (Theorem 2 of \cite[REF][]{bockMinimaxEstimatorsMean1975}):
 
 \begin{theorem}
-  Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{z^T \Sigma^{-1} z}\right) z$. If $\text{Tr}(\Sigma) \ge 2 \lambda_L$ where $\lambda_L$ is the largest eigenvalue of the covariance matrix $\Sigma$ and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the minimax estimator for the mean $\mu$.
+  Let $Z \sim \mathcal{N}_p \left(\mu, \Sigma \right)$ and $z$ be a single observation of the random variable $Z$.
+  Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{z^T \Sigma^{-1} z}\right) z$.
+If $p \ge 3$, $\text{Tr}(\Sigma) \ge 2 \lambda_L$ (where $\lambda_L$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the minimax estimator for the mean, $\mu$.
 \end{theorem}
 
-Consider the Sleuth model with the simple experimental design above:
+Consider the Sleuth model for a single transcript, $s$, with the simple experimental design above:
 
 \begin{equation*}
-  D_s | Y_s \sim \mathcal{N}_p \left( \beta_{s,0} + \mathbb{I}_{mut}\beta_{s,1}, (\sigma_s^2 + \tau_s^2)I_N \right)
+  D_s | Y_s \sim \mathcal{N}_N \left( \beta_{s,0} + \mathbb{I}_{mut}\beta_{s,1}, (\sigma_s^2 + \tau_s^2)I_N \right)
 \end{equation*}
 
 For the $n_{nonmut}$ non-mutated samples, this is equivalent to
