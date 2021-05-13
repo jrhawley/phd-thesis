@@ -8,21 +8,23 @@
   \item in theory, this may increase the error of some transcripts, but will decrease \gls{mse} for a set of transcripts in aggregate \Cref{sec:JS_moments}
 \end{itemize}
 
-\subsection{Derivation of the James-Stein estimator}
+\newfigure{chapter4/Figure1.png}{Reducing the bias-variance tradeoff by combining information across multiple features}{\textbf{a.} Schematic of the bias-variance tradeoff for assessing model performance. Dartboard on the left shows low bias of the darts (mean is close to the bullseye) but a large variance. Dartboard on the right shows a high bias of the darts (mean is off-centre), but a small variance. \textbf{b.} For a $p$-variate normal distribution from which a single observation is made, the naive estimator has a higher \gls{mse} than the \gls{js} estimator, defined as $\hat{\mu}^{(2)}$. \textbf{c.} An analogy showing how the \gls{js} estimators work in theory. Trying to estimate the mean height, weight, and age for the entire population ($\mu$) from a single person will give an estimate that is likely far from the truth ($\hat{\mu}^{(1)}$). Combining information from the three variables together can produce an estimate that is closer to the truth ($\hat{\mu}^{(2)}$).}{fig:JS_fig1}
+
+\subsection{Derivation of the \glsentrylong{js} fold change estimator}
 \label{sec:JS_derivation}
 
-For a $p$-variate normal distribution $Z \sim \mathcal{N}_p(\mu, \Sigma)$ where $\mu$ is unknown and $\Sigma$ is known, if we observe a single realization of this distribution, $z$, we have the following theorem \cite{steinInadmissibilityUsualEstimator1956}:
+For a $p$-variate normal distribution $Z \sim \mathcal{N}_p(\mu, \Sigma)$ where $\mu$ is unknown and $\Sigma$ is known, the following theorem holds \cite{steinInadmissibilityUsualEstimator1956}:
 
 \begin{theorem}
-  The estimator $\hat{\mu}^{(0)} = z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu})^2 \right]$ when $p \ge 3$ and $\Sigma = I_p$. Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert z \Vert ^2}\right) z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for sufficiently small $b$ and large $a$.
+  The estimator $\hat{\mu}^{(0)} = Z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu})^2 \right]$ for a single observation of $Z$ when $p \ge 3$ and $\Sigma = I_p$. Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert Z \Vert ^2}\right) Z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for a single observation for sufficiently small $b$ and large $a$.
 \end{theorem}
 
 This result was generalized to non-singular covariance matrices that were not necessarily the identity matrix (Theorem 2 of \cite[REF][]{bockMinimaxEstimatorsMean1975}):
 
 \begin{theorem}
-  Let $Z \sim \mathcal{N}_p \left(\mu, \Sigma \right)$ and $z$ be a single observation of the random variable $Z$.
-  Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{z^T \Sigma^{-1} z}\right) z$.
-If $p \ge 3$, $\text{Tr}(\Sigma) \ge 2 \lambda_L$ (where $\lambda_L$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the estimator for the mean, $\mu$, that minimizes the \gls{mse}.
+  Let $Z \sim \mathcal{N}_p \left(\mu, \Sigma \right)$.
+  Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{Z^T \Sigma^{-1} Z}\right) Z$.
+  If $p \ge 3$, $\text{Tr}(\Sigma) \ge 2 \lambda_L$ (where $\lambda_L$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the estimator for the mean, $\mu$, that minimizes the \gls{mse} for a single observation of $Z$.
 \end{theorem}
 
 Consider the differential analysis model used in the Sleuth R package \cite{pimentelDifferentialAnalysisRNAseq2017, yiGenelevelDifferentialAnalysis2018} for a single transcript, $s$, with the simple experimental design of $n_{nonmut}$ \gls{wt} samples and 1 mutant sample:
@@ -66,11 +68,10 @@ where
 We switch from using coefficients $\beta_{t,i}$ to $\Beta_{i,s}$ to avoid confusion, since $\beta_{t,i} \in \mathbb{R}^p$ (a $p$-dimensional vector for each covariate in the design) whereas $\Beta_{i,s} \in \mathbb{R}^{|S|}$ (an $|S|$-dimensional vector for only a single coefficient over all transcripts in $S$).
 
 Observations of a single mutated sample from this model meet the criteria for the \gls{js} estimators.
-Let $\delta$ be a single observation of the distribution $\Delta$.
-A \gls{js} estimator for the unknown effect coefficient, $\Beta_1$, can be constructed.
+A \gls{js} estimator for the unknown fold change, $\Beta_1$, can be constructed.
 
 \begin{equation}
-  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{(\delta - \hat{\Beta}_0)^T \Sigma^{-1} (\delta - \hat{\Beta}_0)} \right)(\delta - \hat{\Beta}_0)
+  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{(\Delta - \hat{\Beta}_0)^T \Sigma^{-1} (\Delta - \hat{\Beta}_0)} \right)(\Delta - \hat{\Beta}_0)
   \label{eqn:js_defn}
 \end{equation}
 
@@ -132,7 +133,7 @@ Given an experimental design matrix $X \in \mathbb{R}^{n \times p}$ where $n > p
 
 It can be shown that the \gls{js} estimator is biased towards 0 with a smaller variance than the \gls{ols} estimator (see \Cref{sec:JS_moments}).
 
-\newfigure{chapter4/Figure1.png}{Reducing the bias-variance tradeoff by combining information across multiple features}{\textbf{a.} Schematic of the bias-variance tradeoff for assessing model performance. Dartboard on the left shows low bias of the darts (mean is close to the bullseye) but a large variance. Dartboard on the right shows a high bias of the darts (mean is off-centre), but a small variance. \textbf{b.} For a $p$-variate normal distribution from which a single observation is made, the naive estimator has a higher \gls{mse} than the \gls{js} estimator, defined as $\hat{\mu}^{(2)}$. \textbf{c.} An analogy showing how the \gls{js} estimators work in theory. Trying to estimate the mean height, weight, and age for the entire population ($\mu$) from a single person will give an estimate that is likely far from the truth ($\hat{\mu}^{(1)}$). Combining information from the three variables together can produce an estimate that is closer to the truth ($\hat{\mu}^{(2)}$).}{fig:JS_fig1}
+\subsection{Empirical analysis of the \glsentrylong{js} estimator}
 
 \begin{itemize}
   \item using RNA-seq data from a highly replicated yeast \gls{ko} experiment, we compared the statistical inference from differential gene expression analysis when using the \gls{ols} and \gls{js} estimators
