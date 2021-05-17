@@ -99,23 +99,23 @@ Then the design matrix, with the first column being the intercept and the second
 The variance of the \gls{ols} estimator is then
 
 \begin{equation*}
-  \mathbb{V} \left[ \hat{\beta_s}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)}{n_{mut} n_{nonmut}}
+  \mathbb{V} \left[ \hat{\beta_s}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)}{n_{mut} n_{wt}}
   \begin{bmatrix}
     n_{mut} & -n_{mut} \\
-    - n_{mut} & n_{mut} + n_{nonmut} \\
+    - n_{mut} & n_{mut} + n_{wt} \\
   \end{bmatrix}
 \end{equation*}
 
 Importantly, the estimate for the coefficient measuring the effect that the presence of the mutation has variance
 
 \begin{equation*}
-  \mathbb{V} \left[\beta_{s, mut}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)(n_{mut} + n_{nonmut})}{n_{mut} n_{nonmut}}
+  \mathbb{V} \left[\beta_{s, mut}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)(n_{mut} + n_{wt})}{n_{mut} n_{wt}}
 \end{equation*}
 
 When there is only 1 mutated sample, as per the motivation of this work, this reduces to
 
 \begin{equation}
-  \mathbb{V} \left[\beta_{s, mut}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)(1 + n_{nonmut})}{n_{nonmut}}
+  \mathbb{V} \left[\beta_{s, mut}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)(1 + n_{wt})}{n_{wt}}
 \end{equation}
 
 
@@ -125,7 +125,7 @@ When there is only 1 mutated sample, as per the motivation of this work, this re
 
 \subsection{Expected value of the \glsentrylong{js} estimator}
 
-Due to the non-linear nature of the \gls{js} estimator, a Taylor expansion around $\Beta_1$ can be used to approximate the expectation.
+We can use a Taylor expansion around $\Beta_1$ to approximate the expectated value of $\hat{\Beta}_1^{(JS)}$.
 Consider:
 
 \begin{equation*}
@@ -136,8 +136,10 @@ where
 
 \begin{align*}
   \hat{\Beta}_1^{(OLS)} &\sim N_{|S|}(\Beta_1, \Sigma) \\
-  \Sigma_{s,s} &= \left( \frac{n_{nonmut} + 1}{n_{nonmut}} \right) (\sigma_t^2 + \tau_t^2) \\
-  \Sigma_{s,t} &= 0 \forall t \ne s
+  \Sigma_{s,t} &= \begin{cases}
+    \left( \frac{n_{wt} + 1}{n_{wt}} \right) (\sigma_s^2 + \tau_s^2) & s = t\\
+    0 & s \ne t
+  \end{cases}
 \end{align*}
 
 Let $u = \Sigma^{-1/2}\hat{\Beta}_1^{(OLS)}$.
@@ -211,7 +213,21 @@ Under similar conditions of the number of transcripts under consideration, $|S|$
 \end{equation}
 
 Since the diagonal elements of $\frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^T$ are all $\ge 0$ and $0 \le \left(1 - \frac{2c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \le 1 \forall c > 0$, the variance than of the \gls{js} estimators are smaller than the \gls{ols} estimators.
-This smaller variance allows for more powerful statistical inferences (i.e. when using a Wald test).
+The resulting Wald test statistics for the fold change coefficient of transcript $s$ in the \gls{ols} and \gls{js} cases can be summarized as follows:
+
+\begin{align}
+  W_s^{(OLS)} &= \frac{ \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2 }{ \Sigma_{s,s} } \\
+  W_s^{(JS)} &= \frac{
+    \left( 1 - \frac{ c }{ \left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)} } \right)^2 \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2
+  }{
+    \left(1 - \frac{2c}{ \left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \Sigma_{s,s}
+    - \frac{2c}{\left( \left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)} \right)^2} \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2
+  }
+\end{align}
+
+The coefficient of $\hat{\Beta}_{1,s}^{(OLS)}$ in the numerator is larger than the coefficient of $\Sigma$ in the denominator since $(1 - a)^2 = 1 - 2a + a^2 > 1 - 2a \forall a \in \mathbb{R}$.
+This implies that the Wald test statistics will be larger for the \gls{js} estimator than for the \gls{ols} estimator.
+Thus the \gls{js} method will produce more positive calls, in general, than the \gls{ols} method.
 
 Notably, the variance of the \gls{js} estimator is a function of both the mean and variance of the transcripts under consideration.
 This is in contrast to the \gls{ols} estimator, which is solely a function of the variance.

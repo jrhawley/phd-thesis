@@ -1,15 +1,5 @@
 \section{Results}
 
-\begin{itemize}
-  \item the two main approaches for reducing error in a model are to reduce the model variance or model bias \Cref{fig:JS_fig1}
-  \item here we attempt to decrease \gls{mse} by simultaneously increasing the bias and decreasing the variance in fold change coefficient estimators
-  \item derivation for the \gls{js} estimator can be found in \Cref{sec:JS_derivation}
-  \item Equation for the \gls{js} estimator can be seen in \Cref{fig:JS_fig1}b. 
-  \item in theory, this may increase the error of some transcripts, but will decrease \gls{mse} for a set of transcripts in aggregate \Cref{sec:JS_moments}
-\end{itemize}
-
-\newfigure{chapter4/Figure1.png}{Reducing the bias-variance tradeoff by combining information across multiple features}{\textbf{a.} Schematic of the bias-variance tradeoff for assessing model performance. Dartboard on the left shows low bias of the darts (mean is close to the bullseye) but a large variance. Dartboard on the right shows a high bias of the darts (mean is off-centre), but a small variance. \textbf{b.} For a $p$-variate normal distribution from which a single observation is made, the naive estimator has a higher \gls{mse} than the \gls{js} estimator, defined as $\hat{\mu}^{(2)}$. \textbf{c.} An analogy showing how the \gls{js} estimators work in theory. Trying to estimate the mean height, weight, and age for the entire population ($\mu$) from a single person will give an estimate that is likely far from the truth ($\hat{\mu}^{(1)}$). Combining information from the three variables together can produce an estimate that is closer to the truth ($\hat{\mu}^{(2)}$).}{fig:JS_fig1}
-
 \subsection{Derivation of the \glsentrylong{js} fold change estimator}
 \label{sec:JS_derivation}
 
@@ -27,16 +17,16 @@ This result was generalized to non-singular covariance matrices that were not ne
   If $p \ge 3$, $\text{Tr}(\Sigma) \ge 2 \lambda_L$ (where $\lambda_L$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the estimator for the mean, $\mu$, that minimizes the \gls{mse} for a single observation of $Z$.
 \end{theorem}
 
-Consider the differential analysis model used in the Sleuth R package \cite{pimentelDifferentialAnalysisRNAseq2017, yiGenelevelDifferentialAnalysis2018} for a single transcript, $s$, with the simple experimental design of $n_{nonmut}$ \gls{wt} samples and 1 mutant sample:
+Consider the differential analysis model used in the Sleuth R package \cite{pimentelDifferentialAnalysisRNAseq2017, yiGenelevelDifferentialAnalysis2018} for a single transcript, $s$, with the simple experimental design of $n_{wt}$ \gls{wt} samples and 1 mutant sample:
 
 \begin{equation*}
   D_s | Y_s \sim \mathcal{N}_N \left( \beta_{s,0} + \mathbb{I}_{mut}\beta_{s,1}, (\sigma_s^2 + \tau_s^2)I_N \right)
 \end{equation*}
 
-For the $n_{nonmut}$ \gls{wt} samples, this is equivalent to
+For the $n_{wt}$ \gls{wt} samples, this is equivalent to
 
 \begin{equation*}
-  D_s | Y_s \sim \mathcal{N}_{n_{nonmut}} \left( \beta_{s,0}, (\sigma_s^2 + \tau_s^2)I_{n_{nonmut}} \right)
+  D_s | Y_s \sim \mathcal{N}_{n_{wt}} \left( \beta_{s,0}, (\sigma_s^2 + \tau_s^2)I_{n_{wt}} \right)
 \end{equation*}
 
 which can be fit with the same model process that Sleuth employs.
@@ -91,8 +81,8 @@ For a simple experimental design where the mutation status is the only coefficie
   = \hat{\beta}_s^{(OLS)}
   = (X^TX)^{-1}X^T d_s
   = \begin{bmatrix}
-    \bar{d}_s^{(nonmut)} \\
-    d_s^{(mut)} - \bar{d}_s^{(nonmut)}
+    \bar{d}_s^{(wt)} \\
+    d_s^{(mut)} - \bar{d}_s^{(wt)}
   \end{bmatrix}
 \end{equation*}
 
@@ -134,6 +124,8 @@ Given an experimental design matrix $X \in \mathbb{R}^{n \times p}$ where $n > p
 It can be shown that the \gls{js} estimator is biased towards 0 with a smaller variance than the \gls{ols} estimator (see \Cref{sec:JS_moments}).
 
 \subsection{Empirical analysis of the \glsentrylong{js} estimator}
+
+
 
 \begin{itemize}
   \item using RNA-seq data from a highly replicated yeast \gls{ko} experiment, we compared the statistical inference from differential gene expression analysis when using the \gls{ols} and \gls{js} estimators
