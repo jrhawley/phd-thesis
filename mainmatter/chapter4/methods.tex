@@ -3,7 +3,7 @@
 \subsection{\glsentrylong{rnaseq} data collection and pre-processing}
 
 \Gls{rnaseq} reads were obtained from \cite[REF][]{gierlinskiStatisticalModelsRNAseq2015} from the \gls{sra} (Project Accession PRJEB5348).
-Briefly, the $\Delta$ Snf2 \gls{ko} and \gls{wt} cells were both sequenced as single-end, 50 bp reads, split across seven lanes of a single Illumina HiSeq 2000 flow cell.
+Briefly, the $\Delta$ \emph{\emph{\emph{Snf2}}} \gls{ko} and \gls{wt} cells were both sequenced as single-end, 50 bp reads, split across seven lanes of a single Illumina HiSeq 2000 flow cell.
 The quality of the sequencing reads was assessed with FastQC \cite{simonandrewsFastQCQualityControl2010}.
 The \emph{Saccharomyces cerevisiae} R64-1-1 reference transcriptome index from Ensembl (v96) was downloaded from https://github.com/pachterlab/kallisto-transcriptome-indices/.
 \Gls{rnaseq} reads from all technical replicates of a single biological replicate were quantified against the reference transcriptome with Kallisto (v0.46.2) \cite{brayNearoptimalProbabilisticRNAseq2016} with the following command:
@@ -19,31 +19,33 @@ Statistical significance for the fold change of transcripts from the mutation st
 Multiple testing correction was performed using the Benjamini-Hochberg FDR method \cite{benjaminiControllingFalseDiscovery1995}.
 Transcripts were determined to be significantly differentially expressed if $FDR < 0.01$.
 
-This method was used for differential expression analysis for the full experimental design (48 $\Delta$ Snf2 replicates and 48 \gls{wt} replicates), as well as all simulations with smaller sample sizes.
+This method was used for differential expression analysis for the full experimental design (48 $\Delta$ \emph{Snf2} replicates and 48 \gls{wt} replicates), as well as all simulations with smaller sample sizes.
 
 \subsection{Random sampling and simulations}
 
-From the 48 biological replicates of the $\Delta$ Snf2 and \gls{wt} samples, $N$ total samples were randomly selected, where $N \in \left\{4, 6, 8, ..., 22, 24 \right\}$.
+From the 48 biological replicates of the $\Delta$ \emph{Snf2} and \gls{wt} samples, $N$ total samples were randomly selected, where $N \in \left\{4, 6, 8, ..., 22, 24 \right\}$.
 The sampling was repeated 30 times, independently.
 The samples were chosen according to of the following experimental designs:
 
 \begin{enumerate}
-  \item 30 iterations of $N/2$ $\Delta$ Snf2 vs $N/2$ \gls{wt}, compared using the \gls{ols} estimator
-  \item 15 iterations of 1 $\Delta$ Snf2 vs $N - 1$ \gls{wt} + 15 iterations of $N - 1$ $\Delta$ Snf2 vs 1 \gls{wt}, compared using the \gls{ols} estimator
-  \item 15 iterations of 1 $\Delta$ Snf2 vs $N - 1$ \gls{wt} + 15 iterations of $N - 1$ $\Delta$ Snf2 vs 1 \gls{wt}, compared using the \gls{js} estimator
+  \item 30 iterations of $N/2$ $\Delta$ \emph{Snf2} vs $N/2$ \gls{wt}, compared using the \gls{ols} estimator
+  \item 15 iterations of 1 $\Delta$ \emph{Snf2} vs $N - 1$ \gls{wt} + 15 iterations of $N - 1$ $\Delta$ \emph{Snf2} vs 1 \gls{wt}, compared using the \gls{ols} estimator
+  \item 15 iterations of 1 $\Delta$ \emph{Snf2} vs $N - 1$ \gls{wt} + 15 iterations of $N - 1$ $\Delta$ \emph{Snf2} vs 1 \gls{wt}, compared using the \gls{js} estimator
 \end{enumerate}
 
-For each simulation, the number of \gls{tp}, \gls{fp}, \gls{tn}, and \gls{fn} calls was calculated by comparing the classification of a given transcript as significantly differentially expressed or not (i.e. if $FDR < 0.01$ for a given transcript) in the simulation to the full experiment of 48 $\Delta$ Snf2 vs 48 \gls{wt}.
+Differential expression analysis was calculated with the Sleuth package \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018}.
+For the \gls{js} calculations, the scaling coefficient, $c$, was set to its largest value of $2 \left( \frac{ \text{Tr} (\Sigma) }{\lambda_L} - 2 \right)$ to reduce error as much as possible.
+For each simulation, the number of \gls{tp}, \gls{fp}, \gls{tn}, and \gls{fn} calls was calculated by comparing the classification of a given transcript as significantly differentially expressed or not (i.e. if $FDR < 0.01$ for a given transcript) in the simulation to the full experiment of 48 $\Delta$ \emph{Snf2} vs 48 \gls{wt}.
 With this confusion matrix, derived rates, such as the true positive rate, were then calculated.
 
 \subsection{Random sampling of smaller numbers of transcripts}
 
-In a similar fashion to above, 30 iterations of randomly selected samples were chosen to match the same three scenarios as above, with a fixed $N = 6$ (15 iterations with 1 $\Delta$ Snf2 vs 5 \gls{wt} and 15 iterations with 5 $\Delta$ Snf2 vs 1 \gls{wt}).
+In a similar fashion to above, 30 iterations of randomly selected samples were chosen to match the same three scenarios as above, with a fixed $N = 6$ (15 iterations with 1 $\Delta$ \emph{Snf2} vs 5 \gls{wt} and 15 iterations with 5 $\Delta$ \emph{Snf2} vs 1 \gls{wt}).
 A subset of transcripts, $S$, were randomly selected from those transcripts with $\ge 10$ estimated reads in all 6 of the randomly selected samples.
 Fold change estimates for the three scenarios were calculated as above.
 The number of transcripts selected was chosen from $|S| \in \left\{3, 10, 25, 50, 100, 250 \right\}$.
 
-\Gls{mse} was calculated by comparing the fold change estimate from each iteration to the fold change estimate from the full experiment with 48 $\Delta$ Snf2 vs 48 \gls{wt}.
+\Gls{mse} was calculated by comparing the fold change estimate from each iteration to the fold change estimate from the full experiment with 48 $\Delta$ \emph{Snf2} vs 48 \gls{wt}.
 Percent differences in \gls{mse} were calculated as:
 
 \begin{equation*}

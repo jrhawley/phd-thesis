@@ -135,29 +135,39 @@ Thus, we have produced a high-bias, low-variance fold change estimator that has 
 \subsection{Empirical analysis of the \glsentrylong{js} estimator}
 
 Now that the statistical properties of the \gls{js} estimator have been shown, we use empirical \gls{rnaseq} data to measure the performance of this method in practice.
-To demonstrate this, we make use of a highly replicated \gls{rnaseq} experiment involving $\Delta$ Snf2 \gls{ko} and \gls{wt} yeast cells \cite{gierlinskiStatisticalModelsRNAseq2015}.
+To demonstrate this, we make use of a highly replicated \gls{rnaseq} experiment involving $\Delta$ \emph{Snf2} \gls{ko} and \gls{wt} yeast cells \cite{gierlinskiStatisticalModelsRNAseq2015}.
 This dataset contains 48 biological replicates of each condition, an infeasible sample size for most \gls{rnaseq} experiments.
 Experiments with small sample sizes can be compared to the full dataset to estimate the number of true and false detections for a given experimental design and a given method.
-We randomly select $N$ total samples from the full dataset with an optimal even split between the two groups (i.e. $N / 2$ $\Delta$ Snf2 and $N / 2$ \gls{wt}) or a suboptimal $N - 1$-vs-1 split (i.e. $N - 1$ $\Delta$ Snf2 and 1 \gls{wt} or 1 $\Delta$ Snf2 and $N - 1$ \gls{wt}).
+We randomly select $N$ total samples from the full dataset with an optimal even split between the two groups (i.e. $N / 2$ $\Delta$ \emph{Snf2} and $N / 2$ \gls{wt}) or a suboptimal $N - 1$-vs-1 split (i.e. $N - 1$ $\Delta$ \emph{Snf2} and 1 \gls{wt} or 1 $\Delta$ \emph{Snf2} and $N - 1$ \gls{wt}).
 To measure the effect of total sample size, these simulations are repeated for multiple values of $N$.
 
 We find that for all values of $N$, the \gls{js} method produces more \gls{tp} and \gls{fp} calls, as well as fewer \gls{tn} and \gls{fn} calls, than the \gls{ols} method with suboptimal designs, on average (two-way \gls{anova}, $p < 2.2 \times 10^{-16}$; \Cref{fig:JS_fig2}).
-For example, for $N = 6$, the \gls{js} method identified 642.87 \gls{tp}, 58 \gls{fp}, 2098.3 \gls{tn}, and 2995.7 \gls{fn} on average, compared the to 520.7 \gls{tp}, 41.37 \gls{fp}, 2114.97 \gls{tn}, and 3117.93 \gls{fn} for the \gls{ols} method (\Cref{fig:JS_fig2}).
+For example, for $N = 6$, the \gls{js} method identified 642.87 \gls{tp}, 58 \gls{fp}, 2098.3 \gls{tn}, and 2995.7 \gls{fn} calls on average, compared the to 520.7 \gls{tp}, 41.37 \gls{fp}, 2114.97 \gls{tn}, and 3117.93 \gls{fn} calls for the \gls{ols} method (23.5 \% more \gls{tp}, 40 \% more \gls{fp}, 1.8 \% fewer \gls{tp} and 3.9 \% fewer \gls{fn} calls; \Cref{fig:JS_fig2}).
 The strength of this effect appears to decrease as the total number of samples increases.
 Notably, for the $N = 4$ case where a suboptimal design would be most common in practice, the \gls{js} method had more \gls{tp} and fewer \gls{fn} than the optimal experimental design.
-In all other cases, however, the optimal even split between $\Delta $ Snf2 and \gls{wt} groups results in the highest \gls{tp} and fewest \gls{fn} calls, as expected.
+In all other cases, however, the optimal even split between $\Delta $ \emph{Snf2} and \gls{wt} groups results in the most \gls{tp} and fewest \gls{fn} calls, as expected.
 Thus, for differential expression hypothesis testing, the \gls{ols} method can identify more \gls{tp} and fewer \gls{fn} calls than the \gls{ols} method when dealing with suboptimal experimental designs.
 
-From the derivation of the \gls{js} estimator, it 
+\newfigure{chapter4/Figure2.png}{Differential gene expression analysis of the entire yeast transcriptome with differently sized experimental designs}{Simulations ($n = 30$) using randomly selected samples which were then compared to the full dataset of 48 $\Delta$ \emph{Snf2} vs 48 \gls{wt} to calculate \gls{tp} (\textbf{a}), \gls{fp} (\textbf{b}), \gls{tn} (\textbf{c}), and \gls{fn} (\textbf{d}).}{fig:JS_fig2}
 
-\begin{itemize}
-  \item to investigate where these changes in fold change estimates and $p$-values originates from, we investigate representative simulations
-  \item most genes in the $\Delta$ Snf2 model are under-expressed compared to the \gls{wt} model \Cref{fig:JS_fig3}
-\end{itemize}
+To investigate where the changes in statistical inferences come from, we can view a representative simulation (\Cref{fig:JS_fig3}).
+In the full dataset with 48 biological replicates, \emph{\emph{Snf2}}, \emph{Snf2} is the most under-expressed gene with an estimated 99 \% reduction in expression (\Cref{fig:JS_fig3}a).
+Three other example genes, \emph{PHO12}, \emph{TIS11}, and \emph{TYE7}, are also under-expressed in the $\Delta$ \emph{Snf2} cells.
+Using 4 samples in total, evenly split between the two groups, all four genes remain detected as differentially expressed (\Cref{fig:JS_fig3}b).
+Using a suboptimal design with 1 $\Delta$ \emph{Snf2} and 3 \gls{wt} samples, \emph{TIS11} and \emph{TYE7} are no longer detected as differentially expressed using the \gls{ols} method (\Cref{fig:JS_fig3}c).
+However, the \emph{TIS11} gene is detected as differentially expressed using the \gls{js} method (\Cref{fig:JS_fig3}d).
+The fold change estimates in \Cref{fig:JS_fig3}c-d are similar, since the biasing is small effect.
+Thus, the differences in statistical inference result from the smaller variance of the \gls{js} estimator, as predicted.
 
-\newfigure{chapter4/Figure2.png}{Differential gene expression analysis of the entire yeast transcriptome with differently sized experimental designs}{Simulations ($n = 30$) using randomly selected samples which were then compared to the full dataset of 48 $\Delta$ Snf2 vs 48 \gls{wt} to calculate \gls{tp} (\textbf{a}), \gls{fp} (\textbf{b}), \gls{tn} (\textbf{c}), and \gls{fn} (\textbf{d}).}{fig:JS_fig2}
+\newfigure{chapter4/Figure3.png}{Differential gene expression analysis of $\Delta$ \emph{Snf2} vs \gls{wt} yeast cells using different sample sizes and experimental designs}{\textbf{a.} Volcano plot of differential expression results with \gls{ols} estimates in a highly replicated experiment consisting of 48 biological replicates of each condition. \textbf{b.} The same analysis as (\textbf{a}) using 4 samples in total, 2 $\Delta$ \emph{Snf2} and 2 \gls{wt} samples. \textbf{c.} The same analysis as (\textbf{c}) using 1 $\Delta$ \emph{Snf2} and 3 \gls{wt}. \textbf{d.} The same analysis as (\textbf{c}) using the \gls{js} method instead of \gls{ols}.}{fig:JS_fig3}
 
+Finally, we investigated the impact of the number of transcripts considered on \gls{mse} reduction.
+Using the same yeast \gls{rnaseq} data, we randomly selected $N = 6$ samples and a small number of transcripts from the entire transcriptome, then performed differential expression analysis with the \gls{ols} and \gls{js} methods.
+This was repeated 30 times (15 simulations of 5 $\Delta$ \emph{Snf2} and 1 \gls{wt} and 15 simulations of 1 $\Delta$ \emph{Snf2} and 5 \gls{wt}) with a total of $|S| \in \{ 3, 10, 25, 50, 100, 250 \}$ transcripts.
+Nearly all simulations show a smaller \gls{mse} when using the \gls{js} method compared to the \gls{ols} method (dots below the dotted lines in \Cref{fig:JS_fig4}a).
+Moreover, the \gls{mse} is reduced by 7.73 - 22.68 \% using the \gls{js} method, on average, regardless of the number of transcripts considered.
+The largest percentage of \gls{mse} reduction is observed when 3 transcripts are chosen, with an \textapprox 86 \% error reduction (\Cref{fig:JS_fig4}b).
+However, the effect is also more variable when fewer transcripts are considered, as some simulations with 3 transcripts resulted in an \textapprox 150 \% increase in error (\Cref{fig:JS_fig4}b).
+Taken together, we find that the \gls{js} method significantly reduces the fold change \gls{mse}, with greater reductions found by considering a smaller number of transcripts.
 
-\newfigure{chapter4/Figure3.png}{Differential gene expression analysis of $\Delta$ Snf2 vs \gls{wt} yeast cells using different sample sizes and experimental designs}{\textbf{a.} Volcano plot of differential expression results with \gls{ols} estimates in a highly replicated experiment consisting of 48 biological replicates of each condition. \textbf{b.} The same analysis as (\textbf{a}) using 4 samples in total, 2 $\Delta$ Snf2 and 2 \gls{wt} samples. \textbf{c.} The same analysis as (\textbf{c}) using 1 $\Delta$ Snf2 and 3 \gls{wt}. \textbf{d.} The same analysis as (\textbf{c}) using the \gls{js} method instead of \gls{ols}.}{fig:JS_fig3}
-
-\newfigure{chapter4/Figure4.png}{Differential gene expression analysis focusing on a subset of trancsripts, not the entire transcriptome}{All experiments use 1 $\Delta$ Snf2 vs 5 \gls{wt} samples (or vice versa). \textbf{a.} Comparison of the \gls{mse} of the \gls{js} estimates ($y$-axis) against the \gls{ols} estimates ($x$-axis). The total number of transcripts in each comparison is specified above each facet. \textbf{b.} Percent different in \gls{mse} between the \gls{js} and \gls{ols} estimates. One-sided, two-sample Student's $t$-test, $n = 30$, FDR multiple test corrections.}{fig:JS_fig4}
+\newfigure{chapter4/Figure4.png}{Differential gene expression analysis focusing on a subset of trancsripts, not the entire transcriptome}{All experiments use 1 $\Delta$ \emph{Snf2} vs 5 \gls{wt} samples (or vice versa). \textbf{a.} Comparison of the \gls{mse} of the \gls{js} estimates ($y$-axis) against the \gls{ols} estimates ($x$-axis). The total number of transcripts in each comparison is specified above each facet. \textbf{b.} Percent different in \gls{mse} between the \gls{js} and \gls{ols} estimates. One-sided, two-sample paired Student's $t$-test, $n = 30$, FDR multiple test corrections.}{fig:JS_fig4}
