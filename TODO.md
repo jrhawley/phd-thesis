@@ -20,5 +20,3 @@
 - [ ] replace certain words
   - [ ] overexpression -> over-expression
   - [ ] underexpression -> under-expression
-- [ ] Glossary of abbreviations?
-  - [ ] How do I make abbreviations in the text?

@@ -1,1 +1,23 @@
 \section{Discussion}
+
+\begin{enumerate}
+  \item summary of the paper
+  \begin{enumerate}
+    \item introduced a new statistical method for dealing with $n$-of-1 scenarios for differential expression analysis
+    \item showed that its higher bias and smaller variance, compared to the \gls{ols} method, can improve its differential results, especially when focusing on a few 100 transcripts or less
+    \item this makes it a good method for investigating differential expression in a few scenarios: rare diseases, retrospective studies, and preliminary analyses
+    \item this tool has been packaged into an R package, private-eye, available on CRAN
+  \end{enumerate}
+  \item similar approaches for $n$-of-1 scenarios
+  \begin{enumerate}
+    \item contrast with DESeq2 approach
+    \item contrast with edgeR approach
+    \item mention how the evenly split design achieved higher results overall, and that this is not a replacement for good experimental design
+  \end{enumerate}
+  \item possible future directions for work in this area
+  \begin{enumerate}
+    \item applications in single-cell RNA-seq differential analysis
+    \item functional extensions to other epigenomic assays, such as CUT\&RUN of ATAC-seq, also with their single-cell extensions
+    \item statistical extensions to GLMs in other genomics applications
+  \end{enumerate}
+\end{enumerate}
