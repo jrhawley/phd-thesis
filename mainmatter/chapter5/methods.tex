@@ -1,0 +1,48 @@
+\section{Methods}
+
+\subsection{Patient selection and sample collection}
+
+Cord blood pooling and isolation
+
+B-ALL sample collection and cell sorting
+
+\subsection{\glsentrylong{pdx} generation and \glsentrylong{lda}}
+
+\subsection{Human cell isolation from \glsentrylongpl{pdx}}
+
+\subsection{Primary and \glsentrylong{pdx} sample sequencing}
+
+\subsubsection{\Glsentrylong{rnaseq}}
+
+\subsubsection{\Glsentrylong{mecapseq}}
+
+\subsubsection{\Glsentrylong{atacseq}}
+
+\subsection{Sequencing data analysis}
+
+\subsubsection{Differential gene expression analysis}
+
+\subsubsection{Similarity network fusion}
+
+Preprocessed data from each sample was collected with the following features: normalized gene expression abundance for all genes, chromatin accessibility signal within previously identified accessible peaks, and mean $\beta$ value for all \glspl{cpg} listed in the manifest for targeted bisulfite sequencing kit.
+These features and sample labels were processed with the SNFtool R package \cite{wangSimilarityNetworkFusion2014} to perform the similarity network fusion analysis.
+Graphs were constructed for all samples deriving from a single patient where each node is a sample and each edge is weighted according to the determined similarity between the samples.
+Edges whose weights were below specific thresholds were removed from the graph.
+The threshold weight for the fused graph was 0.05.
+Similar graphs were constructed using the individual components for each sample (e.g. using just the similarity in \gls{rnaseq} data), and the component graphs were compared to the fused graph, to compare the importance of each feature.
+Threshold weights for these individual graphs were determined to be $6 \times 10^{-5}$ for \gls{dname}, $4 \times 10^{-4}$ for gene expression, and $2 \times 10^{-4}$ for chromatin accessibility.
+
+\subsubsection{\Glsentrylong{dmr} identification}
+
+\Glspl{dmr} were identified using the dmrseq R package (v1.3.8) \cite{korthauerDetectionAccurateFalse2018} with an absolute filtering cutoff value of 0.05 and using the sequencing batch as an adjustment covariate.
+Normal samples from all donors were compared pairwise based on their sorted cell type.
+\Gls{ball} samples were compared by their designated disease stage (Dx, DRI, or Rel), and were compared both across all patients (e.g. all Dx samples against all Rel samples), or within a single patient (e.g. all Dx samples from Patient 1 against all Rel samples from Patient 1).
+A multiple testing correction with the \gls{fdr} method was performed \cite{benjaminiControllingFalseDiscovery1995}.
+Regions with an \gls{fdr} $< 0.1$ were determined to be significant.
+
+\subsubsection{Gene ontology enrichment analysis}
+
+Gene ontology enrichment analysis was performed using the PANTHER classification system (database version 2019-10-08) \cite{miLargescaleGeneFunction2013}.
+Gene symbols for the genes whose promoter regions contained the recurrently hyper-methylated regions in all \gls{ball} patient samples were supplied, with the entire human genome as the background.
+An over-representation Fisher test for biological processes was performed with an \gls{fdr} correction.
+Biological processes at the top of the hierarchy with an \gls{fdr} $< 0.05$ were determined to be significant.
