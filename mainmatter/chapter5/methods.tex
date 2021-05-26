@@ -10,18 +10,26 @@ Human cord blood samples were obtained with informed consent from Trillium and C
 Cells were stained with the following antibodies (all from BD Biosciences, unless otherwise stated):
 
 \begin{itemize}
-  \item FITC–anti-CD45RA (1:50, 555488)
-  \item PE–anti-CD90 (1:50, 555596)
-  \item PECy5–anti-CD49f (1:50, 551129)
-  \item V450–anti-CD7 (1:33.3, 642916)
-  \item PECy7–anti-CD38 (1:100, 335790)
-  \item APC–anti-CD10 (1:50, 340923)
-  \item APCCy7–anti-CD34 (1:200, custom made by BD Biosciences)
+  \item FITC anti-CD45RA (1:50, 555488)
+  \item PE anti-CD90 (1:50, 555596)
+  \item PE-Cy5 anti-CD49f (1:50, 551129)
+  \item V450 anti-CD7 (1:33.3, 642916)
+  \item PE-Cy7 anti-CD38 (1:100, 335790)
+  \item APC anti-CD10 (1:50, 340923)
+  \item APC-Cy7 anti-CD34 (1:200, custom made by BD Biosciences)
 \end{itemize}
 
-Cells were then sorted on a FACSAria III (Becton Dickinson), consistently yielding $> 95$ \% purity.
-\Glspl{hspc} were sorted from CD34+ cord blood cells on the basis of the following markers, as previously described: CD34+ CD38- CD45RA- CD90+ CD49f+.
-B cells were sorted as CD34- CD38+ CD19+ CD33- CD3- CD56-.
+Cells were sorted from cord blood cells on the basis of markers listed in \Cref{tab:BALL_markers}, as previously described \cite{nottaIsolationSingleHuman2011}, on a FACSAria III (Becton Dickinson), consistently yielding $> 95$ \% purity.
+
+\newlongtable{l | l}{Cell surface markers used to isolate cell populations from cord blood pools}{
+  \textbf{Cell type(s)} & \textbf{Surface markers} \\
+  \hline
+  \glspl{hsc} \& \glspl{mpp} & CD34+ CD38- CD45RA- \\
+  \glspl{cmp}, \glspl{gmp}, \& \glspl{mep} & CD34+ CD38+ CD10- CD19+ \\
+  \glspl{lmpp} \& \glspl{mlp} & CD34+ CD38- CD45RA+ \\
+  \glspl{eprob}, \glspl{preprob}, \& \glspl{prob} & CD34+ CD38+ CD10+ CD19+ \\
+  B & CD34- CD38+ CD19+ CD33- CD3- CD56-
+}{tab:BALL_markers}{}
 
 \subsection{\Glsentrylong{pdx} generation and \glsentrylongpl{lda}}
 
@@ -83,7 +91,7 @@ Briefly, \gls{rnaseq} reads were aligned against the GRCh38 reference human geno
 Default parameter were used with the following exceptions: chimeric segments were screened with a minimum size of 12 bp, junction overlap of 12 bp, and maximum segment reads gap of 3 bp; splice junction overlap of 10 bp; maximum gap between aligned mates of 100 000 bp; maximum aligned intron of 100 000; and alignSJstitchMismatchNmax of 5 1 5 5.
 Transcript counts were obtained with HTSeq (v0.7.2) \cite{andersHTSeqPythonFramework2015}.
 Data was library size normalized using the RLE method, followed by a variance stabilizing transformation using DESeq2 (v1.22.1) \cite{loveModeratedEstimationFold2014}.
-Principal component analysis plots were generated on a per sample basis using the top 1,000 variable genes.
+Principal component analysis plots were generated on a per sample basis using the top 1 000 variable genes.
 For downstream analysis, the mean expression of each sample clone condition was used.
 For per-patient analyses, differentially expressed genes were identified between disease stage and clone status using DESeq2.
 Genes with an \gls{fdr} $< 0.05$ and absolute $\log_2(\text{fold change}) > 1$ were considered significant.
@@ -106,7 +114,7 @@ Sequencing read qualities were assessed with FastQC (v0.11.8) \cite{simonandrews
 Low quality bases were trimmed with Trim Galore! (v0.6.3) \cite{felixkruegerTrimGalore2012} with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
-  trim_galore --gzip -q 30 --fastqc_args '-o TrimGalore' {sample_mate1} {sample_mate2}
+  trim_galore --gzip -q 30 --fastqc_args `-o TrimGalore' {sample_mate1} {sample_mate2}
 \end{lstlisting}
 
 Trimmed reads were aligned to the GRCh38 reference human genome with Bismark (v0.22.1) \cite{kruegerDNAMethylomeAnalysis2012} with default parameters.
