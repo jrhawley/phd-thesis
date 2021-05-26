@@ -6,7 +6,7 @@ Cord blood pooling and isolation
 
 B-ALL sample collection and cell sorting
 
-\subsection{\glsentrylong{pdx} generation and \glsentrylong{lda}}
+\subsection{\Glsentrylong{pdx} generation and \glsentrylong{lda}}
 
 \subsection{Human cell isolation from \glsentrylongpl{pdx}}
 
@@ -21,6 +21,53 @@ B-ALL sample collection and cell sorting
 \subsection{Sequencing data analysis}
 
 \subsubsection{Differential gene expression analysis}
+
+The methods are described in \cite[REF][]{dobsonRelapseFatedLatentDiagnosis2020}.
+Briefly, \gls{rnaseq} reads were aligned against the GRCh38 reference human genome with STAR (v2.5.2b) \cite{dobinSTARUltrafastUniversal2013} and annotated with the Ensembl reference (v90).
+Default parameter were used with the following exceptions: chimeric segments were screened with a minimum size of 12 bp, junction overlap of 12 bp, and maximum segment reads gap of 3 bp; splice junction overlap of 10 bp; maximum gap between aligned mates of 100 000 bp; maximum aligned intron of 100 000; and alignSJstitchMismatchNmax of 5 1 5 5.
+Transcript counts were obtained with HTSeq (v0.7.2) \cite{andersHTSeqPythonFramework2015}.
+Data was library size normalized using the RLE method, followed by a variance stabilizing transformation using DESeq2 (v1.22.1) \cite{loveModeratedEstimationFold2014}.
+Principal component analysis plots were generated on a per sample basis using the top 1,000 variable genes.
+For downstream analysis, the mean expression of each sample clone condition was used.
+For per-patient analyses, differentially expressed genes were identified between disease stage and clone status using DESeq2.
+Genes with an \gls{fdr} $< 0.05$ and absolute $\log_2(\text{fold change}) > 1$ were considered significant.
+
+\subsubsection{Identification of accessible chromatin peaks}
+
+\Gls{atacseq} reads were aligned against the GRCh38 reference human genome with Bowtie2 (v2.3.4) \cite{langmeadFastGappedreadAlignment2012} with default parameters.
+Accessible peaks were identified with MACS2 (v2.1.2) \cite{zhangModelbasedAnalysisChIPSeq2008} with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+  macs2 callpeak -f BED -g hs --keep-dup all -B --SPMR --nomodel --shift -75 --extsize 150 -p 0.01 --call-summits -n {sample_name} -t {input_bam}
+\end{lstlisting}
+
+A catalogue of peaks from all samples was collected with a custom R script.
+\Gls{atacseq} signal was mapped from each sample to this catalogue using Bedtools \cite{quinlanBEDToolsSwissArmyTool2014} for downstream analysis.
+
+\subsubsection{Bisulfite sequencing pre-processing}
+
+Sequencing read qualities were assessed with FastQC (v0.11.8) \cite{simonandrewsFastQCQualityControl2010}.
+Low quality bases were trimmed with Trim Galore! (v0.6.3) \cite{felixkruegerTrimGalore2012} with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+  trim_galore --gzip -q 30 --fastqc_args '-o TrimGalore' {sample_mate1} {sample_mate2}
+\end{lstlisting}
+
+Trimmed reads were aligned to the GRCh38 reference human genome with Bismark (v0.22.1) \cite{kruegerDNAMethylomeAnalysis2012} with default parameters.
+Duplicates were removed from the resulting alignment file with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+  deduplicate_bismark -p --bam {input_bam}
+\end{lstlisting}
+
+The deduplicated BAM file was sorted by position with sambamba (v0.7.0) \cite{tarasovSambambaFastProcessing2015}.
+$M$-biases were calculated with MethylDackel (v0.4.0) \cite{ryanMethylDackel2019}, and methylation $\beta$ values were extracted from the BAM files with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+  MethylDackel extract --mergeContext --OT 3,124,3,124 --OB 3,124,3,124 {ref_genome} {dedup_sorted_bam}
+\end{lstlisting}
+
+Both $M$ and $\beta$ values were for each \gls{cpg} were used in downstream analyses.
 
 \subsubsection{Similarity network fusion}
 
