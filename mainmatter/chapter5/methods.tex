@@ -2,21 +2,77 @@
 
 \subsection{Patient selection and sample collection}
 
-Cord blood pooling and isolation
+Patient samples were obtained at diagnosis and relapse from patients with \gls{ball} as previously described \cite{dobsonRelapseFatedLatentDiagnosis2020}.
+All samples were frozen viably and stored long term at -150 \textdegree C.
+Samples were selected retrospectively based on paired-sample availability.
 
-B-ALL sample collection and cell sorting
+Human cord blood samples were obtained with informed consent from Trillium and Credit Valley Hospital according to procedures approved by the University Health Network Research Ethics Board, as previously described \cite{dobsonRelapseFatedLatentDiagnosis2020}.
+Cells were stained with the following antibodies (all from BD Biosciences, unless otherwise stated):
 
-\subsection{\Glsentrylong{pdx} generation and \glsentrylong{lda}}
+\begin{itemize}
+  \item FITC–anti-CD45RA (1:50, 555488)
+  \item PE–anti-CD90 (1:50, 555596)
+  \item PECy5–anti-CD49f (1:50, 551129)
+  \item V450–anti-CD7 (1:33.3, 642916)
+  \item PECy7–anti-CD38 (1:100, 335790)
+  \item APC–anti-CD10 (1:50, 340923)
+  \item APCCy7–anti-CD34 (1:200, custom made by BD Biosciences)
+\end{itemize}
+
+Cells were then sorted on a FACSAria III (Becton Dickinson), consistently yielding $> 95$ \% purity.
+\Glspl{hspc} were sorted from CD34+ cord blood cells on the basis of the following markers, as previously described: CD34+ CD38- CD45RA- CD90+ CD49f+.
+B cells were sorted as CD34- CD38+ CD19+ CD33- CD3- CD56-.
+
+\subsection{\Glsentrylong{pdx} generation and \glsentrylongpl{lda}}
+
+\Glspl{pdx} were generated as previously described \cite{dobsonRelapseFatedLatentDiagnosis2020}.
+Clinical samples were stained with the following antibodies:
+
+\begin{itemize}
+  \item anti-CD19 PE (BD Biosciences, clone 4G7)
+  \item anti-CD3 FITC (BS Biosciences, clone SK7) or anti-CD3 APC (Beckman Coulter, clone UCHT11)
+  \item anti-CD45 APC (BD Biosciences, clone 2D1) or anti-CD45 FITC (BD Biosciences, clone 2D1)
+  \item anti-CD34 APC-Cy7 (BD Biosciences, clone 581)
+\end{itemize}
+
+Each sample was sorted on a FACSAria III (BD Biosciences) for leukemic blasts ($\text{CD19}^+ \text{CD45}^{\text{dim/-}}$) and T cells ($\text{CD3}^+ \text{CD45}^{\text{hi}}$).
+\Gls{nsg} mice were bred according to protocols established and approved by the Animal Care Committee at the University Health Network.
+8-to-12-week-old mice were sublethally irradiated at 225 cGy 24 hours prior to transplants.
+Only female mice were used.
+Intra-femoral injections of 10 to 250 000 sorted leukemic blasts were performed as previously described \cite{mazurierRapidMyeloerythroidRepopulation2003}.
+Mice were sacrificed 20-to-30 weeks post-transplant or at the onset of disease symptoms.
+Human cell engraftment in the injected femur, bone marrow (non-injected bones, left tibia, right tibia, left femur), spleen, and central nervous system were assessed using human-specific antibodies for CD45 (PE-Cy7, BD Biosciences, clone HI30; v500 BD Biosciences, clone HI30), CD44 (PE, BD Biosciences, clone 515; FITC, BD Biosciences, clone L178), CD3 (APC, BD Biosciences, clone UCHT1), CD19 (PE-Cy5, Beckman Coulter, clone J3-119), CD33 (PE-Cy7, BD Biosciences, clone P67-6; APC, BD Biosciences, clone P67-6), and CD34 (APC-Cy7, BD Biosciences, clone 581) analyzed on an LSRII (BD Biosciences).
+Mice were considered to be engrafted when $> 0.1$ \% of cells in the injected femur were positive for one or more human \gls{ball}-specific cell surface marker (CD45, CD44, CD19, and CD34).
+Confidence intervals for the frequency of leukemia initiating cells was calculated using ELDA \cite{huELDAExtremeLimiting2009}.
 
 \subsection{Human cell isolation from \glsentrylongpl{pdx}}
+
+Cells from the injected femur, bone marrow, and spleen, were frozen viably after sacrifice.
+Injected femur and bone marrow of mice engrafted with $> 10$ \% human cells were combined.
+These cells were depleted of mouse cells using the Miltenyi Mouse Cell Depletion Kit (Miltenyi Biotec; samples with $> 20$ \% engraftment) or by cell sorting with human CD45 and human CD19 and/or CD34 cell surface antibodies to a purity of $> 90$ \%, as determined by post-processing flow cytometry.
+Central nervous system cells from mice with $> 60$ \% engraftment were used directly for DNA isolation.
+DNA was isolated using the QIAamp DNA Blood Mini or Micro Kit (Qiagen).
 
 \subsection{Primary and \glsentrylong{pdx} sample sequencing}
 
 \subsubsection{\Glsentrylong{rnaseq}}
 
+\Gls{rnaseq} was performed as previously described \cite{dobsonRelapseFatedLatentDiagnosis2020}.
+Briefly, amplified \gls{cdna} was sequenced as paired-end libraries on an Illumina HiSeq2000.
+The libraries were sequenced as $2 \times 75$ bp for the adult and $2 \times 100$ bp for the pediatric samples.
+
 \subsubsection{\Glsentrylong{mecapseq}}
 
+\Gls{mecapseq} was performed using the SeqCapEpi CpGiant kit (Roche NimbleGen).
+Briefly, the DNA library is prepared and bisulfite converted, amplified, and enriched using capture probes for targeted bisulfite-converted DNA fragments, then sequenced on a short-read sequencing machine.
+More specifically, library preparation for \gls{mecapseq} was performed with the KAPA Library Preparation Kits, bisulfite conversion of genomic DNA was performed with the Zymo EZ DNA Methylation Lightning kit,
+bisulfite-converted DNA libraries were amplified using the KAPA HiFi HotStart Uracil+ ReadyMix kit, and finally hybridized to probes from the SeqCap Epi Enrichment Kit.
+Captured DNA fragments were sequenced on an Illumina HiSeq 2500 as $2 \times 125$ bp to a target depth of $70 \times 10^6$ read pairs per sample.
+
 \subsubsection{\Glsentrylong{atacseq}}
+
+Library preparation for \gls{atacseq} was performed with the Nextera DNA Sample Preparation Kit (FC-121-1030, Illumina), according to a previously reported protocol \cite{buenrostroTranspositionNativeChromatin2013}.
+\Gls{atacseq} libraries were sequenced with an Illumina HiSeq 2500 sequencer to generate single-end 50 bp reads.
 
 \subsection{Sequencing data analysis}
 
@@ -34,8 +90,8 @@ Genes with an \gls{fdr} $< 0.05$ and absolute $\log_2(\text{fold change}) > 1$ w
 
 \subsubsection{Identification of accessible chromatin peaks}
 
-\Gls{atacseq} reads were aligned against the GRCh38 reference human genome with Bowtie2 (v2.3.4) \cite{langmeadFastGappedreadAlignment2012} with default parameters.
-Accessible peaks were identified with MACS2 (v2.1.2) \cite{zhangModelbasedAnalysisChIPSeq2008} with the following command:
+\Gls{atacseq} reads were aligned against the GRCh38 reference human genome with Bowtie2 (v2.0.5) \cite{langmeadFastGappedreadAlignment2012} with default parameters.
+Accessible peaks were identified with MACS2 (v2.0.10) \cite{zhangModelbasedAnalysisChIPSeq2008} with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
   macs2 callpeak -f BED -g hs --keep-dup all -B --SPMR --nomodel --shift -75 --extsize 150 -p 0.01 --call-summits -n {sample_name} -t {input_bam}
