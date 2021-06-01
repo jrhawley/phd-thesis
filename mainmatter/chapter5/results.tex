@@ -23,7 +23,7 @@
   \item In summary, normal hematopoietic stem cells permanently change \gls{dname} over the course of differentiation, predominantly by losing \gls{dname}
 \end{itemize}
 
-\newfigure{chapter5/Figure2.png}{Loss of \Glsentrylong{dname} over B-cell differentiation}{\textbf{a.} Schematic of the hematopoietic hierarchy and the grouping of B-cell progenitors into the groups isolated in this study. \textbf{b.} Heatmap of \glspl{dmr} identified between B lineage cell types. Columns are samples ordered by cell type and rows are \glspl{dmr} identified in at least one pairwise comparison between cell types (dmrseq, \gls{fdr} $< 0.1$). \textbf{c.} Bar plot of \glspl{dmr} classified by which step in differentiation they were identified as significantly changed.}{fig:BALL_fig2}
+\newfigure{chapter5/Figure2.png}{Widespread loss of \Glsentrylong{dname} over B-cell differentiation}{\textbf{a.} Schematic of the hematopoietic hierarchy and the grouping of B-cell progenitors into the groups isolated in this study. \textbf{b.} Heatmap of \glspl{dmr} identified between B lineage cell types. Columns are samples ordered by cell type and rows are \glspl{dmr} identified in at least one pairwise comparison between cell types (dmrseq, \gls{fdr} $< 0.1$). \textbf{c.} Bar plot of \glspl{dmr} classified by which step in differentiation they were identified as significantly changed.}{fig:BALL_fig2}
 
 \subsection{Recurrent \glsentrylong{dname} changes identify stem cell pathways in relapse}
 
@@ -31,7 +31,7 @@
   \item We searched for \glspl{dmr} that are present at \gls{ball} relapse using the using primary and \gls{pdx} \gls{dx} and \gls{rel} \gls{ball} samples
   \item When grouping all patients together by disease stage, we found no \glspl{dmr} survived multiple testing corrections
   \item We reanalyzed the same data in a patient-oriented approach, identifying \glspl{dmr} that come from each patient's relapse trajectory
-  \item We were able to identify ~ 26 000 \glspl{dmr} across the cohort of 5 patients \Cref{fig:BALL_fig3}a
+  \item We were able to identify \textapprox 26 000 \glspl{dmr} across the cohort of 5 patients \Cref{fig:BALL_fig3}a
   \item Unlike normal differentiation, most \glspl{dmr} became hypermethylated at relapse
   \item In nearly all cases, the \gls{dx} \gls{pdx} samples strongly resembled the \gls{dx} primary samples, but one \gls{dx} \gls{pdx} sample for Patient 9 more strongly resembles the methylation profile at \gls{rel} \Cref{fig:BALL_fig3}a
   \item This suggests that, like subpopulations identified via mutation profiles, \gls{dname} of a subpopulation of cells present at diagnosis may give rise to the relapse population
@@ -43,9 +43,24 @@
 \begin{itemize}
   \item We investigated the potential effects of these recurrent changes to \gls{dname} using \gls{go} analysis
   \item We found numerous biological processes positively associated with differentiation, the most significant of which is cell fate determination (\Cref{fig:BALL_fig3}c)
-  \item For the recurrent \glspl{dmr}, all patients had $> 20$ \% gain in methylation in the promoter regions of these genes ()\Cref{fig:BALL_fig3}d)
+  \item For the recurrent \glspl{dmr}, all patients had $> 20$ \% gain in methylation in the promoter regions of these genes (\Cref{fig:BALL_fig3}d)
   \item There are some regions where both hyper- and hypomethylation was observed at \gls{rel}, but all promoters had increased at least some \gls{dmr} with increased methylation (\Cref{fig:BALL_fig3}d)
-  \item Taken together, this suggests that the \gls{dname} changes observed at \gls{rel} revert to a more de-differentiated, stem-like state
+  \item Taken together, this suggests that \gls{ball} relapse reverts to a more de-differentiated, stem-like \gls{dname} state
 \end{itemize}
 
 \newfigure{chapter5/Figure3.png}{Recurrent relapse \glspl{dmr} are associated with cell fate decision processes}{\textbf{a.} Heatmaps of \glspl{dmr} identified between \gls{dx} and \gls{rel} samples within each patient. \textbf{b.} Upset plot showing the shared \glspl{dmr} between patients. \Glspl{dmr} in the left highlighted block are unique to a single patient, whereas \glspl{dmr} in the right highlighted block are recurrent changes across all 5 relapse patients. These \glspl{dmr} are in the promoter regions of the callout genes listed. \textbf{c.} \Gls{go} analysis of genes with recurrently hypermethylated promoters in \gls{rel} \gls{ball} samples. The red dashed line indicates the \gls{fdr} threshold of 0.05. \textbf{d.} Pairwise \gls{dname} changes in each patient at the recurrently hypermethylated loci show increased methylation in all patients.}{fig:BALL_fig3}
+
+\subsection{Relapse \glsentrylong{dname} profiles are present at diagnosis, independent of mutation status}
+
+\begin{itemize}
+  \item Previous results focused on \glspl{dmr} between \gls{dx} and \gls{rel} specifically
+  \item Using the \gls{dri} \glspl{pdx}, we can investigate whether the \gls{dname} profiles of relapse-fated subclones also resembles the relapse state, or not
+  \item Again identify \glspl{dmr} between disease stages, including \gls{dri} samples \Cref{fig:BALL_fig4}a
+  \item All samples have \glspl{dmr} that are \Gls{rel} specific \Cref{fig:BALL_fig4}b
+  \item Patients 1, 4, 7, and 9 have cells whose \gls{dname} profile resembles that of the \gls{rel}
+  \item Patients 1, 7, and 9 have cells present at diagnosis that share both mutation and \gls{dname} profiles with their relapses
+  \item Patient 4 has both \gls{dx} and \gls{dri} samples that resemble \gls{rel}
+  \item Classifying \glspl{dmr} based on what stage they are specific too shows that while many \glspl{dmr} are specific to \gls{rel} samples, there are many loci 
+\end{itemize}
+
+\newfigure{chapter5/Figure4.png}{Subpopulations present at diagnosis can harbour relapse-like \gls{dname} profiles}{\textbf{a.} Heatmaps of expanded \glspl{dmr} identified in \gls{dri} \gls{pdx} samples. \textbf{b.} Bar plot showing the number of \glspl{dmr} classified by which disease stage it is specific to. "\Gls{dx} Specific" \glspl{dmr} have shared \gls{dname} between \gls{dri} and \gls{rel} samples. "\Gls{dri} Specific" \glspl{dmr} have shared \gls{dname} between \gls{dx} and \gls{rel} samples. "\Gls{rel} Specific" \glspl{dmr} have shared \gls{dname} between \gls{dx} and \gls{dri} samples. "Unique" \glspl{dmr} are regions that have significantly different \gls{dname} at each stage.}{fig:BALL_fig4}
