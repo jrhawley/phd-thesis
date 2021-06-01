@@ -2,16 +2,50 @@
 
 \subsection{Multiomic integration of \glsentryshort{ball} relapse patients links \glsentrylong{dname} to relapse status}
 
+\begin{itemize}
+  \item We profiled primary and \gls{pdx} \gls{ball} samples using \gls{rnaseq}, \gls{atacseq}, and \gls{mecapseq} \Cref{fig:BALL_fig1}a
+  \item To contextualize any changes we may find in \gls{ball} relapse, we first looked to the hematopoietic hierarchy to characterize \gls{dname} changes that occur over the course of B-cell differentiation
+  \item To identify which molecular marker was most indicative of disease stage, we integrated these three data types with disease stage classifications from \cite[REF][]{dobinSTARUltrafastUniversal2013}
+  \item We then performed \gls{snf} to construct clusters of samples from all three molecular datasets, both combined and individually
+  \item We found for the three patients whose multiomic data passed quality control checks for all datasets, that \gls{dname} was the individual dataset that most strongly correlated with disease state, behind the combined graphs \Cref{fig:BALL_fig1}b
+\end{itemize}
+
 \newfigure{chapter5/Figure1.png}{Experimental design and data integration}{\textbf{a.} Experimental design of samples used in this study. Normal samples were obtained from cord blood pools and sorted into various hematopoietic cell types. B-ALL patients who experienced relapse has sorted leukemic blasts collected at \gls{dx} and \gls{rel}. Based on the mutation profiles from \cite[REF][]{dobsonRelapseFatedLatentDiagnosis2020} some \gls{dx} samples are labelled as \gls{dri}. \textbf{b.} Individual and fused networks of samples from three patients with complete multiomic profiling. Nodes represent individual samples (either primary or \gls{pdx}), edges represent similarities between the connected samples.}{fig:BALL_fig1}
 
 \subsection{Widespread loss of \glsentrylong{dname} over normal B-cell differentiation}
 
+\begin{itemize}
+  \item Given the strong correlation between \gls{dname} signal and disease state, we decided to investigate \gls{dname} changes in \gls{ball} relapse
+  \item We performed \gls{mecapseq} on 8 normal cord blood pools, separating into various cell types based on cell surface markers \Cref{tab:BALL_markers}
+  \item This identified 540 \glspl{dmr}, 500 (92.6 \%) of which become hypomethylated over the course of differentiation
+  \item No \glspl{dmr} change methylation levels then revert back; once a region changes its methylation, that change persists throughout differentiation
+  \item These findings are corroborated by previous studies of B-cell differentiation using the Illumina 450K array \cite{leeGlobalDNAMethylation2012,leeEpigeneticRemodelingBcell2015,nordlundGenomewideSignaturesDifferential2013}
+  \item In summary, normal hematopoietic stem cells permanently change \gls{dname} over the course of differentiation, predominantly by losing \gls{dname}
+\end{itemize}
+
 \newfigure{chapter5/Figure2.png}{Loss of \Glsentrylong{dname} over B-cell differentiation}{\textbf{a.} Schematic of the hematopoietic hierarchy and the grouping of B-cell progenitors into the groups isolated in this study. \textbf{b.} Heatmap of \glspl{dmr} identified between B lineage cell types. Columns are samples ordered by cell type and rows are \glspl{dmr} identified in at least one pairwise comparison between cell types (dmrseq, \gls{fdr} $< 0.1$). \textbf{c.} Bar plot of \glspl{dmr} classified by which step in differentiation they were identified as significantly changed.}{fig:BALL_fig2}
-
-\subsection{Widespread gain of \glsentrylong{dname} over \glsentryshort{ball} relapse}
-
-\newfigure{chapter5/Figure3.png}{Gain of \glsentrylong{dname} over \gls{ball} relapse}{\textbf{a.} Heatmaps of \glspl{dmr} identified between \gls{dx} and \gls{rel} samples within each patient. \textbf{b.} Upset plot showing the shared \glspl{dmr} between patients. \Glspl{dmr} in the left highlighted block are unique to a single patient, whereas \glspl{dmr} in the right highlighted block are recurrent changes across all 5 relapse patients. These \glspl{dmr} are in the promoter regions of the callout genes listed.}{fig:BALL_fig3}
 
 \subsection{Recurrent \glsentrylong{dname} changes identify stem cell pathways in relapse}
 
-\newfigure{chapter5/Figure4.png}{Recurrently hypermethylation gene promoters are associated with cell fate decision processes}{\textbf{a.} \Gls{go} analysis of genes with recurrently hypermethylated promoters in \gls{rel} \gls{ball} samples. The red dashed line indicates the \gls{fdr} threshold of 0.05. \textbf{b.} Pairwise \gls{dname} changes in each patient at the recurrently hypermethylated loci show increased methylation in all patients.}{fig:BALL_fig4}
+\begin{itemize}
+  \item We searched for \glspl{dmr} that are present at \gls{ball} relapse using the using primary and \gls{pdx} \gls{dx} and \gls{rel} \gls{ball} samples
+  \item When grouping all patients together by disease stage, we found no \glspl{dmr} survived multiple testing corrections
+  \item We reanalyzed the same data in a patient-oriented approach, identifying \glspl{dmr} that come from each patient's relapse trajectory
+  \item We were able to identify ~ 26 000 \glspl{dmr} across the cohort of 5 patients \Cref{fig:BALL_fig3}a
+  \item Unlike normal differentiation, most \glspl{dmr} became hypermethylated at relapse
+  \item In nearly all cases, the \gls{dx} \gls{pdx} samples strongly resembled the \gls{dx} primary samples, but one \gls{dx} \gls{pdx} sample for Patient 9 more strongly resembles the methylation profile at \gls{rel} \Cref{fig:BALL_fig3}a
+  \item This suggests that, like subpopulations identified via mutation profiles, \gls{dname} of a subpopulation of cells present at diagnosis may give rise to the relapse population
+  \item Combining the patient-oriented \glspl{dmr} demonstrates that most \glspl{dmr} are patient-specific (\Cref{fig:BALL_fig3}b, left side)
+  \item Only a small number of \glspl{dmr} are shared across patients, which are all within promoter regions of the genes highlighted (\Cref{fig:BALL_fig3}b)
+  \item Taken together, we find that the changes to \gls{dname} over the course of \gls{ball} relapse is antithetical to the changes seen over normal B-cell differentiation
+\end{itemize}
+
+\begin{itemize}
+  \item We investigated the potential effects of these recurrent changes to \gls{dname} using \gls{go} analysis
+  \item We found numerous biological processes positively associated with differentiation, the most significant of which is cell fate determination (\Cref{fig:BALL_fig3}c)
+  \item For the recurrent \glspl{dmr}, all patients had $> 20$ \% gain in methylation in the promoter regions of these genes ()\Cref{fig:BALL_fig3}d)
+  \item There are some regions where both hyper- and hypomethylation was observed at \gls{rel}, but all promoters had increased at least some \gls{dmr} with increased methylation (\Cref{fig:BALL_fig3}d)
+  \item Taken together, this suggests that the \gls{dname} changes observed at \gls{rel} revert to a more de-differentiated, stem-like state
+\end{itemize}
+
+\newfigure{chapter5/Figure3.png}{Recurrent relapse \glspl{dmr} are associated with cell fate decision processes}{\textbf{a.} Heatmaps of \glspl{dmr} identified between \gls{dx} and \gls{rel} samples within each patient. \textbf{b.} Upset plot showing the shared \glspl{dmr} between patients. \Glspl{dmr} in the left highlighted block are unique to a single patient, whereas \glspl{dmr} in the right highlighted block are recurrent changes across all 5 relapse patients. These \glspl{dmr} are in the promoter regions of the callout genes listed. \textbf{c.} \Gls{go} analysis of genes with recurrently hypermethylated promoters in \gls{rel} \gls{ball} samples. The red dashed line indicates the \gls{fdr} threshold of 0.05. \textbf{d.} Pairwise \gls{dname} changes in each patient at the recurrently hypermethylated loci show increased methylation in all patients.}{fig:BALL_fig3}
