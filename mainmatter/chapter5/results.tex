@@ -37,30 +37,30 @@ In summary, we find that normal \glspl{hsc} permanently change \gls{dname} over 
 
 \subsection{Recurrent \glsentrylong{dname} changes identify stem cell pathways in relapse}
 
-\begin{itemize}
-  \item We searched for \glspl{dmr} that are present at \gls{ball} relapse using the using primary and \gls{pdx} \gls{dx} and \gls{rel} \gls{ball} samples
-  \item When grouping all patients together by disease stage, we found no \glspl{dmr} survived multiple testing corrections
-  \item We reanalyzed the same data in a patient-oriented approach, identifying \glspl{dmr} that come from each patient's relapse trajectory
-  \item We were able to identify \textapprox 26 000 \glspl{dmr} across the cohort of 5 patients \Cref{fig:BALL_fig3}a
-  \item Unlike normal differentiation, most \glspl{dmr} became hypermethylated at relapse
-  \item In nearly all cases, the \gls{dx} \gls{pdx} samples strongly resembled the \gls{dx} primary samples, but one \gls{dx} \gls{pdx} sample for Patient 9 more strongly resembles the methylation profile at \gls{rel} \Cref{fig:BALL_fig3}a
-  \item This suggests that, like subpopulations identified via mutation profiles, \gls{dname} of a subpopulation of cells present at diagnosis may give rise to the relapse population
-  \item Combining the patient-oriented \glspl{dmr} demonstrates that most \glspl{dmr} are patient-specific (\Cref{fig:BALL_fig3}b, left side)
-  \item Only a small number of \glspl{dmr} are shared across patients, which are all within promoter regions of the genes highlighted (\Cref{fig:BALL_fig3}b)
-  \item Taken together, we find that the changes to \gls{dname} over the course of \gls{ball} relapse is antithetical to the changes seen over normal B-cell differentiation
-\end{itemize}
-
-\begin{itemize}
-  \item We investigated the potential effects of these recurrent changes to \gls{dname} using \gls{go} analysis
-  \item We found numerous biological processes positively associated with differentiation, the most significant of which is cell fate determination (\Cref{fig:BALL_fig3}c)
-  \item For the recurrent \glspl{dmr}, all patients had $> 20$ \% gain in methylation in the promoter regions of these genes (\Cref{fig:BALL_fig3}d)
-  \item There are some regions where both hyper- and hypomethylation was observed at \gls{rel}, but all promoters had increased at least some \gls{dmr} with increased methylation (\Cref{fig:BALL_fig3}d)
-  \item Taken together, this suggests that \gls{ball} relapse reverts to a more de-differentiated, stem-like \gls{dname} state
-\end{itemize}
+With the predominant loss of \gls{dname} established in the normal setting, we identified \glspl{dmr} between \gls{dx} and \gls{rel} primary and \gls{pdx} \gls{ball} samples.
+When considering all patients together and grouping by disease stage, we found no \glspl{dmr} remained statistically significant after multiple testing corrections.
+This result conflicted with previous observations about \gls{dname} changes in \gls{ball} relapse \cite{leeEpigeneticRemodelingBcell2015,nordlundGenomewideSignaturesDifferential2013} as well as the earlier \gls{snf} analysis.
+We hypothesized that \gls{dname} changes in across patients was heterogeneous, which limited the ability to detect significant changes.
+Using a patient-oriented approach, we identified \glspl{dmr} between \gls{dx} and \gls{rel} for each patient, separately, to track changes over each patient's relapse trajectory.
+This identified 25 761 \glspl{dmr} across the cohort of (range 98 - 15 296, median 7 426, $\delta \beta \ge 20$ \%, \gls{fdr} $< 0.1$, \Cref{fig:BALL_fig3}a).
+Unlike the process of normal differentiation, most \glspl{dmr} were hypermethylated at relapse (\Cref{fig:BALL_fig2}b).
+18 610 (72.2 \%) \glspl{dmr} were specific to a single patient and did not overlap \glspl{dmr} from others (\Cref{fig:BALL_fig3}b, left), as expected from the lack of significant \glspl{dmr} from the cohort-oriented analysis.
+Notably, the 9 recurrently \glspl{dmr} in all 5 patients are all in the promoter regions of the following genes: \emph{BARHL2}, \emph{CYP26B1}, \emph{EBF3}, \emph{EN2}, \emph{GDNF}, \emph{HMGA2}, \emph{NKX2-2}, \emph{NR2F2}, and \emph{PAX6}.
+Using \gls{go} analysis, we find that these genes with nearby recurrent differential methylation are positively associated with differentiation, with the most statistically significant pathway being cell fate determination (\Cref{fig:BALL_fig3}c).
+For these genes, we find that the promoter regions become hypermethylated at \gls{ball} relapse (\Cref{fig:BALL_fig3}d).
+Some genes, like \emph{CYP26B1}, have multiple short \glspl{dmrs} in the promoter and one gains \gls{dname} while the other loses \gls{dname} at relapse, but all these promoters gain \gls{dname} overall.
+Given the association between hypermethylation in promoter regions and decreased expression \cite{jonesFunctionsDNAMethylation2012}, these results suggest that these genes are under-expressed at relapse.
+Taken together, we find that the changes to \gls{dname} over the course of \gls{ball} relapse is antithetical to the changes seen over normal B-cell differentiation, and that recurrent \gls{dname} changes suggest that \gls{ball} relapse reverts to a more de-differentiated, stem-like \gls{dname} state.
 
 \newfigure{chapter5/Figure3.png}{Recurrent relapse \glspl{dmr} are associated with cell fate decision processes}{\textbf{a.} Heatmaps of \glspl{dmr} identified between \gls{dx} and \gls{rel} samples within each patient. \textbf{b.} Upset plot showing the shared \glspl{dmr} between patients. \Glspl{dmr} in the left highlighted block are unique to a single patient, whereas \glspl{dmr} in the right highlighted block are recurrent changes across all 5 relapse patients. These \glspl{dmr} are in the promoter regions of the callout genes listed. \textbf{c.} \Gls{go} analysis of genes with recurrently hypermethylated promoters in \gls{rel} \gls{ball} samples. The red dashed line indicates the \gls{fdr} threshold of 0.05. \textbf{d.} Pairwise \gls{dname} changes in each patient at the recurrently hypermethylated loci show increased methylation in all patients.}{fig:BALL_fig3}
 
 \subsection{Relapse \glsentrylong{dname} profiles are present at diagnosis, independent of mutation status}
+
+\begin{itemize}
+  \item In nearly all cases, the \gls{dx} \gls{pdx} samples strongly resembled the \gls{dx} primary samples, but one \gls{dx} \gls{pdx} sample for Patient 9 more strongly resembles the methylation profile at \gls{rel} \Cref{fig:BALL_fig3}a
+  \item This suggests that, like subpopulations identified via mutation profiles, \gls{dname} of a subpopulation of cells present at diagnosis may give rise to the relapse population
+  
+\end{itemize}
 
 \begin{itemize}
   \item Previous results focused on \glspl{dmr} between \gls{dx} and \gls{rel} specifically
