@@ -1,6 +1,7 @@
 \section{Methods}
 
 \subsection{Patient selection and sample collection}
+\label{sec:BALL_patient_selection}
 
 Patient samples were obtained at diagnosis and relapse from patients with \gls{ball} as previously described \cite{dobsonRelapseFatedLatentDiagnosis2020}.
 All samples were frozen viably and stored long term at -150 \textdegree C.
@@ -134,6 +135,7 @@ $M$-biases were calculated with MethylDackel (v0.4.0) \cite{ryanMethylDackel2019
 Both $M$ and $\beta$ values were for each \gls{cpg} were used in downstream analyses.
 
 \subsubsection{Similarity network fusion}
+\label{sec:BALL_snf}
 
 Preprocessed data from each sample was collected with the following features: normalized gene expression abundance for all genes, chromatin accessibility signal within previously identified accessible peaks, and mean $\beta$ value for all \glspl{cpg} listed in the manifest for targeted bisulfite sequencing kit.
 These features and sample labels were processed with the SNFtool R package \cite{wangSimilarityNetworkFusion2014} to perform the similarity network fusion analysis.

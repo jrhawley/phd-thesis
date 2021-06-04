@@ -1,0 +1,11 @@
+Patient	Sample Type	Subtype	Immunophenotype	Age category	Sex	BM Blast Count 	WBC Count (/mm3) 	Cytogenetics	Inital Therapy Protocol	Time to Relapse (months)	Type of relapse	Status
+1	Diagnostic	DUX4	nd	>18	M	90%	78	46,XY,del(6)(q21q23), t(11;13)(p11.2;q12)	Dana Farber	9.00	hematologic	deceased
+1	Relapse1 Resistant	B-other				nd	82	nd				
+4	Diagnostic	B-other	pre-B-ALL	>18	M	90%	10.5	not assessable	Dana Farber	6.30	hematologic 	deceased
+4	Relapse1					90%	3.8	nd				
+6	Diagnostic	B-other	pre-B-ALL	>18	M	90%	4.8	46 XY t(2;3) (p23,q21)  [20]	Dana Farber	33.97	hematologic	deceased
+6	Relapse1					90%	7.1	46 XY t(2;3) (p23,q21)[9] 46 XY [11]				
+7	Diagnostic	DUX4	nd	<18	F	92%	52.1	46,XX,del(9)(p22) [20/100%]	BCM	39.60	hematologic	deceased
+7	Relapse1					78%		46,XX [8/63%]/46,XX,del(9)(p22) [3/27%]				
+9	Diagnostic	B-other	transitional-pre-B-ALL	<18	M	96%	15.5	46,XY [1/5%]/47,XY,del(9)(p13),+18 [19/95%]	Total XV	48.12	hematologic + CNS	alive
+9	Relapse1					76%		46,XY [7/35%]/47,XY,del(9)(p13),+18 [13/65%]				

@@ -2,26 +2,36 @@
 
 \subsection{Multiomic integration of \glsentryshort{ball} relapse patients links \glsentrylong{dname} to relapse status}
 
-\begin{itemize}
-  \item We profiled primary and \gls{pdx} \gls{ball} samples using \gls{rnaseq}, \gls{atacseq}, and \gls{mecapseq} \Cref{fig:BALL_fig1}a
-  \item To contextualize any changes we may find in \gls{ball} relapse, we first looked to the hematopoietic hierarchy to characterize \gls{dname} changes that occur over the course of B-cell differentiation
-  \item To identify which molecular marker was most indicative of disease stage, we integrated these three data types with disease stage classifications from \cite[REF][]{dobinSTARUltrafastUniversal2013}
-  \item We then performed \gls{snf} to construct clusters of samples from all three molecular datasets, both combined and individually
-  \item We found for the three patients whose multiomic data passed quality control checks for all datasets, that \gls{dname} was the individual dataset that most strongly correlated with disease state, behind the combined graphs \Cref{fig:BALL_fig1}b
-\end{itemize}
+To investigate the molecular landscape of \gls{ball} relapse, we profiled gene expression, chromatin accessibility, and \gls{dname} of 3 adult and 2 pediatric \gls{ball} patients at both \gls{dx} and \gls{rel} with bulk \gls{rnaseq}, \gls{atacseq}, and \gls{mecapseq}, respectively (\Cref{fig:BALL_fig1}a).
+These patients' tumours contained $\ge 90$ \% leukemic blasts at diagnosis and were previously profiled using \gls{wes} to identify the mutation burden of leukemic driver mutations \cite{dobsonRelapseFatedLatentDiagnosis2020} (see \Cref{tab:BALL_clinical}; patient numbers used in this study match those from \cite[REF][]{dobsonRelapseFatedLatentDiagnosis2020}).
+Matching mutation profiles between \gls{dx} and \gls{rel} samples allowed for the identification of \gls{dri} samples, which are cells present at diagnosis that harbour mutations found at relapse, indicating that these cells are relapse-fated.
+Comprehensive datasets containing \gls{rnaseq}, \gls{atacseq}, and \gls{mecapseq} were produced for 3 patients, with 2 patients lacking \gls{rnaseq} data due to source constraints.
+While expression, chromatin accessibility, and \gls{dname} are each critical for determining cell phenotype and its role in relapse, we sought to investigate the importance of each dataset in an agnostic manner.
+To achieve this, similarity scores were calculated between all samples using \gls{snf} \cite{wangSimilarityNetworkFusion2014}.
+For each patient, similarity scores between all samples derived from that patient (both primary and \gls{pdx}) were calculated, and weighted graphs to cluster samples together were constructed (see \Cref{sec:BALL_snf}).
+This was done for each individual data type, as well as for a fused network comprised of information by considering all data types simultaneously.
+To determine the importance of each data type, samples were labelled by their disease stage (\gls{dx}, \gls{dri}, or \gls{rel}; \Cref{fig:BALL_fig1}b).
+For all 3 patients with complete molecular datasets, the combined networks clustered samples based on disease stage more clearly than each individual dataset (\Cref{fig:BALL_fig1}b).
+This suggests that disease stages can be more clearly identified from multiple molecular components together than a single component alone \cite{wangSimilarityNetworkFusion2014}.
+The graphs produced from \gls{dname} data more clearly cluster samples by disease stage than gene expression or chromatin accessibility across all patients, suggesting that \gls{dname} may be a clearer marker of relapse.
+Taken together, we find that \gls{ball} disease stage can be identified through non-genetic molecular measurements and that \gls{dname} is mostly closely linked to relapse than gene expression and chromatin accessibility.
 
 \newfigure{chapter5/Figure1.png}{Experimental design and data integration}{\textbf{a.} Experimental design of samples used in this study. Normal samples were obtained from cord blood pools and sorted into various hematopoietic cell types. B-ALL patients who experienced relapse has sorted leukemic blasts collected at \gls{dx} and \gls{rel}. Based on the mutation profiles from \cite[REF][]{dobsonRelapseFatedLatentDiagnosis2020} some \gls{dx} samples are labelled as \gls{dri}. \textbf{b.} Individual and fused networks of samples from three patients with complete multiomic profiling. Nodes represent individual samples (either primary or \gls{pdx}), edges represent similarities between the connected samples.}{fig:BALL_fig1}
 
 \subsection{Widespread loss of \glsentrylong{dname} over normal B-cell differentiation}
 
-\begin{itemize}
-  \item Given the strong correlation between \gls{dname} signal and disease state, we decided to investigate \gls{dname} changes in \gls{ball} relapse
-  \item We performed \gls{mecapseq} on 8 normal cord blood pools, separating into various cell types based on cell surface markers \Cref{tab:BALL_markers}
-  \item This identified 540 \glspl{dmr}, 500 (92.6 \%) of which become hypomethylated over the course of differentiation
-  \item No \glspl{dmr} change methylation levels then revert back; once a region changes its methylation, that change persists throughout differentiation
-  \item These findings are corroborated by previous studies of B-cell differentiation using the Illumina 450K array \cite{leeGlobalDNAMethylation2012,leeEpigeneticRemodelingBcell2015,nordlundGenomewideSignaturesDifferential2013}
-  \item In summary, normal hematopoietic stem cells permanently change \gls{dname} over the course of differentiation, predominantly by losing \gls{dname}
-\end{itemize}
+Given the strong correlation between \gls{dname} signal and disease state, we focused on \gls{dname} changes over \gls{ball} relapse.
+To understand the dynamic changes to \gls{dname} that happen over the course of \gls{ball} relapse, we first looked to the hematopoietic hierarchy and \gls{dname} changes over normal B-cell differentiation.
+Using normal cord blood pools, sorted into B-cells and multiple B-progenitor cell types, we performed \gls{mecapseq} on 8 pools separated into 4 cell types: \glspl{hsc} and \glspl{mpp}; \glspl{lmpp} and \glspl{mlp}; \glspl{eprob}, \glspl{preprob}, and \glspl{prob} (collectively labelled as \gls{prob}); and B-cells (\Cref{fig:BALL_fig2}a; see \Cref{tab:BALL_markers}).
+Using pairwise comparisons between these cell types, we identified 540 \glspl{dmr} over the course of B-cell differentiation from \glspl{hsc} (\Cref{fig:BALL_fig2}b).
+Significant changes to \gls{dname} occurred in 62 regions from \gls{hsc}-\gls{mpp} to \gls{lmpp}-\gls{mlp}, 312 regions from \gls{lmpp}-\gls{mlp} to \gls{prob}, and 166 regions from \gls{prob} to fully differentiated B-cells (\Cref{fig:BALL_fig2}c).
+While roughly equal numbers of loci gained and lost \gls{dname} in the transition from \glspl{hsc}-\glspl{mpp} to \glspl{lmpp}-\glspl{mlp}, after lymphoid commitment, nearly all regions lost \gls{dname} in later differentiation transitions (\Cref{fig:3D_figs2}c).
+Overall, 500 (92.6 \%) of \glspl{dmr} identified were loci that became hypomethylated over differentiation.
+These changes are in agreement with earlier studies profiling \gls{dname} changes over B-cell differentiation using the Illumina 450K arrays \cite{leeGlobalDNAMethylation2012,leeEpigeneticRemodelingBcell2015,nordlundGenomewideSignaturesDifferential2013}, and provide an expanded set of \glspl{dmr} with which to track differentiation.
+Notably, no \gls{dmr} identified in an earlier transition was found as differentially methylated in a later transition.
+Regions with altered \gls{dname} in one cell type persisted for all downstream cell type transitions.
+This suggests that \gls{dname} at these loci can be used as a marker of differentiation.
+In summary, we find that normal \glspl{hsc} permanently change \gls{dname} over the course of differentiation, predominantly by losing \gls{dname}.
 
 \newfigure{chapter5/Figure2.png}{Widespread loss of \Glsentrylong{dname} over B-cell differentiation}{\textbf{a.} Schematic of the hematopoietic hierarchy and the grouping of B-cell progenitors into the groups isolated in this study. \textbf{b.} Heatmap of \glspl{dmr} identified between B lineage cell types. Columns are samples ordered by cell type and rows are \glspl{dmr} identified in at least one pairwise comparison between cell types (dmrseq, \gls{fdr} $< 0.1$). \textbf{c.} Bar plot of \glspl{dmr} classified by which step in differentiation they were identified as significantly changed.}{fig:BALL_fig2}
 
