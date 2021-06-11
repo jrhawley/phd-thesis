@@ -85,6 +85,24 @@
   \end{figure}
 }
 
+% Typical figure layout and placement with adjusted width
+% #1 = image file
+% #2 = figure title
+% #3 = figure caption
+% #4 = figure reference label
+\newcommand{\newflexfigure}[5]{
+  % Start figure environment
+  \begin{figure}[h!]
+    \centering
+    % Include the figure
+    \includegraphics[width=#5]{#1}
+    % Add the figure caption
+    \caption[#2]{\textbf{#2.} #3}
+    % Add the label for internal referencing
+    \label{#4}
+  \end{figure}
+}
+
 % Figure layout and placement for a figure with a long caption
 % #1 = image file
 % #2 = figure title
