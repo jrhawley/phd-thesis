@@ -1,0 +1,227 @@
+# Introduction
+
+## My outline
+
+- cancer basics
+  - cancer is an important disease to study and cure
+  - cancer is complex and results in many changes to cells
+  - cancer is a disease of the genome and epigenome
+  - consistent hallmarks have emerged about what cancer cells do differently than normal cells
+  - many of these hallmarks can be explained by aberrations to the genome and molecular machinery that expresses the genome
+- normal chromatin architecture and the central dogma
+  - genes, transcripts, proteins
+  - DNA elements
+    - enhancers
+    - promoters
+    - silencers
+    - insulators
+    - TADs
+    - compartments
+    - loops
+  - identifying DNA elements
+    - RNA-seq for assessing impact on expression
+      - DGE
+    - TF binding motifs, ChIP-seq, CUT&RUN
+    - accessibility with DNAse-seq, ATAC-seq, MNase-seq, FAIRE-seq
+    - MPRAs
+    - CRISPR/(d)Cas9 experiments
+    - CRISPR screens and RNA-seq
+    - GRO-seq, PRO-seq
+    - siRNA/shRNA interference experiments
+    - 3C, 4C, 5C, Hi-C, ChIA-PET interactions
+    - chromatin state classifiers (Segway, ChromHMM)
+  - central dogma players
+    - TFs
+    - RNA Pol2
+    - histone writers, readers, and erasers
+    - DNA methyltransferases
+    - CTCF and cohesin
+- aberrations to chromatin architecture in cancer
+  - genetic aberrations in cancer
+    - mutation types: SNVs, CNVs, SVs
+    - mutation detection
+      - experimental methods
+      - computational methods
+    - coding and non-coding mutations
+    - impact of different mutations on central dogma
+      - gene expression changes and eQTLs
+      - protein AA changes
+      - relocating CREs
+      - altered TF binding by motif changes
+      - altered TF binding by concentration
+      - altering TAD boundaries and CRE contacts
+  - non-genetic aberrations in cancer
+    - DNAme changes and their impact
+      - TF binding at CREs
+      - chromatin accessibility
+    - histone modifications and their impact
+      - changes in chromatin accessibility
+    - chromatin accessibility and nucleosome positioning and its impact
+      - TF binding
+      - ability for DNA damage to be repaired
+    - chromatin organization and its impact
+      - reduced contact redundancy, destabilizing GRNs to other assault
+      - novel CRE contact and CRE hijacking
+      - inhibiting normal CRE contact
+- interactions between genetic and non-genetic aberrations in cancer
+  - two diseases with observed interactions between genetic and non-genetic aberrations are prostate cancer and B-ALL
+  - prostate cancer
+    - etiology and risk factors
+    - diagnosis
+    - treatment
+    - relapse and metastasis
+    - FOXA1 somewhere?
+  - B-ALL
+    - etiology and risk factors
+    - diagnosis
+    - treatment
+    - relapse and metastasis
+    - B-cells somewhere?
+    - HSCs somewhere?
+- dissertation structure
+
+## Stanley's intro
+
+- prostate cancer
+  - epidemiology and risk factors for prostate cancer
+  - diagnosis and staging of prostate cancer
+  - prostate cancer treatment strategies
+    - localized prostate cancer
+    - metastatic hormone sensitive prostate cancer
+    - metastatic castration-resistant prostate cancer
+  - prostate cancer cell line models
+- the non-coding cancer genome
+  - the non-coding genome
+  - identification of non-coding functional elements
+  - non-coding germline risk SNPs impacting CRE activity in cancer
+  - non-coding somatic SNVs impacting CRE activity in cancer
+  - germline SNPs and somatic SNVs targeting anchors of chromatin interaction
+  - non-coding SVs in cancer
+- FOXA1
+  - FOXA1 function
+  - FOXA1 is frequently mutated in prostate cancers
+
+## Giacomo's intro
+
+- Genomic features of mammalian genomes
+  - Historical overview
+  - ENCODE 2012: Over 80% of the human genome might be “functional”
+  - Interspersed DNA repeats: transposable elements
+    - Genomic distribution of TEs
+    - Transposable elements as “functional elements”
+  - Tandem repeats: centromeres, pericentromeric regions and telomeres
+- Epigenetics and chromatin
+  - Historical overview of epigenetics
+  - Chromatin
+    - Historical overview of chromatin
+    - Chromatin structure and compaction
+    - Histone modifications
+    - Histone variants, chromatin identity and dynamic
+      - Histone variants in transcription and DNA repair
+      - Histone variants that define specialized chromosomal regions
+    - Histone writers, readers and erasers
+      - The ENCODE project
+  - The special case of heterochromatin
+    - Facultative heterochromatin: H3K27me3 and Polycomb
+    - Constitutive heterochromatin: H3K9me3 and H3K20me3
+    - Non-coding RNA and assembly of heterochromatin
+      - The long non-coding RNA XIST (X-inactive specific transcript) and inactive X heterochromatin
+      - (Peri)centromeric transcripts and heterochromatin assembly
+      - Telomeric repeat-containing RNA (TERRA) and telomeric heterochromatin
+  - DNA methylation
+    - Techniques to study DNA methylation
+      - Restriction-based
+      - Fluorescence-based methods
+      - Affinity-based methods
+      - DNA methylation arrays
+      - Sequencing-based methods
+    - CpG context of DNA methylation
+    - Genomic context of CpG methylation
+      - Methylation at promoters
+      - Methylation at gene bodies
+      - Methylation at DNA repeats
+      - Methylation at monoallelically expressed regions: the case of genomic imprinting and X chromosome activation
+    - Dynamics of DNA methylation and its players
+      - Reprogramming of DNA methylation during development
+      - DNA methylation activities: de novo and maintenance
+      - Mechanisms of DNA demethylation
+      - 5hmC: just an intermediate of DNA demethylation?
+    - The impact of DNA methylation in the different genomic contexts
+      - On promoters and transcription start sites
+      - At gene bodies
+      - At tandem and interspersed DNA repeats
+      - At Imprinted Control Regions (ICRs)
+    - Readers of DNA methylation
+      - 5mC readers
+      - Methylation-sensitive transcription factors
+      - Protein binding both methylated and unmethylated DNA
+      - 5hmC, 5fC and 5caC readers
+    - Interplay between DNA methylation and histone methylation
+      - DNA methylation and H3K4 methylation at promoters
+      - H3K36 methylation and DNA methylation in gene bodies
+      - DNA methylation and H3K9me3: old good friends
+      - Mutual exclusion between DNA methylation and H3K27me3
+    - DNA methylation in normal development
+      - Analyses of DNA methylation in vivo
+      - Analyses of DNA methylation ex vivo in the mouse – culture systems
+- DNA methylation in physiopathology
+  - DNA methylation in physiology
+    - DNA methylation and aging
+    - DNA methylation and environment
+      - Benzo[a]pyrene (BaP) and DNA methylation
+      - Alimentation and DNA methylation: the case of folate
+      - Chemotherapy: 5-azacytidine, what about normal cells?
+  - DNA methylation in pathology
+    - Somatic alterations
+      - Autoimmune diseases
+      - Cancer
+      - Stress: a model to study the causal link between DNA methylation, transcription of pericentromeric and centromeric repeats and perturbed phenotypes
+    - Germline mutations
+      - Mutations in DNMT3A cause an “Overgrowth syndrome with intellectual disability”
+      - Mutations in DNMT1 cause an “Hereditary sensory neuropathy with dementia and hearing loss”
+      - Mutations in MECP2: Rett and Angelman syndromes
+      - The Immunodeficiency, Centromeric instability and Facial anomalies syndrome
+        - Historical overview
+        - Diagnosis, clinical and molecular features
+        - Mutations in DNMT3B cause ICF1 syndrome
+        - Mutations in the zinc finger ZBTB24 genes cause ICF2 syndrome
+
+## Parisa's intro
+
+- SNVs
+  - Protein-coding and non-coding SNVs
+  - Discriminating function vs silent non-coding SNVs
+  - CREs harbouring SNVs
+- CREs and genomic annotations
+  - CREs and their role in the transcriptional process
+  - Annotating the human genome and CREs
+    - Experimental approaches
+    - Computational approaches
+  - SNVs shown to disrupt CRE and TF activity
+- Approaches to interpreting the effect of non-coding SNVs
+  - Individual SNVs in CREs
+  - Genome-wide approaches
+  - SNV enrichment in networks of regulatory elements
+- Objectives and summary
+
+## Katie's intro
+
+- tumour heterogeneity
+  - inter-tumour heterogeneity
+  - intra-tumour heterogeneity
+  - differences in somatic mutation rates across ancestry groups
+- germline predisposition
+  - Knudson's multi-hit model
+  - BRCA1 and BRCA2
+  - Genetic architecture of cancer predisposition
+  - Germline-somatic associations
+  - Methodologies
+- localized prostate cancer
+  - etiology
+  - diagnosis
+  - MP-MRI
+  - prognosis
+- resources
+  - CPC-GENE
+  - TCGA
+- rationale
