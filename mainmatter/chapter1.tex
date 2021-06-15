@@ -1,32 +1,54 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-\section{Cancer is a disease of the genome and epigenome}
-
 Cancer is one of the largest causes of death worldwide, ranking in the top ten most frequent causes in over 150 countries and most frequent in over 40 \cite{brayGlobalCancerStatistics2018}.
-Disease treatment is complicated by the fact that cancers are a myriad of diseases with unique origins, symptoms, and treatment options, often related to the cell of origin.
+Disease treatment is complicated by the fact that cancers are a myriad of diseases with unique origins, symptoms, and treatment options, often related to the cell of origin \cite{gilbertsonMappingCancerOrigins2011}.
 However, numerous hallmarks of cancers have emerged over the last 50 years to provide understanding about what biological aberrations cause tumours to initiate, how they develop over time, and how they respond to therapeutic interventions \cite{hanahanHallmarksCancer2000,hanahanHallmarksCancerNext2011,flavahanEpigeneticPlasticityHallmarks2017,pavlovaEmergingHallmarksCancer2016} (\Cref{fig:intro_hallmarks}).
 
 \newflexfigure{chapter1/hallmarks.png}{The hallmarks of cancer}{Adapted from \cite[REF][]{hanahanHallmarksCancerNext2011}.}{fig:intro_hallmarks}{0.5\textwidth}
 
-Many of these hallmarks of cancer can be achieved through aberrations to the molecular machinery that enables cells to function normally.
+Many of these hallmarks of cancer can be achieved through aberrations to the genome and the molecular machinery that enables cells to function normally \cite{garrawayLessonsCancerGenome2013}.
 For example, genome instability can be achieved by inhibiting DNA repair machinery, as is observed with abnormalities in \emph{MLH1} and \emph{MSH2} repair genes in colorectal cancers \cite{lengauerGeneticInstabilitiesHuman1998} or mutations to \emph{BRCA1}, \emph{BRCA2}, and \emph{ATM} genes in \gls{pca} \cite{abeshouseMolecularTaxonomyPrimary2015}.
 Similarly, replicative immortality can be achieved through telomere elongation by over-expression of the \emph{TERT} gene \cite{vinagreFrequencyTERTPromoter2013}.
 Mutations to the \emph{TERT} promoter, resulting in its over-expression, were first identified in melanomas \cite{huangHighlyRecurrentTERT2013,hornTERTPromoterMutations2013}, but have since been further identified in bladder, thyroid, and brain cancers \cite{vinagreFrequencyTERTPromoter2013,nagarajanRecurrentEpimutationsActivate2014,sternMutationTERTPromoter2015}.
-But while cancer has long been viewed as a disease of the genome \cite{hanahanHallmarksCancer2000}, there are many avenues cells can take to arrive at any of these hallmarks resulting from aberrations of how genes are expressed inside the cell nucleus.
+But while cancer has long been viewed as a disease of the genome \cite{hanahanHallmarksCancer2000,garrawayLessonsCancerGenome2013}, there are many avenues cells can take to arrive these hallmarks resulting from aberrations of how genes are expressed inside the cell nucleus.
 
-Genes, encoded as DNA, are transcribed into \gls{mrna}, which are then translated into proteins, in the process known as the central dogma of molecular biology \cite{albertsMolecularBiologyCell2015} (\Cref{fig:intro_dogma}a).
-The transcription of genes into \gls{mrna} requires RNA polymerase to bind at \glspl{tss} located within gene promoters \cite{goodrichUnexpectedRolesCore2010}.
-The recruitment of RNA polymerase is aided by a special class of proteins, termed \glspl{tf}, that can bind at DNA sequences either close to a gene's promoter, or far from it at DNA elements termed enhancers, insulators, and silencers \cite{schoenfelderLongrangeEnhancerPromoter2019,spitzTranscriptionFactorsEnhancer2012,ongEnhancerFunctionNew2011,anderssonDeterminantsEnhancerPromoter2020,gasznerInsulatorsExploitingTranscriptional2006,oudelaarRelationshipGenomeStructure2020}.
-These different DNA elements can be tens to thousands of \glspl{bp} apart from each other, but the DNA polymer bends to take up a small space inside the nucleus, and this can bring distal DNA elements close together in three-dimensional space \cite{finnMolecularBasisBiological2019,zhouChartingHistoneModifications2011} (\Cref{fig:intro_dogma}b).
-The ability of \glspl{tf} to bind at certain DNA elements is dependent on multiple features of the DNA inside the nucleus, including its sequence, its shape, and nearby chemical modifications, such as \gls{dname} or modifications to the histone proteins that comprise the nucleosomes that DNA is wrapped around \cite{zhuTranscriptionFactorsReaders2016,fureyChIPSeqNew2012,carterEpigeneticBasisCellular2021}.
-While the DNA sequence remains consistent across all cells in an organism, the chromatin state can vary, allowing for cell-type-specific gene expression.
-These chromatin states can be aberrantly displayed in cell types that do not normally have that state, which can lead to the aberrant over- or under-expression of genes in those cells.
+\section{Normal chromatin architecture in mammalian cells}
 
-\newfigure{chapter1/transcription-dogma.png}{The basics of gene expression inside the nucleus.}{\textbf{a.} The central dogma of molecular biology. \textbf{b.} Schematic of the transcription machinery to initiate transcription. Both panels are adapted from \cite[REF][]{albertsMolecularBiologyCell2015}.}{fig:intro_dogma}
+Genes, encoded as DNA, are expressed by being transcribed into \gls{mrna} and subsequently translated into proteins in the process known as the Central Dogma of molecular biology \cite{albertsMolecularBiologyCell2015} (\Cref{fig:intro_dogma}a).
+The transcription of genes into \gls{mrna} requires RNA polymerase to bind at \glspl{tss} within DNA elements found at the beginning of genes, termed promoters \cite{goodrichUnexpectedRolesCore2010}.
+Promoters are one example of a class of DNA elements, termed \glspl{cre} because of their roles in regulating the expression of genes on the same strand of DNA.
+The recruitment of RNA polymerase is aided by a special class of proteins, termed \glspl{tf}, that can bind at DNA sequences either close to a gene's promoter, or far from it at other \glspl{cre} such as enhancers and insulators \cite{schoenfelderLongrangeEnhancerPromoter2019,spitzTranscriptionFactorsEnhancer2012,ongEnhancerFunctionNew2011,anderssonDeterminantsEnhancerPromoter2020,gasznerInsulatorsExploitingTranscriptional2006,oudelaarRelationshipGenomeStructure2020} (\Cref{fig:intro_dogma}b).
+Together, the binding of \glspl{tf} to the DNA at specific \glspl{cre} is fundamental for to initiating transcription and expressing genes.
+
+\subsection{\Glsentrylongpl{cre} and features regulating transcription}
+
+The ability of \glspl{tf} to bind at specific \glspl{cre} is dependent on multiple features of the DNA.
+Many \glspl{tf} bind to DNA at specific sequences, termed motifs \cite{farnhamInsightsGenomicProfiling2009,spitzTranscriptionFactorsEnhancer2012}.
+The structural protein \gls{ctcf} has a well-defined motif and binds to this motif at thousands of locations across the human genome \cite{kimAnalysisVertebrateInsulator2007,dixonTopologicalDomainsMammalian2012}.
+Mutations to the sequence motif can alter \gls{ctcf}'s binding affinity for DNA, as is the case with many \glspl{tf} \cite{kasowskiVariationTranscriptionFactor2010,mauranoWidespreadSitedependentBuffering2012,mauranoLargescaleIdentificationSequence2015}.
+Relying on more than just the genetic sequence, \Gls{ctcf} is also an example of a \gls{tf} that is sensitive epigenetic features such as \gls{dname}, the addition of a methyl group to DNA nucleotides \cite{mauranoRoleDNAMethylation2015,wangWidespreadPlasticityCTCF2012,wiehleDNAMethylationEmbryonic2019,xuNascentDNAMethylome2018,vinerModelingMethylsensitiveTranscription2016}, as are DNA methyltransferases \emph{DNMT1}, \emph{DNMT3A}, and \emph{DNMT3B} \cite{gollEukaryoticCytosineMethyltransferases2005,listerHumanDNAMethylomes2009}.
+\Gls{tf} binding to DNA can also be affected by the presence of other proteins at binding sites.
+\Glspl{tf} can bind in a combinatorial manner at the same location \cite{farnhamInsightsGenomicProfiling2009,ongEnhancerFunctionNew2011,spitzTranscriptionFactorsEnhancer2012} or be blocked from binding altogether by the presence of nucleosomes, protein complexes that DNA winds around to make it compact in three-dimensional space \cite{henikoffNucleosomeDestabilizationEpigenetic2008,jiangNucleosomePositioningGene2009}.
+The collection of DNA, nucleosomes, DNA-bound transcription factors, and chemical modifications is defined as the chromatin, and the presence and density of nucleosomes, as well as DNA coiling, make certain segments of the chromatin more (euchromatin) or less (heterochromatin) accessible for \gls{tf} binding.
+This can affect normal cellular behaviour such as cell-type-specific gene expression \cite{vierstraGlobalReferenceMapping2020,cusanovichSingleCellAtlasVivo2018} and DNA damage repair in inaccessible regions \cite{polakCelloforiginChromatinOrganization2015}.
+Thus, both genetic and epigenetic chromatin features affect how \glspl{tf} can bind and regulate transcription.
+
+In addition to \gls{tf} binding, transcription regulation depends on the ability of \glspl{cre} to localize together in three-dimensional space across long distances \cite{zhuTranscriptionFactorsReaders2016,fureyChIPSeqNew2012,carterEpigeneticBasisCellular2021} .
+Distal chromatin regions can localize to form focal interactions between \glspl{cre} \cite{finnMolecularBasisBiological2019,dekker3DGenomeModerator2016} (\Cref{fig:intro_dogma}c).
+
+% Start here
+
+and different chromatin states enable cells with the same DNA sequence to express genes differently \cite{spurrellTiesThatBind2016,buenrostroSinglecellChromatinAccessibility2015,leeTranscriptionalRegulationIts2013,ongEnhancerFunctionNew2011,schoenfelderLongrangeEnhancerPromoter2019,zhouChartingHistoneModifications2011}.
+These \glspl{cre} can be tens to thousands of \glspl{bp} apart from each other, but the DNA polymer bends to take up a small space inside the nucleus, and this can bring distal elements close together in three-dimensional space \cite{finnMolecularBasisBiological2019,zhouChartingHistoneModifications2011}.
+These chromatin states can be aberrantly displayed in cell types that do not normally have that state and can lead to the aberrant over- or under-expression of genes in those cells \cite{buenrostroSinglecellChromatinAccessibility2015}.
+
+\newfigure{chapter1/transcription-dogma.png}{The basics of gene expression inside the nucleus}{\textbf{a.} The central dogma of molecular biology. Adapted from \cite[REF][]{albertsMolecularBiologyCell2015}. \textbf{b.} Schematic of the transcription machinery to initiate transcription. Adapted from \cite[REF][]{albertsMolecularBiologyCell2015}.}{fig:intro_dogma}
 
 
-\subsection{}
+\section{Aberrations to chromatin architecture in cancer}
+
+\section{Interactions between chromatin architecture components in prostate cancer and leukemia}
 
 \section{Dissertation structure}
 
@@ -34,7 +56,7 @@ I begin with \Cref{chap:FOXA1} by exploring the \emph{cis}-regulatory landscape 
 I demonstrate the essentiality of \emph{FOXA1} for prostate tumours, identify putative \glspl{cre} based on integration of multiomic datasets in \gls{pca} cell lines, and assess the functional impact of recurrent \gls{pca} \glspl{snv} on \emph{FOXA1} expression and \gls{tf} binding.
 
 With the \emph{cis}-regulatory network of \emph{FOXA1} established in \gls{pca}, I attempt to construct the \emph{cis}-regulatory landscape genome-wide in \gls{pca} with \gls{3c} mapping in \Cref{chap:3D}.
-Using Hi-C, I characterize the three-dimensional chromatin organization of \gls{pca} and investigate the relationship between chromatin organization, \glspl{sv}, and the hijacking of \emph{cis}-regulatory networks more generally.
+Using Hi-C, I characterize the three-dimensional chromatin organization of \gls{pca} and investigate changes to this structure over oncogenesis, and explore the relationship between chromatin organization, \glspl{sv}, and \gls{cre} hijacking.
 
 In assessing the impact of \glspl{sv} on chromatin organization, I uncovered a statistical problem stemming from the lack of recurrent \glspl{sv} across \gls{pca} patients, leading to unbalanced experimental comparisons.
 To address this problem, I developed a statistical method for reducing error in gene expression fold-change estimates from unbalanced experimental designs in \Cref{chap:JS} and characterize the method.
