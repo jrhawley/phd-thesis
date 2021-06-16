@@ -21,32 +21,54 @@ Promoters are one example of a class of DNA elements, termed \glspl{cre} because
 The recruitment of RNA polymerase is aided by a special class of proteins, termed \glspl{tf}, that can bind at DNA sequences either close to a gene's promoter, or far from it at other \glspl{cre} such as enhancers and insulators \cite{schoenfelderLongrangeEnhancerPromoter2019,spitzTranscriptionFactorsEnhancer2012,ongEnhancerFunctionNew2011,anderssonDeterminantsEnhancerPromoter2020,gasznerInsulatorsExploitingTranscriptional2006,oudelaarRelationshipGenomeStructure2020} (\Cref{fig:intro_dogma}b).
 Together, the binding of \glspl{tf} to the DNA at specific \glspl{cre} is fundamental for to initiating transcription and expressing genes.
 
-\subsection{\Glsentrylongpl{cre} and features regulating transcription}
+\subsection{DNA elements and features regulating transcription}
 
 The ability of \glspl{tf} to bind at specific \glspl{cre} is dependent on multiple features of the DNA.
 Many \glspl{tf} bind to DNA at specific sequences, termed motifs \cite{farnhamInsightsGenomicProfiling2009,spitzTranscriptionFactorsEnhancer2012}.
-The structural protein \gls{ctcf} has a well-defined motif and binds to this motif at thousands of locations across the human genome \cite{kimAnalysisVertebrateInsulator2007,dixonTopologicalDomainsMammalian2012}.
+The structural protein \gls{ctcf} has a well-defined motif and binds to this sequence at thousands of locations across the human genome \cite{kimAnalysisVertebrateInsulator2007,dixonTopologicalDomainsMammalian2012}.
 Mutations to the sequence motif can alter \gls{ctcf}'s binding affinity for DNA, as is the case with many \glspl{tf} \cite{kasowskiVariationTranscriptionFactor2010,mauranoWidespreadSitedependentBuffering2012,mauranoLargescaleIdentificationSequence2015}.
-Relying on more than just the genetic sequence, \Gls{ctcf} is also an example of a \gls{tf} that is sensitive epigenetic features such as \gls{dname}, the addition of a methyl group to DNA nucleotides \cite{mauranoRoleDNAMethylation2015,wangWidespreadPlasticityCTCF2012,wiehleDNAMethylationEmbryonic2019,xuNascentDNAMethylome2018,vinerModelingMethylsensitiveTranscription2016}, as are DNA methyltransferases \emph{DNMT1}, \emph{DNMT3A}, and \emph{DNMT3B} \cite{gollEukaryoticCytosineMethyltransferases2005,listerHumanDNAMethylomes2009}.
+Relying on more than just the genetic sequence, \Gls{ctcf} is also an example of a \gls{tf} that is sensitive epigenetic features such as \gls{dname}, the addition of a methyl group to DNA nucleotides \cite{mauranoRoleDNAMethylation2015,wangWidespreadPlasticityCTCF2012,wiehleDNAMethylationEmbryonic2019,xuNascentDNAMethylome2018,vinerModelingMethylsensitiveTranscription2016}, as are DNA methyltransferases DNMT1, DNMT3A, and DNMT3B \cite{gollEukaryoticCytosineMethyltransferases2005,listerHumanDNAMethylomes2009}.
 \Gls{tf} binding to DNA can also be affected by the presence of other proteins at binding sites.
 \Glspl{tf} can bind in a combinatorial manner at the same location \cite{farnhamInsightsGenomicProfiling2009,ongEnhancerFunctionNew2011,spitzTranscriptionFactorsEnhancer2012} or be blocked from binding altogether by the presence of nucleosomes, protein complexes that DNA winds around to make it compact in three-dimensional space \cite{henikoffNucleosomeDestabilizationEpigenetic2008,jiangNucleosomePositioningGene2009}.
-The collection of DNA, nucleosomes, DNA-bound transcription factors, and chemical modifications is defined as the chromatin, and the presence and density of nucleosomes, as well as DNA coiling, make certain segments of the chromatin more (euchromatin) or less (heterochromatin) accessible for \gls{tf} binding.
+The collection of DNA, nucleosomes, DNA-bound transcription factors, and chemical modifications is defined as the chromatin, and the presence and density of nucleosomes, as well as DNA coiling, make certain segments of the chromatin more or less accessible for \gls{tf} binding (euchromatin and heterochromatin, respectively).
 This can affect normal cellular behaviour such as cell-type-specific gene expression \cite{vierstraGlobalReferenceMapping2020,cusanovichSingleCellAtlasVivo2018} and DNA damage repair in inaccessible regions \cite{polakCelloforiginChromatinOrganization2015}.
 Thus, both genetic and epigenetic chromatin features affect how \glspl{tf} can bind and regulate transcription.
 
-In addition to \gls{tf} binding, transcription regulation depends on the ability of \glspl{cre} to localize together in three-dimensional space across long distances \cite{zhuTranscriptionFactorsReaders2016,fureyChIPSeqNew2012,carterEpigeneticBasisCellular2021} .
-Distal chromatin regions can localize to form focal interactions between \glspl{cre} \cite{finnMolecularBasisBiological2019,dekker3DGenomeModerator2016} (\Cref{fig:intro_dogma}c).
+In addition to \gls{tf} binding, transcription regulation depends on the ability of \glspl{cre} to localize together in three-dimensional space across large genomic distances \cite{zhuTranscriptionFactorsReaders2016,fureyChIPSeqNew2012,carterEpigeneticBasisCellular2021} (\Cref{fig:intro_dogma}c).
+Localization of \glspl{cre} tens to thousands of \glspl{bp} apart form focal interactions is aided by the formation of \glspl{tad}, domains of chromatin whose boundaries are linked by structural proteins, including \gls{ctcf} and cohesin \cite{zhouChartingHistoneModifications2011,dekker3DGenomeModerator2016,finnMolecularBasisBiological2019,oudelaarRelationshipGenomeStructure2020}.
+In addition to \glspl{tad} which can range in size from $10^4 - 10^6$ \gls{bp}, chromatin is also organized into active or inactive compartments (A and B compartments, respectively) that range in size from $10^5 - 10^6$ \gls{bp} \cite{lieberman-aidenComprehensiveMappingLongRange2009,rao3DMapHuman2014,oudelaarRelationshipGenomeStructure2020,mirnyTwoMajorMechanisms2019}.
+These two modes of chromatin organization facilitate the proper localization of \glspl{cre} and \glspl{tf} at the right time.
+While \glspl{tad} and compartments are largely conserved across cell types \cite{dixonTopologicalDomainsMammalian2012,stergachisConservationTransactingCircuitry2014,berthelotComplexityConservationRegulatory2017}, the strength of focal chromatin interactions have been observed to change between cell types, providing a further mechanism to change chromatin state \cite{}.
+Different chromatin states enable cells with the same DNA sequence to express genes differently \cite{spurrellTiesThatBind2016,buenrostroSinglecellChromatinAccessibility2015,leeTranscriptionalRegulationIts2013,ongEnhancerFunctionNew2011,schoenfelderLongrangeEnhancerPromoter2019,zhouChartingHistoneModifications2011}, and thus identifying the repertoire of \glspl{cre}, chromatin interactions, \glspl{tad}, and compartments are vital in determining the regulation of genes in various cell types.
 
-% Start here
+\newfigure{chapter1/transcription-dogma.png}{The basics of gene expression inside the nucleus}{\textbf{a.} The central dogma of molecular biology. Adapted from \cite[REF][]{albertsMolecularBiologyCell2015}. \textbf{b.} Schematic of the transcription machinery to initiate transcription. Adapted from \cite[REF][]{albertsMolecularBiologyCell2015}. \textbf{c.} The scale of chromatin interactions across length scales. Adapted from \cite[REF][]{finnMolecularBasisBiological2019}.}{fig:intro_dogma}
 
-and different chromatin states enable cells with the same DNA sequence to express genes differently \cite{spurrellTiesThatBind2016,buenrostroSinglecellChromatinAccessibility2015,leeTranscriptionalRegulationIts2013,ongEnhancerFunctionNew2011,schoenfelderLongrangeEnhancerPromoter2019,zhouChartingHistoneModifications2011}.
-These \glspl{cre} can be tens to thousands of \glspl{bp} apart from each other, but the DNA polymer bends to take up a small space inside the nucleus, and this can bring distal elements close together in three-dimensional space \cite{finnMolecularBasisBiological2019,zhouChartingHistoneModifications2011}.
-These chromatin states can be aberrantly displayed in cell types that do not normally have that state and can lead to the aberrant over- or under-expression of genes in those cells \cite{buenrostroSinglecellChromatinAccessibility2015}.
+\subsection{Methods for identifying DNA elements and chromatin interactions}
 
-\newfigure{chapter1/transcription-dogma.png}{The basics of gene expression inside the nucleus}{\textbf{a.} The central dogma of molecular biology. Adapted from \cite[REF][]{albertsMolecularBiologyCell2015}. \textbf{b.} Schematic of the transcription machinery to initiate transcription. Adapted from \cite[REF][]{albertsMolecularBiologyCell2015}.}{fig:intro_dogma}
-
+Stuff about ENCODE and its history
+% start here
 
 \section{Aberrations to chromatin architecture in cancer}
+
+\subsection{Genetic aberrations in cancer}
+
+\subsubsection{Various types of mutations}
+
+\glspl{snv}, \glspl{cnv}, \glspl{sv}
+
+\subsubsection{Coding and non-coding mutations}
+
+\subsubsection{Impact of coding and non-coding mutations}
+
+\subsection{Non-genetic aberrations in cancer}
+
+\subsubsection{\Glsentrylong{dname} aberrations}
+
+\subsubsection{Histone modifications}
+
+\subsubsection{Chromatin accessibility and nucleosome positioning}
+
+\subsubsection{Enhancer hijacking and chromatin organization aberrations}
 
 \section{Interactions between chromatin architecture components in prostate cancer and leukemia}
 
