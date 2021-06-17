@@ -36,7 +36,7 @@ Thus, both genetic and epigenetic chromatin features affect how \glspl{tf} can b
 
 In addition to \gls{tf} binding, transcription regulation depends on the ability of \glspl{cre} to localize together in three-dimensional space across large genomic distances \cite{zhuTranscriptionFactorsReaders2016,fureyChIPSeqNew2012,carterEpigeneticBasisCellular2021} (\Cref{fig:intro_dogma}c).
 Localization of \glspl{cre} tens to thousands of \glspl{bp} apart form focal interactions is aided by the formation of \glspl{tad}, domains of chromatin whose boundaries are linked by structural proteins, including \gls{ctcf} and cohesin \cite{zhouChartingHistoneModifications2011,dekker3DGenomeModerator2016,finnMolecularBasisBiological2019,oudelaarRelationshipGenomeStructure2020}.
-In addition to \glspl{tad} which can range in size from $10^4 - 10^6$ \gls{bp}, chromatin is also organized into active or inactive compartments (A and B compartments, respectively) that range in size from $10^5 - 10^6$ \gls{bp} \cite{lieberman-aidenComprehensiveMappingLongRange2009,rao3DMapHuman2014,oudelaarRelationshipGenomeStructure2020,mirnyTwoMajorMechanisms2019}.
+In addition to \glspl{tad} which can range in size from $10^4 - 10^6$ \gls{bp}, chromatin is also organized into active or inactive compartments (A and B compartments, respectively) that range in size from $10^5 - 10^6$ \gls{bp} \cite{liebermanaidenComprehensiveMappingLongRange2009,rao3DMapHuman2014,oudelaarRelationshipGenomeStructure2020,mirnyTwoMajorMechanisms2019}.
 These two modes of chromatin organization facilitate the proper localization of \glspl{cre} and \glspl{tf} at the right time.
 While \glspl{tad} and compartments are largely conserved across cell types \cite{dixonTopologicalDomainsMammalian2012,stergachisConservationTransactingCircuitry2014,berthelotComplexityConservationRegulatory2017}, focal chromatin interactions can differ up to 45 \% between cell types, providing a further mechanism to change chromatin state \cite{rao3DMapHuman2014}.
 Different chromatin states enable cells with the same DNA sequence to express genes differently \cite{spurrellTiesThatBind2016,buenrostroSinglecellChromatinAccessibility2015,leeTranscriptionalRegulationIts2013,ongEnhancerFunctionNew2011,schoenfelderLongrangeEnhancerPromoter2019,zhouChartingHistoneModifications2011}, and thus identifying the repertoire of \glspl{cre}, chromatin interactions, \glspl{tad}, and compartments are vital in determining the regulation of genes in various cell types.
@@ -51,15 +51,23 @@ This concept is to take a molecular feature of interest, be it an RNA transcript
 Protein binding sites and histone post-translational modifications can be identified by fragmenting DNA around antibodies that bind to these proteins with techniques like \gls{chipseq} and \gls{cutrun} \cite{robertsonGenomewideProfilesSTAT12007,baileyPracticalGuidelinesComprehensive2013,skeneTargetedSituGenomewide2018}.
 Accessible and inaccessible chromatin can be assessed by the chromatin's propensity to be cut by enzymes like DNase I, Tn5 transposase, and micrococcal nuclease in \gls{dnaseseq}, \gls{atacseq}, and \gls{mnaseseq} protocols, respectively \cite{boyleHighResolutionMappingCharacterization2008,buenrostroTranspositionNativeChromatin2013,buenrostroATACseqMethodAssaying2015,corcesImprovedATACseqProtocol2017,schonesDynamicRegulationNucleosome2008}.
 \Gls{dname} can be measured with bisulfite-sequencing assays \cite{lairdPrinciplesChallengesGenomewide2010}, and distal chromatin interactions can be identified with \gls{3c} and \gls{3c}-based methods such as Hi-C \cite{dekkerCapturingChromosomeConformation2002,liebermanaidenComprehensiveMappingLongRange2009,dixonTopologicalDomainsMammalian2012,noraSpatialPartitioningRegulatory2012,rao3DMapHuman2014}.
-Using these genome-wide sequencing techniques across a variety of human cell lines and tissues, the ENCODE Project aimed to catalogue all biochemically functional elements in the human genome to better understand all the ways genes are expressed and how they are regulated in different cell types \cite{birneyIdentificationAnalysisFunctional2007,mooreExpandedEncyclopaediasDNA2020}.
-While these measurements help in identifying candidate \glspl{cre} and important regions of the genome, determining their function and which target genes they regulate is a further complicating problem.
+Yet while these measurements help in identifying candidate \glspl{cre} and important regions of the genome, determining their function and which target genes they regulate is a further complicating problem.
 
 \newfigure{chapter1/sequencing-techniques.png}{Characterizing functional DNA elements with high throughput sequencing}{}{fig:intro_sequencing}
 
-
-% start here
+Varying chromatin states across cell types means that multiple measurements across multiple cell types are necessary to understand the breadth of functions a single \gls{cre} may have.
+In 2007, the ENCODE Project aimed to catalogue all biochemically functional elements in the human genome to better understand all the ways genes are expressed and how they are regulated in different cell types \cite{birneyIdentificationAnalysisFunctional2007,mooreExpandedEncyclopaediasDNA2020}.
+Using these genome-wide sequencing techniques across a variety of human cell lines and tissues, the ENCODE Project has since catalogued nearly $10^6$ candidate \glspl{cre}, comprising nearly 8 \% of the human genome \cite{mooreExpandedEncyclopaediasDNA2020}.
+Interpreting this data requires computational methods to correlate and interpret measurements across samples.
+Genome segmentation methods such as ChromHMM \cite{ernstChromHMMAutomatingChromatinstate2012} and Segway \cite{hoffmanUnsupervisedPatternDiscovery2012,chanSegwayGaussianMixture2018}  classify genomic regions according to their predicted function which can be validated with \emph{in vitro} or \emph{in vivo} experiments.
+Many techniques for experimental validation, including \gls{crispr}-Cas9, \gls{sirna}, and \gls{shrna}, can interfere with candidate \glspl{cre} by deleting them from the genome, preventing \glspl{tf} from binding to the chromatin, or preventing translation of \gls{mrna} transcripts into proteins \cite{zhouEmergenceNoncodingCancer2016,gasperiniComprehensiveCatalogueValidated2020}.
+These same techniques can also be used to screen for candidate \glspl{cre} themselves, through \glspl{mpra} and \gls{crispr} screens \cite{gasperiniComprehensiveCatalogueValidated2020}, necessitating their own suite of statistical and software tools for analyzing observations.
+Altogether, a collection of experimental and computational techniques enable the cataloguing and interpretation of thousands of \glspl{cre} and chromatin interactions across many cell types.
+These catalogues facilitate understanding how genes are expressed within the complex chromatin architecture in normal cells and, importantly, how aberrations to this architecture can result in disease.
 
 \section{Aberrations to chromatin architecture in cancer}
+
+% start here
 
 \subsection{Genetic aberrations in cancer}
 
