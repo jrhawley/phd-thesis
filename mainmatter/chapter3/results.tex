@@ -1,8 +1,8 @@
 \section{Results}
 
-\subsection{Three-dimensional chromatin organization is stable over oncogenesis}
+\subsection{Three-dimensional genome organization is stable over oncogenesis}
 
-\Gls{3c} technologies enable the measurement of three-dimensional chromatin organization.
+\Gls{3c} technologies enable the measurement of three-dimensional genome organization.
 These assays, however, are often limited to cell lines, animal models and liquid tumours due to the amount of input required \cite{lieberman-aidenComprehensiveMappingLongRange2009}.
 Here, we optimized and conducted low-input Hi-C \cite{diazChromatinConformationAnalysis2018} on 10 $\mu$m thick cryosections from 12 primary prostate tumours and 5 primary benign prostate sections (see Methods, \Cref{fig:3D_fig1}a, \Cref{fig:3D_figs1}a).
 The 12 tumours were selected from the \gls{cpcgene} cohort previously assessed for \gls{wgs} \cite{fraserGenomicHallmarksLocalized2017}, \gls{rnaseq} \cite{chenWidespreadFunctionalRNA2019}, and H3K27ac \gls{chipseq} \cite{kronTMPRSS2ERGFusion2017,mazrooeiCistromePartitioningReveals2019} (Supplementary Table 1).
@@ -18,18 +18,18 @@ Hence, we produced a high depth, high quality Hi-C library on 17 primary prostat
 To characterize the higher-order organization of the primary prostate genome, we first identified \glspl{tad}.
 Across the 17 primary tissue samples, we observed an average of 2,305 \glspl{tad} with a median size of 560 kbp (Supplementary Tables 3-4).
 However, when considering all hierarchical levels of \gls{tad} organization, we did not observe significant differences in the number of \glspl{tad} identified across length scales (\Cref{fig:3D_fig1}b), nor in the persistence of their boundaries (\Cref{fig:3D_fig1}c).
-This suggests few, if any, differences in three-dimensional chromatin organization at the \gls{tad} level between benign and tumour tissue.
+This suggests few, if any, differences in three-dimensional genome organization at the \gls{tad} level between benign and tumour tissue.
 Notably, we observed differences in organization around essential genes for PCa between primary tissue and previously profiled cell lines.
 For example, chromatin around the \gls{ar} gene that was previously found enriched in the 22Rv1 compared to RWPE1 prostate cell lines \cite{rhieHighresolution3DEpigenomic2019} were not recapitulated in either benign or tumour primary samples (\Cref{fig:3D_fig1}d).
 Moreover, when compared to other Hi-C datasets, the primary prostate samples clustered separately from cell lines (\Cref{fig:3D_figs1}b), despite similar enrichment of CTCF binding sites near \gls{tad} boundaries (\Cref{fig:3D_figs1}c).
-These results suggest that \glspl{tad} are constrained over oncogenesis and that cell line models may not harbour disease-relevant three-dimensional chromatin organization.
+These results suggest that \glspl{tad} are constrained over oncogenesis and that cell line models may not harbour disease-relevant three-dimensional genome organization.
 
-We next investigated compartmentalization changes, the second class of higher-order three-dimensional chromatin organization.
+We next investigated compartmentalization changes, the second class of higher-order three-dimensional genome organization.
 Recurrent changes to segments nearly the size of chromosome arms showed differential compartmentalization in multiple tumour samples compared to benign samples, such as compartment B-to-A transitions on 19q and A-to-B transitions on chromosome Y (\Cref{fig:3D_figs2}a-c).
 Only two genes on chromosome 19 were differentially expressed between the 8 tumours with benign-like compartmentalization and the other 4 (\Cref{fig:3D_figs2}d).
 Similarly, no genes on chromosome Y were differentially expressed between the 4 tumours with benign-like compartmentalization and the remaining samples (\Cref{fig:3D_figs2}e).
 Both arms on chromosome 3 show differential mean compartmentalization, but this appears to be driven by one tumour sample and one benign sample for each arm and is not recurrent (\Cref{fig:3D_figs2}f).
-Collectively, these results suggest that phenotypic differences between benign and tumour tissues do not stem from differences in higher-order three-dimensional chromatin organization alone.
+Collectively, these results suggest that phenotypic differences between benign and tumour tissues do not stem from differences in higher-order three-dimensional genome organization alone.
 
 \subsection{Focal chromatin interactions shift over oncogenesis}
 
@@ -37,7 +37,7 @@ Changes to focal chromatin interactions have been observed in the absence of hig
 We detected chromatin interactions, identifying a median of 4,395 interactions per sample (range 1,286 - 6,993; \Cref{fig:3D_figs3}a, Supplementary Table 5).
 Among these detected interactions, we identified known contacts in PCa such as those between two distal \glspl{cre} on chromosome 14 and the FOXA1 promoter \cite{zhouNoncodingMutationsTarget2020} (\Cref{fig:3D_figs3}b), and \glspl{cre} upstream of MYC on chromosome 8 that are frequently duplicated in metastatic disease \cite{quigleyGenomicHallmarksStructural2018} (Supplementary Table 5).
 16,474 unique chromatin interactions were identified in at least one sample (\Cref{fig:3D_fig2}a), reaching an estimated \textapprox 80\% saturation of detection (\Cref{fig:3D_figs3}c).
-Restricting our analysis to the 8,486 interactions present in at least two samples (51.5\% of all interactions) yielded 1,405 tumour- and 273 benign-specific interactions, suggesting focal changes in three-dimensional chromatin organization occur over oncogenesis.
+Restricting our analysis to the 8,486 interactions present in at least two samples (51.5\% of all interactions) yielded 1,405 tumour- and 273 benign-specific interactions, suggesting focal changes in three-dimensional genome organization occur over oncogenesis.
 Aggregate peak analysis revealed Hi-C contact enrichment at all detected interactions in all samples (\Cref{fig:3D_fig2}b-c), demonstrating that tumors- and benign-specific interactions are not binary.
 Rather, the contacts at "tumour-specific" loci are more enriched than those at "benign-specific" loci in tumour samples (\Cref{fig:3D_fig2}b).
 Similarly, the contacts at "benign-specific" loci are more enriched than those at "tumour-specific" loci in benign samples (\Cref{fig:3D_fig2}c).
@@ -88,6 +88,7 @@ Overall, we find that \glspl{sv} are associated with higher-order topological ch
 
 Despite the evidence that \glspl{sv} rarely impact higher-order chromatin topology, we evaluated whether \glspl{sv} affected the expression of genes within the \glspl{tad} surrounding the breakpoint using patient-matched \gls{rnaseq} data \cite{chenWidespreadFunctionalRNA2019}.
 We found that 23 of 260 breakpoints (8.8\%) are associated with significant changes to local gene expression (\Cref{fig:3D_fig4}b).
+Notably, only one of these breakpoints with local gene expression was also found to associate with an altered TAD (\Cref{fig:3D_fig4}b).
 Complex events can have opposite effects at each breakpoint.
 For example, while the T2E fusion across all tumours leads to over-expression of ERG and under-expression of TMPRSS2 \cite{fraserGenomicHallmarksLocalized2017,kronTMPRSS2ERGFusion2017}, the deleted locus between these two genes was inserted into chromosome 14 as part of a complex translocation event in one patient (\Cref{fig:3D_fig4}c-f).
 This inserted fragment positions ERG towards the 5' end of the RALGAPA1 gene and TMPRSS2 towards the 3' end (\Cref{fig:3D_fig4}c) resulting in a significant drop in intra-\gls{tad} contacts at the RALGAPA1 locus on chromosome 14 (two-sample unpaired $t$-test, $t = 6.38$, $p = 1.04 \times 10^{-9}$; \Cref{fig:3D_fig4}d).
