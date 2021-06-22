@@ -25,6 +25,7 @@ Together, the binding of \glspl{tf} to the \gls{dna} at specific \glspl{cre} is 
 
 The ability of \glspl{tf} to bind at specific \glspl{cre} is dependent on multiple features of the \gls{dna}.
 Many \glspl{tf} bind to \gls{dna} at specific sequences, termed motifs \cite{farnhamInsightsGenomicProfiling2009,spitzTranscriptionFactorsEnhancer2012}.
+Finding the locations of a given motif in the genome is often the first step in determining the cistrome of a \gls{tf}, the set of all sites and \glspl{cre} a \gls{tf} binds to \emph{in vivo} \cite{lupienCistromicsHormoneDependentCancer2009,liuCistromeIntegrativePlatform2011}.
 The structural protein \gls{ctcf} has a well-defined motif and binds to this sequence at thousands of locations across the human genome \cite{kimAnalysisVertebrateInsulator2007,dixonTopologicalDomainsMammalian2012}.
 Mutations to the sequence motif can alter \gls{ctcf}'s binding affinity for \gls{dna}, as is the case with many \glspl{tf} \cite{kasowskiVariationTranscriptionFactor2010,mauranoWidespreadSitedependentBuffering2012,mauranoLargescaleIdentificationSequence2015}.
 Relying on more than just the genetic sequence, \Gls{ctcf} is also an example of a \gls{tf} that is sensitive epigenetic features such as \gls{dname}, the addition of a methyl group to \gls{dna} nucleotides \cite{mauranoRoleDNAMethylation2015,wangWidespreadPlasticityCTCF2012,wiehleDNAMethylationEmbryonic2019,xuNascentDNAMethylome2018,vinerModelingMethylsensitiveTranscription2016}, as are \gls{dna} methyltransferases DNMT1, DNMT3A, and DNMT3B \cite{gollEukaryoticCytosineMethyltransferases2005,listerHumanDNAMethylomes2009}.
@@ -118,9 +119,57 @@ Taken together, these papers demonstrate the effect of differences in normal cel
 Overall, these non-genetic aberrations of chromatin can be found across multiple cancer types.
 But we will continue to focus on two seemingly different cancer types that both display complex relationships between different components of the chromatin architecture: \gls{pca} and \gls{ball}.
 
-\section{Interactions between chromatin architecture components in prostate cancer and leukemia}
+\section{Chromatin architecture of \glsentrylong{pca} and \glsentrylong{ball}}
 
-\section{Dissertation structure}
+\subsection{Prostate cancer}
+
+\subsubsection{Diagnosis, treatment, and risk factors}
+
+\Gls{pca} is the second most commonly diagnosed cancer in men globally, with an estimated 23 300 men being diagnosed with the disease in Canada in 2020 \cite{brayGlobalCancerStatistics2018,brennerProjectedEstimatesCancer2020}.
+Diagnosis typically begins with the detection of \gls{psa} in the blood, followed by a digital rectal exam and a core needle biopsy to rule out benign prostate hyperplasia \cite{}.
+Once diagnosed, patients are typically grouped into one of several risk categories based on factors including \gls{psa} levels, histopathological assessment (i.e. Gleason or \gls{isup} scores), and medical imaging to detect for distal metastases (\gls{tnm} staging)\cite{}.
+\Gls{pca} patients assessed to have a low mortality risk often undergo active surveillance to monitor for changes in the disease that pose a risk to the patient.
+Patients with high mortality risks often undergo one of multiple treatment regimens, including surgery, androgen deprivation therapy, chemotherapy, and radiotherapy \cite{}.
+While \textapprox 93 \% of men with localized \gls{pca} survive, \textapprox 70 \% of patients with metastatic disease will die \cite{}, accounting for \textapprox 10 \% of all cancer deaths in men \cite{brennerProjectedEstimatesCancer2020}.
+This highlights the need for accurate risk assessment at diagnosis and knowledge of what aberrations lead to aggressive, metastatic disease.
+
+Risk of developing \gls{pca} is associated with age and the median age at diagnosis is 66 years old \cite{}.
+% don't forget this number
+While developing \gls{pca} at a young age is rare (diagnosis at age $< 40$ accounts for !!!x!!! \% of all \gls{pca} diagnoses), younger men who are diagnosed typically have a more aggressive disease and relatively poorer survival rates \cite{}.
+In addition to age, genetic ancestry is a risk factors for developing the disease.
+Men of African ancestry are \textapprox 1.6 times more likely to be diagnosed with \gls{pca} than men of western European ancestry, who in turn are \textapprox 2 times more likely than men of Asian ancestry \cite{}.
+Men of different ancestries also tend to accumulate different sets of mutations in their tumours.
+For example, \textapprox 50 \% of men of western European ancestry harbour a fusion of an \emph{ETS} gene family member \cite{fraserGenomicHallmarksLocalized2017}, whereas only \textapprox 10 \% of men of Asian ancestry harboured a similar mutation \cite{liGenomicEpigenomicAtlas2020}.
+Inherited germline mutations are also a risk factor for \gls{pca}, as men with \emph{BRCA1} and \emph{BRCA2} mutations are \textapprox 2 times more likely to develop \gls{pca} than those without.
+Men with germline mutations to \emph{ATM} and \emph{HOXB13} are also at a higher risk of developing the disease \cite{}.
+Studies identifying these risks demonstrate that familial history, in addition to age and genetic ancestry, are important factors for developing \gls{pca}.
+
+\subsubsection{Chromatin aberrations in \glsentrylong{pca}}
+
+Large cohort studies of prostate tumours have identified numerous driver mutations for the disease.
+% do I need all these mutations? should I elaborate on their function?
+These driver mutations include, but are not limited to, coding mutations to the \emph{BRCA1}, \emph{BRCA2}, \emph{CHD1}, \emph{IDH1}, \emph{MYC}, \emph{NKX3-1}, \emph{PTEN}, \emph{RB1}, \emph{SPOP}, and \emph{TP53} genes, as well as \emph{ETS}, \emph{FOX}, \emph{HOX}, \emph{KLK}, and \emph{KMT} factors \cite{fraserGenomicHallmarksLocalized2017,pcf/su2cinternationalprostatecancerdreamteamLongTailOncogenic2018,abeshouseMolecularTaxonomyPrimary2015}.
+% feels like a bit of a shoehorn
+\emph{ETS} factor mutations, such as the \gls{t2e} fusion, can lead to a globally \emph{cis}-regulatory landscape, affecting \gls{tf} binding genome-wide and \emph{NOTCH} signalling \cite{kronTMPRSS2ERGFusion2017}.
+Metastatic tumours are enriched for amplifications to the \emph{FOXA1} and \gls{ar} genes compared to primary tumours, as well as mutations targeting epigenetic regulators, such as \glspl{kmt} \cite{grassoMutationalLandscapeLethal2012,robinsonIntegrativeClinicalGenomics2015,quigleyGenomicHallmarksStructural2018}.
+Over-expression of \gls{ar} is associated with castration resistance, reducing the effectiveness of androgen deprivation therapies \cite{}.
+% weird phrasing, might want to fix up
+Importantly, \emph{FOXA1} is a pioneer \gls{tf} that regulates \gls{ar}, and over-expression of \emph{FOXA1} is also more frequently found in metastatic than primary tumours \cite{tengPioneerProstateCancer2021}.
+Together, these two genes, their \glspl{cre}, and their cistromes constitute important regions of chromatin that impact the progression of low-risk, localized \gls{pca} into high-risk metastatic \gls{pca}.
+
+\subsection{\Glsentrylong{ball}}
+
+\begin{itemize}
+  \item B-ALL rates, epidemiology
+  \item diagnosis and staging
+  \item treatment strategies and relapse
+  \item important aberrations of chromatin architecture in B-ALL
+\end{itemize}
+
+In summary, the processes of \gls{pca} oncogenesis, \gls{pca} metastases, and \gls{ball} relapse all harbour aberrations to different components of the chromatin architecture that likely interact with each other.
+Thus, to mitigate, or even prevent, these processes from occurring, this thesis investigates mutations targeting \glspl{cre} of important \glspl{tf}, the relationship between three-dimensional genome organization and \glspl{sv}, and the effect of \gls{dname} changes over the course of relapse.
+
+\section{Thesis structure}
 
 I begin with \Cref{chap:FOXA1} by exploring the \emph{cis}-regulatory landscape of \gls{pca} and delineating the \glspl{cre} of the prostate oncogene \emph{FOXA1}.
 I demonstrate the essentiality of \emph{FOXA1} for prostate tumours, identify putative \glspl{cre} based on integration of multiomic datasets in \gls{pca} cell lines, and assess the functional impact of recurrent \gls{pca} \glspl{snv} on \emph{FOXA1} expression and \gls{tf} binding.
@@ -134,5 +183,5 @@ To address this problem, I developed a statistical method for reducing error in 
 Given the shared importance of mutations to \glspl{tf} and epigenetic enzymes in prostate cancer and leukemias, in \Cref{chap:BALL} I explore the epigenetic landscape of \gls{ball} and its relapse after treatment.
 I characterize molecular changes to \gls{ball} tumours over the course of disease relapse and identify important changes to \gls{dname} that indicate the reversion to a stem-like phenotype, often present in a subpopulation of cells at diagnosis.
 
-Together, this dissertation investigates the multiple layers of the chromatin architecture that contribute to oncogenesis and cancer progression.
+Together, this thesis investigates the multiple layers of the chromatin architecture that contribute to oncogenesis and cancer progression.
 I demonstrate that aberrations to the genome, epigenome, and three-dimensional organization of chromatin play important roles individually, and together, in the orchestration of the disease.
