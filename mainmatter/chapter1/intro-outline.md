@@ -74,7 +74,7 @@
     - HSCs somewhere?
 - dissertation structure
 
-## Stanley's intro
+## Stanley's intro (19 pages)
 
 - prostate cancer
   - epidemiology and risk factors for prostate cancer
@@ -95,7 +95,7 @@
   - FOXA1 function
   - FOXA1 is frequently mutated in prostate cancers
 
-## Giacomo's intro
+## Giacomo's intro (85 pages)
 
 - Genomic features of mammalian genomes
   - Historical overview
@@ -180,7 +180,7 @@
         - Mutations in DNMT3B cause ICF1 syndrome
         - Mutations in the zinc finger ZBTB24 genes cause ICF2 syndrome
 
-## Parisa's intro
+## Parisa's intro (12 pages)
 
 - SNVs
   - Protein-coding and non-coding SNVs
@@ -198,7 +198,7 @@
   - SNV enrichment in networks of regulatory elements
 - Objectives and summary
 
-## Katie's intro
+## Katie's intro (24 pages)
 
 - tumour heterogeneity
   - inter-tumour heterogeneity
@@ -219,3 +219,18 @@
   - CPC-GENE
   - TCGA
 - rationale
+
+## Ali's intro (12 pages)
+
+- thesis outline
+- mapping the transcriptome to human phenotypes
+  - unsupervised clustering
+  - statistical inference and signature identification
+  - supervised learning methods
+  - pathway-based models
+- beyond the transcriptome
+- mapping the epigenome to human phenotypes
+  - super-enhancers
+  - LOCKs
+  - TADs
+- summary
