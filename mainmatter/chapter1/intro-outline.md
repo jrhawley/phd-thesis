@@ -234,3 +234,25 @@
   - LOCKs
   - TADs
 - summary
+
+## Stephanie's outline (36 pages)
+
+- B-cell ALL
+  - B-cell lymphopoiesis
+  - B-ALL
+  - genetics of B-ALL
+  - prenatal origins of B-ALL
+  - inherited risk of B-ALL
+  - exposures and infections initiating B-ALL
+  - B-ALL minimal residual disease and relapse
+- development of PDX models of B-ALL
+  - humanized mouse models
+  - xenografts models of leukemia and leukemogenesis
+- cancer heterogeneity
+  - intra-tumoural heterogeneity
+  - the cancer stem cell model
+  - leukemia-initiating cells in B-ALL
+  - clonal evolution and the genetic basis of cancer
+  - clonal evolution in B-ALL and B-ALL L-ICs
+- cell of origin of B-ALL
+  - cellular target of leukemic initiation and transformation in B-ALL
