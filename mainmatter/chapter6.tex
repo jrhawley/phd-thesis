@@ -49,9 +49,28 @@ Given the widespread hypermethylation observed at relapse in all patients, it is
 Finally, the widespread hypermethylation of \gls{ball} at relapse reflects revision of malignant blasts to a more stem-like phenotype, a characteristic typically observed in other leukemias such as \gls{aml} \cite{krivtsovMLLTranslocationsHistone2007,liClinicalImplicationsGenomewide2017,kresoEvolutionCancerStem2014,shlushIdentificationPreleukaemicHaematopoietic2014,shlushTracingOriginsRelapse2017}.
 This suggests that the role of leukemic stem cells and the impact that the cell-of-origin has on therapeutic response, should be prioritized in future research of \gls{ball} relapse.
 
+\section{Limitations}
+
+The main limitations in the studies presented here stem from cancer models, cohort sizes, and correlative measurements.
+In \Cref{chap:FOXA1}, we used essentiality data from \gls{pca} cell lines that serve as models of primary prostate tumours.
+Further, our dissection of \glspl{cre} relied on encyclopedias of DNA elements derived from cell lines, as did our validation experiments for assessing the impact of mutations seen in primary prostate tumours.
+Cell line models are not necessarily representative of primary tumours observed in patients \cite{}.
+Moreover, different cell lines may have different regulatory networks, as recent studies of chromatin organization and \gls{cre} contacts in \gls{pca} cell lines have highlighted \cite{ahmedCRISPRiScreensReveal2021}.
+This separation between the models we study and the patients we aim to serve may prohibit translation of discoveries from our models to the clinic.
+
+In \Cref{chap:3D}, we were able to profile the genome organization of 12 \gls{pca} patients and 5 benign prostate samples.
+Similarly, in \Cref{chap:BALL}, we used \glspl{pdx} originating from 5 patients with \gls{ball}.
+In light of the large degree of inter-patient variation seen in tumours from the same tissue, observations in these small sample sizes may not generalize to patients with these diseases as a whole.
+In both cases, we used patient-matched data to corroborate findings from other components of the chromatin architecture, where possible, but validation experiments for some observations remain difficult.
+Using \gls{crispr} technologies to knock in \glspl{snv} or inactivate individual \glspl{cre} is possible, but replicating complex \glspl{sv} or selectively (de)methylating \glspl{cre} to validate some findings remains technically challenging \cite{nakamuraCRISPRTechnologiesPrecise2021,pickar-oliverNextGenerationCRISPR2019,wangEngineering3DGenome2021}.
+
 \section{Summary and concluding remarks}
 
-\begin{itemize}
-  \item work does not focus on a single disease, should extend this type of analysis to all cancers, since they all appear to harbour aberrations affecting multiple components of the chromatin architecture
-  \item multi-pronged approach of computational, statistical, and molecular, and microscopy methods optimized for low-input samples targeting the set of DNA elements and their relationships to each other in individual patients to develop personalized medicines and treat cancer at its origins in the chromatin
-\end{itemize}
+Diagnosis, treatment, and the foundational understanding of cancer has been revolutionized by high throughput sequencing technologies and the ability to detect and interpret genetic aberrations in tumours.
+When combined with information about \glspl{cre}, the essentiality of genes in multiple cell types, and the three-dimensional genome organization, genetic aberrations can provide a significant amount of explanatory power for the hallmarks of cancer and what causes them.
+But genetic aberrations are not the only mechanism cancer cells can use to arrive at these hallmarks to drive disease.
+Identifying aberrations across multiple components of the chromatin architecture can uncover complex mechanisms through which cancer cells turn off the expression of tumour suppressor genes, activate oncogenes, or activate pathways.
+Interrogating the role of mutations in a gene's set of \glspl{cre} (\Cref{chap:FOXA1}), identifying stable regions of genome organization and shifting chromatin interactions over oncogenesis (\Cref{chap:3D}), and comparing genetic and epigenetic states over disease progression (\Cref{chap:BALL}) are all important approaches to better understand the aberrations, origins, and trajectories of cancers in patients.
+This multi-pronged approach requires computational, statistical, and molecular, methods, optimized for low-input samples and small cohort sizes (\Cref{chap:3D,chap:JS}), and methodological developments in these areas are still required.
+This thesis focuses on \gls{pca} and \gls{ball}, but the methodologies employed here are not restricted to a single disease.
+Proof-of-concept studies here can be extended to all cancers, or any other diseases caused by aberrations to the chromatin architecture.
