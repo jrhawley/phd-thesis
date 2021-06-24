@@ -126,7 +126,7 @@ But we will continue to focus on two seemingly different cancer types that both 
 \subsubsection{Diagnosis, treatment, and risk factors}
 
 \Gls{pca} is the second most commonly diagnosed cancer in men globally, with an estimated 23 300 men being diagnosed with the disease in Canada in 2020 \cite{brayGlobalCancerStatistics2018,brennerProjectedEstimatesCancer2020}.
-Diagnosis typically begins with the detection of \gls{psa} in the blood, followed by a digital rectal exam and a core needle biopsy to rule out benign prostate hyperplasia \cite{}.
+Diagnosis typically begins with the detection of \gls{psa} in the blood, followed by a digital rectal exam for an enlarged prostate and a core needle biopsy to rule out benign prostate hyperplasia \cite{}.
 Once diagnosed, patients are typically grouped into one of several risk categories based on factors including \gls{psa} levels, histopathological assessment (i.e. Gleason or \gls{isup} scores), and medical imaging to detect for distal metastases (\gls{tnm} staging)\cite{}.
 \Gls{pca} patients assessed to have a low mortality risk often undergo active surveillance to monitor for changes in the disease that pose a risk to the patient.
 Patients with high mortality risks often undergo one of multiple treatment regimens, including surgery, androgen deprivation therapy, chemotherapy, and radiotherapy \cite{}.
@@ -159,14 +159,36 @@ Together, these two genes, their \glspl{cre}, and their cistromes constitute imp
 
 \subsection{\Glsentrylong{ball}}
 
-\begin{itemize}
-  \item B-ALL rates, epidemiology
-  \item diagnosis and staging
-  \item treatment strategies and relapse
-  \item important aberrations of chromatin architecture in B-ALL
-\end{itemize}
+\subsubsection{Diagnosis, treatment, and risk factors}
 
-In summary, the processes of \gls{pca} oncogenesis, \gls{pca} metastases, and \gls{ball} relapse all harbour aberrations to different components of the chromatin architecture that likely interact with each other.
+Leukemia is the 15th most commonly diagnosed cancer globally, with an estimated 6 900 individuals being diagnosed with the disease in Canada in 2020 \cite{brayGlobalCancerStatistics2018,brennerProjectedEstimatesCancer2020}.
+Leukemias, generally, result from an overgrowth of undifferentiated blast cells that do not exhibit the same behaviours as fully differentiated cells in the hematopoietic hierarchy \cite{}.
+\Gls{ball} is an acute clonal expansion of primitive cells restricted to the lymphoid hematopoietic lineage of B-cells and primarily occurs in children \cite{hungerAcuteLymphoblasticLeukemia2015}.
+Currently, overall survival of pediatric \gls{ball} is \textapprox 90 \% \cite{hungerAcuteLymphoblasticLeukemia2015}, yet disease relapse after treatment still occurs in 10 - 15 \% of patients \cite{inabaAcuteLymphoblasticLeukaemia2013,heikampNextGenerationEvaluationTreatment2018}.
+Diagnosis of \gls{ball} typically begins with the detection of over-abundant lymphoblasts by microscopy and immunophenotypic assessment of cell surface markers indicating lineage commitment and developmental stage \cite{inabaAcuteLymphoblasticLeukaemia2013}.
+After diagnosis, mortality risk is assessed based on factors including age and white blood cell counts.
+Patients under 2 or over 10 years of age have worse prognoses than patients of other ages, as do patients with $\ge 50 \times 10^3$ cells / mL \cite{hungerAcuteLymphoblasticLeukemia2015,inabaAcuteLymphoblasticLeukaemia2013}.
+Newly diagnosed patients typically undergo remission-induction therapy, intensification/consolidation therapy, and continuation/maintenance therapy over the span of 2 years \cite{inabaAcuteLymphoblasticLeukaemia2013}.
+Risk factors for developing the disease include sex, genetic ancestry, and chromosomal rearrangements, with men, African or Hispanic ancestry, and Down's syndrome all associated with an increased risk \cite{inabaAcuteLymphoblasticLeukaemia2013,hungerAcuteLymphoblasticLeukemia2015}.
+Risk factors for disease relapse remain elusive; however, karyotpying and high throughput sequencing technologies are helping to identify new biomarkers.
+
+\subsubsection{Chromatin aberrations in \glsentrylong{ball}}
+
+\Gls{ball} is commonly classified according to the presence of recurrent mutations.
+Hyperploidy and the presence of the fusion of the \emph{ETV6} and \emph{RUNX1} genes are associated with favourable outcomes, whereas hypoploidy with $<$ 44 chromosomes, fusion of the \emph{BCR} and \emph{ABL1} genes, and mutations affecting the \emph{PAX5}, \emph{EBF1}, \emph{MLL}/\emph{KMT2A}, \emph{CRLF2}, and \emph{IKZF1} genes are all associated with poorer outcomes \cite{inabaAcuteLymphoblasticLeukaemia2013,hungerAcuteLymphoblasticLeukemia2015}.
+Many of these affected genes regulate B-cell development, such as \emph{PAX5} \cite{liuPax5LossImposes2014,dangPAX5TumorSuppressor2015,mullighanGenomewideAnalysisGenetic2007}, \emph{IKZF1} \cite{mullighanGenomewideAnalysisGenetic2007}, and \emph{EBF1} \cite{}.
+Similarly, \emph{KMT2A} and \emph{CREBBP} are histone writers, depositing methyl groups to the histone H3 lysine 4 residue and acetyl groups to the histone H3 lysine 56 residue, respectively \cite{slanyMLLFusionProteins2020,krivtsovMLLTranslocationsHistone2007,raoHijackedCancerKMT22015,parkPHD3DomainMLL2010,liStructuralBasisActivity2016,dasBindingHistoneChaperone2014}.
+Mutations in these genes are enriched in relapse \cite{hungerAcuteLymphoblasticLeukemia2015,mullighanGenomicAnalysisClonal2008}, suggesting that not only do epigenetic regulators play a key role in oncogenesis, but that they also promote relapse.
+
+Aberrant changes to \gls{dname} may also play a role in \gls{ball} relapse.
+\Gls{dname} has been shown to change across B-cell differentiation, with \glspl{dmr} found in the cistromes of \glspl{tf} that regulate differentiation, including \emph{EBF1} and \emph{PAX5} \cite{leeGlobalDNAMethylation2012}.
+Additionally, the \gls{dname} profile of \gls{ball} cells differ at thousands of loci across the genome, compared to normal B-cells, primarily in bivalent \glspl{cre} and promoter regions \cite{leeEpigeneticRemodelingBcell2015,nordlundGenomewideSignaturesDifferential2013}.
+These findings suggest that aberrant \gls{dname} pattern in \gls{ball} may be affecting B-cell differentiation through \gls{tf} binding.
+Moreover, hypomethylation of the \emph{IL2RA} gene is associated with a worse prognosis, as is aberrant \gls{dname} in the presence of \emph{E2A}-\emph{PBX1} or \emph{KMT2A} fusions \cite{gengIntegrativeEpigenomicAnalysis2012}.
+This suggests that specific \gls{dname} changes may cooperate with mutated epigenetic regulators to promote aggressive disease that is more likely to relapse after treatment.
+Overall, numerous genetic and epigenetic alterations in primary \gls{ball} and relapsed \gls{ball} suggest that multiple chromatin aberrations impact the development and progression of this disease.
+
+While cellular phenotypes and treatment strategies for \gls{pca} and \gls{ball} do not resemble each other,  \gls{pca} oncogenesis, \gls{pca} metastases, and \gls{ball} relapse all harbour aberrations to different components of the chromatin architecture that interact with each other.
 Thus, to mitigate, or even prevent, these processes from occurring, this thesis investigates mutations targeting \glspl{cre} of important \glspl{tf}, the relationship between three-dimensional genome organization and \glspl{sv}, and the effect of \gls{dname} changes over the course of relapse.
 
 \section{Thesis structure}
