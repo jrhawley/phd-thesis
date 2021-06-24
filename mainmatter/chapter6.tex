@@ -26,16 +26,17 @@ These approaches are not limited to prostate tumours and can serve as a starting
 
 \section{Implications of three-dimensional organization and enhancer hijacking in \glsentrylong{pca}}
 
-\begin{itemize}
-  \item optimized low-input Hi-C method to interrogate genome organization in more tissues than previously possible
-  \item largest collection of 3D organization data in prostate tumours to date
-  \item add to evidence that \glspl{sv} can, but rarely, alter 3D structure in disease, prompting further interrogation into how and why this appears to be the case
-  \item motivates use of microscopy measurements in single cells to see how structure is altered and if sub-clonal mutations interfere with the ability to detect changes in structure
-  \item statistical methods may make progress to help identify effect of individual, non-recurrent events, such as in \Cref{chap:JS}, as well as computational libraries for developing better tooling in this area
-  \item alternatively further push for development in organoid models that can replicate the chromatin state of tumour tissue from small input samples
-  \item use genome organization methods to fully characterize GRNs for each individual gene (both first- and higher-order, depending on how much perturbations to these networks affect gene expression)
-  \item consider evolutionary lens of GRN across species instead of just thinking of genes as single units
-\end{itemize}
+In \Cref{chap:3D}, my co-authors optimized a low-input Hi-C method to interrogate genome organization in cryo-preserved prostate tissue slides.
+I then demonstrated that this could produce a high quality Hi-C library and helped produce that largest collection of genome organization data in prostate tumours to date.
+This technological step forward opens the door for profiling the three-dimensional genome in cancer patients without relying in cell lines or other models, and may be a critical step in moving personalized medicine forward.
+We add to existing evidence that \glspl{sv} can, but rarely, alter 3D structure in disease \cite{ghavi-helmHighlyRearrangedChromosomes2019,oudelaarRelationshipGenomeStructure2020,despangFunctionalDissectionSox92019,williamsonDevelopmentallyRegulatedShh2019,dixonIntegrativeDetectionAnalysis2018,akdemirDisruptionChromatinFolding2020,liPatternsSomaticStructural2020,iyyankiSubtypeassociatedEpigenomicLandscape2021}.
+Elucidating when and how \glspl{sv} impact genome organization, then, is still an area that requires investigation.
+Developments in statistical methods, such as those discussed in \Cref{chap:JS}, may help identify the effects of individual, non-recurrent \glspl{sv}.
+Subclonality of \glspl{sv} may interfere with the ability to detect rearranged domains in bulk Hi-C measurements.
+Thus, developments in high throughput sequencing and microscopy measurements in single cells, such as ORCA \cite{mateoVisualizingDNAFolding2019} and STORM \cite{batesStochasticOpticalReconstruction2013}, as well as organoid or explant models that recapitulate the chromatin state of the original tumour, may help in identifying the effect of such events \cite{}.
+This work also adds to our ability to detect chromatin interactions between promoters and enhancers in patient samples, allowing for better characterization of gene regulatory networks for each and every gene.
+Given the benefits of plexus-based approaches to interpreting aberrations in the chromatin architecture, this work serves as a foundation on which to integrate gene regulatory networks with chromatin aberrations in cancers more generally.
+This foundation can be extended to studying the evolution of these networks, their genome organization, and their resiliency between species or over time as tumours respond to therapeutic interventions \cite{}.
 
 \section{Implications of \glsentrylong{dname} changes in relapse}
 
