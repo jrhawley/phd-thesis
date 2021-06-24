@@ -1,2 +1,54 @@
 \chapter{Discussion \& Future Directions}
 \label{chap:discussion}
+
+Each of the previous chapters have presented a story interrogating multiple components of the chromatin architecture, how they interact with each other, and the plethora of computational and experimental methods required to unravel this architecture.
+\Cref{chap:FOXA1} identifies and validates \glspl{cre} of the \emph{FOXA1} gene, a critical \gls{tf} that regulates \gls{pca} development and regulates \gls{ar} expression to control disease progression.
+\Cref{chap:3D} expands on these ideas to investigate how the three-dimensional genome organization impacts gene regulatory networks and how genetic aberrations can alter this organization to promote oncogenesis.
+\Cref{chap:JS} develops a mathematical and computational framework to reduce uncertainty about how individual aberrations in chromatin architecture impact gene expression.
+Finally, \Cref{chap:BALL} identifies the strong relationship between genetic and epigenetic profiles in \gls{ball} relapse and investigates how \gls{dname} changes and revision to a more stem-like chromatin state may underlie disease relapse.
+Together, the work presented in this thesis demonstrates that different components of the chromatin architecture, the genome, molecular chromatin modifications, and three-dimensional organization, can all individually contribute to cancer development and progression.
+Moreover, this thesis demonstrates that aberrations in these components work together to drive disease.
+These multiple components of the chromatin architecture need to be studied in tandem to understand the origins of cancer and how to develop curative treatments for it.
+
+\section{Implications of non-coding \glsentrylongpl{snv} targeting a single gene}
+
+In \Cref{chap:FOXA1},
+
+\begin{itemize}
+  \item using essentiality from multiple cell lines to converge on uniformly important \glspl{tf} in a given tumour type
+  \item idea that \glspl{snv} converge on \glspl{cre} of important genes in a given tumour type
+  \item other aberrations, such as \gls{dname}, histone modifications, complex \glspl{sv}, or chromatin accessibility may show similar impacts on the expression of these genes in other cancer types
+  \item experimental and computational methods to identify and validate \glspl{cre} for a given gene
+  \item importance of considering the set of \glspl{cre} for a given gene, or plexus, when considering the impact of chromatin aberrations in oncogenesis or relapse
+  \item impact on "driver" identification in cancers
+  \item all of the above extend beyond \gls{pca} and can apply in all cancers or diseases with known chromatin aberrations
+\end{itemize}
+
+\section{Implications of three-dimensional organization and enhancer hijacking in \glsentrylong{pca}}
+
+\begin{itemize}
+  \item optimized low-input Hi-C method to interrogate genome organization in more tissues than previously possible
+  \item largest collection of 3D organization data in prostate tumours to date
+  \item add to evidence that \glspl{sv} can, but rarely, alter 3D structure in disease, prompting further interrogation into how and why this appears to be the case
+  \item motivates use of microscopy measurements in single cells to see how structure is altered and if sub-clonal mutations interfere with the ability to detect changes in structure
+  \item statistical methods may make progress to help identify effect of individual, non-recurrent events, such as in \Cref{chap:JS}, as well as computational libraries for developing better tooling in this area
+  \item alternatively further push for development in organoid models that can replicate the chromatin state of tumour tissue from small input samples
+  \item use genome organization methods to fully characterize GRNs for each individual gene (both first- and higher-order, depending on how much perturbations to these networks affect gene expression)
+  \item consider evolutionary lens of GRN across species instead of just thinking of genes as single units
+\end{itemize}
+
+\section{Implications of \glsentrylong{dname} changes in relapse}
+
+\begin{itemize}
+  \item prioritize role of stem cells in disease relapse
+  \item use increasing \gls{dname} as a potential biomarker of relapse
+  \item may be able to use blood-based \gls{dname} detection to create a non-invasive test for this development
+  \item may be able to treat \gls{ball} patients with de-methylating agents if gains in \gls{dname} are observed to prevent relapse
+\end{itemize}
+
+\section{Summary and concluding remarks}
+
+\begin{itemize}
+  \item work does not focus on a single disease, should extend this type of analysis to all cancers, since they all appear to harbour aberrations affecting multiple components of the chromatin architecture
+  \item multi-pronged approach of computational, statistical, and molecular, and microscopy methods optimized for low-input samples targeting the set of DNA elements and their relationships to each other in individual patients to develop personalized medicines and treat cancer at its origins in the chromatin
+\end{itemize}
