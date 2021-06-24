@@ -57,12 +57,13 @@ Further, our dissection of \glspl{cre} relied on encyclopedias of DNA elements d
 Cell line models are not necessarily representative of primary tumours observed in patients \cite{}.
 Moreover, different cell lines may have different regulatory networks, as recent studies of chromatin organization and \gls{cre} contacts in \gls{pca} cell lines have highlighted \cite{ahmedCRISPRiScreensReveal2021}.
 This separation between the models we study and the patients we aim to serve may prohibit translation of discoveries from our models to the clinic.
-
 In \Cref{chap:3D}, we were able to profile the genome organization of 12 \gls{pca} patients and 5 benign prostate samples.
 Similarly, in \Cref{chap:BALL}, we used \glspl{pdx} originating from 5 patients with \gls{ball}.
-In light of the large degree of inter-patient variation seen in tumours from the same tissue, observations in these small sample sizes may not generalize to patients with these diseases as a whole.
+In light of the large degree of inter-patient variation seen in tumours from the same tissue, and the intra-patient variation seen in \glspl{pdx} (\Cref{chap:BALL}), observations in these small sample sizes may not generalize to patients with these diseases as a whole.
 In both cases, we used patient-matched data to corroborate findings from other components of the chromatin architecture, where possible, but validation experiments for some observations remain difficult.
 Using \gls{crispr} technologies to knock in \glspl{snv} or inactivate individual \glspl{cre} is possible, but replicating complex \glspl{sv} or selectively (de)methylating \glspl{cre} to validate some findings remains technically challenging \cite{nakamuraCRISPRTechnologiesPrecise2021,pickar-oliverNextGenerationCRISPR2019,wangEngineering3DGenome2021}.
+Finally, despite the small sample sizes in some of these studies, the amount of high throughput sequencing data generated was larger than many computational methods could handle efficiently, particularly with Hi-C data.
+Some methods used here had to be adapted from their original publications, and other methods that could have been used would have required extensive re-engineering to function properly, limiting some analyses.
 
 \section{Summary and concluding remarks}
 
