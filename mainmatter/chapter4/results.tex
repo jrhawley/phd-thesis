@@ -47,11 +47,11 @@ By reparameterizing this model to consider every transcript in the single mutate
 where
 
 \begin{align*}
-  \Beta_{i,s} &= \beta_{s,i} \forall s \in S \\
-  \Sigma &= \begin{bmatrix}
-    \max\{ \hat{\sigma}_1^2, \tilde{\sigma}_1^2 \} + \hat{\tau}_1^2 & & 0 \\
-    & \ddots & \\
-    0 & & \max\{ \hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2 \} + \hat{\tau}_{|S|}^2 \\
+  \Beta_{i,s} & = \beta_{s,i} \forall s \in S \\
+  \Sigma      & = \begin{bmatrix}
+    \max\{ \hat{\sigma}_1^2, \tilde{\sigma}_1^2 \} + \hat{\tau}_1^2 &        & 0                                                                           \\
+                                                                    & \ddots &                                                                             \\
+    0                                                               &        & \max\{ \hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2 \} + \hat{\tau}_{|S|}^2 \\
   \end{bmatrix}
 \end{align*}
 
@@ -90,10 +90,10 @@ where
 
 \begin{equation*}
   X = \begin{bmatrix}
-    1 & 1 \\
-    1 & 0 \\
+    1      & 1      \\
+    1      & 0      \\
     \vdots & \vdots \\
-    1 & 0
+    1      & 0
   \end{bmatrix}
   \in \mathbb{R}^{(N + 1) \times 2}
 \end{equation*}
@@ -125,6 +125,7 @@ For a more general experimental design, the above can be extended.
 \end{theorem}
 
 It can be shown that the \gls{js} estimator is biased towards 0 with a smaller variance than the \gls{ols} estimator (see \Cref{sec:JS_moments}).
+In theory, this may increase the error of some transcripts, but will decrease the \gls{mse} for a set of transcripts in aggregate (see \Cref{sec:JS_moments}).
 
 From this definition, we can see two parameters of this model that will affect the amount of biasing: the scaling coefficient, $c$, and the total number of transcripts being considered, $|S|$.
 Firstly, the scaling coefficient can be manually specified, and the largest biasing occurs when $c$ is its maximum value, $2 \left( \frac{\text{Tr}(\Sigma)}{\lambda_L} - 2 \right)$.
