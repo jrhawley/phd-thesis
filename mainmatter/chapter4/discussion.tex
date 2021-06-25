@@ -1,23 +1,15 @@
 \section{Discussion}
 
-\begin{enumerate}
-  \item summary of the paper
-  \begin{enumerate}
-    \item introduced a new statistical method for dealing with $n$-of-1 scenarios for differential expression analysis
-    \item showed that its higher bias and smaller variance, compared to the \gls{ols} method, can improve its differential results, especially when focusing on a few 100 transcripts or less
-    \item this makes it a good method for investigating differential expression in a few scenarios: rare diseases (see https://ojrd.biomedcentral.com/articles/10.1186/s13023-018-0765-y, https://www.disgenet.org/downloads, https://www.orpha.net/consor/cgi-bin/index.php, and https://www.omim.org/), retrospective studies, and preliminary analyses
-    \item this tool has been packaged into an R package
-  \end{enumerate}
-  \item similar approaches for $n$-of-1 scenarios
-  \begin{enumerate}
-    \item contrast with DESeq2 approach
-    \item contrast with edgeR approach
-    \item mention how the evenly split design achieved higher results overall, and that this is not a replacement for good experimental design
-  \end{enumerate}
-  \item possible future directions for work in this area
-  \begin{enumerate}
-    \item applications in single-cell RNA-seq differential analysis
-    \item functional extensions to other epigenomic assays, such as CUT\&RUN of ATAC-seq, also with their single-cell extensions
-    \item statistical extensions to GLMs in other genomics applications
-  \end{enumerate}
-\end{enumerate}
+In this work, we developed a statistical framework for differential expression analysis where unreplicated conditions are found.
+We found that its larger bias and smaller variance, compared to conventional \gls{ols} estimators, can improve statistical inferences, particularly when focusing on $\le 100$ transcripts.
+In cases with unreplicated conditions, DESeq2 \cite{loveModeratedEstimationFold2014}, edgeR \cite{robinsonEdgeRBioconductorPackage2010}, and Sleuth \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} frameworks group all samples, both case and control, before performing normalization and performing variance shrinkage.
+The method presented here builds on these shrinkage methods to reduce uncertainty in gene expression fold changes for scenarios where biological replicates are missing or challenging to produce.
+
+Many statistical methods exist to similarly reduce uncertainty.
+However, as has been shown here, balanced experimental designs, where the number of case and control samples are equal, outperformed both the \gls{ols} and \gls{js} methods.
+This is similarly the case with other differential analysis methods \cite{schurchHowManyBiological2016,gierlinskiStatisticalModelsRNAseq2015}.
+Complex statistical methods often cannot overcome limitations in sample size.
+Thus, technological development for biological models that recapitulate the chromatin state of tissues, such as organoids and cell lines, may be more advantageous for experimental validation \cite{zanoniModelingNeoplasticDisease2020}.
+The statistical method presented here may be useful in single-cell single-cell \gls{rnaseq} differential analysis, where single cells are often clustered together to improve differential expression analysis inferences \cite{chenAssessmentComputationalMethods2019}.
+This method may similarly apply to single-cell methods of other epigenomic assays,  such as \gls{chipseq} \cite{rotemSinglecellChIPseqReveals2015}, \gls{cutrun} \cite{hainerProfilingPluripotencyFactors2019}, or \gls{atacseq} \cite{buenrostroSinglecellChromatinAccessibility2015}.
+These applications require special consideration for inflated zero counts in single-cell data \cite{chenAssessmentComputationalMethods2019}, and require further investigation before adopting ideas presented here.
