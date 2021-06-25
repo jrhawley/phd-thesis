@@ -1,10 +1,17 @@
 \section{Introduction}
 
-\begin{enumerate}
-  \item Relapse of \gls{ball} is common in both pediatric and adult patients
-  \item Previous investigation of the origins of \gls{ball} relapse identifies growth of subclones present at diagnosis as critical factor
-  \item Importance of \gls{dname}, CTCF binding, and chromatin organization in \glspl{hspc} function raises the possibility of these roles being important in \gls{ball} as well
-  \item Previous work has identified stem-associated phenotypes and chromatin remodelling pathways as important in these subclones
-  \item Here, we use patient matched diagnosis and relapse samples and multiple PDXs to investigate epigenetic dynamics that occur over \gls{ball} relapse
-  \item Something about \gls{dname} shaping hematopoietic differentiation and the epigenetic factors related to cell type \cite{izzoDNAMethylationDisruption2020,takayamaTransitionQuiescentActivated2021}
-\end{enumerate}
+After treatment, relapse of \gls{ball} occurs in 15 - 25 \% of pediatric patients and 40 - 75 \% of adult patients \cite{inabaAcuteLymphoblasticLeukaemia2013,formanMythSecondRemission2013}.
+Previous studies of the cells that give rise to primary and relapsed leukemias have identified newly acquired somatic mutations and \glspl{cnv} targeting cell cycle regulation and B-cell development \cite{mullighanGenomicAnalysisClonal2008}.
+These cells predominantly appear to arise from a genetic subclone of cells present at diagnosis, while treatment primarily targets the dominant clone \cite{oshimaMutationalLandscapeClonal2016,oshimaMutationalFunctionalGenetics2020,maRiseFallSubclones2015,mullighanGenomicAnalysisClonal2008}.
+But inactivating mutations are one of many ways in which genes regulating B-cell development, cell cycle, and differentiation can be activated or inactivated.
+Changes to \gls{dname} play an important role in hematopoietic differentiation \cite{leeGlobalDNAMethylation2012,izzoDNAMethylationDisruption2020}, and chromatin accessibility signatures in \glspl{hspc} distinguish phenotypically distinct cell types, even with minimal changes to gene expression patterns \cite{takayamaTransitionQuiescentActivated2021}.
+Notably, the binding of the \gls{tf} \gls{ctcf} mediates specific focal chromatin interactions that govern cell cycle and self-renewal capacity, and these bindings sites are sensitive to the presence of \gls{dname} \cite{takayamaTransitionQuiescentActivated2021,mauranoRoleDNAMethylation2015}.
+This suggests that non-genetic components of chromatin, including its \gls{dname} and accessibility, can influence \gls{ball} relapse.
+Moreover, interactions between genetic mutations and epigenetic aberrations have been observed in other leukemias, such as recurrent inactivating mutations in \emph{TET2} \cite{hirschConsequencesMutantTET22018,shihCombinationTargetedTherapy2017,duyRationalTargetingCooperating2019}, \emph{IDH1} and \emph{IDH2} \cite{shihCombinationTargetedTherapy2017,figueroaLeukemicIDH1IDH22010}, and \emph{DNMT3A} \cite{luEpigeneticPerturbationsArg882Mutated2016,yangDNMT3ALossDrives2016}, leading to disruption of \gls{dname} genome-wide.
+In summary, to investigate the origins of \gls{ball} relapse requires multiomic profiling on diagnosis-relapse matched samples.
+
+Previous studies of \gls{ball} relapse have primarily focused on genomic and transcriptomic assays \cite{mullighanGenomicAnalysisClonal2008,maRiseFallSubclones2015,dobsonRelapseFatedLatentDiagnosis2020}.
+Epigenetic studies of \gls{ball} relapse have primarily relied on enrichment-based assays or methylation arrays that have limited resolution genome-wide \cite{hoganIntegratedGenomicAnalysis2011,nordlundGenomewideSignaturesDifferential2013,leeEpigeneticRemodelingBcell2015}.
+Further, fewer have investigated the role of chromatin accessibility in \gls{ball} oncogenesis or relapse \cite{diedrichProfilingChromatinAccessibility2021}.
+To address the gaps left by these studies, we expand on previously published \glspl{pdx} from 5 patient-matched \gls{dx} and \gls{rel} samples, as well as relapse-fated genetic subclones that were present at diagnosis (termed \gls{dri}) \cite{dobsonRelapseFatedLatentDiagnosis2020}.
+Using total \gls{rnaseq}, \gls{atacseq} for measuring chromatin accessibility, and  bisulfite sequencing with \gls{mecapseq}, we investigate the genetic and epigenetic dynamics of \gls{ball} relapse.
