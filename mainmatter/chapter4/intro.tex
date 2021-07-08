@@ -15,7 +15,7 @@ Estimating the impact of a given mutation only found in a single individual is d
 To address this problem of unreplicated biological samples in differential gene expression analyses, we attempt to reduce the \gls{mse} of \gls{rnaseq} models by addressing the bias (\Cref{fig:JS_fig1}a).
 Using the \gls{js} estimator for the mean of normal distribution based on a single observation \cite{steinInadmissibilityUsualEstimator1956,bockMinimaxEstimatorsMean1975,steinEstimationMeanMultivariate1981}, we reduce the \gls{mse} of fold change estimates by simultaneously increasing the bias and decreasing the variance of the statistical model (\Cref{fig:JS_fig1}b).
 This method works by combining variation across dimensions for a multivariate observation and uses this combined information to reduce the estimate error (\Cref{fig:JS_fig1}c).
-First, we use the Sleuth model \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} for differential analysis to derive the \gls{js} estimator fold gene expression fold change and relate it to the \gls{ols} estimator .
+First, we use the Sleuth model \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} for differential analysis to derive the \gls{js} estimator fold gene expression fold change and relate it to the \gls{ols} estimator.
 Then, using simulations from a highly replicated \gls{rnaseq} experiment \cite{gierlinskiStatisticalModelsRNAseq2015}, we compare the differences in statistical inferences between the \gls{js} and \gls{ols} estimators.
 Finally, we investigate how the number of transcripts under consideration affects the reduction in \gls{mse}, suggesting how this method can be best used in practice.
 
