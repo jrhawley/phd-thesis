@@ -49,6 +49,34 @@ Given the widespread hypermethylation observed at relapse in all patients, it is
 Finally, the widespread hypermethylation of \gls{ball} at relapse reflects revision of malignant blasts to a more stem-like phenotype, a characteristic typically observed in other leukemias such as \gls{aml} \cite{krivtsovMLLTranslocationsHistone2007,liClinicalImplicationsGenomewide2017,kresoEvolutionCancerStem2014,shlushIdentificationPreleukaemicHaematopoietic2014,shlushTracingOriginsRelapse2017}.
 This suggests that the role of leukemic stem cells and the impact that the cell-of-origin has on therapeutic response, should be prioritized in future research of \gls{ball} relapse.
 
+\section{Implications for functional genomics and cancer patients}
+
+The studies presented here highlight the importance of non-genetic properties of chromatin and their role in cancer development and progression.
+I used multiple sequencing-based assays to identify chromatin elements and structures, such as \glspl{cre} and \glspl{tad}, associate these elements and structures with potential target genes, and measure how these elements and structures affect gene expression when they are perturbed.
+This has multiple implications for how functional genomics and cancer research can be performed.
+Firstly, considering the entire regulatory plexus of genes may help pinpoint drivers of oncogenesis or cancer progression by offering alternative methods to identify candidate drivers.
+Similarly, viewing \gls{cre} hijacking as a common mechanism of aberrant gene expression may simultaneously increase the number of potential driver events found and offer a biological mechanism of action.
+These two perspectives may help resolve previously identified risk \glspl{snv} with no known mechanism of action.
+Considering the entire regulatory plexus as a functional unit of chromatin can also have therapeutic implications.
+Genes important for cancer progression, such as \emph{FOXA1} and \gls{ar} in \gls{pca}, have multiple regulatory elements.
+Each element is a potential option for targeted therapies, and combination therapies targeting multiple elements may offer more robust and controllable options than targeting the gene alone or an individual element.
+Developing targeted therapies for the multiple validated \glspl{cre} discovered in \Cref{chap:FOXA1} may help control or prevent castration resistance in \gls{pca}.
+Regarding the regulatory plexus as a functional unit may also help predict the evolutionary dynamics that tumours undergo during treatment.
+Therapeutic resistance via tumour evolution remains a clinical concern, and much study of evolutionary dynamics over cancer progression has focused on identifying genetic subclonal populations of tumour initiating cells \cite{pogrebniakHarnessingTumorEvolution2018,maleyClassifyingEvolutionaryEcological2017}
+The evolution of gene regulatory networks have long been studied in model organisms such as \emph{Arabidopsis thaliana} \cite{nowickLineagespecificTranscriptionFactors2010} and \emph{Drosophila melanogaster} \cite{peterEvolutionGeneRegulatory2011}.
+Bridging these fields of research together by including \glspl{cre}, epigenetic marks, and genome organization as important players in the fitness and evolution of tumours may help inform how to prevent or counteract therapeutic resistance.
+
+Secondly, I have shown that valuable information about tumour regulatory networks cannot be captured by sequencing DNA alone.
+Assaying more than solely the DNA from cancer patients is required to understand the origin and potential trajectories of their tumours.
+Studying these regulatory networks in cancer patients requires robust characterization using multiple genome-wide assays and validation experiments.
+Given the differences observed between cell line models and primary patient samples observed in \Cref{chap:3D}, as well as the inter-patient heterogeneity observed in \Cref{chap:BALL}, it is vital that these networks are constructed on a per-patient basis.
+Currently, chromatin-based assays are not prioritized for clinical samples in the same manner as genome-based assays are.
+Further, profiling multiple facets of the chromatin architecture from primary patient samples requires technological development in genome-wide assays.
+Optimizing for small amounts of chromatin obtained from samples that are fresh or stored as flash-frozen paraffin embedded or cryo-preserved material are clear next steps to more comprehensively characterize the chromatin of tumours.
+In \Cref{chap:3D}, my colleagues and I pushed technological limits in this area in the case of the Hi-C assay.
+If more comprehensive characterization of per-patient chromatin architecture is pursued, adopting patient-specific discovery strategies such as those presented in \Cref{chap:JS,chap:BALL} may help guide personalized therapeutic strategies.
+Alternatively, developing patient-derived models that recapitulate the entire chromatin architecture, as mentioned previously, can help test and validate potential therapies for each patient, such as targeted \gls{dname} experiments proposed in \Cref{chap:BALL}.
+
 \section{Limitations}
 
 The main limitations in the studies presented here stem from cancer models, cohort sizes, and correlative measurements.
@@ -74,4 +102,4 @@ Identifying aberrations across multiple components of the chromatin architecture
 Interrogating the role of mutations in a gene's set of \glspl{cre} (\Cref{chap:FOXA1}), identifying stable regions of genome organization and shifting chromatin interactions over oncogenesis (\Cref{chap:3D}), and comparing genetic and epigenetic states over disease progression (\Cref{chap:BALL}) are all important approaches to better understand the aberrations, origins, and trajectories of cancers in patients.
 This multi-pronged approach requires computational, statistical, and molecular, methods, optimized for low-input samples and small cohort sizes (\Cref{chap:3D,chap:JS}), and methodological developments in these areas are still required.
 This thesis focuses on \gls{pca} and \gls{ball}, but the methodologies employed here are not restricted to a single disease.
-Proof-of-concept studies here can be extended to all cancers, or any other diseases caused by aberrations to the chromatin architecture.
+In summary, measuring multiple facets of the chromatin architecture directly from patients and viewing aberrations in light of the regulatory networks that this architecture describes, we can better understand how cancer arises and develop better, more targeted therapies for patients.
