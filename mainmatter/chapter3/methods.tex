@@ -10,7 +10,7 @@ To accurately represent the presence of this subtype of PCa in the disease gener
 
 \subsection{Patient Tumour in situ low-input Hi-C Sequencing}
 
-We followed the general in situ low input Hi-C (Low-C) protocol from Diaz \emph{et al.}, 2018 \cite{diazChromatinConformationAnalysis2018} with our own re-optimization for solid tumour tissue sections.
+We followed the general in situ low input Hi-C (Low-C) protocol from \cite[REF][]{diazChromatinConformationAnalysis2018} with our own re-optimization for solid tumour tissue sections.
 It is worth noting that throughout the protocol, the pellet would be hardly visible and would require careful pipetting.
 The specific modifications of the protocol are described below.
 
@@ -227,7 +227,7 @@ hic_breakfinder --bam-file {BAM} --exp-file-inter inter_expect_1Mb.hg38.txt --ex
 \end{lstlisting}
 
 For the T2E fusion, only one patient had the deletion identified by $\texttt{hic\_breakfinder}$ with default parameters (CPCG0336).
-Difficulties identifying \glspl{sv} with $\texttt{hic\_breakfinder}$ have been previously noted \cite{hoStructuralVariationSequencing2019}.
+Difficulties identifying \glspl{sv} with $\texttt{hic\_breakfinder}$ have been previously noted \cite{hoStructuralVariationSequencing2020}.
 After adjusting the detection threshold, we were able to identify the fusion in other samples.
 To ensure the T2E+ tumours were effectively stratified for future analyses, the fusion was annotated using the same coordinates for the other T2E+ samples.
 No other additions to breakpoint calls were made.
@@ -301,7 +301,7 @@ Peaks calls are in Supplementary Table 8.
 
 \subsubsection{Differential acetylation analysis}
 
-Unique peak calls and de-duplicated pull-down and control BAM files from tumour samples were loaded into R with the DiffBind package (v2.14.0) \cite{starkDiffBindDifferentialBinding} using DESeq2 (v1.26.0) 84 as the differential analysis model.
+Unique peak calls and de-duplicated pull-down and control BAM files from tumour samples were loaded into R with the DiffBind package (v2.14.0) \cite{starkDiffBindDifferentialBinding2011} using DESeq2 (v1.26.0) 84 as the differential analysis model.
 3 of the 12 samples had low quality peak calls compared to the other 9 and were not considered when calculating differential acetylation (CPCG0268, CPCG0255, and CPCG0336).
 We considered each unique breakpoint one at a time in the remaining 9 samples.
 Samples were grouped by their mutation status (i.e. a design matrix where the mutation status is the only covariate) and DiffBind's differential binding analysis method was performed to identify all differentially acetylated regions between the two groups.

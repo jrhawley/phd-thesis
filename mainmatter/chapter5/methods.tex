@@ -111,8 +111,8 @@ A catalogue of peaks from all samples was collected with a custom R script.
 
 \subsubsection{Bisulfite sequencing pre-processing}
 
-Sequencing read qualities were assessed with FastQC (v0.11.8) \cite{simonandrewsFastQCQualityControl2010}.
-Low quality bases were trimmed with Trim Galore! (v0.6.3) \cite{felixkruegerTrimGalore2012} with the following command:
+Sequencing read qualities were assessed with FastQC (v0.11.8) \cite{andrewsFastQCQualityControl2010}.
+Low quality bases were trimmed with Trim Galore! (v0.6.3) \cite{kruegerTrimGalore2012} with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
   trim_galore --gzip -q 30 --fastqc_args `-o TrimGalore' {sample_mate1} {sample_mate2}
