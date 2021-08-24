@@ -28,6 +28,7 @@
 \usepackage{textcomp}
 % monotype and teletype fonts for code blocks
 \usepackage{listings}
+\usepackage{xcolor}
 % handle citations to external documents
 \usepackage[backend=biber, style=nature, sorting=none, doi=true, isbn=false]{biblatex}
 % commands for dealing with initializations, abbreviations, and glossaries
@@ -37,9 +38,17 @@
 % `toc` adds the glossary to the ToC
 \usepackage[nopostdot, record, toc]{glossaries-extra}
 % create hyperlinks for jumping around the document
-\usepackage{hyperref}
+\usepackage[colorlinks=true]{hyperref}
 % handle internal document references to figures, tables, and more
 \usepackage[capitalize, noabbrev]{cleveref}
+
+% define softer colours for internal references, URLs, and citations
+\definecolor{myred}{RGB}{224, 108, 117}
+\definecolor{mygreen}{RGB}{152, 195, 121}
+\definecolor{myblue}{RGB}{97, 175, 239}
+
+% use these colours into hyperref package
+\hypersetup{linkcolor=myred, citecolor=mygreen, urlcolor=myblue}
 
 % load the Zotero library Bibtex file
 \addbibresource{thesis.bib}
