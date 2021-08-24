@@ -114,7 +114,7 @@ This resulted in an average of $1.12 \times 10^9$ read per tumour sample (Supple
 
 \subsubsection{Contact matrix generation and balancing}
 
-Aggregated binary alignment map (BAM) files were converted to the pairs format using pairtools (v0.2.2) \cite{goloborodkoMirnylabPairtoolsV02019} and then the cooler format using the cooler package (v0.8.5) \cite{abdennurMirnylabCoolerV02019}.
+Aggregated \gls{bam} files were converted to the pairs format using pairtools (v0.2.2) \cite{goloborodkoMirnylabPairtoolsV02019} and then the cooler format using the cooler package (v0.8.5) \cite{abdennurCoolerScalableStorage2020}.
 The pairs files were generated with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
@@ -179,7 +179,7 @@ To remove sequencing depth as a confounding factor, contact matrices for all sam
 Contact matrix eigenvectors were calculated with Cooltools.
 To standardize the sign of each eigenvector, the GC content of the reference genome, binned at 40 kbp, was used as a phasing reference track.
 This reference track was calculated with the $\texttt{frac\_gc}$ function from the Bioframe Python package (v0.0.12) \cite{nezarabdennurMirnylabBioframeV02020}.
-The first eigenvector was used to identify compartments with the following command: 
+The first eigenvector was used to identify compartments with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
 cooltools call-compartments --bigwig --reference-track gc-content-phase.bedGraph -o {output} {input}
