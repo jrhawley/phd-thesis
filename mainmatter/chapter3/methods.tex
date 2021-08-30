@@ -1,36 +1,37 @@
 \section{Methods}
+\label{sec:3D_methods}
 
 \subsection{Patient selection criteria}
 
-Patients were selected from the \gls{cpcgene} cohort of Canadian men with indolent PCa, Gleason scores of 3+3, 3+4, and 4+3.
-All primary human material was obtained with informed consent with approval of our institutional research ethics board (UHN 11-0024).
+Patients were selected from the \gls{cpcgene} cohort of $\ge 200$ Canadian men with indolent \gls{pca}, Gleason scores of 3+3, 3+4, and 4+3 \cite{fraserGenomicHallmarksLocalized2017}.
+All primary human material was obtained with written informed consent with approval of our institutional \gls{reb} (\gls{uhn} 11-0024).
 The intersection of previously published data for \gls{wgs} \cite{fraserGenomicHallmarksLocalized2017}, RNA abundance \cite{chenWidespreadFunctionalRNA2019}, and H3K27ac \gls{chipseq} \cite{kronTMPRSS2ERGFusion2017} led to 25 samples having data for all assays.
-11 of these tested positive for ETS gene family fusions (T2E status), and 14 without.
-To accurately represent the presence of this subtype of PCa in the disease generally, and to ensure minimum read depths required to perform accurate analysis on chromatin conformation data, we selected approximately half of these remaining samples (6 T2E+ and 6 T2E-).
+11 of these were positive for the \gls{t2e} fusion and 14 were not.
+To accurately represent the presence of this subtype of \gls{pca} in the disease generally, and to ensure minimum read depths required to perform accurate analysis on chromatin conformation data, we selected approximately half of these remaining samples (6 \gls{t2e}+ and 6 \gls{t2e}$-$).
 
-\subsection{Patient Tumour in situ low-input Hi-C Sequencing}
+\subsection{Patient tumour in situ low-input Hi-C sequencing}
 
-We followed the general in situ low input Hi-C (Low-C) protocol from \cite[REF][]{diazChromatinConformationAnalysis2018} with our own re-optimization for solid tumour tissue sections.
+We followed the general in situ low input Hi-C protocol from \cite[REF][]{diazChromatinConformationAnalysis2018} with our own re-optimization for solid tumour tissue sections.
 It is worth noting that throughout the protocol, the pellet would be hardly visible and would require careful pipetting.
 The specific modifications of the protocol are described below.
 
-\subsubsection{Tumour Tissue Preparation}
+\subsubsection{Tumour tissue preparation}
 
-Twelve cryopreserved-frozen PCa tumour tissue specimens were obtained from primary \gls{pca} patients as part of the \gls{cpcgene} effort \cite{fraserGenomicHallmarksLocalized2017}.
-Informed consent was obtained from all patients with REB approval (UHN 11-0024).
+Twelve cryopreserved-frozen \gls{pca} tumour tissue specimens were obtained from primary \gls{pca} patients as part of the \gls{cpcgene} effort \cite{fraserGenomicHallmarksLocalized2017}.
+Written informed consent was obtained from all patients with \gls{reb} approval (\gls{uhn} 11-0024).
 These tumour specimens were sectioned into 10 $\mu$m sections.
-Sections before and after the sections used for Hi-C were stained with hematoxylin and eosin (H\&E) and assessed pathologically for $\ge$ 70\% PCa cellularity.
+Sections before and after the sections used for Hi-C were stained with hematoxylin and eosin (H\&E) and assessed pathologically for $\ge$ 70\% \gls{pca} cellularity.
 The percentage of infiltrating lymphocytes was also estimated by pathological assessment to be $\le$ 3\%.
-Stratification into T2E+ or T2E- was determined through either \gls{wgs} detection of the rearrangement, immunohistochemistry, or \gls{mrna} expression microarray data \cite{fraserGenomicHallmarksLocalized2017}.
+Stratification into \gls{t2e}+ or \gls{t2e}$-$ was determined through either \gls{wgs} detection of the fusion, immunohistochemistry, or \gls{mrna} expression microarray data \cite{fraserGenomicHallmarksLocalized2017}.
 
-\subsubsection{Normal Tissue Preparation}
+\subsubsection{Normal tissue preparation}
 
 Five snap-frozen prostate tumour-adjacent normal tissue specimens were obtained.
-Informed consent was obtained from all patients with REB approval (UHN 11-0024).
+Written informed consent was obtained from all patients with \gls{reb} approval (\gls{uhn} 11-0024).
 Tissue specimens were sectioned into 5, 10, and 20 $\mu$m sections.
 Sections used for Hi-C and \gls{rnaseq} were stained with H\&E and assessed pathologically for $\ge$ 60\% prostate glandular cellularity.
 
-\subsubsection{Fixation and Lysis}
+\subsubsection{Fixation and lysis}
 
 One or two sections (consecutive; depending on surface area) for each patient were thawed and fixed by adding 300 $\mu$L of 1\% formaldehyde in PBS directly onto the tissue sample, followed by a 10-minute incubation at room temperature (RT) (Supplementary Figure 1a).
 The formaldehyde was quenched by adding 20 $\mu$L of 2.5M glycine to the sample reaching a final concentration of 0.2M followed by 5 minutes of incubation at RT.
@@ -39,7 +40,7 @@ The samples were then mixed thoroughly by gentle pipetting and left on ice for 2
 Upon lysis, the samples were snap-frozen with liquid nitrogen and stored at -80 \textdegree C until processing the next day.
 As a note, stagger fixation times when processing multiple samples to prevent needless rush and chance of under/over-fixation.
 
-\subsubsection{Enzyme Digestion and Overhang Fill-In}
+\subsubsection{Enzyme digestion and overhang fill-in}
 
 The samples stored at -80 \textdegree C were thawed on ice and spun down at 300 $\times$ g for 5 minutes at 4 \textdegree C.
 The samples were then re-suspended in 125 $\mu$L of ice-cold 10X NEB2 Buffer (New England Biolabs), and again spun down at 13,000 $\times$ g for 5 minutes at 4 \textdegree C.
@@ -50,7 +51,7 @@ Upon digestion, the MboI enzyme was inactivated by incubating at 62 \textdegree 
 The overhangs generated by the MboI enzyme was then filled-in by adding a mix of dNTPs and DNA Polymerase I Klenow Fragment directly to each sample (10 $\mu$L of 0.4 mM biotin-14-dCTP, 0.5 $\mu$L of 10 mM dATP, 0.5 $\mu$L of 10 mM dGTP, 0.5 $\mu$L of 10 mM dTTP, 4 $\mu$L of 5U/$\mu$L DNA Polymerase I Klenow Fragment).
 The samples were then mixed by gentle pipetting followed by incubation at 37 \textdegree C for 90 minutes with gentle agitation.
 
-\subsubsection{Proximity Ligation and De-crosslinking}
+\subsubsection{Proximity ligation and de-crosslinking}
 
 Upon overhang fill-in, each sample was subject to proximity ligation through the addition of 328.5 $\mu$L water, 60 $\mu$L of 10X T4 DNA Ligase Buffer (ThermoFisher Scientific), 50 $\mu$L of 10\% Triton X-100, 6 $\mu$L of 20 mg/mL BSA (New England Biolabs) and 3.5 $\mu$L of 5 Weiss U/$\mu$L T4 DNA Ligase (ThermoFisher).
 The samples were mixed through gentle pipetting and incubated at RT (20-22 \textdegree C) with rotation for 4 hours.
@@ -58,7 +59,7 @@ The samples were then spun down at 13,000 $\times$ g for 5 minutes at RT and re-
 Next, 10 $\mu$L of 20 mg/mL Proteinase K (New England Biolabs) was added to each sample and incubated at 55 \textdegree C for 30 minutes at 1,000 rpm.
 Then 65 $\mu$L of 5 M NaCl was added to each sample and incubated at 65 \textdegree C at 1,000 rpm overnight.
 
-\subsubsection{DNA Extraction}
+\subsubsection{DNA extraction}
 
 Phenol-chloroform extraction columns were spun down at 17,000 $\times$ g for 1 minute at 4 \textdegree C to get gel down to the bottom of the tube.
 The samples incubated overnight were then added to the column.
@@ -73,7 +74,7 @@ The supernatant was then discarded and the tube was air-dried until no traces of
 A mix of 5 $\mu$L of 10X NEB2.1 buffer (New England Biolabs), 1.25 $\mu$L of 1 mM dATP, 1.25 $\mu$L of 1 mM dCTP, 1.25 $\mu$L of 1 mM dGTP, 1 mM of dTTP, 0.5 $\mu$L of 10 mg/mL BSA, 5 $\mu$L of water, 3.5 $\mu$L of 3 U/$\mu$L T4 DNA Polymerase (New England Biolabs) was added to each sample.
 The samples were mixed thoroughly by gentle pipetting, and then incubated at 20 \textdegree C for 4 hours.
 
-\subsubsection{Fragmentation and Biotin Pull-down}
+\subsubsection{Fragmentation and biotin pull-down}
 
 70 $\mu$L of water was added to each sample bringing total volume up to 120 $\mu$L, and the samples were transferred into Covaris sonication tubes.
 The samples were then sonicated using Covaris M220 sonicator to attain 300-700 bp fragments.
@@ -83,7 +84,7 @@ The sample was then incubated with gentle rotation at RT for 20 minutes.
 The supernatant was discarded and the beads were re-suspended with 400 $\mu$L of 1X B\&W buffer + 0.1\% Triton X-100 followed by a 2-minute incubation at 55 \textdegree C with mixing.
 The wash was repeated once more, then re-suspended in 400 $\mu$L of 1X NEB2 buffer (New England Biolabs).
 
-\subsubsection{Library Preparation and Size Selection}
+\subsubsection{Library preparation and size selection}
 
 The beads containing the Hi-C samples were separated on a magnetic rack to remove the supernatant.
 The beads were then re-suspended in a total volume of 10 $\mu$L for library preparation using the SMARTer ThruPLEX DNA-seq library preparation kit (Takara Biosciences) per manufacturer's protocol with an adjustment on the last step, a PCR reaction for library amplification.
@@ -93,7 +94,7 @@ The samples were then subject to real-time qPCR and pulled out from the qPCR mac
 Ultimately, this is done to reduce PCR duplication rates, a huge limitation for low-input Hi-C protocols.
 The Hi-C libraries were then double size-selected for 300-700 bp using Ampure XP beads and sent for BioAnalyzer analysis prior to sequencing.
 
-\subsection{Hi-C Sequencing and Data Pre-processing}
+\subsection{Hi-C Sequencing and data pre-processing}
 
 \subsubsection{Sequencing}
 
@@ -130,7 +131,7 @@ cooler cload pairs --assembly hg38 -c1 2 -p1 3 -c2 4 -p2 5 {genome}:1000  {input
 The raw contact matrices stored in the cooler file format were balanced using cooler's implementation of the ICE algorithm \cite{imakaevIterativeCorrectionHiC2012} using the $\texttt{cooler balance}$ command.
 Contact matrices at different resolutions were created with the $\texttt{cooler zoomify}$ command.
 
-\subsection{Hi-C Data Analysis}
+\subsection{Hi-C data analysis}
 
 \subsubsection{\Glsentryshort{tad} identification}
 
@@ -226,10 +227,10 @@ Breakpoints were explicitly called with the following command:
 hic_breakfinder --bam-file {BAM} --exp-file-inter inter_expect_1Mb.hg38.txt --exp-file-intra intra_expect_100kb.hg38.txt --name {Sample_ID} --min-1kb.
 \end{lstlisting}
 
-For the T2E fusion, only one patient had the deletion identified by $\texttt{hic\_breakfinder}$ with default parameters (CPCG0336).
+For the \gls{t2e} fusion, only one patient had the deletion identified by $\texttt{hic\_breakfinder}$ with default parameters (CPCG0336).
 Difficulties identifying \glspl{sv} with $\texttt{hic\_breakfinder}$ have been previously noted \cite{hoStructuralVariationSequencing2020}.
 After adjusting the detection threshold, we were able to identify the fusion in other samples.
-To ensure the T2E+ tumours were effectively stratified for future analyses, the fusion was annotated using the same coordinates for the other T2E+ samples.
+To ensure the \gls{t2e}+ tumours were effectively stratified for future analyses, the fusion was annotated using the same coordinates for the other \gls{t2e}+ samples.
 No other additions to breakpoint calls were made.
 Certain breakpoints that appeared to be artefacts were removed, as described below.
 
@@ -267,10 +268,10 @@ Contact frequencies from the ICE-normalized, 20 kbp contact matrices were extrac
 The row means were calculated to produce a single vector where each element is the average normalized contact frequency between the anchor of interest and the distal 20 kbp bin.
 These vectors were plotted as lines in \Cref{fig:3D_fig6}e.
 
-\subsection{Patient Tumour Tissue H3K27ac \glsentryshortpl{chipseq}}
+\subsection{Patient tumour tissue H3K27ac \glsentryshortpl{chipseq}}
 
 \gls{chipseq} against H3K27ac was previously published for these matching samples in \cite{kronTMPRSS2ERGFusion2017}.
-Sequencing data was processed similarly to the previous publication of this data \cite{kronTMPRSS2ERGFusion2017}; however, the hg38 reference genome was used instead of hg19.
+Sequencing data was processed similarly to the previous publication of this data \cite{kronTMPRSS2ERGFusion2017}; however, the GRCh38 reference genome was used instead of GRCh37 \cite{internationalhumangenomesequencingconsortiumFinishingEuchromaticSequence2004}.
 
 \subsubsection{Sequence alignment}
 
@@ -315,7 +316,7 @@ Breakpoint coordinates were lifted over to hg38 coordinates using the liftOver f
 Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gelRegioneRBioconductorPackage2015}, selecting randomized regions from the hg38 genome, excluding the ENCODE blacklist regions \cite{amemiyaENCODEBlacklistIdentification2019} and masked loci.
 100 permutations were calculated and a one-sided permutation $z$-test was used to calculate statistical significance.
 
-\subsection{Primary Tissue RNA Data Analysis}
+\subsection{Primary tissue RNA data analysis}
 
 \subsubsection{Tumour sample \glsentrylong{rnaseq}}
 
