@@ -46,7 +46,7 @@ Clinical samples were stained with the following antibodies:
 
 Each sample was sorted on a FACSAria III (BD Biosciences) for leukemic blasts ($\text{CD19}^+ \text{CD45}^{\text{dim/-}}$) and T cells ($\text{CD3}^+ \text{CD45}^{\text{hi}}$).
 \Gls{nsg} mice were bred according to protocols established and approved by the Animal Care Committee at the University Health Network.
-8-to-12-week-old mice were sublethally irradiated at 225 cGy 24 hours prior to transplants.
+8-to-12-week-old mice were sublethally irradiated at 225 cGy 24 h prior to transplants.
 Only female mice were used.
 Intra-femoral injections of 10 to 250 000 sorted leukemic blasts were performed as previously described \cite{mazurierRapidMyeloerythroidRepopulation2003}.
 Mice were sacrificed 20-to-30 weeks post-transplant or at the onset of disease symptoms.
@@ -125,8 +125,8 @@ Duplicates were removed from the resulting alignment file with the following com
   deduplicate_bismark -p --bam {input_bam}
 \end{lstlisting}
 
-The deduplicated BAM file was sorted by position with sambamba (v0.7.0) \cite{tarasovSambambaFastProcessing2015}.
-$M$-biases were calculated with MethylDackel (v0.4.0) \cite{ryanMethylDackel2019}, and methylation $\beta$ values were extracted from the BAM files with the following command:
+The deduplicated \gls{bam} file was sorted by position with sambamba (v0.7.0) \cite{tarasovSambambaFastProcessing2015}.
+$M$-biases were calculated with MethylDackel (v0.4.0) \cite{ryanMethylDackel2019}, and methylation $\beta$ values were extracted from the \gls{bam} files with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
   MethylDackel extract --mergeContext --OT 3,124,3,124 --OB 3,124,3,124 {ref_genome} {dedup_sorted_bam}
