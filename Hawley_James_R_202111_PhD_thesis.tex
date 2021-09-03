@@ -171,7 +171,19 @@
   showstringspaces=false,
 }
 
+% define a theorem environment titled "Theorem"
 \newtheorem{theorem}{Theorem}
+
+% define a nicer transpose symbol
+\newcommand{\tran}{\mathrm{T}}
+
+% define a nicer transpose symbol
+\newcommand{\trace}[1]{\mathrm{Tr} \left[ #1 \right]}
+
+% define a nicer command that lists all authors in the publication
+\newcommand{\printpublication}[1]{
+  \AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}
+}
 
 % ==============================================================================
 % Document
@@ -182,46 +194,46 @@
 % ------------------------------------------------
 \frontmatter
 \subfile{frontmatter/title}
-\subfile{frontmatter/abstract}
-\subfile{frontmatter/acknowledgments}
+% \subfile{frontmatter/abstract}
+% \subfile{frontmatter/acknowledgments}
 \subfile{frontmatter/toc}
 
-\newpage
+% \newpage
 
-\subfile{frontmatter/tables_list}
-\subfile{frontmatter/figures_list}
+% \subfile{frontmatter/tables_list}
+% \subfile{frontmatter/figures_list}
 
 \newpage
 \subfile{frontmatter/completed_works}
 
-\newpage
-\subfile{frontmatter/abbreviations_list}
+% \newpage
+% \subfile{frontmatter/abbreviations_list}
 
 
 % Main Matter
 % ------------------------------------------------
 \mainmatter
-% intro
+% % intro
 % \subfile{mainmatter/chapter1}
 
 % % FOXA1 CREs
-\subfile{mainmatter/chapter2}
+% \subfile{mainmatter/chapter2}
 
-% prostate cancer 3D genome
-\subfile{mainmatter/chapter3}
+% % prostate cancer 3D genome
+% \subfile{mainmatter/chapter3}
 
 % James-Stein RNA-seq method
 \subfile{mainmatter/chapter4}
 
-% B-ALL DNA methylation
-\subfile{mainmatter/chapter5}
+% % B-ALL DNA methylation
+% \subfile{mainmatter/chapter5}
 
-% discussion and future directions
-\subfile{mainmatter/chapter6}
+% % discussion and future directions
+% \subfile{mainmatter/chapter6}
 
-% Back Matter
-% ------------------------------------------------
-\subfile{backmatter/appendices}
+% % Back Matter
+% % ------------------------------------------------
+% \subfile{backmatter/appendices}
 \backmatter
 \subfile{backmatter/references}
 \end{document}

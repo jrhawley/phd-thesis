@@ -8,22 +8,22 @@ Let $Y_{si}$ be the natural log of the abundance of transcript $s$ in sample $i$
 Given the design matrix
 
 \begin{equation*}
-X = [x_1^T; x_2^T; ... x_n^T], x_i \in \mathbb{R}^p
+  X = [x_1\tran; x_2\tran; ... x_n\tran], x_i \in \mathbb{R}^p
 \end{equation*}
 
 the abundance of transcripts can be modelled as a \gls{glm}
 
 \begin{equation}
-Y_{si} = x_i^T \beta_s + \epsilon_{si}
+  Y_{si} = x_i\tran \beta_s + \epsilon_{si}
 \end{equation}
 
 where $\epsilon_{si} \sim \mathcal{N}(0, \sigma_s^2)$ is the biological noise of transcript $s$ in sample $i$ and $B_s \in \mathbb{R}^p$ is the fixed effect of the covariates on the expression of transcript $s$.
 
 Due to inferential noise from sequencing, each $Y_{si}$ are not observed directly, but indirectly through the observed perturbations, $D_{si}$.
-This can be modelled as
+This can be modelled as:
 
 \begin{equation}
-D_{si} | Y_{si} = Y_{si} + \zeta_{si}
+  D_{si} | Y_{si} = Y_{si} + \zeta_{si}
 \end{equation}
 
 where $\zeta_{si} \sim \mathcal{N}(0, \tau_s^2)$ is the inferential noise of transcript $s$ in sample $i$.
@@ -31,17 +31,18 @@ Both biological and inferential noise for each transcript are \gls{iid} and inde
 Namely:
 
 \begin{align*}
-\mathbb{C}ov [\epsilon_{si}, \epsilon_{rj}] &= \sigma_s^2\delta_{i,j}\delta_{s,r} \\
-\mathbb{C}ov [\zeta_{si}, \zeta_{rj}] &= \tau_s^2\delta_{i,j}\delta_{s,r} \\
-\mathbb{C}ov [\epsilon_{si}, \zeta_{rj}] &= 0 \\
-  & \forall s,r \forall i,j
+  \mathbb{C}ov [\epsilon_{si}, \epsilon_{rj}] & = \sigma_s^2\delta_{i,j}\delta_{s,r} \\
+  \mathbb{C}ov [\zeta_{si}, \zeta_{rj}]       & = \tau_s^2\delta_{i,j}\delta_{s,r}   \\
+  \mathbb{C}ov [\epsilon_{si}, \zeta_{rj}]    & = 0                                  \\
+                                              & \forall s,r \forall i,j
 \end{align*}
 
-The abundances for transcript $s$ in all $N$ samples can then modelled as a multivariate normal distribution
+The abundances for transcript $s$ in all $N$ samples can then modelled as a multivariate normal distribution:
 
-\begin{equation}
-  D_{s} | Y_{s} \sim \mathcal{N}_N(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{N})
-\end{equation}
+\begin{align}
+  Y_{s} \sim \mathcal{N}_N(X \beta_s, \sigma_s^2 I_{N})
+  D_{s} \sim \mathcal{N}_N(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{N})
+\end{align}
 
 where $I_N \in \mathbb{R}^{N \times N}$ is the identity matrix.
 
@@ -51,14 +52,14 @@ This is achieved through a Wald test or likelihood ratio test after estimating t
 The estimator for the differential effect is the \gls{ols} estimate:
 
 \begin{equation*}
-  \hat{\beta}_s = (X^TX)^{-1} X^T d_s
+  \hat{\beta}_s = (X\tranX)^{-1} X\tran d_s
 \end{equation*}
 
 where $d_s$ is the observed abundances given by
 
 \begin{align*}
-  d_{si} &= \ln \left(\frac{k_{si}}{\hat{f_i}} + 0.5 \right) \\
-  \hat{f_i} &= \underset{s \in S^*}{\mathrm{median}} \frac{k_{si}}{\sqrt[N]{\underset{j = 1}{\overset{N}{\prod }}k_{sj}}} \\
+  d_{si}    & = \ln \left(\frac{k_{si}}{\hat{f_i}} + 0.5 \right)                                                           \\
+  \hat{f_i} & = \underset{s \in S^*}{\mathrm{median}} \frac{k_{si}}{\sqrt[N]{\underset{j = 1}{\overset{N}{\prod }}k_{sj}}} \\
 \end{align*}
 
 where $k_{si}$ is the estimated read count from the Kallisto package (v0.46.1) \cite{brayNearoptimalProbabilisticRNAseq2016} for transcript $s$ in sample $i$ and $\hat{f_i}$ is the scaling factor for sample $i$, calculated from the set of all transcripts that pass initial filtering, $S^*$.
@@ -74,13 +75,13 @@ As shown in Supplementary Note 2 of \cite[REF][]{pimentelDifferentialAnalysisRNA
 It can also be shown that, for a covariance matrix $\Sigma$,
 
 \begin{equation*}
-  \mathbb{V} \left[ \hat{\beta}_s^{(OLS)} \right] = (X^TX)^{-1} X^T \Sigma X (X^TX)^{-1}
+  \mathbb{V} \left[ \hat{\beta}_s^{(OLS)} \right] = (X\tranX)^{-1} X\tran \Sigma X (X\tranX)^{-1}
 \end{equation*}
 
 In the case where $\Sigma = (\sigma_s^2 + \tau_s^2)I_N$, this reduces to
 
 \begin{equation*}
-  \mathbb{V} \left[ \hat{\beta_s}^{(OLS)} \right] = (\sigma_s^2 + \tau_s^2)(X^TX)^{-1}
+  \mathbb{V} \left[ \hat{\beta_s}^{(OLS)} \right] = (\sigma_s^2 + \tau_s^2)(X\tranX)^{-1}
 \end{equation*}
 
 Consider a simple experimental design where the only covariate of interest is the presence of a mutation.
@@ -88,12 +89,12 @@ Then the design matrix, with the first column being the intercept and the second
 
 \begin{equation*}
   X = \begin{bmatrix}
-  1 & 1 \\
-  1 & 0 \\
-  \vdots & \vdots \\
-  1 & 0
+    1      & 1      \\
+    1      & 0      \\
+    \vdots & \vdots \\
+    1      & 0
   \end{bmatrix}
-\in \mathbb{R}^{(N + 1) \times 2}
+  \in \mathbb{R}^{(N + 1) \times 2}
 \end{equation*}
 
 The variance of the \gls{ols} estimator is then
@@ -101,7 +102,7 @@ The variance of the \gls{ols} estimator is then
 \begin{equation*}
   \mathbb{V} \left[ \hat{\beta_s}^{(OLS)} \right] = \frac{(\sigma_s^2 + \tau_s^2)}{n_{mut} n_{wt}}
   \begin{bmatrix}
-    n_{mut} & -n_{mut} \\
+    n_{mut}   & -n_{mut}         \\
     - n_{mut} & n_{mut} + n_{wt} \\
   \end{bmatrix}
 \end{equation*}
@@ -129,16 +130,16 @@ We can use a Taylor expansion around $\Beta_1$ to approximate the expectated val
 Consider:
 
 \begin{equation*}
-  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{\left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \hat{\Beta}_1^{(OLS)}
+  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{\left( \hat{\Beta}_1^{(OLS)} \right)\tran \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \hat{\Beta}_1^{(OLS)}
 \end{equation*}
 
 where
 
 \begin{align*}
-  \hat{\Beta}_1^{(OLS)} &\sim N_{|S|}(\Beta_1, \Sigma) \\
-  \Sigma_{s,t} &= \begin{cases}
-    \left( \frac{n_{wt} + 1}{n_{wt}} \right) (\sigma_s^2 + \tau_s^2) & s = t\\
-    0 & s \ne t
+  \hat{\Beta}_1^{(OLS)} & \sim N_{|S|}(\Beta_1, \Sigma) \\
+  \Sigma_{s,t}          & = \begin{cases}
+    \left( \frac{n_{wt} + 1}{n_{wt}} \right) (\sigma_s^2 + \tau_s^2) & s = t   \\
+    0                                                                & s \ne t
   \end{cases}
 \end{align*}
 
@@ -146,24 +147,24 @@ Let $u = \Sigma^{-1/2}\hat{\Beta}_1^{(OLS)}$.
 Then
 
 \begin{align*}
-  \mathbb{E}\left[ \hat{\Beta}_1^{(JS)} \right] &= \mathbb{E} \left[ \hat{\Beta}_1^{(OLS)} \right] - c\Sigma^{1/2}\mathbb{E} \left[ \frac{u}{\Vert u \Vert ^2} \right] \\
-  &= \Beta_1 - c\Sigma^{1/2}\mathbb{E} \left[ \frac{u}{\Vert u \Vert ^2} \right] \Sigma^{1/2}\\
+  \mathbb{E}\left[ \hat{\Beta}_1^{(JS)} \right] & = \mathbb{E} \left[ \hat{\Beta}_1^{(OLS)} \right] - c\Sigma^{1/2}\mathbb{E} \left[ \frac{u}{\Vert u \Vert ^2} \right] \\
+                                                & = \Beta_1 - c\Sigma^{1/2}\mathbb{E} \left[ \frac{u}{\Vert u \Vert ^2} \right] \Sigma^{1/2}                            \\
 \end{align*}
 
 Expanding $\frac{u}{\Vert u \Vert ^2}$ around $a = \Sigma^{-1/2}\Beta_1$ gives:
 
 \begin{align*}
   \mathbb{E}\left[ \hat{\Beta}_1^{(JS)} \right]
-  &= \Beta_1 - c\Sigma^{1/2}\mathbb{E} \left[ \frac{a}{\Vert a \Vert ^2} + \left( \frac{1}{\Vert a \Vert ^2}
-    - \frac{2}{\Vert a \Vert ^4} aa^T\right)(u - a) + \mathcal{O}(\Vert u - a \Vert ^2)\right] \\
-  & = \left(1 - \frac{c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \Beta_1
-    + \mathcal{O}(\Vert u - a \Vert ^2)
+   & = \Beta_1 - c\Sigma^{1/2}\mathbb{E} \left[ \frac{a}{\Vert a \Vert ^2} + \left( \frac{1}{\Vert a \Vert ^2}
+  - \frac{2}{\Vert a \Vert ^4} aa\tran\right)(u - a) + \mathcal{O}(\Vert u - a \Vert ^2)\right]                \\
+   & = \left(1 - \frac{c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right) \Beta_1
+  + \mathcal{O}(\Vert u - a \Vert ^2)
 \end{align*}
 
 As long as the number of transcripts being considered, $|S|$, is not large, and that the true coefficient of variation is not large (i.e. that $\Vert u - a \Vert ^2 \ll \Vert \Beta_1 \Vert ^2$), the Taylor approximation is close to
 
 \begin{equation}
-  \mathbb{E}\left[ \hat{\Beta}_1^{(JS)} \right] \approx \left(1 - \frac{c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \Beta_1
+  \mathbb{E}\left[ \hat{\Beta}_1^{(JS)} \right] \approx \left(1 - \frac{c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right) \Beta_1
 \end{equation}
 
 Thus the \gls{js} estimator is an estimate of $\Beta_1$ that is biased towards 0.
@@ -173,7 +174,7 @@ Thus the \gls{js} estimator is an estimate of $\Beta_1$ that is biased towards 0
 The \gls{mse} of the \gls{js} estimator is related to its variance.
 
 \begin{equation*}
-  \mathbb{E} \left[ \Vert \hat{\Beta}_1^{(JS)} - \Beta_1 \Vert ^2\right] 
+  \mathbb{E} \left[ \Vert \hat{\Beta}_1^{(JS)} - \Beta_1 \Vert ^2\right]
   = \sum_{s \in S} \mathbb{E}\left[ \left( \hat{\Beta}_{1,s}^{(JS)} - \Beta_{1,s} \right)^2 \right] \\
   = \sum_{s \in S} \mathbb{V}\left[ \hat{\Beta}_{1,s}^{(JS)} \right]
 \end{equation*}
@@ -186,12 +187,12 @@ This is still desirable if the goal is to find if there is an effect on any tran
 To calculate the variance for each individual transcript, a similar approach with Taylor expansions can be used, as above.
 
 \begin{align*}
-  &\mathbb{V} \left[ \hat{\Beta}_1^{(JS)} \right] \\
-  &\approx \mathbb{E} \left[ \hat{\Beta}_1^{(JS)}
-    \left( \hat{\Beta}_1^{(JS)} \right)^T \right]
-    - \left(1 - \frac{c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right)^2 \Beta_1 \Beta_1^T \\
-  &= \Sigma^{1/2} \mathbb{E} \left[ u u^T - \frac{2c}{u^Tu}uu^T + \left( \frac{c}{u^Tu} \right)^2 uu^T \right]\Sigma^{1/2}
-    - \left(1 - \frac{c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right)^2 \Beta_1 \Beta_1^T \\
+   & \mathbb{V} \left[ \hat{\Beta}_1^{(JS)} \right]                                                                                         \\
+   & \approx \mathbb{E} \left[ \hat{\Beta}_1^{(JS)}
+  \left( \hat{\Beta}_1^{(JS)} \right)\tran \right]
+  - \left(1 - \frac{c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right)^2 \Beta_1 \Beta_1\tran                                                     \\
+   & = \Sigma^{1/2} \mathbb{E} \left[ u u\tran - \frac{2c}{u\tranu}uu\tran + \left( \frac{c}{u\tranu} \right)^2 uu\tran \right]\Sigma^{1/2}
+  - \left(1 - \frac{c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right)^2 \Beta_1 \Beta_1\tran                                                     \\
 \end{align*}
 
 where, again, $u = \Sigma^{-1/2} \hat{\Beta}_1^{(OLS)}$.
@@ -199,29 +200,29 @@ Expanding about $a = \Sigma^{-1/2} \Beta_1$ yields:
 
 \begin{equation*}
   \mathbb{V} \left [ \hat{\Beta}_1^{(JS)} \right]
-  = \left(1 - \frac{2c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \Sigma
-    - \frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^T
-    + \mathcal{O}(\Vert u - a \Vert ^4)
+  = \left(1 - \frac{2c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right) \Sigma
+  - \frac{2c}{\left( \Beta_1\tran \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1\tran
+  + \mathcal{O}(\Vert u - a \Vert ^4)
 \end{equation*}
 
 Under similar conditions of the number of transcripts under consideration, $|S|$, and $\Vert u - a \Vert ^2$, we then have that
 
 \begin{equation}
   \mathbb{V} \left [ \hat{\Beta}_1^{(JS)} \right]
-  \approx \left(1 - \frac{2c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \Sigma
-  - \frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^T
+  \approx \left(1 - \frac{2c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right) \Sigma
+  - \frac{2c}{\left( \Beta_1\tran \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1\tran
 \end{equation}
 
-Since the diagonal elements of $\frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^T$ are all $\ge 0$ and $0 \le \left(1 - \frac{2c}{\Beta_1^T \Sigma^{-1} \Beta_1} \right) \le 1 \forall c > 0$, the variance than of the \gls{js} estimators are smaller than the \gls{ols} estimators.
+Since the diagonal elements of $\frac{2c}{\left( \Beta_1\tran \Sigma^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1\tran$ are all $\ge 0$ and $0 \le \left(1 - \frac{2c}{\Beta_1\tran \Sigma^{-1} \Beta_1} \right) \le 1 \forall c > 0$, the variance than of the \gls{js} estimators are smaller than the \gls{ols} estimators.
 The resulting Wald test statistics for the fold change coefficient of transcript $s$ in the \gls{ols} and \gls{js} cases can be summarized as follows:
 
 \begin{align}
-  W_s^{(OLS)} &= \frac{ \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2 }{ \Sigma_{s,s} } \\
-  W_s^{(JS)} &= \frac{
-    \left( 1 - \frac{ c }{ \left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)} } \right)^2 \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2
+  W_s^{(OLS)} & = \frac{ \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2 }{ \Sigma_{s,s} } \\
+  W_s^{(JS)}  & = \frac{
+  \left( 1 - \frac{ c }{ \left( \hat{\Beta}_1^{(OLS)} \right)\tran \Sigma^{-1} \hat{\Beta}_1^{(OLS)} } \right)^2 \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2
   }{
-    \left(1 - \frac{2c}{ \left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \Sigma_{s,s}
-    - \frac{2c}{\left( \left( \hat{\Beta}_1^{(OLS)} \right)^T \Sigma^{-1} \hat{\Beta}_1^{(OLS)} \right)^2} \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2
+  \left(1 - \frac{2c}{ \left( \hat{\Beta}_1^{(OLS)} \right)\tran \Sigma^{-1} \hat{\Beta}_1^{(OLS)}} \right) \Sigma_{s,s}
+  - \frac{2c}{\left( \left( \hat{\Beta}_1^{(OLS)} \right)\tran \Sigma^{-1} \hat{\Beta}_1^{(OLS)} \right)^2} \left( \hat{\Beta}_{1, s}^{(OLS)} \right)^2
   }
 \end{align}
 
@@ -231,8 +232,8 @@ Thus the \gls{js} method will produce more positive calls, in general, than the 
 
 Notably, the variance of the \gls{js} estimator is a function of both the mean and variance of the transcripts under consideration.
 This is in contrast to the \gls{ols} estimator, which is solely a function of the variance.
-Additionally, the off-diagonal elements of the matrix $\Beta_1 \Beta_1^T$ imply that the \gls{js} fold change estimates are not independent of each other.
+Additionally, the off-diagonal elements of the matrix $\Beta_1 \Beta_1\tran$ imply that the \gls{js} fold change estimates are not independent of each other.
 This, again, contrasts with the \gls{ols} estimator, where the diagonal covariance matrix, $\Sigma$, implies that the fold change estimates are themselves independent of each other.
-The effect of this dependence on statistical inference is a function of the variance and true fold change, as can be seen from the $\frac{2c}{\left( \Beta_1^T \Sigma^{-1} \Beta_1 \right)^2}$ coefficient.
+The effect of this dependence on statistical inference is a function of the variance and true fold change, as can be seen from the $\frac{2c}{\left( \Beta_1\tran \Sigma^{-1} \Beta_1 \right)^2}$ coefficient.
 While rarely true in practice, this statistical dependence can affect the results of statistical inference, in theory.
 For most purposes, is not expected to have a large effect on the results of statistical inference.
