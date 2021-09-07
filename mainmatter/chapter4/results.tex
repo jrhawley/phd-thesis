@@ -23,9 +23,10 @@ For the $n_\mathrm{WT}$ \gls{wt} samples, this can be expressed as:
 %
 \begin{equation}
   D_s \sim \mathcal{N}_{n_\mathrm{WT}} \left( \beta_{s,0}, (\sigma_s^2 + \tau_s^2)I_{n_\mathrm{WT}} \right)
+  \label{eqn:wt_model}
 \end{equation}
 %
-where $D_s$ is the observed counts of reads compatible with transcript $s$ (i.e. the read counts mapping to transcript $s$ after alignment or pseudo-alignment), $\beta_{s,0}$ is the mean read count for transcript $s$, $\sigma_s^2$ is the biological variance of counts for transcript $s$, and $\tau_s^2$ is the inferential variance for transcript $s$, and $I_{n_\mathrm{WT}}$ is the ${n_\mathrm{WT}} \times {n_\mathrm{WT}}$ identity matrix.
+where $D_s$ is the $n_\mathrm{WT}$-dimensional count of reads compatible with transcript $s$ (i.e. the read counts mapping to transcript $s$ after pseudo-alignment); $\beta_{s,0}$ is the mean read count for transcript $s$; $\sigma_s^2$ is the biological variance of counts for transcript $s$; $\tau_s^2$ is the inferential variance for transcript $s$; and $I_{n_\mathrm{WT}}$ is the ${n_\mathrm{WT}} \times {n_\mathrm{WT}}$ identity matrix.
 The model for the single mutated sample is slightly modified, with a parameter $\beta_{s,1}$ representing the fold-change effect of the mutation:
 %
 \begin{equation}
@@ -35,13 +36,19 @@ The model for the single mutated sample is slightly modified, with a parameter $
 %
 For a given transcript, $s$, the variance is the same between the mutated and \gls{wt} samples (namely, $\sigma_s^2 + \tau_s^2$).
 While the mean $\beta_{s, 0}$ can be estimated from the \gls{wt} samples, the fold-change $\beta_{s, 1}$ is unknown and can only be determined through the single mutated sample.
-By re-parameterizing this model to consider every transcript in the single mutated sample, \Cref{eqn:single_mut_model} can be re-written as:
+By re-parameterizing this model to consider every transcript, \Cref{eqn:wt_model} can be re-written as:
+%
+\begin{equation}
+  \Delta \sim \mathcal{N}_{|S|}(\Beta_0, \Sigma) \\
+\end{equation}
+%
+and \Cref{eqn:single_mut_model} can be re-written as:
 %
 \begin{equation}
   \Delta \sim \mathcal{N}_{|S|}(\Beta_0 + \Beta_1, \Sigma) \\
 \end{equation}
 %
-where $\Delta$ is the $|S|$-dimensional vector of observed read counts for all transcripts in the mutated sample, $S$ is the set of all transcripts, $\Beta_0$ is the $|S|$-dimensional vector of mean counts for each transcript, $\Beta_1$ is the $|S|$-dimensional vector of fold-change effects associated with the mutation, and $\Sigma$ is the covariance matrix.
+where $\Delta$ is the $|S|$-dimensional vector of read counts for all transcripts, $S$ is the set of all transcripts, $\Beta_0$ is the $|S|$-dimensional vector of mean counts for each transcript, $\Beta_1$ is the $|S|$-dimensional vector of fold-change effects associated with the mutation, and $\Sigma$ is the covariance matrix.
 Mathematically, we can express these parameters in terms of parameters from \Cref{eqn:single_mut_model}:
 %
 \begin{align*}
@@ -54,8 +61,20 @@ Mathematically, we can express these parameters in terms of parameters from \Cre
   \end{bmatrix}
 \end{align*}
 
-All quantities in $\Beta_0$, $\Beta_1$, and $\Sigma$ are initially unknown, and the statistical model presented in \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} can be used derive estimates for each of these quantities (hereafter denoted with the $\hat{}$ symbol).
-However, if we treat the estimates for $\Beta_0$ and $\Sigma$ derived from the \gls{wt} samples as a known input for the mutated model, then \Cref{eqn:single_mut_model} for a single mutated sample meets the criteria for the \gls{js} estimators.
+All quantities in $\Beta_0$, $\Beta_1$, and $\Sigma$ are initially unknown.
+The statistical model presented in \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} can be used derive estimates for $\Beta_0$ and $\Sigma$ solely from the \gls{wt} samples (hereafter denoted with the $\hat{}$ symbol):
+%
+\begin{align*}
+  \hat{\Beta}_0 & = \frac{1}{n_\mathrm{WT}} \sum_{i = 1}^{n_\mathrm{WT}} \Delta^{(i)} \\
+  \hat{\Sigma}  & = \begin{bmatrix}
+    \max\{\hat{\sigma}_1^2, \tilde{\sigma}_1^2\} + \hat{\tau}_1^2 &        & 0                                                                         \\
+                                                                  & \ddots                                                                             \\
+    0                                                             &        & \max\{\hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2\} + \hat{\tau}_{|S|}^2 \\
+  \end{bmatrix}
+\end{align*}
+%
+where $\Delta^{(i)}$ is the read counts for \gls{wt} sample $i$; $\hat{\sigma}_s^2$ is the estimate of the raw biological variance for transcript $s$; $\tilde{\sigma}_i^2$ is the shrunken estimate of the biological variance for transcript $s$; and $\hat{\tau}_s^2$ is the estimate of the inferential variance for transcript $s$ obtained from bootstrapping (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
+However, if we treat the estimates for $\Beta_0$ and $\Sigma$ derived from the \gls{wt} samples as known inputs for the mutated model, then \Cref{eqn:single_mut_model} for a single mutated sample meets the criteria for the \gls{js} estimators.
 This is not necessarily an accurate assumption, since these estimates may be biased, inaccurate at small samples sizes, or affected by confounding factors, like batch effects.
 But with sufficiently large $n_\mathrm{WT}$, this may not be a practical concern.
 
@@ -104,7 +123,7 @@ where
 \end{equation*}
 %
 is the design matrix.
-Looking closely at the \gls{ols} estimator for the mutation coefficient, $\beta_{s,1}$, it is clear that it is given by:
+Looking closely at the \gls{ols} estimator for the mutation coefficient, $\beta_{s,1}$, it is given by:
 %
 \begin{equation}
   \hat{\beta}_{s,1}^{(OLS)} = d_s^{(mut)} - \hat{\beta}_{s,0}^{(OLS)} = \delta_s - \hat{\beta}_{0,s}
@@ -118,7 +137,7 @@ The \gls{js} estimator for $\Beta_1$ can then be expressed simply as:
   \label{eqn:js_defn_ols}
 \end{equation}
 %
-From this definition, it is easy to see that the \gls{js} estimate is colinear with the \gls{ols} estimate but uniformly shrunk towards 0.
+From this definition, one can see that the \gls{js} estimate is colinear with the \gls{ols} estimate but uniformly shrunk towards 0.
 For a more general experimental design, the above can be extended.
 
 \begin{theorem}
