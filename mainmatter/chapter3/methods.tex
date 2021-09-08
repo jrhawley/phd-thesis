@@ -338,6 +338,6 @@ kallisto quant --bootstrap-samples 100 --pseudobam --threads 8 --index /path/to/
 To assess whether \glspl{sv} were associated with local gene expression changes, we considered each unique breakpoint one at a time.
 For each breakpoint, we compared the gene expression between the mutated and non-mutated tumour samples using Sleuth (v0.30.0) \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} with a linear model where the mutation status was the only covariate.
 To reduce the chance of falsely identifying genes as differentially expressed, only genes located within the \glspl{tad} (window size  $w = 20$) containing breakpoints were considered.
-Fold-change estimates of each transcript were assessed for significance using a Wald test.
+Fold change estimates of each transcript were assessed for significance using a Wald test.
 Transcript-level p-values are combined to create gene-level p-values using the Lancaster aggregation method provided by the Sleuth package \cite{yiGenelevelDifferentialAnalysis2018}.
 Correcting for multiple tests was then performed with the Benjamini-Hochberg FDR correction for all genes that were potentially altered in the mutated sample(s).
