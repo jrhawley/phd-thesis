@@ -127,6 +127,6 @@ In theory, this may increase the error of some transcripts, but will decrease th
 
 There are two parameters of this model that will affect the amount of biasing: the scaling coefficient, $c$, and the transcripts being considered for differential expression, $S$.
 Firstly, the scaling coefficient can be manually specified, and the largest biasing occurs when $c$ is its maximum value, $2 \left( \frac{\trace{\Sigma}}{\lambda} - 2 \right)$.
-Secondly, the transcripts under consideration can also be manually specified, which will affect the value of the denominator $\left( \hat{\Beta}_1^{(OLS)} \right)^\tran \hat{\Sigma}^{-1} \hat{\Beta}_1^{(OLS)}$, and thus the amount of biasing.
+Secondly, the transcripts under consideration can also be manually specified, which will affect the value of the denominator, $\left( \hat{\Beta}_1^{(OLS)} \right)^\tran \hat{\Sigma}^{-1} \hat{\Beta}_1^{(OLS)}$, and thus the amount of biasing.
 The more transcripts under consideration, the larger the denominator, and so the smaller the effect.
 Taken together, we have produced a high-bias, low-variance fold change estimator that has a lower \gls{mse} than the \gls{ols} estimator and two tunable parameters.
