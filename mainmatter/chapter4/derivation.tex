@@ -4,7 +4,7 @@
 For a $p$-variate normal distribution, denoted as $Z \sim \mathcal{N}_p(\mu, \Sigma)$, where the mean $\mu$ is unknown and the covariance matrix $\Sigma$ is known, the following theorem holds \cite{steinInadmissibilityUsualEstimator1956}:
 
 \begin{theorem}
-  The estimator $\hat{\mu}^{(0)} = Z$, for any mean $\mu$, does not minimize the \gls{mse} $\mathbb{E} \left[ (\mu - \hat{\mu}^{(0)})^2 \right]$ for a single observation of $Z$ when $p \ge 3$ and $\Sigma = I_p$, the $p \times p$ identity matrix.
+  The estimator $\hat{\mu}^{(OLS)} = Z$, for any mean $\mu$, does not minimize the \gls{mse}, $\expect{(\mu - \hat{\mu}^{(OLS)})^2}$ for a single observation of $Z$ when $p \ge 3$ and $\Sigma = I_p$, the $p \times p$ identity matrix.
   Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert Z \Vert ^2}\right) Z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for a single observation for sufficiently small coefficient $b$ and sufficiently large coefficient $a$.
 \end{theorem}
 
@@ -119,7 +119,7 @@ We can summarize the above with the following theorem.
 
 \begin{theorem}
   For an experiment containing $n_\mathrm{WT}$ \gls{wt} samples and a single mutated sample, an estimate for the expression fold change of $|S|$ transcripts can be given by the \gls{js} estimator \Cref{eqn:js_defn_ols} where $\hat{\Sigma}$ is the covariance matrix for all $|S|$ transcripts estimated from all $n_\mathrm{WT}$ \gls{wt} samples; $\hat{\Beta}_1^{(OLS)}$ is the \gls{ols} estimator for expression fold change given by \Cref{eqn:ols_defn}; and $c$ is some scaling coefficient.
-  When $|S| \ge 3$, $\trace{\hat{\Sigma}} \ge 2\lambda$ (where $\lambda$ is the largest eigenvalue of $\hat{\Sigma}$), and $c$ satisfies \Cref{eqn:js_scaling_bounds}, then the \gls{mse} of the \gls{js} estimator, $\hat{\Beta}_1^{(JS)}$ is smaller than the \gls{mse} of the \gls{ols} estimator, $\hat{\Beta}_1^{(OLS)}$.
+  When $|S| \ge 3$, $\trace{\hat{\Sigma}} \ge 2\lambda$ (where $\lambda$ is the largest eigenvalue of $\hat{\Sigma}$), and $c$ satisfies \Cref{eqn:js_scaling_bounds}, then the \gls{mse} of the \gls{js} estimator, $\hat{\Beta}_1^{(JS)}$, is smaller than the \gls{mse} of the \gls{ols} estimator, $\hat{\Beta}_1^{(OLS)}$.
 \end{theorem}
 
 It can be shown that the \gls{js} estimator is biased towards 0 with a smaller variance than the \gls{ols} estimator (see \Cref{sec:JS_moments}).
