@@ -12,7 +12,7 @@ This means individuals identified with the disease will likely not have biologic
 Similarly, in \Cref{chap:3D}, nearly all \glspl{sv} were not found in more than a single patient.
 Estimating the impact of a given mutation only found in a single individual is difficult, and recapitulating complex \glspl{sv} often found in primary prostate tumours in cell line models remains challenging \cite{nakamuraCRISPRTechnologiesPrecise2021,pickar-oliverNextGenerationCRISPR2019,wangEngineering3DGenome2021}.
 
-To address this problem of unreplicated biological samples in differential gene expression analyses, we attempt to reduce the \gls{mse} of \gls{rnaseq} models by addressing the bias (\Cref{fig:JS_fig1}a).
+To address this problem of unreplicated biological samples in differential gene expression analyses, we attempt to reduce the \gls{mse} of gene expression fold change estimates from models of \gls{rnaseq} data by addressing the bias (\Cref{fig:JS_fig1}a).
 Using the \gls{js} estimator for the mean of normal distribution based on a single observation \cite{steinInadmissibilityUsualEstimator1956,bockMinimaxEstimatorsMean1975,steinEstimationMeanMultivariate1981}, we reduce the \gls{mse} of fold change estimates by simultaneously increasing the bias and decreasing the variance of the statistical model (\Cref{fig:JS_fig1}b).
 This method works by combining variation across dimensions for a multivariate observation and uses this combined information to reduce the estimate error (\Cref{fig:JS_fig1}c).
 First, we use the Sleuth model \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} for differential analysis to derive the \gls{js} estimator fold gene expression fold change and relate it to the \gls{ols} estimator.
