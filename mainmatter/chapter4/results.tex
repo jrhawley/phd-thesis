@@ -16,6 +16,7 @@ This result was generalized to non-singular covariance matrices that were not ne
   Let $Z \sim \mathcal{N}_p \left(\mu, \Sigma \right)$.
   Let $\hat{\mu}^{(JS)} = \left( 1 - \frac{c}{Z^\tran \Sigma^{-1} Z}\right) Z$.
   If $p \ge 3$, $\trace{\Sigma} \ge 2 \lambda$ (where $\trace{\cdot}$ is the trace of a matrix, $\lambda$ is the largest eigenvalue of the covariance matrix, $\Sigma$), and $0 \le c \le 2 \left( \frac{\trace{\Sigma}}{\lambda} - 2 \right)$, then $\hat{\mu}^{(JS)}$ is the estimator for the mean, $\mu$, that minimizes the \gls{mse} for a single observation of $Z$.
+  \label{thm:js}
 \end{theorem}
 
 Consider the differential analysis model used in the Sleuth R package \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} for a single transcript, $s$, with the simple experimental design of $n_\mathrm{WT}$ \gls{wt} samples and 1 mutant sample.
@@ -39,16 +40,18 @@ While the mean $\beta_{s, 0}$ can be estimated from the \gls{wt} samples, the fo
 By re-parameterizing this model to consider every transcript, \Cref{eqn:wt_model} can be re-written as:
 %
 \begin{equation}
-  \Delta \sim \mathcal{N}_{|S|}(\Beta_0, \Sigma) \\
+  \Delta^{(\mathrm{WT})} \sim \mathcal{N}_{|S|}(\Beta_0, \Sigma) \\
+  \label{eqn:delta_wt}
 \end{equation}
 %
 and \Cref{eqn:single_mut_model} can be re-written as:
 %
 \begin{equation}
-  \Delta \sim \mathcal{N}_{|S|}(\Beta_0 + \Beta_1, \Sigma) \\
+  \Delta^{(\mathrm{Mut})} \sim \mathcal{N}_{|S|}(\Beta_0 + \Beta_1, \Sigma) \\
+  \label{eqn:delta_mut}
 \end{equation}
 %
-where $\Delta$ is the $|S|$-dimensional vector of read counts for all transcripts, $S$ is the set of all transcripts, $\Beta_0$ is the $|S|$-dimensional vector of mean counts for each transcript, $\Beta_1$ is the $|S|$-dimensional vector of fold-change effects associated with the mutation, and $\Sigma$ is the covariance matrix.
+where $\Delta^{(\mathrm{WT})}$ is the $|S|$-dimensional vector of read counts for all transcripts in a \gls{wt} sample; $\Delta^{(\mathrm{Mut})}$ is the same but for the mutated sample; $S$ is the set of all transcripts; $\Beta_0$ is the $|S|$-dimensional vector of mean counts for each transcript; $\Beta_1$ is the $|S|$-dimensional vector of fold-change effects associated with the mutation; and $\Sigma$ is the covariance matrix.
 Mathematically, we can express these parameters in terms of parameters from \Cref{eqn:single_mut_model}:
 %
 \begin{align*}
@@ -73,24 +76,25 @@ The statistical model presented in \cite[REF][]{pimentelDifferentialAnalysisRNAs
   \end{bmatrix}
 \end{align*}
 %
-where $\Delta^{(i)}$ is the read counts for \gls{wt} sample $i$; $\hat{\sigma}_s^2$ is the estimate of the raw biological variance for transcript $s$; $\tilde{\sigma}_i^2$ is the shrunken estimate of the biological variance for transcript $s$; and $\hat{\tau}_s^2$ is the estimate of the inferential variance for transcript $s$ obtained from bootstrapping (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
-However, if we treat the estimates for $\Beta_0$ and $\Sigma$ derived from the \gls{wt} samples as known inputs for the mutated model, then \Cref{eqn:single_mut_model} for a single mutated sample meets the criteria for the \gls{js} estimators.
+where $\Delta^{(i)}$ is the read counts for \gls{wt} sample $i$; $\hat{\sigma}_s^2$ is the raw estimate of the biological variance for transcript $s$; $\tilde{\sigma}_i^2$ is the shrunken estimate of the biological variance for transcript $s$ made through aggregating data across transcripts; and $\hat{\tau}_s^2$ is the estimate of the inferential variance for transcript $s$ obtained from bootstrapping (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
+However, if we treat the estimates $\hat{\Beta}_0$ and $\hat{\Sigma}$ derived from the \gls{wt} samples as known inputs for the mutated model, then \Cref{eqn:single_mut_model} for a single mutated sample meets the criteria for the \gls{js} estimators.
 This is not necessarily an accurate assumption, since these estimates may be biased, inaccurate at small samples sizes, or affected by confounding factors, like batch effects.
 But with sufficiently large $n_\mathrm{WT}$, this may not be a practical concern.
 
-A \gls{js} estimator for the unknown fold change, $\Beta_1$, can be constructed.
+A \gls{js} estimator for the unknown fold change, $\Beta_1$, can be constructed according to \Cref{thm:js}:
 %
 \begin{equation}
-  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{(\Delta - \hat{\Beta}_0)^\tran \Sigma^{-1} (\Delta - \hat{\Beta}_0)} \right)(\Delta - \hat{\Beta}_0)
+  \hat{\Beta}_1^{(JS)} = \left( 1 - \frac{c}{(\Delta^{(\mathrm{Mut})} - \hat{\Beta}_0)^\tran \hat{\Sigma}^{-1} (\Delta^{(\mathrm{Mut})} - \hat{\Beta}_0)} \right)(\Delta^{(\mathrm{Mut})} - \hat{\Beta}_0)
   \label{eqn:js_defn}
 \end{equation}
 %
-where $\hat{\Beta}_0$ is the estimate obtained from the non-mutated samples for all transcripts $s \in S$.
-It is straightforward to see that
+where $\hat{\Beta}_0$ is the estimate obtained from the non-mutated samples for all transcripts $s \in S$, and $\Delta^{(\mathrm{Mut})}$ is the read counts for all transcripts in the single mutated sample.
+By \Cref{eqn:delta_mut}, the following relationships can be derived to satisfy \Cref{thm:js}:
 %
 \begin{align*}
-  \trace{\Sigma} & = \sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2                  \\
-  \lambda        & = \max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}
+  \trace{\hat{\Sigma}} & = \sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2                                                                                                                                      \\
+  \lambda              & = \max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}                                                                                                                     \\
+  0                    & \le c \le 2 \left( \frac{\sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2}{\max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}} - 2 \right) \\
 \end{align*}
 
 \subsection{Comparison between the \glsentryshort{ols} and \glsentrylong{js} estimators}
