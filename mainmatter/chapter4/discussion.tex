@@ -2,8 +2,8 @@
 
 In this work, we developed a statistical framework for differential expression analysis where unreplicated conditions are found.
 We found that its larger bias and smaller variance, compared to conventional \gls{ols} estimators, can improve statistical inferences, particularly when focusing on $\le 100$ transcripts.
-In cases with unreplicated conditions, DESeq2 \cite{loveModeratedEstimationFold2014}, edgeR \cite{robinsonEdgeRBioconductorPackage2010}, and Sleuth \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} frameworks group all samples, both case and control, before performing normalization and performing variance shrinkage.
-The method presented here builds on these shrinkage methods to reduce uncertainty in gene expression fold changes for scenarios where biological replicates are missing.
+In cases with unreplicated conditions, the DESeq2 \cite{loveModeratedEstimationFold2014}, edgeR \cite{robinsonEdgeRBioconductorPackage2010}, and Sleuth \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} frameworks group all samples, both case and control, before performing normalization and performing variance shrinkage.
+The method presented here builds on these shrinkage methods to reduce uncertainty in gene expression fold change estimates for when biological replicates are missing.
 This method can help improve differential gene expression analyses for singular observations, such as unique chromatin aberrations or rare diseases.
 
 Many statistical methods exist to similarly reduce uncertainty.

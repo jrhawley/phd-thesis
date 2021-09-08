@@ -2,10 +2,10 @@
 
 \subsection{\glsentrylong{rnaseq} data collection and pre-processing}
 
-\Gls{rnaseq} reads were obtained from \cite[REF][]{gierlinskiStatisticalModelsRNAseq2015} from the \gls{sra} (Project Accession PRJEB5348).
+\Gls{rnaseq} reads were obtained from \cite[REF][]{gierlinskiStatisticalModelsRNAseq2015} via the \gls{sra} \cite{leinonenSequenceReadArchive2011} (Project Accession PRJEB5348).
 Briefly, the $\Delta$\emph{Snf2} \gls{ko} and \gls{wt} cells were both sequenced as single-end, 50 bp reads, split across seven lanes of a single Illumina HiSeq 2000 flow cell.
 The quality of the sequencing reads was assessed with FastQC \cite{andrewsFastQCQualityControl2010}.
-The \emph{Saccharomyces cerevisiae} R64-1-1 reference transcriptome index from Ensembl (v96) was downloaded from https://github.com/pachterlab/kallisto-transcriptome-indices/.
+The \emph{Saccharomyces cerevisiae} R64-1-1 reference transcriptome index from Ensembl \cite{cunninghamEnsembl20192019} (v96) was downloaded from \url{https://github.com/pachterlab/kallisto-transcriptome-indices/} (commit \texttt{944fbcc972ceca3b7c643c82670a04d20b0bd443}).
 \Gls{rnaseq} reads from all technical replicates of a single biological replicate were quantified against the reference transcriptome with Kallisto (v0.46.2) \cite{brayNearoptimalProbabilisticRNAseq2016} with the following command:
 
 \begin{lstlisting}[basicstyle=\ttfamily]
