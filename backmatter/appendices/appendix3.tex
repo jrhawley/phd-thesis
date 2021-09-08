@@ -246,5 +246,5 @@ Notably, the variance of the \gls{js} estimator is a function of both the mean a
 This is in contrast to the \gls{ols} estimator, which is solely a function of the variance.
 Additionally, the off-diagonal elements of the matrix $\Beta_1 \Beta_1^\tran$ imply that the \gls{js} fold change estimates are not independent of each other.
 This, again, contrasts with the \gls{ols} estimator, where the diagonal covariance matrix, $\hat{\Sigma}$, implies that the fold change estimates are themselves independent of each other.
-The effect of this dependence on statistical inference is a function of the variance and true fold change, as can be seen from the $\frac{2c}{\left( \Beta_1^\tran \hat{\Sigma}^{-1} \Beta_1 \right)^2}$ coefficient.
-While rarely true in practice, this statistical dependence can affect the results of statistical inference, in theory.
+The effect of this dependence on statistical inference is a function of the variance and true fold change, as can be seen from the $\frac{2c}{\left( \Beta_1^\tran \hat{\Sigma}^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^\tran$ term.
+While often ignored in practice, this statistical dependence can affect the results of statistical inference.
