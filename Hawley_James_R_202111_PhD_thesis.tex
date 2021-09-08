@@ -180,6 +180,12 @@
 % define a nicer transpose symbol
 \newcommand{\trace}[1]{\mathrm{Tr} \left[ #1 \right]}
 
+% define a nicer expectation operator
+\newcommand{\expect}[1]{\mathbb{E} \left[ #1 \right]}
+
+% define a nicer variance operator
+\newcommand{\variance}[1]{\mathbb{V} \left[ #1 \right]}
+
 % define a nicer command that lists all authors in the publication
 \newcommand{\printpublication}[1]{
   \AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}
@@ -233,7 +239,7 @@
 
 % % Back Matter
 % % ------------------------------------------------
-% \subfile{backmatter/appendices}
+\subfile{backmatter/appendices}
 \backmatter
 \subfile{backmatter/references}
 \end{document}
