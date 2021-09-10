@@ -267,6 +267,28 @@ Contact frequencies from the \gls{ice}-normalized, 20 kbp contact matrices were 
 The row means were calculated to produce a single vector where each element is the average normalized contact frequency between the anchor of interest and the distal 20 kbp bin.
 These vectors were plotted as lines in \Cref{fig:3D_fig6}e.
 
+\subsubsection{Complex structural variant assembly}
+
+NeoLoopFinder \cite{wangGenomewideDetectionEnhancerhijacking2021} was used to estimate copy number aberrations from Hi-C data with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+calculate-cnv -g hg38 -e MboI -H {input_cooler} --output {cnv_estimates}
+\end{lstlisting}
+
+This estimation was subsequently used to perform copy number-aware normalization of 10 kbp resolution contact matrices with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+correct-cnv -H {input_cooler} --cnv-file {cnv_estimates} --nproc 8
+\end{lstlisting}
+
+Complex \glspl{sv} were assembled using \gls{sv} breakpoints identified by Hi-C Breakfinder \cite{dixonIntegrativeDetectionAnalysis2018} and the copy number-aware normalized contact matrices with the following command:
+
+\begin{lstlisting}[basicstyle=\ttfamily]
+assemble-complexSVs --breakpoints {sample_SV_breakpoints} --hic {input_cooler} --nproc 8
+\end{lstlisting}
+
+Assembled contact matrices were plotted with a custom Python script using the Cooler and NeoLoopFinder Python packages.
+
 \subsection{Patient tumour tissue H3K27ac \glsentryshort{chipseq}}
 
 \gls{chipseq} against H3K27ac was previously published for these matching samples in \cite{kronTMPRSS2ERGFusion2017}.
