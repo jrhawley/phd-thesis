@@ -132,7 +132,7 @@ Contact matrices at different resolutions were created with the $\texttt{cooler 
 
 \subsection{Hi-C data analysis}
 
-\subsubsection{\Glsentryshort{tad} identification}
+\subsubsection{\Glsfmtshort{tad} identification}
 
 Contact matrices were binned at a resolution of 40 kbp.
 To remove sequencing depth as a confounding factor, contact matrices for all samples were first downsampled to match the sequencing depth of the shallowest sample.
@@ -167,7 +167,7 @@ For comparisons involving cell lines, this was $w = 32 \times 40$ kbp.
 
 The persistence of a \gls{tad} boundary was calculated as the number of window sizes where this region was identified as a boundary.
 
-\subsubsection{Sample clustering by \glsentryshortpl{tad}}
+\subsubsection{Sample clustering by \glsfmtshortpl{tad}}
 
 Using the \gls{tad} calls at the window size $w = 32 \times 40$ kbp, the similarity between samples was calculated with BPscore.
 The resulting matrix, containing the similarity between any two samples, was used as the distance matrix for unsupervised hierarchical clustering with $\texttt{ward.D2}$ linkage \cite{murtaghWardHierarchicalAgglomerative2014}.
@@ -255,7 +255,7 @@ Simple \glspl{sv} are connected components in the breakpoint graph containing on
 A visual representation of these graphs can be found in \Cref{fig:3D_figs4}b.
 Graphs are displayed with a spring-force layout, adjusted using the Kamada Kawai optimization \cite{kamadaAlgorithmDrawingGeneral1989} from the NetworkX Python package (v2.4) \cite{hagbergExploringNetworkStructure2008}.
 
-\subsubsection{Determination of \glsentryshort{sv} breakpoints altering intra-\glsentryshortpl{tad} contacts}
+\subsubsection{Determination of \glsfmtshort{sv} breakpoints altering intra-\glsfmtshortpl{tad} contacts}
 
 Patients are assigned into one of two groups using hierarchical clustering (complete linkage) with the matrix of pairwise BPscore \cite{zaborowskiBPscoreEffectiveMetric2019} values as a distance matrix.
 If the clustering equals the mutated samples from the non-mutated samples (i.e. the clustering matches the mutation status in this locus), then the local topology was classified as $\texttt{altered}$ because of the \gls{sv}.
@@ -289,7 +289,7 @@ assemble-complexSVs --breakpoints {sample_SV_breakpoints} --hic {input_cooler} -
 
 Assembled contact matrices were plotted with a custom Python script using the Cooler and NeoLoopFinder Python packages.
 
-\subsection{Patient tumour tissue H3K27ac \glsentryshort{chipseq}}
+\subsection{Patient tumour tissue H3K27ac \glsfmtshort{chipseq}}
 
 \gls{chipseq} against H3K27ac was previously published for these matching samples in \cite{kronTMPRSS2ERGFusion2017}.
 Sequencing data was processed similarly to the previous publication of this data \cite{kronTMPRSS2ERGFusion2017}; however, the GRCh38 reference genome was used instead of GRCh37 \cite{internationalhumangenomesequencingconsortiumFinishingEuchromaticSequence2004}.
@@ -339,7 +339,7 @@ Permutation tests were performed with the regioneR R package (v1.18.0) \cite{gel
 
 \subsection{Primary tissue RNA data analysis}
 
-\subsubsection{Tumour sample \glsentrylong{rnaseq}}
+\subsubsection{Tumour sample \glsfmtlong{rnaseq}}
 
 Total RNA was extracted for the \gls{cpcgene} tumour samples as previously described \cite{chenWidespreadFunctionalRNA2019}.
 Briefly, total RNA was extracted with mirVana miRNA Isolation Kit (Life Technologies) according to the manufacturer's instructions.
@@ -347,7 +347,7 @@ RNA samples were sent to BGI Americas where they were assessed for quality contr
 For each sample, 200 ng of total RNA was used to construct a TruSeq strand-specific library with the Ribo Zero protocol (Illumina, Cat. \#RS-122-2203).
 The libraries were sequenced on an Illumina HiSeq 2000 to a minimal target of 180 million, $2 \times 100$ bp paired-end reads.
 
-\subsubsection{\glsentrylong{rnaseq} data pre-processing}
+\subsubsection{\glsfmtlong{rnaseq} data pre-processing}
 
 \gls{rnaseq} FASTQ files were pseudo-aligned to the GRCh38 genome using Kallisto (v0.46.1) \cite{brayNearoptimalProbabilisticRNAseq2016} with the following command:
 

@@ -21,7 +21,7 @@ To compare gene essentiality between \gls{pca} cell lines and others, essentiali
 To perform a permutation test, the median expression of 8 randomly selected cell lines was calculated one million times to generate a background distribution of essentiality scores across all cell types available.
 The median essentiality score from the 8 \gls{pca} cell lines was calculated and its percentile within the background distribution is reported.
 
-\subsection{\glsentryshort{sirna} knockdown and cell proliferation assay}
+\subsection{\glsfmtshort{sirna} knockdown and cell proliferation assay}
 
 300,000 LNCaP cells (Day 0) were reverse transfected with \gls{sirna} (siFOXA1 using Lipofectamine \gls{mrna}max reagent; ThermoFisher Scientific, Cat No. 13778150).
 Cells were counted using Countess automated cell counter (Invitrogen).
@@ -34,17 +34,17 @@ After blocking, anti-\emph{FOXA1} (Abcam Cat No. 23737) in 2.5\% non-fat milk wa
 Next day, the blot was washed and incubated with IRDye 800CW Goat Anti-Rabbit IgG secondary antibody (LI-COR, Cat No. $925-32211$) at room temperature for 1 h.
 The blot was then washed and assessed with the Odyssey CLX imaging system (LI-COR).
 
-\subsection{Identifying putative \emph{FOXA1} \glsentryshortpl{cre}}
+\subsection{Identifying putative \emph{FOXA1} \glsfmtshortpl{cre}}
 
 Putative \emph{FOXA1} \glspl{cre} were identified through the use of C3D method based on DNase I Hypersensitivity \cite{mehdiC3DToolPredict2019}.
 Predicted interacting \gls{dhs} with a Pearson's correlation above 0.7 \cite{thurmanAccessibleChromatinLandscape2012} were kept for downstream analysis.
 
-\subsection{Hi-C and \glsentryshortpl{tad} in LNCaP cells}
+\subsection{Hi-C and \glsfmtshortpl{tad} in LNCaP cells}
 
 Hi-C and \glspl{tad} conducted and called, respectively, in LNCaP cells are publicly available off ENCODE portal (experiment accession ENCSR346DCU; FASTQ file accessions: ENCFF726LGW, ENCFF550SKU, ENCFF950CQX, and ENCFF411TZJ; \glspl{tad} file accession: ENCFF139JCA).
 Visualization of the Hi-C dataset is available on the Hi-C Browser \cite{wang3DGenomeBrowser2018}.
 
-\subsection{Clonal \glsentrylong{wt} Cas9 and dCas9-KRAB mediated validation}
+\subsection{Clonal \glsfmtlong{wt} Cas9 and dCas9-KRAB mediated validation}
 
 Lentiviral particles were generated in 293FT cells (ThermoFisher) using the pMDG.2 and psPAX2 packaging plasmids (Addgene; \#12259 and \#12260, a gift from Didier Trono) alongside the Lenti-Cas9-2A-Blast plasmid (Addgene \#73310, a gift from Jason Moffat) and collected 72 hrs post transfection.
 LNCaP and 22Rv1 cells were then transduced for $24-48$ h with equal amounts of virus followed by selection with media containing blasticidin (7.5 $\mu$g/mL for LNCaP cells, 6 $\mu$g/mL for 22Rv1 cells).
@@ -66,7 +66,7 @@ Lastly, 1 $\mu$L (100 $\mu$M) of electroporation enhancer (Integrated DNA Techno
 The entire transfection reaction was transfected into 350,000 cells through Nucleofection (SF Solution EN120 - 4D Nucleofector, Lonza).
 Cells were then harvested 24 h post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 
-\subsection{Transient Cas9-mediated disruption of \glsentryshortpl{cre}}
+\subsection{Transient Cas9-mediated disruption of \glsfmtshortpl{cre}}
 
 Deletion of elements through this method were achieved through the transfection of Cas9 nuclease protein complexed with the \gls{crrna} (Integrated DNA Technologies).
 Briefly, five to six unique \gls{crrna} molecules (Integrated DNA Technologies) were designed to tile across the region of interest using the CRISPOR tool (\url{http://crispor.tefor.net/}) \cite{haeusslerEvaluationOfftargetOntarget2016} and the Zhang lab CRISPR Design tools (\url{http://crispr.mit.edu/}) \cite{hsuDNATargetingSpecificity2013}.
@@ -78,10 +78,9 @@ The entire transfection reaction was transfected into 350 000 cells through Nucl
 Cells were then harvested 24 h post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 For double deletions, two sets of \gls{grna}-RNP complex (10 $\mu$g of Alt-R S.p. HiFi Cas9 Nuclease 3NLS) were transfected and harvested 24 h post-transfection for RNA and DNA for RT-PCR and confirmation of deletion, respectively.
 To control for double deletions, two negative control regions within the \gls{tad} were also compounded.
-%% Fix this
 Due to size, see published manuscript for primers.
 
-\subsection{RT-PCR assessment of gene expression upon deletion of \glsentryshortpl{cre}}
+\subsection{RT-PCR assessment of gene expression upon deletion of \glsfmtshortpl{cre}}
 
 DNA and RNA were harvested with Qiagen AllPrep RNA/DNA Kit (Qiagen, Cat No. 80204).
 Next, cDNA was synthesized from 300 ng of RNA using SensiFast cDNA Synthesis kit (Bioline, Cat No. BIO-65054), and \gls{mrna} expression levels for various genes of interest were assessed.
@@ -89,7 +88,7 @@ Due to size, see published manuscript for the primer sequences used for expressi
 Differential gene expression was calculated by normalizing against \emph{TBP} (housekeeping gene).
 Statistical significance was calculated using Student's $t$-test in R.
 
-\subsection{Confirmation of Cas9-mediated deletion of \glsentryshortpl{cre}}
+\subsection{Confirmation of Cas9-mediated deletion of \glsfmtshortpl{cre}}
 
 Deletion of \glspl{cre} were confirmed through PCR amplification of the intended region for deletion, followed by the T7 Endonuclease Assay (Integrated DNA Technology).
 %% fix this
@@ -98,7 +97,7 @@ PCR products were then loaded onto a 1\% agarose gel for visualization.
 The agarose gel to assess the on-target genome editing efficiency was done through densitometry using ImageJ.
 The correlation between on-target genome editing efficiency and \emph{FOXA1} \gls{mrna} expression reduction was drawn through Pearson's correlation in R.
 
-\subsection{Cell proliferation upon deletion of \emph{FOXA1} \glsentryshortpl{cre}}
+\subsection{Cell proliferation upon deletion of \emph{FOXA1} \glsfmtshortpl{cre}}
 
 Pairs of \glspl{grna} flanking the \glspl{cre} of interest, \emph{FOXA1} promoter and control regions were designed using CRISPOR (\url{http://crispor.tefor.net/}) and Zhang lab CRISPR Design tool (\url{http://crispr.mit.edu/}) (due to size, see published manuscript).
 Each pair of \glspl{grna} were cloned into the lentiCRISPRv2 (Addgene; a gift from Feng Zhang \#52961) and the lentiCRISPRv2-Blast (Addgene; a gift from Feng Zhang \#83480) plasmid as previously described \cite{sanjanaImprovedVectorsGenomewide2014}.

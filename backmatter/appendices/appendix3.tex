@@ -72,7 +72,7 @@ $D_s$ is defined by a transformation of raw read counts to correct for biases su
 where $k_{s,i}$ is the estimated read count from the Kallisto package \cite{brayNearoptimalProbabilisticRNAseq2016} for transcript $s$ in sample $i$ and $\hat{f_i}$ is the read count scale factor for sample $i$.
 The read count scale factor is calculated from the set of all transcripts that pass initial filtering, $S^*$, which is typically the entire transcriptome, $S$, less a few transcripts with read counts below some threshold (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
 
-\section{Statistical moments of the \glsentrylong{ols} estimator}
+\section{Statistical moments of the \glsfmtlong{ols} estimator}
 
 As shown in Supplementary Note 2 of \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017}, the estimator is unbiased:
 %
@@ -130,10 +130,10 @@ When there is only a single mutated sample (i.e. $n_\mathrm{Mut} = 1$), this red
   \variance{ \beta_{s,\mathrm{Mut}}^{(OLS)} } = \frac{(\sigma_s^2 + \tau_s^2)(1 + n_\mathrm{WT})}{n_\mathrm{WT}}
 \end{equation}
 
-\section{Statistical moments of the \glsentrylong{js} estimator}
+\section{Statistical moments of the \glsfmtlong{js} estimator}
 \label{sec:JS_moments}
 
-\subsection{Expected value of the \glsentrylong{js} estimator}
+\subsection{Expected value of the \glsfmtlong{js} estimator}
 
 We can use a Taylor expansion around $\Beta_1$ to approximate the expected value of $\hat{\Beta}_1^{(JS)}$.
 Using the definition of $\hat{\Beta}_1^{(JS)}$ from \Cref{eqn:js_defn_ols}, let $u = \hat{\Sigma}^{-1/2}\hat{\Beta}_1^{(OLS)}$.
@@ -173,7 +173,7 @@ For sufficiently small $|S|$ and sufficiently small coefficient of variation (i.
 %
 Thus, the \gls{js} estimator is an estimate of $\Beta_1$ that is biased towards 0.
 
-\subsection{Variance of the \glsentrylong{js} estimator}
+\subsection{Variance of the \glsfmtlong{js} estimator}
 
 The \gls{mse} of the \gls{js} estimator is related to its variance.
 %
