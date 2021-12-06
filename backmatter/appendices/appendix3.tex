@@ -1,14 +1,102 @@
 \chapter{Supplementary Material for Chapter 4}
+\label{chap:JS_appendix}
+
+\section{Notation}
+\label{sec:JS_notation}
+
+Below is a summary of the notation and symbols that are used throughout this appendix and \Cref*{chap:JS}.
+
+\newlongtable{l l l}{Operators used throughout \Cref*{chap:JS_appendix} and \Cref*{chap:JS}}{
+  Name & Notation & Definition
+}{
+  tab:JS_appendix_operators
+}{
+  Expectation & $\expect{ \cdot }$          & Expectation of a random variable. \\
+  Covariance  & $\variance{ \cdot, \cdot }$ & Covariance of two random variables. \\
+  Variance    & $\variance{ \cdot }$        & Variance of a random variable. \\
+  Trace       & $\trace{ \cdot }$           & Trace of a matrix \\
+              &                             & (or the matrix representation of a random variable).
+}
+
+\newlongtable{l l l l}{Random variables used throughout \Cref*{chap:JS_appendix} and \Cref*{chap:JS}}{
+  Name & Notation & Units & Definition
+}{
+  tab:JS_appendix_variables
+}{
+  Latent transcript         & $Y$                 & None & Abundance of sequencing reads assigned to \\
+    abundance               &                     &      & each transcript in an organism's transcriptome. \\
+  Observed transcript       & $D$                 & None & Observed abundance of sequencing reads assigned to \\
+    abundance               &                     &      & each transcript in an organism's transcriptome. \\
+  Biological noise          & $\epsilon$          & None & Differences in expression between samples and \\
+                            &                     &      & variance from library preparation methods \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
+  Inferential noise         & $\zeta$             & None & Differences in expression arising from \\
+                            &                     &      & computational inference of reads to transcripts \\
+                            &                     &      & and sequencing stochasticity \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
+  \gls{ols} mean estimator  & $\hat{\mu}^{(OLS)} $ & None & Estimator of mean fold change using the \gls{ols} method. \\
+  \gls{js} mean estimator   & $\hat{\mu}^{(JS)}$  & None & Estimator of mean fold change using the \gls{js} method. \\
+}
+
+\newlongtable{l l l}{Symbols used throughout \Cref*{chap:JS_appendix} and \Cref*{chap:JS}}{
+  Name & Notation & Definition
+}{
+  tab:JS_appendix_symbols
+}{
+  Estimate            & $\hat{ \cdot }$                & Estimation of some constant or parameter. \\
+  Transpose           & $\cdot^\tran$                  & Transpose of a matrix \\
+                      &                                & (or the matrix representation of a random variable). \\
+  Normal distribution & $\mathcal{N}_p( \mu, \Sigma )$ & A $p$-dimensional normal distribution with mean $\mu$ \\
+                      &                                & and covariance matrix $\Sigma$. \\
+  Identity matrix     & $I_n$, $I_{r \times c}$        & A square $n \times n$, or rectangular $r \times c$, identity matrix.
+}
+
+\newlongtable{l l l}{Parameters and constants used throughout \Cref*{chap:JS_appendix} and \Cref*{chap:JS}}{
+  Name & Notation & Definition
+}{
+  tab:JS_appendix_params
+}{
+  Design matrix                                 & $X$                & Matrix of covariates as columns and samples as rows. \\
+                                                &                    & All $p$ covariates for sample $i$ are denoted by the \\
+                                                &                    & $p$-dimensional column vector $x_i$. \\
+  Set of transcripts                            & $S$                & All transcripts from an organism's transcriptome that \\
+                                                &                    & are considered in a differential expression analysis. \\
+  Wild type sample size                         & $n_\mathrm{WT}$    & The number of samples in the "wild type" group. \\
+  Mutant sample size                            & $n_\mathrm{Mut}$   & The number of samples in the "mutant" group. \\
+                                                &                    & In this application, $n_\mathrm{Mut} = 1$. \\
+  Total sample size                             & $n_\mathrm{Tot}$   & Total sample size in a differential expression analysis  \\
+                                                &                    & experiment. In this application, $n_\mathrm{Tot} = n_\mathrm{WT} + n_\mathrm{Mut}$. \\
+  Variance of inferential noise                 & $\tau^2$           & Inferential noise, $\zeta$, is distributed as $\mathcal{N}_{|S|} \left( 0, \tau^2 \right)$. \\
+                                                &                    & By assumption $\tau^2$ is a diagonal matrix where \\
+                                                &                    & the $i$-th diagonal element is denoted as $\tau^2_i$. \\
+  Variance of biological noise                  & $\sigma^2$         & Biological noise, $\epsilon$, is distributed as $\mathcal{N}_{|S|} \left( 0, \sigma^2 \right)$. \\
+                                                &                    & By assumption $\sigma^2$ is a diagonal matrix where \\
+                                                &                    & the $i$-th diagonal element is denoted as $\sigma^2_i$. \\
+  Shrinkage-based variance of biological noise  & $\tilde{\sigma}^2$ & Biological noise, $\epsilon$, is distributed as $\mathcal{N}_{|S|} \left( 0, \sigma^2 \right)$. \\
+                                                &                    & By assumption $\sigma^2$ is a diagonal matrix where \\
+                                                &                    & the $i$-th diagonal element is denoted as $\sigma^2_i$. \\
+  Estimated count                               & $k_{si}$           & Read abundance of transcript $s$ in sample $i$ as \\
+                                                &                    & estimated by pseudo-alignment in Kallisto. \\
+  Sample scale factor                           & $f_i$              & Read abundance scale factor for sample $i$ to adjust \\
+                                                &                    & for differences in sequencing depth between samples. \\
+  Covariate effect                              & $\beta_s$          & Fixed effect of each covariate on the expression of \\
+                                                &                    & transcript $s$. In this application, $\beta_{s,0}$ is the \\
+                                                &                    & baseline expression and $\beta_{s,1}$ is the fold-change in \\
+                                                &                    & mutant samples.
+}
 
 \section{Differential expression analysis with Sleuth}
 
 The differential expression model employed in the Sleuth (v0.30.0) \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} can be described as follows.
-Consider a set of transcripts, $S$, measured in $N$ samples with an experimental design matrix, $X \in \mathbb{R}^{N \times p}$, where $p$ is the number of covariates considered.
+Consider a set of transcripts, $S$, that are each measured in $n_\mathrm{Tot}$ samples with an experimental design matrix, $X \in \mathbb{R}^{n_\mathrm{Tot} \times p}$, where $p$ is the number of covariates considered.
 Let $Y_{si}$ be the natural log of the abundance of transcript $s$ in sample $i$.
 Given the design matrix:
 %
 \begin{equation}
-  X = [x_1^\tran; x_2^\tran; ... x_n^\tran], x_i \in \mathbb{R}^p
+  X = \begin{bmatrix}
+    x_1^\tran \\
+    x_2^\tran \\
+    ... \\
+    x_n^\tran
+  \end{bmatrix}
 \end{equation}
 %
 the abundance of transcripts can be modelled as a \gls{glm}:
@@ -17,7 +105,7 @@ the abundance of transcripts can be modelled as a \gls{glm}:
   Y_{si} = x_i^\tran \beta_s + \epsilon_{si}
 \end{equation}
 %
-where $\epsilon_{si} \sim \mathcal{N}(0, \sigma_s^2)$ is the biological noise of transcript $s$ in sample $i$ and $B_s \in \mathbb{R}^p$ is the fixed effect of the covariates on the expression of transcript $s$.
+where $\epsilon_{si} \sim \mathcal{N}(0, \sigma_s^2)$ is the biological noise of transcript $s$ in sample $i$ and $\beta_s \in \mathbb{R}^p$ is the fixed effect of the covariates on the expression of transcript $s$.
 
 Due to inferential noise from sequencing, each $Y_{si}$ are not observed directly, but indirectly through the observed perturbations, $D_{si}$.
 This can be modelled as:
@@ -44,17 +132,16 @@ Namely:
   \variance{\epsilon_{si}, \zeta_{rj}}    & = 0
 \end{align}
 %
-where $\variance{\cdot, \cdot}$ is the covariance operator, $s, r \in S$, and $i, j \in \{1, ..., N \}$.
-The abundances for transcript $s$ in all $N$ samples can then modelled as a multivariate normal distribution:
+where $s, r \in S$, and $i, j \in \{1, ..., n_\mathrm{Tot} \}$.
+The abundances for transcript $s$ in all $n_\mathrm{Tot}$ samples can then modelled as a multivariate normal distribution:
 %
 \begin{align}
-  Y_{s} & \sim \mathcal{N}_N(X \beta_s, \sigma_s^2 I_{N})             \\
-  D_{s} & \sim \mathcal{N}_N(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{N})
+  Y_{s} & \sim \mathcal{N}_{n_\mathrm{Tot}}(X \beta_s, \sigma_s^2 I_{n_\mathrm{Tot}})             \\
+  D_{s} & \sim \mathcal{N}_{n_\mathrm{Tot}}(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{n_\mathrm{Tot}})
 \end{align}
 %
-where $I_N \in \mathbb{R}^{N \times N}$ is the identity matrix.
 
-The goal of the differential analysis is to estimate the $|S| \times p$ coefficients in $B_s \forall s \in S$, and to determine which coefficients differ significantly from 0.
+The goal of the differential analysis is to estimate the $|S| \times p$ coefficients in $\beta_s \forall s \in S$, and to determine which coefficients differ significantly from 0.
 This is often achieved through a Wald test or likelihood ratio test after estimating the inferential variance, $\tau_s^2$, through bootstrapping and estimating the biological variance, $\sigma_s^2$, through dispersion estimation and shrinkage.
 The estimator for the differential effect is the \gls{ols} estimate:
 %
@@ -65,12 +152,13 @@ The estimator for the differential effect is the \gls{ols} estimate:
 $D_s$ is defined by a transformation of raw read counts to correct for biases such as transcript length and sequencing depth between different samples:
 %
 \begin{align}
-  D_{s,i}   & = \ln \left(\frac{k_{s,i}}{\hat{f_i}} + 0.5 \right)                                                            \\
-  \hat{f_i} & = \underset{s \in S^*}{\mathrm{median}} \frac{k_{s,i}}{\sqrt[N]{\underset{j = 1}{\overset{N}{\prod }}k_{s,j}}}
+  D_{si}   & = \ln \left(\frac{k_{si}}{f_i} + 0.5 \right)                                                            \\
+  f_i & = \underset{s \in S^*}{\mathrm{median}} \frac{k_{si}}{\sqrt[N]{\underset{j = 1}{\overset{N}{\prod }}k_{s,j}}}
 \end{align}
 %
-where $k_{s,i}$ is the estimated read count from the Kallisto package \cite{brayNearoptimalProbabilisticRNAseq2016} for transcript $s$ in sample $i$ and $\hat{f_i}$ is the read count scale factor for sample $i$.
-The read count scale factor is calculated from the set of all transcripts that pass initial filtering, $S^*$, which is typically the entire transcriptome, $S$, less a few transcripts with read counts below some threshold (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
+where $k_{si}$ is the estimated read count from the Kallisto package \cite{brayNearoptimalProbabilisticRNAseq2016} for transcript $s$ in sample $i$ and $f_i$ is the read count scale factor for sample $i$.
+The read count scale factor is calculated from the set of all transcripts that pass initial filtering, $S^*$.
+This is typically the entire transcriptome, $S$, but excludes transcripts with read counts below some threshold (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
 
 \section{Statistical moments of the \glsfmtlong{ols} estimator}
 
@@ -86,14 +174,14 @@ It can also be shown that, for a covariance matrix $\Sigma$,
   \variance{ \hat{\beta}_s^{(OLS)} } = (X^\tran X)^{-1} X^\tran \Sigma X (X^\tran X)^{-1}
 \end{equation}
 %
-In the case where the covariance matrix is diagonal (i.e. $\Sigma = (\sigma_s^2 + \tau_s^2)I_N$), this reduces to:
+In the case where the covariance matrix is diagonal (i.e. $\Sigma = (\sigma_s^2 + \tau_s^2)I_{n_\mathrm{Tot}}$), this reduces to:
 %
 \begin{equation}
   \variance{ \hat{\beta_s}^{(OLS)} } = (\sigma_s^2 + \tau_s^2)(X^\tran X)^{-1}
 \end{equation}
 %
-Now consider the simple experimental design from \Cref{chap:JS}, where the only covariate of interest is the presence of a mutation and $n_\mathrm{Mut}$ samples have this mutation and $n_\mathrm{WT}$ samples do not
-Then, the design matrix looks like so:
+Now consider the simple experimental design from \Cref{chap:JS}, where the only covariate of interest is the presence of a mutation, $n_\mathrm{Mut}$ samples have this mutation, and $n_\mathrm{WT}$ samples do not.
+Then the design matrix looks like so:
 %
 \begin{equation}
   X = \begin{bmatrix}
@@ -104,7 +192,7 @@ Then, the design matrix looks like so:
     \vdots & \vdots \\
     1      & 0
   \end{bmatrix}
-  \in \mathbb{R}^{N \times 2}
+  \in \mathbb{R}^{n_\mathrm{Tot} \times 2}
 \end{equation}
 %
 where the first column corresponds to the mean expression (i.e. the intercept, in statistical terms) and the second column corresponds to the mutation status.

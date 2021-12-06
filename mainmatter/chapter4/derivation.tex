@@ -1,11 +1,14 @@
 \section{Derivation of the \glsfmtlong{js} fold change estimator}
 \label{sec:JS_derivation}
 
+This section will define variables and symbols as they arise.
+For a complete list of conventions and notation used in this section, see \Cref{sec:JS_notation}.
+
 For a $p$-variate normal distribution, denoted as $Z \sim \mathcal{N}_p(\mu, \Sigma)$, where the mean $\mu$ is unknown and the covariance matrix $\Sigma$ is known, the following theorem holds \cite{steinInadmissibilityUsualEstimator1956}:
 
 \begin{theorem}
   The estimator $\hat{\mu}^{(OLS)} = Z$, for any mean $\mu$, does not minimize the \gls{mse}, $\expect{(\mu - \hat{\mu}^{(OLS)})^2}$ for a single observation of $Z$ when $p \ge 3$ and $\Sigma = I_p$, the $p \times p$ identity matrix.
-  Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert Z \Vert ^2}\right) Z$ has a smaller \gls{mse} than $\hat{\mu}^{(0)}$ for a single observation for sufficiently small coefficient $b$ and sufficiently large coefficient $a$.
+  Namely, the estimator $\hat{\mu}^{(JS)} = \left( 1 - \frac{b}{a + \Vert Z \Vert ^2}\right) Z$ has a smaller \gls{mse} than $\hat{\mu}^{(OLS)}$ for a single observation for sufficiently small coefficient $b$ and sufficiently large coefficient $a$.
 \end{theorem}
 
 This result was generalized to non-singular covariance matrices that were not necessarily the identity matrix (Theorem 2 of \cite[REF][]{bockMinimaxEstimatorsMean1975}):
@@ -35,7 +38,7 @@ The model for the single mutated sample is slightly modified, with a parameter $
 %
 For a given transcript, $s$, the variance is the same between the mutated and \gls{wt} samples (namely, $\sigma_s^2 + \tau_s^2$).
 While the mean $\beta_{s, 0}$ can be estimated from the \gls{wt} samples, the fold change $\beta_{s, 1}$ is unknown and can only be determined through the single mutated sample.
-By re-parameterizing this model to consider every transcript, \Cref{eqn:wt_model} can be re-written as:
+By reparameterizing this model to consider every transcript, \Cref{eqn:wt_model} can be re-written as:
 %
 \begin{equation}
   \Delta^{(\mathrm{WT})} \sim \mathcal{N}_{|S|}(\Beta_0, \Sigma) \\
