@@ -186,6 +186,18 @@
 % define a nicer variance operator
 \newcommand{\variance}[1]{\mathbb{V} \left[ #1 \right]}
 
+% define the OLS estimator for the mean of a normal distribution
+\newcommand{\muols}[0]{\hat{\mu}^{(OLS)}}
+
+% define the JS estimator for the mean of a normal distribution
+\newcommand{\mujs}[0]{\hat{\mu}^{(JS)}}
+
+% define the OLS estimator for the fold change
+\newcommand{\fcols}[0]{\hat{\Beta}_1^{(OLS)}}
+
+% define the JS estimator for the fold change
+\newcommand{\fcjs}[0]{\hat{\Beta}_1^{(JS)}}
+
 % define a nicer command that lists all authors in the publication
 \newcommand{\printpublication}[1]{
   \AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}

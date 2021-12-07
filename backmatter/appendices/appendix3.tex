@@ -23,17 +23,17 @@ Below is a summary of the notation and symbols that are used throughout this app
 }{
   tab:JS_appendix_variables
 }{
-  Latent transcript         & $Y$                 & None & Abundance of sequencing reads assigned to \\
-    abundance               &                     &      & each transcript in an organism's transcriptome. \\
-  Observed transcript       & $D$                 & None & Observed abundance of sequencing reads assigned to \\
-    abundance               &                     &      & each transcript in an organism's transcriptome. \\
-  Biological noise          & $\epsilon$          & None & Differences in expression between samples and \\
-                            &                     &      & variance from library preparation methods \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
-  Inferential noise         & $\zeta$             & None & Differences in expression arising from \\
-                            &                     &      & computational inference of reads to transcripts \\
-                            &                     &      & and sequencing stochasticity \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
-  \gls{ols} mean estimator  & $\hat{\mu}^{(OLS)} $ & None & Estimator of mean fold change using the \gls{ols} method. \\
-  \gls{js} mean estimator   & $\hat{\mu}^{(JS)}$  & None & Estimator of mean fold change using the \gls{js} method. \\
+  Latent transcript         & $Y$        & None & Abundance of sequencing reads assigned to \\
+    abundance               &            &      & each transcript in an organism's transcriptome. \\
+  Observed transcript       & $D$        & None & Observed abundance of sequencing reads assigned to \\
+    abundance               &            &      & each transcript in an organism's transcriptome. \\
+  Biological noise          & $\epsilon$ & None & Differences in expression between samples and \\
+                            &            &      & variance from library preparation methods \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
+  Inferential noise         & $\zeta$    & None & Differences in expression arising from \\
+                            &            &      & computational inference of reads to transcripts \\
+                            &            &      & and sequencing stochasticity \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
+  \gls{ols} mean estimator  & $\muols$   & None & Estimator of mean fold change using the \gls{ols} method. \\
+  \gls{js} mean estimator   & $\mujs$    & None & Estimator of mean fold change using the \gls{js} method. \\
 }
 
 \newlongtable{l l l}{Symbols used throughout \Cref*{chap:JS_appendix} and \Cref*{chap:JS}}{
@@ -135,14 +135,35 @@ Namely:
 where $s, r \in S$, and $i, j \in \{1, ..., n_\mathrm{Tot} \}$.
 The abundances for transcript $s$ in all $n_\mathrm{Tot}$ samples can then modelled as a multivariate normal distribution:
 %
-\begin{align}
-  Y_{s} & \sim \mathcal{N}_{n_\mathrm{Tot}}(X \beta_s, \sigma_s^2 I_{n_\mathrm{Tot}})             \\
-  D_{s} & \sim \mathcal{N}_{n_\mathrm{Tot}}(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{n_\mathrm{Tot}})
-\end{align}
+\begin{equation}
+  D_{s} \sim \mathcal{N}_{n_\mathrm{Tot}}(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{n_\mathrm{Tot}})
+\end{equation}
 %
+The goal of the differential analysis is to estimate the $p$ coefficients in $\beta_s \forall s \in S$ ($|S| \times p$ in total) and to determine which coefficients differ significantly from 0.
+This is often achieved through a Wald test or likelihood ratio test after estimating the inferential variance through bootstrapping and the biological variance through dispersion estimation and shrinkage.
+Using these estimation methods on the $n_\mathrm{WT}$ \gls{wt} samples provides the following estimates:
+% TODO: FIX THIS AND FIND OUT WHERE IT NEEDS TO GO
+\begin{align*}
+  \hat{\Beta}_0 & = \frac{1}{n_\mathrm{WT}} \sum_{i = 1}^{n_\mathrm{WT}} \Delta^{(i)} \\
+  \hat{\Sigma}  & = \begin{bmatrix}
+    \max\{\hat{\sigma}_1^2, \tilde{\sigma}_1^2\} + \hat{\tau}_1^2 &        & 0                                                                         \\
+                                                                  & \ddots                                                                             \\
+    0                                                             &        & \max\{\hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2\} + \hat{\tau}_{|S|}^2 \\
+  \end{bmatrix}
+\end{align*}
+%
+where $\Delta^{(i)}$ is the abundance for \gls{wt} sample $i$; $\hat{\sigma}_s^2$ is the raw estimate of the biological variance for transcript $s$; $\tilde{\sigma}_i^2$ is the shrunken estimate of the biological variance for transcript $s$ made through aggregating data across transcripts; and $\hat{\tau}_s^2$ is the estimate of the inferential variance for transcript $s$ \cite{pimentelDifferentialAnalysisRNAseq2017}.
 
-The goal of the differential analysis is to estimate the $|S| \times p$ coefficients in $\beta_s \forall s \in S$, and to determine which coefficients differ significantly from 0.
-This is often achieved through a Wald test or likelihood ratio test after estimating the inferential variance, $\tau_s^2$, through bootstrapping and estimating the biological variance, $\sigma_s^2$, through dispersion estimation and shrinkage.
+% TODO: FIX THIS AND FIND OUT WHERE IT NEEDS TO GO
+By \Cref{eqn:delta_mut}, the following relationships can be derived to satisfy \Cref{thm:js}:
+%
+\begin{align}
+  \trace{\hat{\Sigma}} & = \sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2                                                                                                                                      \\
+  \lambda              & = \max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}                                                                                                                     \\
+  0                    & \le c \le 2 \left( \frac{\sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2}{\max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}} - 2 \right)
+  \label{eqn:js_scaling_bounds}
+\end{align}
+
 The estimator for the differential effect is the \gls{ols} estimate:
 %
 \begin{equation}
