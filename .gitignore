@@ -280,3 +280,4 @@ word/
 __latexindent_temp.tex
 __latexindent_temp.pdf
 *.apc
+**/.DS_Store
