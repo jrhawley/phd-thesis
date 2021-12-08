@@ -83,7 +83,7 @@ Below is a summary of the notation and symbols that are used throughout this app
                                 &                    & mutant samples.
 }
 
-\section{Differential expression analysis with Sleuth}
+\section{Sleuth model for differential expression analysis}
 
 The differential expression model employed in the Sleuth (v0.30.0) \cite{pimentelDifferentialAnalysisRNAseq2017,yiGenelevelDifferentialAnalysis2018} can be described as follows.
 Consider a set of transcripts, $S$, that are each measured in $n_\mathrm{Tot}$ samples with an experimental design matrix, $X \in \mathbb{R}^{n_\mathrm{Tot} \times p}$, where $p$ is the number of covariates considered.
@@ -139,23 +139,44 @@ The abundances for transcript $s$ in all $n_\mathrm{Tot}$ samples can then model
   D_{s} \sim \mathcal{N}_{n_\mathrm{Tot}}(X \beta_s, (\sigma_s^2 + \tau_s^2)I_{n_\mathrm{Tot}})
 \end{equation}
 %
+
+The \gls{ols} estimate for the differential effect is given by:
+%
+\begin{equation}
+  \hat{\beta}_s = (X^\tran X)^{-1} X^\tran D_s
+\end{equation}
+%
+$D_s$ is defined by a transformation of read counts to correct for biases such as transcript length and sequencing depth between different samples:
+%
+\begin{align}
+  D_{si}   & = \ln \left(\frac{k_{si}}{f_i} + 0.5 \right)                                                            \\
+  f_i & = \underset{s \in S^*}{\mathrm{median}} \frac{k_{si}}{\sqrt[N]{\underset{j = 1}{\overset{N}{\prod }}k_{s,j}}}
+\end{align}
+%
+where $k_{si}$ is the estimated read count from the Kallisto model \cite{brayNearoptimalProbabilisticRNAseq2016} for transcript $s$ in sample $i$ and $f_i$ is the read count scale factor for sample $i$.
+The read count scale factor is calculated from the set of all transcripts that pass initial filtering, $S^*$.
+This is typically the entire transcriptome, $S$, but excludes transcripts with read counts below some threshold (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
+
 The goal of the differential analysis is to estimate the $p$ coefficients in $\beta_s \forall s \in S$ ($|S| \times p$ in total) and to determine which coefficients differ significantly from 0.
 This is often achieved through a Wald test or likelihood ratio test after estimating the inferential variance through bootstrapping and the biological variance through dispersion estimation and shrinkage.
-Using these estimation methods on the $n_\mathrm{WT}$ \gls{wt} samples provides the following estimates:
-% TODO: FIX THIS AND FIND OUT WHERE IT NEEDS TO GO
-\begin{align*}
+
+\section{Plug-in estimators derived from \glsfmtlong{wt} samples}
+
+Using the Sleuth model described above on the $n_\mathrm{WT}$ \gls{wt} samples provides the following estimates:
+%
+\begin{align}
   \hat{\Beta}_0 & = \frac{1}{n_\mathrm{WT}} \sum_{i = 1}^{n_\mathrm{WT}} \Delta^{(i)} \\
   \hat{\Sigma}  & = \begin{bmatrix}
     \max\{\hat{\sigma}_1^2, \tilde{\sigma}_1^2\} + \hat{\tau}_1^2 &        & 0                                                                         \\
                                                                   & \ddots                                                                             \\
     0                                                             &        & \max\{\hat{\sigma}_{|S|}^2, \tilde{\sigma}_{|S|}^2\} + \hat{\tau}_{|S|}^2 \\
   \end{bmatrix}
-\end{align*}
+\end{align}
 %
 where $\Delta^{(i)}$ is the abundance for \gls{wt} sample $i$; $\hat{\sigma}_s^2$ is the raw estimate of the biological variance for transcript $s$; $\tilde{\sigma}_i^2$ is the shrunken estimate of the biological variance for transcript $s$ made through aggregating data across transcripts; and $\hat{\tau}_s^2$ is the estimate of the inferential variance for transcript $s$ \cite{pimentelDifferentialAnalysisRNAseq2017}.
 
-% TODO: FIX THIS AND FIND OUT WHERE IT NEEDS TO GO
-By \Cref{eqn:delta_mut}, the following relationships can be derived to satisfy \Cref{thm:js}:
+With these estimators used as plug-in values for \Cref{eqn:delta_mut_js_dist}, a \gls{js} estimator for the fold change can be calculated according to \Cref{thm:js}.
+Doing so yields the following relations:
 %
 \begin{align}
   \trace{\hat{\Sigma}} & = \sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2                                                                                                                                      \\
@@ -163,27 +184,11 @@ By \Cref{eqn:delta_mut}, the following relationships can be derived to satisfy \
   0                    & \le c \le 2 \left( \frac{\sum_{s \in S} \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2}{\max_{s \in S} \left\{ \max\{ \hat{\sigma}_s^2, \tilde{\sigma}_s^2 \} + \hat{\tau}_s^2 \right\}} - 2 \right)
   \label{eqn:js_scaling_bounds}
 \end{align}
+%
 
-The estimator for the differential effect is the \gls{ols} estimate:
-%
-\begin{equation}
-  \hat{\beta}_s = (X^\tran X)^{-1} X^\tran D_s
-\end{equation}
-%
-$D_s$ is defined by a transformation of raw read counts to correct for biases such as transcript length and sequencing depth between different samples:
-%
-\begin{align}
-  D_{si}   & = \ln \left(\frac{k_{si}}{f_i} + 0.5 \right)                                                            \\
-  f_i & = \underset{s \in S^*}{\mathrm{median}} \frac{k_{si}}{\sqrt[N]{\underset{j = 1}{\overset{N}{\prod }}k_{s,j}}}
-\end{align}
-%
-where $k_{si}$ is the estimated read count from the Kallisto package \cite{brayNearoptimalProbabilisticRNAseq2016} for transcript $s$ in sample $i$ and $f_i$ is the read count scale factor for sample $i$.
-The read count scale factor is calculated from the set of all transcripts that pass initial filtering, $S^*$.
-This is typically the entire transcriptome, $S$, but excludes transcripts with read counts below some threshold (see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} for details).
+\section{Statistical moments of the \glsfmtshort{ols} estimator}
 
-\section{Statistical moments of the \glsfmtlong{ols} estimator}
-
-As shown in Supplementary Note 2 of \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017}, the estimator is unbiased:
+As shown in Supplementary Note 2 of \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017}, the \gls{ols} estimator is unbiased:
 %
 \begin{equation}
   \expect{ \hat{\beta}_s^{(OLS)} } = \beta_s
@@ -239,10 +244,10 @@ When there is only a single mutated sample (i.e. $n_\mathrm{Mut} = 1$), this red
   \variance{ \beta_{s,\mathrm{Mut}}^{(OLS)} } = \frac{(\sigma_s^2 + \tau_s^2)(1 + n_\mathrm{WT})}{n_\mathrm{WT}}
 \end{equation}
 
-\section{Statistical moments of the \glsfmtlong{js} estimator}
+\section{Statistical moments of the \glsfmtshort{js} estimator}
 \label{sec:JS_moments}
 
-\subsection{Expected value of the \glsfmtlong{js} estimator}
+\subsection{Expected value of the \glsfmtshort{js} estimator}
 
 We can use a Taylor expansion around $\Beta_1$ to approximate the expected value of $\hat{\Beta}_1^{(JS)}$.
 Using the definition of $\hat{\Beta}_1^{(JS)}$ from \Cref{eqn:js_defn_ols}, let $u = \hat{\Sigma}^{-1/2}\hat{\Beta}_1^{(OLS)}$.
@@ -282,7 +287,7 @@ For sufficiently small $|S|$ and sufficiently small coefficient of variation (i.
 %
 Thus, the \gls{js} estimator is an estimate of $\Beta_1$ that is biased towards 0.
 
-\subsection{Variance of the \glsfmtlong{js} estimator}
+\subsection{Variance of the \glsfmtshort{js} estimator}
 
 The \gls{mse} of the \gls{js} estimator is related to its variance.
 %
@@ -302,8 +307,8 @@ Again, let $u = \hat{\Sigma}^{-1/2} \hat{\Beta}_1^{(OLS)}$.
 Then:
 %
 \begin{align}
-  \hat{\Beta}_1^{(JS)} \left( \hat{\Beta}_1^{(JS)} \right)^\tran & = \hat{\Sigma}^{1/2} \left( 1 - \frac{c}{\Vert u \Vert ^2} \right)^2 u u^\tran \hat{\Sigma}^{1/2}                                                                \\
-                                                                 & = \hat{\Sigma}^{1/2} \left[ u u^\tran - \frac{2c}{\Vert u \Vert ^2} u u^\tran + \left( \frac{c}{\Vert u \Vert ^2} \right)^2 u u^\tran \right] \hat{\Sigma}^{1/2}
+  \hat{\Beta}_1^{(JS)} \left( \hat{\Beta}_1^{(JS)} \right)^\tran  & = \hat{\Sigma}^{1/2} \left( 1 - \frac{c}{\Vert u \Vert ^2} \right)^2 u u^\tran \hat{\Sigma}^{1/2}                                                                \\
+                                                                  & = \hat{\Sigma}^{1/2} \left[ u u^\tran - \frac{2c}{\Vert u \Vert ^2} u u^\tran + \left( \frac{c}{\Vert u \Vert ^2} \right)^2 u u^\tran \right] \hat{\Sigma}^{1/2}
 \end{align}
 %
 The variance is then given by:
@@ -323,6 +328,9 @@ Expanding the expectation about $a = \hat{\Sigma}^{-1/2} \Beta_1$ yields:
 \end{equation}
 %
 Since the diagonal elements of $\frac{2c}{\left( \Beta_1^\tran \hat{\Sigma}^{-1} \Beta_1 \right)^2} \Beta_1 \Beta_1^\tran$ are all $\ge 0$ and $0 \le \left(1 - \frac{2c}{\Beta_1^\tran \hat{\Sigma}^{-1} \Beta_1} \right) \le 1 \forall c > 0$, the variance than of the \gls{js} estimators are smaller than the \gls{ols} estimators.
+
+\section{Wald test statistics for the \glsfmtshort{ols} and \glsfmtshort{js} estimators}
+
 The resulting Wald test statistics for the fold change coefficient of transcript $s$ in the \gls{ols} and \gls{js} cases can be summarized as follows:
 %
 \begin{align}
