@@ -54,33 +54,33 @@ Below is a summary of the notation and symbols that are used throughout this app
 }{
   tab:JS_appendix_params
 }{
-  Design matrix                                 & $X$                & Matrix of covariates as columns and samples as rows. \\
-                                                &                    & All $p$ covariates for sample $i$ are denoted by the \\
-                                                &                    & $p$-dimensional column vector $x_i$. \\
-  Set of transcripts                            & $S$                & All transcripts from an organism's transcriptome that \\
-                                                &                    & are considered in a differential expression analysis. \\
-  Wild type sample size                         & $n_\mathrm{WT}$    & The number of samples in the "wild type" group. \\
-  Mutant sample size                            & $n_\mathrm{Mut}$   & The number of samples in the "mutant" group. \\
-                                                &                    & In this application, $n_\mathrm{Mut} = 1$. \\
-  Total sample size                             & $n_\mathrm{Tot}$   & Total sample size in a differential expression analysis  \\
-                                                &                    & experiment. In this application, $n_\mathrm{Tot} = n_\mathrm{WT} + n_\mathrm{Mut}$. \\
-  Variance of inferential noise                 & $\tau^2$           & Inferential noise, $\zeta$, is distributed as $\mathcal{N}_{|S|} \left( 0, \tau^2 \right)$. \\
-                                                &                    & By assumption $\tau^2$ is a diagonal matrix where \\
-                                                &                    & the $i$-th diagonal element is denoted as $\tau^2_i$. \\
-  Variance of biological noise                  & $\sigma^2$         & Biological noise, $\epsilon$, is distributed as $\mathcal{N}_{|S|} \left( 0, \sigma^2 \right)$. \\
-                                                &                    & By assumption $\sigma^2$ is a diagonal matrix where \\
-                                                &                    & the $i$-th diagonal element is denoted as $\sigma^2_i$. \\
-  Shrinkage-based variance of biological noise  & $\tilde{\sigma}^2$ & Biological noise, $\epsilon$, is distributed as $\mathcal{N}_{|S|} \left( 0, \sigma^2 \right)$. \\
-                                                &                    & By assumption $\sigma^2$ is a diagonal matrix where \\
-                                                &                    & the $i$-th diagonal element is denoted as $\sigma^2_i$. \\
-  Estimated count                               & $k_{si}$           & Read abundance of transcript $s$ in sample $i$ as \\
-                                                &                    & estimated by pseudo-alignment in Kallisto. \\
-  Sample scale factor                           & $f_i$              & Read abundance scale factor for sample $i$ to adjust \\
-                                                &                    & for differences in sequencing depth between samples. \\
-  Covariate effect                              & $\beta_s$          & Fixed effect of each covariate on the expression of \\
-                                                &                    & transcript $s$. In this application, $\beta_{s,0}$ is the \\
-                                                &                    & baseline expression and $\beta_{s,1}$ is the fold-change in \\
-                                                &                    & mutant samples.
+  Design matrix                 & $X$                & Matrix of covariates as columns and samples as rows. \\
+                                &                    & All $p$ covariates for sample $i$ are denoted by the \\
+                                &                    & $p$-dimensional column vector $x_i$. \\
+  Set of transcripts            & $S$                & All transcripts from an organism's transcriptome that \\
+                                &                    & are considered in a differential expression analysis. \\
+  Wild type sample size         & $n_\mathrm{WT}$    & The number of samples in the "wild type" group. \\
+  Mutant sample size            & $n_\mathrm{Mut}$   & The number of samples in the "mutant" group. \\
+                                &                    & In this application, $n_\mathrm{Mut} = 1$. \\
+  Total sample size             & $n_\mathrm{Tot}$   & Total sample size in a differential expression analysis  \\
+                                &                    & experiment. In this application, $n_\mathrm{Tot} = n_\mathrm{WT} + n_\mathrm{Mut}$. \\
+  Variance of inferential noise & $\tau^2$           & Inferential noise, $\zeta$, is distributed as $\mathcal{N}_{|S|} \left( 0, \tau^2 \right)$. \\
+                                &                    & By assumption $\tau^2$ is a diagonal matrix where \\
+                                &                    & the $i$-th diagonal element is denoted as $\tau^2_i$. \\
+  Variance of biological noise  & $\sigma^2$         & Biological noise, $\epsilon$, is distributed as $\mathcal{N}_{|S|} \left( 0, \sigma^2 \right)$. \\
+                                &                    & By assumption $\sigma^2$ is a diagonal matrix where \\
+                                &                    & the $i$-th diagonal element is denoted as $\sigma^2_i$. \\
+  Shrinkage-based variance      & $\tilde{\sigma}^2$ & A shrunken estimate of biological variance. \\
+  of biological noise           &                    & This is used to reduce the instability of variances \\
+                                &                    & estimators in experiments with small sample sizes \cite{pimentelDifferentialAnalysisRNAseq2017}. \\
+  Estimated count               & $k_{si}$           & Read count of transcript $s$ in sample $i$ as \\
+                                &                    & estimated by pseudo-alignment in Kallisto. \\
+  Sample scale factor           & $f_i$              & Read count scale factor for sample $i$ to adjust \\
+                                &                    & for differences in sequencing depth between samples. \\
+  Covariate effect              & $\beta_s$          & Fixed effect of each covariate on the expression of \\
+                                &                    & transcript $s$. In this application, $\beta_{s,0}$ is the \\
+                                &                    & baseline expression and $\beta_{s,1}$ is the fold-change in \\
+                                &                    & mutant samples.
 }
 
 \section{Differential expression analysis with Sleuth}
