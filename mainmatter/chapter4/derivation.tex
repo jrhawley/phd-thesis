@@ -75,7 +75,7 @@ Mathematically, we can express these parameters in terms of parameters from \Cre
   \end{bmatrix}
 \end{align*}
 
-The sleuth statistical model can be used derive estimates for $\Beta_0$ and $\Sigma$ solely from the $n_\mathrm{WT}$ \gls{wt} samples (hereafter denoted with the $\hat{}$ symbol).
+The Sleuth statistical model can be used derive estimates for $\Beta_0$ and $\Sigma$ solely from the $n_\mathrm{WT}$ \gls{wt} samples (hereafter denoted with the $\hat{}$ symbol).
 If we treat the estimates $\hat{\Beta}_0$ and $\hat{\Sigma}$ derived from the \gls{wt} samples as plug-in parameters for the mutated model, then \Cref{eqn:single_mut_model} for a single mutated sample meets the criteria for the \gls{js} estimators.
 This is not necessarily an accurate assumption, since these estimates may be biased, inaccurate for small $n_\mathrm{WT}$, or affected by batch effects that are not shared between the \gls{wt} and mutant samples.
 However, this assumption is made out of necessity due to the constraints of measuring a single sample.
@@ -126,5 +126,5 @@ In theory, this may increase the error of some transcripts, but will decrease th
 There are two parameters of this model that will affect the amount of biasing: the scaling coefficient, $c$, and the transcripts being considered for differential expression, $S$.
 Firstly, the scaling coefficient can be manually specified, and the largest biasing occurs when $c$ is its maximum value, $2 \left( \frac{\trace{\Sigma}}{\lambda} - 2 \right)$.
 Secondly, the transcripts under consideration can also be manually specified, which will affect the value of the denominator, $\left( \fcols \right)^\tran \hat{\Sigma}^{-1} \fcols$, and thus the amount of biasing.
-The more transcripts under consideration, the larger the denominator, and so the smaller the effect.
+The more transcripts under consideration, the larger expected value for the denominator, and so the smaller the biasing effect.
 Taken together, we have produced a high-bias, low-variance fold change estimator that has a lower \gls{mse} than the \gls{ols} estimator and two tunable parameters.
