@@ -2,9 +2,12 @@
 
 To measure the performance of this method in practice, we make use of a highly replicated \gls{rnaseq} experiment involving $\Delta$\emph{Snf2} \gls{ko} and \gls{wt} \emph{Saccharomyces cerevisiae} cells \cite{gierlinskiStatisticalModelsRNAseq2015}.
 This dataset contains 48 biological replicates of each condition, an infeasible sample size for most \gls{rnaseq} experiments.
-Experiments with small sample sizes can be compared to the full dataset to estimate the number of true and false detections for a given experimental design and a given method.
 We randomly select $N$ total samples from the full dataset with an optimal even split between the two groups (i.e. $N / 2$ $\Delta$\emph{Snf2} and $N / 2$ \gls{wt}) or a suboptimal $(N - 1)$-vs-1 split (i.e. $N - 1$ $\Delta$\emph{Snf2} and 1 \gls{wt} or 1 $\Delta$\emph{Snf2} and $N - 1$ \gls{wt}).
 To measure the effect of total sample size, this random selection is repeated for multiple values of $N$.
+Experiments with smaller sample sizes can be compared to the full dataset to estimate the number of true and false detections for a given experimental design and a given method.
+For the purposes of this comparison, we assume the fold change estimates obtained from the full dataset are accurate without bias and that all determinations of significant differential expression are true.
+This assumption is made to focus on the potential model improvements provided by the \gls{js} estimator over the \gls{ols} model.
+This is also due to the practical considerations of designing \gls{rnaseq} experiments and that this experimental data is as close to ideal as can be found in the field.
 
 We find that for all values of $N$, the \gls{js} method produces more \gls{tp} and \gls{fp} calls, as well as fewer \gls{tn} and \gls{fn} calls, than the \gls{ols} method with suboptimal designs, on average (two-way \gls{anova}, $p < 2.2 \times 10^{-16}$; \Cref{fig:JS_fig2}).
 For example, for $N = 6$, the \gls{js} method identified 642.87 \gls{tp}, 58 \gls{fp}, 2098.3 \gls{tn}, and 2995.7 \gls{fn} calls on average, compared the to 520.7 \gls{tp}, 41.37 \gls{fp}, 2114.97 \gls{tn}, and 3117.93 \gls{fn} calls for the \gls{ols} method (23.5 \% more \gls{tp}, 40 \% more \gls{fp}, 1.8 \% fewer \gls{tp} and 3.9 \% fewer \gls{fn} calls; \Cref{fig:JS_fig2}).

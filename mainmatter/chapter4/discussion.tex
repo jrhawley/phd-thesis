@@ -6,11 +6,20 @@ In cases with unreplicated conditions, the DESeq2 \cite{loveModeratedEstimationF
 The method presented here builds on these shrinkage methods to reduce uncertainty in gene expression fold change estimates for when biological replicates are missing.
 This method can help improve differential gene expression analyses for singular observations, such as unique chromatin aberrations or rare diseases.
 
+There are some limitations to this work.
+The \gls{wt} estimates, $\hat{\Beta}_0$ and $\hat{\Sigma}$, are used as plug-in estimates for \Cref{eqn:delta_mut_js_dist}.
+Plug-in estimates under-estimate the variation in this distribution and thus may lead to more frequent false discoveries \cite{efronIntroductionBootstrap1993}.
+Evaluation of the sensitivity of the \gls{js} estimator to this effect was not performed here.
+Future studies using simulated data with known expression fold changes could be performed to assess this sensitivity.
+
 Many statistical methods exist to similarly reduce uncertainty.
 However, as has been shown here, balanced experimental designs, where the number of case and control samples are equal, outperformed both the \gls{ols} and \gls{js} methods.
 This is similarly the case with other differential analysis methods \cite{schurchHowManyBiological2016,gierlinskiStatisticalModelsRNAseq2015}.
 Complex statistical methods often cannot overcome limitations in sample size.
 Thus, technological development for biological models that recapitulate the chromatin state of tissues, such as organoids and cell lines, may be more advantageous for experimental validation \cite{zanoniModelingNeoplasticDisease2020}.
-The statistical method presented here may be useful in single-cell \gls{rnaseq} differential analysis, where single cells are often clustered together to improve differential expression analysis inferences \cite{chenAssessmentComputationalMethods2019}.
-This method may similarly apply to single-cell methods of other epigenomic assays,  such as \gls{chipseq} \cite{rotemSinglecellChIPseqReveals2015}, \gls{cutrun} \cite{hainerProfilingPluripotencyFactors2019}, or \gls{atacseq} \cite{buenrostroSinglecellChromatinAccessibility2015}.
+The statistical method presented here may be useful in rare disease settings, where a single patient's data may be compared against a large reference database consisting of thousands of individuals to address the potential issue of small $n_\mathrm{WT}$.
+The \gls{js} estimator could be applied to the entire transcriptome, consisting of thousands of transcripts, but the method may have limited benefit in this naive application due to the large number of dimensions.
+To take advantage of the benefits provided by the \gls{js} estimator, one could refine the search space to transcripts involved with a gene that is known to undergo differential splicing in a related disease.
+Alternatively, the scenario in \Cref{chap:3D} could be addressed by only considering the transcripts of genes within a \gls{tad} containing an \gls{sv} breakpoint.
+This statistical method may similarly apply to single-cell \gls{rnaseq} differential analysis, where single cells are often clustered together to improve differential expression analysis inferences \cite{chenAssessmentComputationalMethods2019}, or other epigenomic assays,  such as \gls{chipseq} \cite{rotemSinglecellChIPseqReveals2015}, \gls{cutrun} \cite{hainerProfilingPluripotencyFactors2019}, or \gls{atacseq} \cite{buenrostroSinglecellChromatinAccessibility2015}.
 These applications require special consideration for inflated zero counts in single-cell data \cite{chenAssessmentComputationalMethods2019}, and require further investigation before adopting ideas presented here.

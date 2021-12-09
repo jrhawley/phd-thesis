@@ -77,8 +77,9 @@ Mathematically, we can express these parameters in terms of parameters from \Cre
 
 The sleuth statistical model can be used derive estimates for $\Beta_0$ and $\Sigma$ solely from the $n_\mathrm{WT}$ \gls{wt} samples (hereafter denoted with the $\hat{}$ symbol).
 If we treat the estimates $\hat{\Beta}_0$ and $\hat{\Sigma}$ derived from the \gls{wt} samples as plug-in parameters for the mutated model, then \Cref{eqn:single_mut_model} for a single mutated sample meets the criteria for the \gls{js} estimators.
-This is not necessarily an accurate assumption, since these estimates may be biased, inaccurate at small samples sizes, or affected by confounding factors, like batch effects, that are not shared between the \gls{wt} and mutant samples.
-With sufficiently large $n_\mathrm{WT}$, this may not be a practical concern.
+This is not necessarily an accurate assumption, since these estimates may be biased, inaccurate for small $n_\mathrm{WT}$, or affected by batch effects that are not shared between the \gls{wt} and mutant samples.
+However, this assumption is made out of necessity due to the constraints of measuring a single sample.
+With sufficiently large $n_\mathrm{WT}$ and quality control in \gls{rnaseq} library preparation, this may not be a practical concern.
 
 Under these assumptions, we have the following distribution from which we are drawing a single observation:
 %
