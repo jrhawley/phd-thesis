@@ -77,10 +77,10 @@ Below is a summary of the notation and symbols that are used throughout this app
                                 &                    & estimated by pseudo-alignment in Kallisto. \\
   Sample scale factor           & $f_i$              & Read count scale factor for sample $i$ to adjust \\
                                 &                    & for differences in sequencing depth between samples. \\
-  Covariate effect              & $\beta_s$          & Fixed effect of each covariate on the expression of \\
-                                &                    & transcript $s$. In this application, $\beta_{s,0}$ is the \\
-                                &                    & baseline expression and $\beta_{s,1}$ is the fold-change in \\
-                                &                    & mutant samples.
+  Coefficient                   & $\beta_s$          & Effect of each covariate on the expression of \\
+                                &                    & transcript $s$. In this application, $\beta_{s0}$ is the \\
+                                &                    & baseline abundnace and $\beta_{s1}$ is the fold change \\
+                                &                    & between mutant and \gls{wt} samples.
 }
 
 \section{Sleuth model for differential expression analysis}

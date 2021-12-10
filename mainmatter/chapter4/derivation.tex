@@ -38,7 +38,7 @@ The variance in this model is decomposed into two components: biological noise a
 $\sigma_s^2$ denotes the biological variance of counts for transcript $s$ and $\tau_s^2$ denotes the inferential variance for transcript $s$.
 For details about this variance decomposition, see \cite[REF][]{pimentelDifferentialAnalysisRNAseq2017} and \Cref{chap:JS_appendix}.
 
-The model for the single mutated sample is slightly modified, with a parameter $\beta_{s,1}$ representing the fold change effect of the mutation:
+The model for the single mutated sample is slightly modified, with a parameter $\beta_{1s}$ representing the abundance fold change associated with the mutation \cite{pimentelDifferentialAnalysisRNAseq2017,loveModeratedEstimationFold2014}:
 %
 \begin{equation}
   D_s \sim \mathcal{N} \left( \beta_{0s} + \beta_{1s}, \sigma_s^2 + \tau_s^2 \right)
@@ -62,7 +62,7 @@ and \Cref{eqn:single_mut_model} can be similarly re-written as:
   \label{eqn:delta_mut}
 \end{equation}
 %
-where $\Delta$ is the vector of abundances for all transcripts in a \gls{wt} sample; $\nabla$ is the same but for the mutated sample; $\Beta_0$ is the $|S|$-dimensional vector of baseline abundances; $\Beta_1$ is the $|S|$-dimensional vector of fold change effects associated with the mutation; and $\Sigma$ is the covariance matrix.
+where $\Delta$ is the vector of abundances for all transcripts in a \gls{wt} sample; $\nabla$ is the same but for the mutated sample; $\Beta_0$ is the $|S|$-dimensional vector of baseline abundances for each transcript; $\Beta_1$ is the $|S|$-dimensional vector of abundance fold changes in each transcript associated with the mutation; and $\Sigma$ is the covariance matrix.
 Mathematically, we can express these parameters in terms of parameters from \Cref{eqn:single_mut_model}:
 %
 \begin{align*}
@@ -88,7 +88,8 @@ Under these assumptions, we have the following distribution from which we are dr
   \label{eqn:delta_mut_js_dist}
 \end{equation}
 %
-This fits the criteria for \Cref{thm:js} and a \gls{js} estimator for the unknown fold change, $\Beta_1$, can be constructed:
+By defining $Z = \nabla - \hat{\Beta}_0$, we can see that this satisfies the criteria for \Cref{thm:js}.
+A \gls{js} estimator for the unknown fold change, $\Beta_1$, can be constructed:
 %
 \begin{equation}
   \fcjs = \left( 1 - \frac{c}{(\nabla - \hat{\Beta}_0)^\tran \hat{\Sigma}^{-1} (\nabla - \hat{\Beta}_0)} \right) \left(\nabla - \hat{\Beta}_0 \right)
