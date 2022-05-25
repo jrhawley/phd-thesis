@@ -28,9 +28,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 % handle citations to external documents
-% \usepackage[backend=biber, style=nature, sorting=none, doi=true, isbn=false]{biblatex}
-% \usepackage[style=nature, sorting=none, doi=true, isbn=false]{biblatex}
-\usepackage[backend=bibtex8]{biblatex}
+\usepackage[backend=bibtex8, style=nature, sorting=none, doi=true, isbn=false]{biblatex}
 % commands for dealing with initializations, abbreviations, and glossaries
 % loading before hyperref to avoid links
 % `nopostdot` remove the period after the term in the glossary
@@ -162,9 +160,6 @@
   #5
   \end{tabularx}
 }
-
-% Fix the vertical spacing for the tilde
-\renewcommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}
 
 % Define default formatting for listing code blocks
 \lstset{
