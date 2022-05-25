@@ -1,0 +1,7 @@
+[doc]
+name = 'phd-thesis'
+bundle = 'https://data1.fullyjustified.net/tlextras-2021.3r1.tar'
+
+[[output]]
+name = 'Hawley_James_R_202203_PhD_thesis'
+type = 'pdf'
