@@ -34,8 +34,8 @@ Using the same yeast \gls{rnaseq} data, we randomly selected $N = 6$ samples and
 This was repeated 30 times (15 samplings of 5 $\Delta$\emph{Snf2} and 1 \gls{wt} and 15 samplings of 1 $\Delta$\emph{Snf2} and 5 \gls{wt}) with a total of $|S| \in \{ 3, 10, 25, 50, 100, 250 \}$ transcripts.
 Nearly all samplings show a smaller \gls{mse} when using the \gls{js} method compared to the \gls{ols} method (dots below the dotted lines in \Cref{fig:JS_fig4}a).
 Moreover, the \gls{mse} is reduced by 7.73 - 22.68 \% using the \gls{js} method, on average, regardless of the number of transcripts considered.
-The largest percentage of \gls{mse} reduction is observed when 3 transcripts are chosen, with an \textapprox 86 \% error reduction (\Cref{fig:JS_fig4}b).
-However, the effect is also more variable when fewer transcripts are considered, as some samplings with 3 transcripts resulted in an \textapprox 150 \% increase in error (\Cref{fig:JS_fig4}b).
+The largest percentage of \gls{mse} reduction is observed when 3 transcripts are chosen, with an $\sim$ 86 \% error reduction (\Cref{fig:JS_fig4}b).
+However, the effect is also more variable when fewer transcripts are considered, as some samplings with 3 transcripts resulted in an $\sim$ 150 \% increase in error (\Cref{fig:JS_fig4}b).
 Taken together, we find that the \gls{js} method significantly reduces the fold change \gls{mse}, with greater reductions found by considering a smaller number of transcripts.
 
 \newfigure{chapter4/Figure4.png}{Differential gene expression analysis focusing on a subset of trancsripts, not the entire transcriptome}{All experiments use 1 $\Delta$\emph{Snf2} vs 5 \glsfmtshort{wt} samples (or vice versa). \textbf{a.} Comparison of the \glsfmtshort{mse} of the \glsfmtshort{js} estimates ($y$-axis) against the \glsfmtshort{ols} estimates ($x$-axis). The total number of transcripts in each comparison is specified above each facet. \textbf{b.} Percent different in \glsfmtshort{mse} between the \glsfmtshort{js} and \glsfmtshort{ols} estimates. One-sided, two-sample paired Student's $t$-test, $n = 30$, FDR multiple test corrections.}{fig:JS_fig4}
