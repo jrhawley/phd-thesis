@@ -24,13 +24,13 @@
 \usepackage{enumerate}
 % intelligently split long tables across pages
 \usepackage{ltablex}
-% slight adjustments to special characters like ~
-\usepackage{textcomp}
 % monotype and teletype fonts for code blocks
 \usepackage{listings}
 \usepackage{xcolor}
 % handle citations to external documents
-\usepackage[backend=biber, style=nature, sorting=none, doi=true, isbn=false]{biblatex}
+% \usepackage[backend=biber, style=nature, sorting=none, doi=true, isbn=false]{biblatex}
+% \usepackage[style=nature, sorting=none, doi=true, isbn=false]{biblatex}
+\usepackage[backend=bibtex8]{biblatex}
 % commands for dealing with initializations, abbreviations, and glossaries
 % loading before hyperref to avoid links
 % `nopostdot` remove the period after the term in the glossary
@@ -66,6 +66,7 @@
 \degree{Doctor of Philosophy}
 \department{Medical Biophysics}
 \gradyear{2022}
+
 
 % ==============================================================================
 % Functions and commands
@@ -204,55 +205,5 @@
   \AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}
 }
 
-% ==============================================================================
-% Document
-% ==============================================================================
+
 \begin{document}
-
-% Front Matter
-% ------------------------------------------------
-\frontmatter
-\subfile{frontmatter/title}
-\subfile{frontmatter/abstract}
-\subfile{frontmatter/acknowledgments}
-\subfile{frontmatter/toc}
-
-\newpage
-
-\subfile{frontmatter/tables_list}
-\subfile{frontmatter/figures_list}
-
-\newpage
-\subfile{frontmatter/completed_works}
-
-\newpage
-\subfile{frontmatter/abbreviations_list}
-
-
-% Main Matter
-% ------------------------------------------------
-\mainmatter
-% intro
-\subfile{mainmatter/chapter1}
-
-% FOXA1 CREs
-\subfile{mainmatter/chapter2}
-
-% prostate cancer 3D genome
-\subfile{mainmatter/chapter3}
-
-% James-Stein RNA-seq method
-\subfile{mainmatter/chapter4}
-
-% B-ALL DNA methylation
-\subfile{mainmatter/chapter5}
-
-% discussion and future directions
-\subfile{mainmatter/chapter6}
-
-% Back Matter
-% ------------------------------------------------
-\subfile{backmatter/appendices}
-\backmatter
-\subfile{backmatter/references}
-\end{document}
